@@ -8,6 +8,7 @@
 pip install pillow
 python3 tools/generate_textures.py
 python3 tools/generate_item_textures.py
+python3 tools/texture_contact_sheet.py   # docs/textures/contact_sheet.png
 ```
 
 Sortie : `textures/block/lucky_*.png` et `textures/item/*.png` en **32×32 natif** (+ `icon.png` 128×128).

@@ -21,6 +21,11 @@
       "trigger": "minecraft:impossible"
     }
   },
+  "requirements": [
+    [
+      "completed"
+    ]
+  ],
   "rewards": {
     "loot": [
       "unpredictableblocks:rewards/quest_invasion_memes"

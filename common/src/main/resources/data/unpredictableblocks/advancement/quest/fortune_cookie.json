@@ -9,7 +9,7 @@
     },
     "description": {
       "translate": "advancements.unpredictableblocks.fortune_cookie.description",
-      "fallback": "Avoir 5 pommes d'or."
+      "fallback": "Valider un code fortune en chat sous 5 secondes."
     },
     "frame": "task",
     "show_toast": true,
@@ -17,20 +17,15 @@
   },
   "parent": "unpredictableblocks:root",
   "criteria": {
-    "wisdom": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": "minecraft:golden_apple",
-            "count": {
-              "min": 5
-            }
-          }
-        ]
-      }
+    "fortune_code": {
+      "trigger": "minecraft:impossible"
     }
   },
+  "requirements": [
+    [
+      "fortune_code"
+    ]
+  ],
   "rewards": {
     "loot": [
       "unpredictableblocks:rewards/quest_fortune_cookie"

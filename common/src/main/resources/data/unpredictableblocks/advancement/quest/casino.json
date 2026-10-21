@@ -17,7 +17,7 @@
   "criteria": {
     "jackpot": {
       "trigger": "minecraft:impossible"
-    },
+    }
   },
   "requirements": [["jackpot"]],
   "rewards": {

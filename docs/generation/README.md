@@ -7,6 +7,13 @@ Index des fiches alignées sur le cahier des charges (chance −100…+100, quê
 | [`GENERATION_BOULANGERIE.md`](../GENERATION_BOULANGERIE.md) | Fiche complète exemple (thème 2) |
 | [`THEMES_01_24.md`](THEMES_01_24.md) | Thèmes 1–24 : visuel, spawn, événements catalogue §4, structures, quêtes |
 | [`THEMES_25_32.md`](THEMES_25_32.md) | Thèmes 25–32 : extension directive |
+| `GENERATION_<theme>.md` | Fiche courte par thème (sauf boulangerie → racine) |
+
+Générer les fiches courtes :
+
+```bash
+python3 tools/scaffold_generation_docs.py
+```
 | [`../textures/CATALOGUE.md`](../textures/CATALOGUE.md) | Table PNG 32×32 + items |
 | [`../textures/README.md`](../textures/README.md) | Pipeline `pixel_canvas.py`, regen |
 
