@@ -15,6 +15,7 @@ Lucky Blocks chaotiques à thèmes, système de **chance (-100…+100)**, quête
 - **Quêtes** : advancements sous `data/unpredictableblocks/advancement/quest/` + **Journal des quêtes** (item).
 - **HUD Luck** (barre d’action) ; config optionnelle `unpredictableblocks.json` (**spawn** / pondérations uniquement — les **32 thèmes** restent toujours actifs en jeu).
 - **Paliers quêtes** 8/16/24, **Lucky mystère**, **aura de chunk**, **pari Luck** (sneak + poussière d’émeraude en off-hand au cassage).
+- **Langues** (30 locales, 246 clés chacune) : `en_us`, `en_gb`, `fr_fr`, `de_de`, `es_es`, `es_mx`, `pt_br`, `it_it`, `nl_nl`, `pl_pl`, `ru_ru`, `uk_ua`, `cs_cz`, `sv_se`, `da_dk`, `nb_no`, `fi_fi`, `hu_hu`, `tr_tr`, `ja_jp`, `ko_kr`, `zh_cn`, `zh_tw`, `vi_vn`, `id_id`, `th_th`, `ro_ro`, `el_gr`, `he_il`, `ar_sa` — messages via `message.unpredictableblocks.*`. Régénération : `python3 tools/generate_lang_files.py`.
 
 ## Build
 
