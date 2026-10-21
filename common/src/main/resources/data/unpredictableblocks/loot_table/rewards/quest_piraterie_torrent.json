@@ -21,6 +21,19 @@
           ]
         }
       ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "unpredictableblocks:disque_dur_capitaine"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:filled_map"
+        }
+      ]
     }
   ]
 }

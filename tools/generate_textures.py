@@ -81,6 +81,9 @@ def gen_anachronisme() -> Image.Image:
         d.rectangle((9, y, 14, y), fill=rgb("00FFCC"))
     d.ellipse((2, 2, 6, 6), outline=rgb("5C3317"), width=1)
     qmark(d, rgb("FFD700"))
+    d.raw.rectangle((4, 8, 10, 10), fill=rgb("CD7F32"))
+    d.raw.rectangle((20, 6, 28, 7), fill=rgb("00FFCC"))
+    d.raw.point((24, 12), fill=rgb("FFD700"))
     return img
 
 
@@ -95,6 +98,10 @@ def gen_boulangerie() -> Image.Image:
     d.rectangle((5, 0, 10, 2), fill=rgb("F5F5F5"))
     d.rectangle((5, 1, 10, 1), fill=rgb("2040A0"))
     qmark(d, rgb("FFE8B0"))
+    d.raw.line((12, 4, 22, 4), fill=rgb("E8C872"))
+    d.raw.ellipse((14, 0, 20, 6), fill=(255, 255, 255, 100))
+    d.raw.rectangle((10, 2, 11, 5), fill=(255, 255, 255, 80))
+    d.raw.rectangle((23, 2, 24, 6), fill=(255, 255, 255, 80))
     return img
 
 
@@ -413,6 +420,8 @@ def gen_invasion_memes() -> Image.Image:
         d.line((0, y, 15, y), fill=(int(255 * t), int(128 * (1 - t)), 255))
     d.rectangle((2, 4, 7, 10), fill=rgb("D4A520"))
     d.rectangle((9, 5, 13, 9), fill=rgb("88CC88"))
+    d.raw.rectangle((18, 18, 26, 26), fill=rgb("FF69B4"))
+    d.raw.line((4, 28, 28, 4), fill=rgb("00FFFF"), width=1)
     return img
 
 
