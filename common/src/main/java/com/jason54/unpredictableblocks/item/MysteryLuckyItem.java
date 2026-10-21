@@ -5,7 +5,7 @@ import com.jason54.unpredictableblocks.luck.LuckResolver;
 import com.jason54.unpredictableblocks.luck.LuckStat;
 import com.jason54.unpredictableblocks.luck.PlayerLuckStorage;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
-import net.minecraft.network.chat.Component;
+import com.jason54.unpredictableblocks.util.ModMessages;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -33,7 +33,7 @@ public class MysteryLuckyItem extends LoreItem {
         LuckStat playerLuck = PlayerLuckStorage.getModifier(sp);
         var outcome = LuckResolver.resolve(new LuckStat(0), playerLuck, serverLevel.getRandom());
         LuckyBlockEventDispatcher.dispatch(serverLevel, sp, sp.blockPosition(), theme, outcome);
-        sp.sendSystemMessage(Component.literal("§dLucky mystère → §f" + theme.id()));
+        sp.sendSystemMessage(ModMessages.msg("mystery_roll", theme.id()));
         if (!sp.getAbilities().instabuild) {
             sp.getItemInHand(hand).shrink(1);
         }

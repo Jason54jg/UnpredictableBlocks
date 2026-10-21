@@ -1,5 +1,7 @@
 # UnpredictableBlocks
 
+*(English: [README.en.md](README.en.md))*
+
 Mod multi-loader **NeoForge + Fabric** (Architectury + Stonecutter) pour Minecraft **26.1.2 → 26.3**, mappings **Mojmap**.
 
 Lucky Blocks chaotiques à thèmes, système de **chance (-100…+100)**, quêtes (advancements) et spawn naturel en monde.

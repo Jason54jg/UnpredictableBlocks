@@ -9,6 +9,7 @@ import com.jason54.unpredictableblocks.quest.PlayerQuestData;
 import com.jason54.unpredictableblocks.luck.PlayerLuckStorage;
 import com.jason54.unpredictableblocks.registry.ModItems;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
+import com.jason54.unpredictableblocks.util.ModMessages;
 import com.jason54.unpredictableblocks.world.ChunkLuckAura;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
@@ -72,7 +73,7 @@ public class LuckyBlock extends BaseEntityBlock {
                 int bet = consumeLuckBet(serverPlayer);
                 if (bet != 0) {
                     blockLuck = blockLuck.add(bet);
-                    serverPlayer.sendSystemMessage(Component.literal("§ePari Luck : §b+" + bet + " §esur ce cassage !"));
+                    serverPlayer.sendSystemMessage(ModMessages.msg("luck_bet", bet));
                 }
                 int effectiveLuck = LuckStat.clamp(blockLuck.value() + playerLuck.value());
                 LuckResolver.ResolvedOutcome outcome = LuckResolver.resolve(blockLuck, playerLuck, serverLevel.getRandom());

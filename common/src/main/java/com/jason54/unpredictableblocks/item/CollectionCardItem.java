@@ -1,6 +1,7 @@
 package com.jason54.unpredictableblocks.item;
 
 import com.jason54.unpredictableblocks.config.ModConfig;
+import com.jason54.unpredictableblocks.util.ModMessages;
 import com.jason54.unpredictableblocks.lucky.PlayerLuckyBreakStats;
 import com.jason54.unpredictableblocks.quest.QuestRewards;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
@@ -59,24 +60,27 @@ public class CollectionCardItem extends Item {
         ItemStack stack = player.getItemInHand(hand);
         LuckyTheme theme = readTheme(stack);
         if (theme == null) {
-            sp.sendSystemMessage(Component.literal("§7Carte vierge (aucun thème)."));
+            sp.sendSystemMessage(ModMessages.msg("card_empty"));
             return InteractionResult.SUCCESS;
         }
         var spawn = ModConfig.themeSpawn(theme);
         String biomes = String.join(", ", spawn.preferredBiomes());
         boolean quest = QuestRewards.isDone(sp, "quest/" + theme.id());
         boolean master = QuestRewards.isDone(sp, "theme_master/" + theme.id());
-        sp.sendSystemMessage(Component.literal("§b§lCarte — §f" + theme.id()));
-        sp.sendSystemMessage(Component.literal(
-                "§7Cassages §f" + PlayerLuckyBreakStats.breaks(sp, theme)
-                        + " §aH" + PlayerLuckyBreakStats.highs(sp, theme)
-                        + " §cL" + PlayerLuckyBreakStats.lows(sp, theme)
+        sp.sendSystemMessage(ModMessages.msg("card_title", theme.id()));
+        sp.sendSystemMessage(ModMessages.msg(
+                "card_stats",
+                PlayerLuckyBreakStats.breaks(sp, theme),
+                PlayerLuckyBreakStats.highs(sp, theme),
+                PlayerLuckyBreakStats.lows(sp, theme)
         ));
-        sp.sendSystemMessage(Component.literal(
-                "§7Quête : " + (quest ? "§a✔" : "§7○")
-                        + " §7| Maître : " + (master ? "§6★" : "§7○")
-                        + " §8| §7" + biomes
+        sp.sendSystemMessage(ModMessages.msg(
+                quest ? "card_quest_done" : "card_quest_pending"
         ));
+        sp.sendSystemMessage(ModMessages.msg(
+                master ? "card_master_done" : "card_master_pending"
+        ));
+        sp.sendSystemMessage(ModMessages.msg("card_biomes", biomes));
         return InteractionResult.SUCCESS;
     }
 }

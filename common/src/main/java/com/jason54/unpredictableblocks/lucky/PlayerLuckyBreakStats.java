@@ -4,7 +4,7 @@ import com.jason54.unpredictableblocks.config.ModConfig;
 import com.jason54.unpredictableblocks.luck.LuckTier;
 import com.jason54.unpredictableblocks.quest.PlayerQuestData;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
-import net.minecraft.network.chat.Component;
+import com.jason54.unpredictableblocks.util.ModMessages;
 import net.minecraft.server.level.ServerPlayer;
 
 /** Compteurs cassages / HIGH / LOW par thème + combo 3× même thème. */
@@ -40,9 +40,7 @@ public final class PlayerLuckyBreakStats {
         PlayerQuestData.updateComboChain(player, theme.id(), gameplay.comboWindowTicksOrDefault(), chain -> {
             if (chain.count() == hits) {
                 PlayerQuestData.grantComboPity(player, theme.id());
-                player.sendSystemMessage(Component.literal(
-                        "§6Combo ×" + hits + " sur §f" + theme.id() + "§6 — prochain cassage : tier minimum §eNEUTRAL§6."
-                ));
+                player.sendSystemMessage(ModMessages.msg("combo_pity", hits, theme.id()));
             }
         });
     }

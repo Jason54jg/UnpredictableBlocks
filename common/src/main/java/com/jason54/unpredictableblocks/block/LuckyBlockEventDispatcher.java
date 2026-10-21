@@ -1,6 +1,7 @@
 package com.jason54.unpredictableblocks.block;
 
 import com.jason54.unpredictableblocks.config.ModConfig;
+import com.jason54.unpredictableblocks.util.ModMessages;
 import com.jason54.unpredictableblocks.event.LuckyBreakFeedback;
 import com.jason54.unpredictableblocks.event.ThemeEventEffects;
 import com.jason54.unpredictableblocks.item.CollectionCardItem;
@@ -77,12 +78,12 @@ public final class LuckyBlockEventDispatcher {
 
         if (theme == LuckyTheme.SPEEDRUNNER) {
             PlayerQuestData.startSpeedrun(player);
-            player.sendSystemMessage(Component.literal("§eChrono lancé — atteignez l'End en moins de 3 minutes !"));
+            player.sendSystemMessage(ModMessages.msg("speedrun_start"));
         }
 
         if (theme == LuckyTheme.PLOMBERIE) {
             PlayerQuestData.startPlomberieWindow(player, 20L * 60 * 5);
-            player.sendSystemMessage(Component.literal("§6Fuite détectée — ouvrez un coffre avant 5 minutes !"));
+            player.sendSystemMessage(ModMessages.msg("plomberie_start"));
         }
 
         PlayerQuestData.recordLuckOutcome(player, effective.tier());
@@ -91,10 +92,7 @@ public final class LuckyBlockEventDispatcher {
         if (effective.tier() == LuckTier.LOW) {
             PlayerQuestData.setMissedReroll(player, theme);
             long vipSeconds = ModConfig.gameplay().missedRerollTicksOrDefault() / 20L;
-            player.sendSystemMessage(Component.literal(
-                    "§cMalus enregistré — Jeton VIP utilisable (" + vipSeconds + "s) pour relancer « "
-                            + theme.id() + " »."
-            ));
+            player.sendSystemMessage(ModMessages.msg("malus_vip", theme.id(), vipSeconds));
         }
 
         float cardChance = (float) ModConfig.gameplay().cardDropOnHighOrDefault();

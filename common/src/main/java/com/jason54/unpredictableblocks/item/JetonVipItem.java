@@ -8,6 +8,7 @@ import com.jason54.unpredictableblocks.luck.LuckTier;
 import com.jason54.unpredictableblocks.quest.PlayerQuestData;
 import com.jason54.unpredictableblocks.registry.ModBlocks;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
+import com.jason54.unpredictableblocks.util.ModMessages;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -52,7 +53,7 @@ public class JetonVipItem extends LoreItem {
             luckyBlockEntity.setLuck(LuckStat.MAX);
         }
 
-        player.sendSystemMessage(Component.literal("§eJeton VIP : Lucky Block " + theme.id() + " (Luck +100)"));
+        player.sendSystemMessage(ModMessages.msg("vip_block_place", theme.id()));
 
         consumeOne(context, player);
         return InteractionResult.SUCCESS;
@@ -75,17 +76,15 @@ public class JetonVipItem extends LoreItem {
             return InteractionResult.PASS;
         }
         if (!PlayerQuestData.hasMissedReroll(from)) {
-            from.sendSystemMessage(Component.literal("§7Aucun malus en attente à transférer."));
+            from.sendSystemMessage(ModMessages.msg("vip_no_pending"));
             return InteractionResult.FAIL;
         }
         if (!ItemCooldowns.tryConsume(from, ItemCooldowns.JETON, ItemCooldowns.JETON_TICKS)) {
             return InteractionResult.FAIL;
         }
         if (PlayerQuestData.transferMissedReroll(from, to)) {
-            from.sendSystemMessage(Component.literal("§eMalus VIP transféré à §f" + to.getGameProfile().name()));
-            to.sendSystemMessage(Component.literal(
-                    "§e" + from.getGameProfile().name() + " §7vous a transféré un §6relance VIP§7."
-            ));
+            from.sendSystemMessage(ModMessages.msg("vip_transfer_from", to.getGameProfile().name()));
+            to.sendSystemMessage(ModMessages.msg("vip_transfer_to", from.getGameProfile().name()));
             if (!from.getAbilities().instabuild) {
                 stack.shrink(1);
             }
@@ -110,11 +109,9 @@ public class JetonVipItem extends LoreItem {
         LuckyBlockEventDispatcher.dispatch(serverLevel, serverPlayer, serverPlayer.blockPosition(), chosen, forced);
 
         if (theme.isPresent()) {
-            serverPlayer.sendSystemMessage(Component.literal("§eRelance VIP (malus) : " + chosen.id() + " (HIGH)"));
+            serverPlayer.sendSystemMessage(ModMessages.msg("vip_reroll", chosen.id()));
         } else {
-            serverPlayer.sendSystemMessage(Component.literal(
-                    "§eJeton VIP : aucun malus en attente — " + chosen.id() + " (HIGH aléatoire)"
-            ));
+            serverPlayer.sendSystemMessage(ModMessages.msg("vip_random_high", chosen.id()));
         }
 
         if (!serverPlayer.getAbilities().instabuild) {

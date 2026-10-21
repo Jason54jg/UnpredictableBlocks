@@ -3,7 +3,7 @@ package com.jason54.unpredictableblocks.quest;
 import com.jason54.unpredictableblocks.config.ModConfig;
 import com.jason54.unpredictableblocks.lucky.PlayerLuckyBreakStats;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
-import net.minecraft.network.chat.Component;
+import com.jason54.unpredictableblocks.util.ModMessages;
 import net.minecraft.server.level.ServerPlayer;
 
 /** 10 cassages + quête du thème → advancement theme_master/&lt;id&gt; (perfection). */
@@ -23,7 +23,7 @@ public final class ThemeMasterProgress {
             return;
         }
         QuestRewards.complete(player, path, "master");
-        player.sendSystemMessage(Component.literal("§6Maître du thème §f" + theme.id() + "§6 !"));
+        player.sendSystemMessage(ModMessages.msg("theme_master", theme.id()));
         ThemeMasterMilestones.checkAfterMaster(player);
     }
 }

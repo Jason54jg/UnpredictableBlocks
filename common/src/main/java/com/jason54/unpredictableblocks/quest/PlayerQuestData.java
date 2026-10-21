@@ -2,6 +2,7 @@ package com.jason54.unpredictableblocks.quest;
 
 import com.jason54.unpredictableblocks.UnpredictableBlocks;
 import com.jason54.unpredictableblocks.config.ModConfig;
+import com.jason54.unpredictableblocks.util.ModMessages;
 import com.jason54.unpredictableblocks.luck.LuckTier;
 import com.jason54.unpredictableblocks.luck.PlayerLuckStorage;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
@@ -76,9 +77,7 @@ public final class PlayerQuestData {
                 resetCounter(player, "malus_streak");
                 int bonus = gameplay.malusStreakLuckBonusOrDefault();
                 PlayerLuckStorage.addModifier(player, bonus);
-                player.sendSystemMessage(Component.literal(
-                        "§dSérie malchanceuse — compensation §b+" + bonus + " Luck§d !"
-                ));
+                player.sendSystemMessage(ModMessages.msg("malus_streak", bonus));
             }
         } else {
             resetCounter(player, "malus_streak");

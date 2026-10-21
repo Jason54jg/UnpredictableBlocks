@@ -3,6 +3,7 @@ package com.jason54.unpredictableblocks.quest;
 import com.jason54.unpredictableblocks.config.ModConfig;
 import com.jason54.unpredictableblocks.lucky.PlayerLuckyBreakStats;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
+import com.jason54.unpredictableblocks.util.ModMessages;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 
@@ -19,9 +20,7 @@ public final class QuestJournal {
         }
         int cards = CardCollection.uniqueCount(player);
         int masters = ThemeMasterMilestones.countMasters(player);
-        player.sendSystemMessage(Component.literal(
-                "§6§lJournal §8Q" + done + "/32 §bC" + cards + "/32 §6M" + masters + "/32"
-        ));
+        player.sendSystemMessage(ModMessages.msg("journal_header", done, cards, masters));
         for (LuckyTheme theme : LuckyTheme.values()) {
             String mark = isQuestDone(player, theme) ? "§a✔" : "§7○";
             Component title = Component.translatable("advancements.unpredictableblocks." + theme.id() + ".title");

@@ -12,6 +12,7 @@ import com.jason54.unpredictableblocks.registry.ModBlocks;
 import com.jason54.unpredictableblocks.registry.ModItems;
 import com.jason54.unpredictableblocks.lucky.PlayerLuckyBreakStats;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
+import com.jason54.unpredictableblocks.util.ModMessages;
 import com.jason54.unpredictableblocks.util.ServerLevels;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
@@ -29,7 +30,7 @@ import net.minecraft.server.level.ServerPlayer;
 
 public final class UnpredictableBlocksCommands {
     private static final DynamicCommandExceptionType UNKNOWN_THEME =
-            new DynamicCommandExceptionType(id -> Component.literal("Thème inconnu : " + id));
+            new DynamicCommandExceptionType(id -> ModMessages.msg("command.unknown_theme", id));
 
     private UnpredictableBlocksCommands() {}
 
@@ -48,7 +49,10 @@ public final class UnpredictableBlocksCommands {
                                                     ServerLevel level = ServerLevels.of(player);
                                                     var outcome = new LuckResolver.ResolvedOutcome(tier, suffix(tier));
                                                     LuckyBlockEventDispatcher.dispatch(level, player, pos, theme, outcome);
-                                                    ctx.getSource().sendSuccess(() -> Component.literal("Événement " + theme.id() + " / " + tier), true);
+                                                    ctx.getSource().sendSuccess(
+                                                            () -> ModMessages.msg("command.event_ok", theme.id(), tier),
+                                                            true
+                                                    );
                                                     return 1;
                                                 }))))
                         .then(Commands.literal("casino")
@@ -81,7 +85,7 @@ public final class UnpredictableBlocksCommands {
                                 .executes(ctx -> {
                                     ModConfig.load();
                                     ctx.getSource().sendSuccess(
-                                            () -> Component.literal("Config unpredictableblocks.json rechargée."),
+                                            () -> ModMessages.msg("command.reload_ok"),
                                             true
                                     );
                                     return 1;
@@ -89,27 +93,31 @@ public final class UnpredictableBlocksCommands {
                         .then(Commands.literal("gameplay")
                                 .executes(ctx -> {
                                     var g = ModConfig.gameplay();
-                                    ctx.getSource().sendSuccess(() -> Component.literal("§6Gameplay (config) :"), false);
-                                    ctx.getSource().sendSuccess(() -> Component.literal(
-                                            "§7carte HIGH §f" + (int) (g.cardDropOnHighOrDefault() * 100) + "%"
-                                                    + " §7| combo §f" + g.comboHitsRequiredOrDefault()
-                                                    + "× / " + (g.comboWindowTicksOrDefault() / 20) + "s"
+                                    ctx.getSource().sendSuccess(() -> ModMessages.msg("command.gameplay_header"), false);
+                                    ctx.getSource().sendSuccess(() -> ModMessages.msg(
+                                            "command.gameplay_line1",
+                                            (int) (g.cardDropOnHighOrDefault() * 100),
+                                            g.comboHitsRequiredOrDefault(),
+                                            g.comboWindowTicksOrDefault() / 20
                                     ), false);
-                                    ctx.getSource().sendSuccess(() -> Component.literal(
-                                            "§7near miss luck §f[" + g.nearMissLuckMinOrDefault()
-                                                    + "…" + g.nearMissLuckMaxOrDefault() + "]"
-                                                    + " §7| maître §f" + g.themeMasterBreaksOrDefault() + " breaks"
+                                    ctx.getSource().sendSuccess(() -> ModMessages.msg(
+                                            "command.gameplay_line2",
+                                            g.nearMissLuckMinOrDefault(),
+                                            g.nearMissLuckMaxOrDefault(),
+                                            g.themeMasterBreaksOrDefault()
                                     ), false);
-                                    ctx.getSource().sendSuccess(() -> Component.literal(
-                                            "§7série malus §f" + g.malusStreakLengthOrDefault()
-                                                    + " LOW → +" + g.malusStreakLuckBonusOrDefault() + " luck"
-                                                    + " §7| VIP TTL §f" + (g.missedRerollTicksOrDefault() / 20) + "s"
+                                    ctx.getSource().sendSuccess(() -> ModMessages.msg(
+                                            "command.gameplay_line3",
+                                            g.malusStreakLengthOrDefault(),
+                                            g.malusStreakLuckBonusOrDefault(),
+                                            g.missedRerollTicksOrDefault() / 20
                                     ), false);
-                                    ctx.getSource().sendSuccess(() -> Component.literal(
-                                            "§7pari sneak+dust §f+" + g.luckBetAmountOrDefault() + " luck"
-                                                    + " §7| ambient §f" + g.ambientParticleRadiusOrDefault() + "m / "
-                                                    + g.ambientParticleIntervalTicksOrDefault() + "t"
-                                                    + " §7| sons mod §f" + g.useModTierSoundsOrDefault()
+                                    ctx.getSource().sendSuccess(() -> ModMessages.msg(
+                                            "command.gameplay_line4",
+                                            g.luckBetAmountOrDefault(),
+                                            g.ambientParticleRadiusOrDefault(),
+                                            g.ambientParticleIntervalTicksOrDefault(),
+                                            ModMessages.msg(g.useModTierSoundsOrDefault() ? "yes" : "no")
                                     ), false);
                                     return 1;
                                 }))
@@ -126,24 +134,22 @@ public final class UnpredictableBlocksCommands {
                                             ServerPlayer from = ctx.getSource().getPlayerOrException();
                                             ServerPlayer to = EntityArgument.getPlayer(ctx, "target");
                                             if (from.getUUID().equals(to.getUUID())) {
-                                                ctx.getSource().sendFailure(Component.literal("Cible invalide."));
+                                                ctx.getSource().sendFailure(ModMessages.msg("command.invalid_target"));
                                                 return 0;
                                             }
                                             if (!PlayerQuestData.hasMissedReroll(from)) {
-                                                ctx.getSource().sendFailure(Component.literal("Aucun malus en attente à transférer."));
+                                                ctx.getSource().sendFailure(ModMessages.msg("command.transfer_none"));
                                                 return 0;
                                             }
                                             if (PlayerQuestData.transferMissedReroll(from, to)) {
                                                 ctx.getSource().sendSuccess(
-                                                        () -> Component.literal("Malus VIP transféré à " + to.getGameProfile().name()),
+                                                        () -> ModMessages.msg("command.transfer_ok", to.getGameProfile().name()),
                                                         true
                                                 );
-                                                to.sendSystemMessage(Component.literal(
-                                                        "§e" + from.getGameProfile().name() + " §7vous a transféré un §6relance VIP§7 (malus en attente)."
-                                                ));
+                                                to.sendSystemMessage(ModMessages.msg("vip_transfer_to", from.getGameProfile().name()));
                                                 return 1;
                                             }
-                                            ctx.getSource().sendFailure(Component.literal("Transfert impossible (expiré ?)."));
+                                            ctx.getSource().sendFailure(ModMessages.msg("command.transfer_fail"));
                                             return 0;
                                         })))
         );
@@ -157,7 +163,11 @@ public final class UnpredictableBlocksCommands {
         if (luck != 0 && level.getBlockEntity(pos) instanceof LuckyBlockEntity be) {
             be.setLuck(luck);
         }
-        source.sendSuccess(() -> Component.literal("Placé " + theme.id() + (luck != 0 ? " luck=" + luck : "")), true);
+        source.sendSuccess(() -> ModMessages.msg(
+                "command.place_ok",
+                theme.id(),
+                luck != 0 ? ModMessages.msg("command.place_luck_suffix", luck) : Component.empty()
+        ), true);
         return 1;
     }
 
@@ -167,22 +177,23 @@ public final class UnpredictableBlocksCommands {
             source.sendSuccess(() -> statLine(player, only), false);
             return 1;
         }
-        source.sendSuccess(() -> Component.literal("§6Stats cassages Lucky (HIGH/LOW) :"), false);
+        source.sendSuccess(() -> ModMessages.msg("command.stats_header"), false);
         for (LuckyTheme theme : LuckyTheme.values()) {
             source.sendSuccess(() -> statLine(player, theme), false);
         }
         if (PlayerQuestData.hasMissedReroll(player)) {
-            source.sendSuccess(() -> Component.literal("§eMalus VIP en attente : oui"), false);
+            source.sendSuccess(() -> ModMessages.msg("command.vip_pending"), false);
         }
         return 1;
     }
 
     private static Component statLine(ServerPlayer player, LuckyTheme theme) {
-        return Component.literal(
-                "§7" + theme.id() + " §8— breaks "
-                        + PlayerLuckyBreakStats.breaks(player, theme)
-                        + " §aH" + PlayerLuckyBreakStats.highs(player, theme)
-                        + " §cL" + PlayerLuckyBreakStats.lows(player, theme)
+        return ModMessages.msg(
+                "command.stats_line",
+                theme.id(),
+                PlayerLuckyBreakStats.breaks(player, theme),
+                PlayerLuckyBreakStats.highs(player, theme),
+                PlayerLuckyBreakStats.lows(player, theme)
         );
     }
 
