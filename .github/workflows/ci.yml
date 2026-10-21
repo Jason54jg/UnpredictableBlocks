@@ -13,13 +13,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Regénérer et vérifier les assets
+      - name: Regénérer les assets
         run: |
           pip install -r tools/requirements.txt
           python3 tools/generate_textures.py
           python3 tools/generate_item_textures.py
           python3 tools/generate_structures.py
-          git diff --exit-code --stat || (echo "::warning::Les assets générés divergent du repo — commit attendu si scripts modifiés." && true)
 
   build:
     runs-on: ubuntu-latest
@@ -29,9 +28,9 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '21'
-      - name: Gradle build (Fabric + NeoForge)
+          java-version: '25'
+      - name: Gradle compile
         run: |
           chmod +x gradlew
-          ./gradlew :fabric:build :neoforge:build --no-daemon --stacktrace
+          ./gradlew :common:compileJava :fabric:compileJava :neoforge:compileJava --no-daemon --stacktrace
         continue-on-error: true

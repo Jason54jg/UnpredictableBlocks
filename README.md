@@ -14,9 +14,12 @@ Lucky Blocks chaotiques à thèmes, système de **chance (-100…+100)**, quête
 
 ## Build
 
+**JDK 25** requis (Minecraft 26.1.2). Voir `docs/BUILD.md`.
+
 ```bash
 ./gradlew :fabric:build
 ./gradlew :neoforge:build
+./gradlew chiseledBuild
 ```
 
 ## Textures (sans Photoshop / Aseprite obligatoire)
