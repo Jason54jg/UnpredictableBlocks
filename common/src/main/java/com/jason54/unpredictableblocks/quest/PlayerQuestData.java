@@ -1,7 +1,10 @@
 package com.jason54.unpredictableblocks.quest;
 
 import com.jason54.unpredictableblocks.UnpredictableBlocks;
+import com.jason54.unpredictableblocks.luck.LuckTier;
+import com.jason54.unpredictableblocks.luck.PlayerLuckStorage;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
+import net.minecraft.network.chat.Component;
 import com.jason54.unpredictableblocks.util.ServerLevels;
 import com.mojang.serialization.Codec;
 import net.minecraft.nbt.CompoundTag;
@@ -58,6 +61,20 @@ public final class PlayerQuestData {
         QuestSavedData data = root(player);
         data.counters.remove(counterKey(player.getUUID(), key));
         data.setDirty();
+    }
+
+    /** Après 3 malus LOW consécutifs, bonus +5 Luck (une fois par série). */
+    public static void recordLuckOutcome(ServerPlayer player, LuckTier tier) {
+        if (tier == LuckTier.LOW) {
+            int streak = incrementCounter(player, "malus_streak");
+            if (streak >= 3) {
+                resetCounter(player, "malus_streak");
+                PlayerLuckStorage.addModifier(player, 5);
+                player.sendSystemMessage(Component.literal("§dSérie malchanceuse — compensation §b+5 Luck§d !"));
+            }
+        } else {
+            resetCounter(player, "malus_streak");
+        }
     }
 
     public static void startSpeedrun(ServerPlayer player) {

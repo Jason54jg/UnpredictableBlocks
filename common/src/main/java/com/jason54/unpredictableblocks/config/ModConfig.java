@@ -24,6 +24,15 @@ public final class ModConfig {
         return ROOT;
     }
 
+    public static ThemeSpawn themeSpawn(LuckyTheme theme) {
+        ThemeSpawn fromFile = get().themes().get(theme.id());
+        return fromFile != null ? fromFile : ThemeSpawn.forTheme(theme);
+    }
+
+    public static boolean isThemeEnabled(LuckyTheme theme) {
+        return themeSpawn(theme).isEnabled();
+    }
+
     public static void load() {
         Path path = PlatformConfigPaths.configFile("unpredictableblocks.json");
         if (Files.exists(path)) {
@@ -54,14 +63,18 @@ public final class ModConfig {
                 themes.put(theme.id(), ThemeSpawn.forTheme(theme));
             }
             return new UnpredictableBlocksConfig(
-                    new Meta("26.1.2,26.2,26.3", 0),
+                    new Meta("26.1.2,26.2,26.3", 0, null),
                     Spawn.defaults(),
                     themes
             );
         }
     }
 
-    public record Meta(String supportedVersions, int defaultBlockLuck) {}
+    public record Meta(String supportedVersions, int defaultBlockLuck, Boolean showLuckHud) {
+        public boolean showLuckHudOrDefault() {
+            return showLuckHud == null || showLuckHud;
+        }
+    }
 
     public record Spawn(
             int attemptsPerChunk,
@@ -89,42 +102,47 @@ public final class ModConfig {
             double netherWeight,
             double endWeight,
             String[] preferredBiomes,
-            boolean nightOnly
+            boolean nightOnly,
+            Boolean enabled
     ) {
+        public boolean isEnabled() {
+            return enabled == null || enabled;
+        }
+
         public static ThemeSpawn forTheme(LuckyTheme theme) {
             return switch (theme) {
-                case ANACHRONISME -> new ThemeSpawn(LuckyRarity.RARE, 1.2, 0.4, 0.2, new String[]{"plains", "badlands"}, false);
-                case BOULANGERIE -> new ThemeSpawn(LuckyRarity.COMMON, 1.5, 0.2, 0.1, new String[]{"*"}, false);
-                case BSOD -> new ThemeSpawn(LuckyRarity.LEGENDARY, 0.4, 0.4, 0.4, new String[]{"*"}, false);
-                case VOLAILLE -> new ThemeSpawn(LuckyRarity.COMMON, 1.0, 0.3, 0.1, new String[]{"jungle", "forest"}, false);
-                case IMPOTS -> new ThemeSpawn(LuckyRarity.RARE, 1.3, 0.1, 0.0, new String[]{"village"}, false);
-                case STREAMER -> new ThemeSpawn(LuckyRarity.RARE, 1.1, 0.2, 0.1, new String[]{"beach", "ocean"}, false);
-                case PROPRETE -> new ThemeSpawn(LuckyRarity.COMMON, 1.0, 0.2, 0.1, new String[]{"river", "snowy"}, false);
-                case GRAVITE_ZERO -> new ThemeSpawn(LuckyRarity.LEGENDARY, 0.3, 0.2, 1.5, new String[]{"end_highlands", "peaks"}, false);
-                case FAST_FOOD -> new ThemeSpawn(LuckyRarity.COMMON, 1.2, 0.3, 0.1, new String[]{"plains", "savanna"}, false);
-                case CAUCHEMAR_MATIN -> new ThemeSpawn(LuckyRarity.RARE, 1.0, 0.2, 0.2, new String[]{"*"}, true);
-                case FILM_ACTION -> new ThemeSpawn(LuckyRarity.RARE, 1.0, 0.5, 0.1, new String[]{"badlands", "desert"}, false);
-                case JDR_D20 -> new ThemeSpawn(LuckyRarity.RARE, 0.9, 0.6, 0.3, new String[]{"dark_forest", "taiga"}, false);
-                case PENURIE_2020 -> new ThemeSpawn(LuckyRarity.COMMON, 1.1, 0.1, 0.0, new String[]{"village", "beach"}, false);
-                case COMPLOT -> new ThemeSpawn(LuckyRarity.LEGENDARY, 0.5, 0.3, 0.2, new String[]{"desert", "swamp"}, false);
-                case LAG_BUG -> new ThemeSpawn(LuckyRarity.LEGENDARY, 0.6, 0.6, 0.6, new String[]{"*"}, false);
-                case DISCO_80 -> new ThemeSpawn(LuckyRarity.RARE, 1.0, 0.3, 0.2, new String[]{"*"}, true);
-                case PLOMBERIE -> new ThemeSpawn(LuckyRarity.COMMON, 1.0, 0.2, 0.1, new String[]{"swamp", "river", "dripstone"}, false);
-                case FORTUNE_COOKIE -> new ThemeSpawn(LuckyRarity.RARE, 0.8, 0.2, 0.1, new String[]{"jungle", "bamboo"}, false);
-                case CAMPING -> new ThemeSpawn(LuckyRarity.COMMON, 1.1, 0.2, 0.1, new String[]{"taiga", "forest", "peaks"}, false);
-                case GYM_BRO -> new ThemeSpawn(LuckyRarity.RARE, 1.0, 0.4, 0.1, new String[]{"plains", "desert"}, false);
-                case ART_MODERNE -> new ThemeSpawn(LuckyRarity.RARE, 1.0, 0.1, 0.1, new String[]{"village", "badlands"}, false);
-                case MAGIE_COMPTOIR -> new ThemeSpawn(LuckyRarity.COMMON, 0.9, 0.5, 0.2, new String[]{"swamp", "mansion"}, false);
-                case CASINO -> new ThemeSpawn(LuckyRarity.LEGENDARY, 0.4, 0.6, 0.1, new String[]{"desert", "badlands"}, false);
-                case INVASION_MEMES -> new ThemeSpawn(LuckyRarity.LEGENDARY, 0.5, 0.5, 0.5, new String[]{"*"}, false);
-                case PAUSE_CAFE -> new ThemeSpawn(LuckyRarity.COMMON, 1.3, 0.1, 0.0, new String[]{"plains", "village"}, false);
-                case RETARD_VOL -> new ThemeSpawn(LuckyRarity.RARE, 1.0, 0.2, 0.1, new String[]{"plains", "desert"}, false);
-                case ANANAS_PIZZA -> new ThemeSpawn(LuckyRarity.RARE, 1.1, 0.2, 0.0, new String[]{"jungle", "savanna"}, false);
-                case SPEEDRUNNER -> new ThemeSpawn(LuckyRarity.LEGENDARY, 0.3, 0.8, 0.6, new String[]{"stronghold", "nether_wastes"}, false);
-                case PIRATERIE_TORRENT -> new ThemeSpawn(LuckyRarity.RARE, 0.8, 0.2, 0.1, new String[]{"ocean", "beach"}, false);
-                case ASMR_FIDGET -> new ThemeSpawn(LuckyRarity.COMMON, 1.2, 0.2, 0.2, new String[]{"*"}, false);
-                case VAMPIRE_GOTHIQUE -> new ThemeSpawn(LuckyRarity.RARE, 1.0, 0.3, 0.1, new String[]{"dark_forest", "roofed_forest"}, true);
-                case MULTIVERS_SLIDERS -> new ThemeSpawn(LuckyRarity.LEGENDARY, 0.2, 0.7, 1.2, new String[]{"end_highlands", "nether_wastes"}, false);
+                case ANACHRONISME -> new ThemeSpawn(LuckyRarity.RARE, 1.2, 0.4, 0.2, new String[]{"plains", "badlands"}, false, null);
+                case BOULANGERIE -> new ThemeSpawn(LuckyRarity.COMMON, 1.5, 0.2, 0.1, new String[]{"*"}, false, null);
+                case BSOD -> new ThemeSpawn(LuckyRarity.LEGENDARY, 0.4, 0.4, 0.4, new String[]{"*"}, false, null);
+                case VOLAILLE -> new ThemeSpawn(LuckyRarity.COMMON, 1.0, 0.3, 0.1, new String[]{"jungle", "forest"}, false, null);
+                case IMPOTS -> new ThemeSpawn(LuckyRarity.RARE, 1.3, 0.1, 0.0, new String[]{"village"}, false, null);
+                case STREAMER -> new ThemeSpawn(LuckyRarity.RARE, 1.1, 0.2, 0.1, new String[]{"beach", "ocean"}, false, null);
+                case PROPRETE -> new ThemeSpawn(LuckyRarity.COMMON, 1.0, 0.2, 0.1, new String[]{"river", "snowy"}, false, null);
+                case GRAVITE_ZERO -> new ThemeSpawn(LuckyRarity.LEGENDARY, 0.3, 0.2, 1.5, new String[]{"end_highlands", "peaks"}, false, null);
+                case FAST_FOOD -> new ThemeSpawn(LuckyRarity.COMMON, 1.2, 0.3, 0.1, new String[]{"plains", "savanna"}, false, null);
+                case CAUCHEMAR_MATIN -> new ThemeSpawn(LuckyRarity.RARE, 1.0, 0.2, 0.2, new String[]{"*"}, true, null);
+                case FILM_ACTION -> new ThemeSpawn(LuckyRarity.RARE, 1.0, 0.5, 0.1, new String[]{"badlands", "desert"}, false, null);
+                case JDR_D20 -> new ThemeSpawn(LuckyRarity.RARE, 0.9, 0.6, 0.3, new String[]{"dark_forest", "taiga"}, false, null);
+                case PENURIE_2020 -> new ThemeSpawn(LuckyRarity.COMMON, 1.1, 0.1, 0.0, new String[]{"village", "beach"}, false, null);
+                case COMPLOT -> new ThemeSpawn(LuckyRarity.LEGENDARY, 0.5, 0.3, 0.2, new String[]{"desert", "swamp"}, false, null);
+                case LAG_BUG -> new ThemeSpawn(LuckyRarity.LEGENDARY, 0.6, 0.6, 0.6, new String[]{"*"}, false, null);
+                case DISCO_80 -> new ThemeSpawn(LuckyRarity.RARE, 1.0, 0.3, 0.2, new String[]{"*"}, true, null);
+                case PLOMBERIE -> new ThemeSpawn(LuckyRarity.COMMON, 1.0, 0.2, 0.1, new String[]{"swamp", "river", "dripstone"}, false, null);
+                case FORTUNE_COOKIE -> new ThemeSpawn(LuckyRarity.RARE, 0.8, 0.2, 0.1, new String[]{"jungle", "bamboo"}, false, null);
+                case CAMPING -> new ThemeSpawn(LuckyRarity.COMMON, 1.1, 0.2, 0.1, new String[]{"taiga", "forest", "peaks"}, false, null);
+                case GYM_BRO -> new ThemeSpawn(LuckyRarity.RARE, 1.0, 0.4, 0.1, new String[]{"plains", "desert"}, false, null);
+                case ART_MODERNE -> new ThemeSpawn(LuckyRarity.RARE, 1.0, 0.1, 0.1, new String[]{"village", "badlands"}, false, null);
+                case MAGIE_COMPTOIR -> new ThemeSpawn(LuckyRarity.COMMON, 0.9, 0.5, 0.2, new String[]{"swamp", "mansion"}, false, null);
+                case CASINO -> new ThemeSpawn(LuckyRarity.LEGENDARY, 0.4, 0.6, 0.1, new String[]{"desert", "badlands"}, false, null);
+                case INVASION_MEMES -> new ThemeSpawn(LuckyRarity.LEGENDARY, 0.5, 0.5, 0.5, new String[]{"*"}, false, null);
+                case PAUSE_CAFE -> new ThemeSpawn(LuckyRarity.COMMON, 1.3, 0.1, 0.0, new String[]{"plains", "village"}, false, null);
+                case RETARD_VOL -> new ThemeSpawn(LuckyRarity.RARE, 1.0, 0.2, 0.1, new String[]{"plains", "desert"}, false, null);
+                case ANANAS_PIZZA -> new ThemeSpawn(LuckyRarity.RARE, 1.1, 0.2, 0.0, new String[]{"jungle", "savanna"}, false, null);
+                case SPEEDRUNNER -> new ThemeSpawn(LuckyRarity.LEGENDARY, 0.3, 0.8, 0.6, new String[]{"stronghold", "nether_wastes"}, false, null);
+                case PIRATERIE_TORRENT -> new ThemeSpawn(LuckyRarity.RARE, 0.8, 0.2, 0.1, new String[]{"ocean", "beach"}, false, null);
+                case ASMR_FIDGET -> new ThemeSpawn(LuckyRarity.COMMON, 1.2, 0.2, 0.2, new String[]{"*"}, false, null);
+                case VAMPIRE_GOTHIQUE -> new ThemeSpawn(LuckyRarity.RARE, 1.0, 0.3, 0.1, new String[]{"dark_forest", "roofed_forest"}, true, null);
+                case MULTIVERS_SLIDERS -> new ThemeSpawn(LuckyRarity.LEGENDARY, 0.2, 0.7, 1.2, new String[]{"end_highlands", "nether_wastes"}, false, null);
             };
         }
     }

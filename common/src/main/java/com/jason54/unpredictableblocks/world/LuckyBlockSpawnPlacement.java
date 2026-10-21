@@ -59,7 +59,7 @@ public final class LuckyBlockSpawnPlacement {
         double totalWeight = 0;
         for (LuckyTheme theme : LuckyTheme.values()) {
             ModConfig.ThemeSpawn cfg = themeConfig(theme);
-            if (cfg.rarity() != rarity) {
+            if (!cfg.isEnabled() || cfg.rarity() != rarity) {
                 continue;
             }
             if (cfg.nightOnly() && !night) {
@@ -77,7 +77,10 @@ public final class LuckyBlockSpawnPlacement {
         double roll = random.nextDouble() * totalWeight;
         for (LuckyTheme theme : LuckyTheme.values()) {
             ModConfig.ThemeSpawn cfg = themeConfig(theme);
-            if (cfg.rarity() != rarity || (cfg.nightOnly() && !night) || !matchesBiome(cfg, biomePath)) {
+            if (!cfg.isEnabled()
+                    || cfg.rarity() != rarity
+                    || (cfg.nightOnly() && !night)
+                    || !matchesBiome(cfg, biomePath)) {
                 continue;
             }
             roll -= themeWeight(cfg, level) * dimensionFactor;
@@ -90,7 +93,7 @@ public final class LuckyBlockSpawnPlacement {
 
     private static LuckyTheme fallbackTheme(LuckyRarity rarity, RandomSource random) {
         LuckyTheme[] candidates = java.util.Arrays.stream(LuckyTheme.values())
-                .filter(t -> t.rarity() == rarity)
+                .filter(t -> t.rarity() == rarity && themeConfig(t).isEnabled())
                 .toArray(LuckyTheme[]::new);
         if (candidates.length == 0) {
             return null;
@@ -130,9 +133,7 @@ public final class LuckyBlockSpawnPlacement {
     }
 
     private static ModConfig.ThemeSpawn themeConfig(LuckyTheme theme) {
-        var map = ModConfig.get().themes();
-        ModConfig.ThemeSpawn fromFile = map.get(theme.id());
-        return fromFile != null ? fromFile : ModConfig.ThemeSpawn.forTheme(theme);
+        return ModConfig.themeSpawn(theme);
     }
 
     private static ModConfig.Spawn spawnConfig() {

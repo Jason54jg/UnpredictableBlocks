@@ -7,6 +7,7 @@ import com.jason54.unpredictableblocks.luck.LuckResolver;
 import com.jason54.unpredictableblocks.luck.LuckTier;
 import com.jason54.unpredictableblocks.quest.CasinoJackpot;
 import com.jason54.unpredictableblocks.registry.ModBlocks;
+import com.jason54.unpredictableblocks.registry.ModItems;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
 import com.jason54.unpredictableblocks.util.ServerLevels;
 import com.mojang.brigadier.CommandDispatcher;
@@ -67,6 +68,7 @@ public final class UnpredictableBlocksCommands {
                                     for (LuckyTheme theme : LuckyTheme.values()) {
                                         player.getInventory().add(new net.minecraft.world.item.ItemStack(ModBlocks.get(theme)));
                                     }
+                                    player.getInventory().add(new net.minecraft.world.item.ItemStack(ModItems.JOURNAL_QUETES.get()));
                                     return 1;
                                 }))
         );

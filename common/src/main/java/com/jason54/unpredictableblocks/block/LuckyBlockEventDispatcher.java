@@ -1,5 +1,6 @@
 package com.jason54.unpredictableblocks.block;
 
+import com.jason54.unpredictableblocks.config.ModConfig;
 import com.jason54.unpredictableblocks.event.ThemeEventEffects;
 import com.jason54.unpredictableblocks.luck.LuckResolver;
 import com.jason54.unpredictableblocks.luck.LuckTier;
@@ -32,6 +33,11 @@ public final class LuckyBlockEventDispatcher {
             LuckyTheme theme,
             LuckResolver.ResolvedOutcome outcome
     ) {
+        if (!ModConfig.isThemeEnabled(theme)) {
+            player.sendSystemMessage(Component.literal("§7Événement ignoré — thème désactivé : " + theme.id()));
+            return;
+        }
+
         LuckResolver.ResolvedOutcome effective = outcome;
         if (theme == LuckyTheme.JDR_D20) {
             LuckTier d20 = JdrDiceRoll.rollD20(player, level.getRandom());
@@ -51,6 +57,8 @@ public final class LuckyBlockEventDispatcher {
             PlayerQuestData.startPlomberieWindow(player, 20L * 60 * 5);
             player.sendSystemMessage(Component.literal("§6Fuite détectée — ouvrez un coffre avant 5 minutes !"));
         }
+
+        PlayerQuestData.recordLuckOutcome(player, effective.tier());
 
         if (effective.tier() == LuckTier.LOW) {
             PlayerQuestData.setMissedReroll(player, theme);

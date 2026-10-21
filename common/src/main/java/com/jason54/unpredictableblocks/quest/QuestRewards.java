@@ -20,4 +20,13 @@ public final class QuestRewards {
     public static void complete(ServerPlayer player, String advancementPath) {
         complete(player, advancementPath, "completed");
     }
+
+    public static boolean isDone(ServerPlayer player, String advancementPath) {
+        Identifier id = Identifier.fromNamespaceAndPath(UnpredictableBlocks.MOD_ID, advancementPath);
+        AdvancementHolder advancement = ServerLevels.of(player).getServer().getAdvancements().get(id);
+        if (advancement == null) {
+            return false;
+        }
+        return player.getAdvancements().getOrStartProgress(advancement).isDone();
+    }
 }

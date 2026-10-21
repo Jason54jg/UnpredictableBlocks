@@ -1,0 +1,25 @@
+{
+  "display": {
+    "icon": {
+      "id": "unpredictableblocks:lucky_invasion_memes"
+    },
+    "title": {
+      "translate": "advancements.unpredictableblocks.collector.title",
+      "fallback": "Collectionneur du Chaos"
+    },
+    "description": {
+      "translate": "advancements.unpredictableblocks.collector.description",
+      "fallback": "Posséder les 32 Lucky Blocks en items."
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "unpredictableblocks:root",
+  "criteria": {
+    "all_blocks": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [["all_blocks"]]
+}

@@ -10,6 +10,7 @@ import com.jason54.unpredictableblocks.item.JetonVipItem;
 import com.jason54.unpredictableblocks.item.ShakerProtItem;
 import com.jason54.unpredictableblocks.item.LoreItem;
 import com.jason54.unpredictableblocks.item.LuckyBlockItem;
+import com.jason54.unpredictableblocks.item.QuestJournalItem;
 import com.jason54.unpredictableblocks.item.ThemedGearHelper;
 import com.jason54.unpredictableblocks.item.UsableLuckItem;
 import dev.architectury.registry.registries.DeferredRegister;
@@ -66,6 +67,12 @@ public final class ModItems {
                 ThemedGearHelper.enchant(stack, ThemedGearHelper.efficiency(), 4);
                 ThemedGearHelper.enchant(stack, ThemedGearHelper.unbreaking(), 3);
                 ThemedGearHelper.enchant(stack, ThemedGearHelper.knockback(), 2);
+            }));
+
+    public static final RegistrySupplier<Item> JOURNAL_QUETES = ITEMS.register("journal_quetes", () ->
+            new QuestJournalItem(new Item.Properties(), stack -> {
+                ThemedGearHelper.name(stack, "Journal des Quêtes");
+                ThemedGearHelper.lore(stack, "Clic droit : progression 32 thèmes.");
             }));
 
     public static final RegistrySupplier<Item> JETON_VIP = ITEMS.register("jeton_or_vip", () ->

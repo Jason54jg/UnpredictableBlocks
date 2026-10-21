@@ -1,5 +1,6 @@
 package com.jason54.unpredictableblocks.block;
 
+import com.jason54.unpredictableblocks.config.ModConfig;
 import com.jason54.unpredictableblocks.block.entity.LuckyBlockEntity;
 import com.jason54.unpredictableblocks.luck.LuckResolver;
 import com.jason54.unpredictableblocks.luck.LuckStat;
@@ -7,6 +8,7 @@ import com.jason54.unpredictableblocks.luck.PlayerLuckStorage;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -55,8 +57,13 @@ public class LuckyBlock extends BaseEntityBlock {
             if (be instanceof LuckyBlockEntity luckyBe) {
                 LuckStat blockLuck = new LuckStat(luckyBe.getLuck());
                 LuckStat playerLuck = PlayerLuckStorage.getModifier(serverPlayer);
-                LuckResolver.ResolvedOutcome outcome = LuckResolver.resolve(blockLuck, playerLuck, serverLevel.getRandom());
-                LuckyBlockEventDispatcher.dispatch(serverLevel, serverPlayer, pos, theme, outcome);
+                if (!ModConfig.isThemeEnabled(theme)) {
+                    serverPlayer.sendSystemMessage(Component.literal(
+                            "§7Thème « " + theme.id() + " » désactivé (unpredictableblocks.json)."));
+                } else {
+                    LuckResolver.ResolvedOutcome outcome = LuckResolver.resolve(blockLuck, playerLuck, serverLevel.getRandom());
+                    LuckyBlockEventDispatcher.dispatch(serverLevel, serverPlayer, pos, theme, outcome);
+                }
             }
         }
         return super.playerWillDestroy(level, pos, state, player);

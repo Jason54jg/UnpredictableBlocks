@@ -10,6 +10,7 @@ import com.jason54.unpredictableblocks.registry.ModCreativeTabs;
 import com.jason54.unpredictableblocks.registry.ModSounds;
 import com.jason54.unpredictableblocks.command.CommandRegistration;
 import com.jason54.unpredictableblocks.event.GearEffectHandler;
+import com.jason54.unpredictableblocks.event.LuckHudHandler;
 import com.jason54.unpredictableblocks.quest.FortuneCookieHandler;
 import com.jason54.unpredictableblocks.quest.QuestEventHandler;
 import com.jason54.unpredictableblocks.quest.QuestExtendedHandler;
@@ -35,6 +36,7 @@ public final class UnpredictableBlocks {
         QuestExtendedHandler.register();
         FortuneCookieHandler.register();
         GearEffectHandler.register();
+        LuckHudHandler.register();
         CommandRegistration.register();
         LOGGER.info("UnpredictableBlocks initialisé (MC {}+)", ModConfig.get().meta().supportedVersions());
     }
