@@ -128,6 +128,7 @@ public final class UnpredictableBlocksCommands {
                                                 ctx.getSource(),
                                                 resolveTheme(StringArgumentType.getString(ctx, "theme"))
                                         ))))
+                        .then(WorldProfileCommands.branch())
                         .then(Commands.literal("transfer")
                                 .then(Commands.argument("target", EntityArgument.player())
                                         .executes(ctx -> {

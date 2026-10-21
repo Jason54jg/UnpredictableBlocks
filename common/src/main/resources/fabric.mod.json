@@ -9,7 +9,8 @@
   "icon": "assets/unpredictableblocks/icon.png",
   "environment": "*",
   "entrypoints": {
-    "main": ["com.jason54.unpredictableblocks.fabric.UnpredictableBlocksFabric"]
+    "main": ["com.jason54.unpredictableblocks.fabric.UnpredictableBlocksFabric"],
+    "client": ["com.jason54.unpredictableblocks.fabric.client.UnpredictableBlocksFabricClient"]
   },
   "depends": {
     "fabricloader": ">=0.17.0",

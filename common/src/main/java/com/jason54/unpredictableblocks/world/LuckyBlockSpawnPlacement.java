@@ -20,9 +20,18 @@ public final class LuckyBlockSpawnPlacement {
     private LuckyBlockSpawnPlacement() {}
 
     public static void populateChunk(ServerLevel level, LevelChunk chunk) {
+        WorldModProfile.WorldProfileData profile = WorldModProfile.get(level);
+        if (!profile.naturalSpawn()) {
+            return;
+        }
         ModConfig.Spawn spawn = ModConfig.get().spawn();
+        int attempts = (int) Math.round(spawn.attemptsPerChunk() * profile.spawnMultiplier());
+        if (attempts <= 0) {
+            return;
+        }
+        int defaultLuck = profile.defaultBlockLuck();
         RandomSource random = level.getRandom();
-        for (int i = 0; i < spawn.attemptsPerChunk(); i++) {
+        for (int i = 0; i < attempts; i++) {
             if (random.nextFloat() > 0.65f) {
                 continue;
             }
@@ -36,7 +45,10 @@ public final class LuckyBlockSpawnPlacement {
             if (level.getBlockState(surface).isAir() && level.getBlockState(surface.below()).isSolidRender()) {
                 level.setBlock(surface, state, 3);
                 if (level.getBlockEntity(surface) instanceof com.jason54.unpredictableblocks.block.entity.LuckyBlockEntity luckyBe) {
-                    luckyBe.setLuck(com.jason54.unpredictableblocks.config.ModConfig.get().meta().defaultBlockLuck());
+                    int luck = defaultLuck != 0
+                            ? defaultLuck
+                            : com.jason54.unpredictableblocks.config.ModConfig.get().meta().defaultBlockLuck();
+                    luckyBe.setLuck(luck);
                 }
             }
         }

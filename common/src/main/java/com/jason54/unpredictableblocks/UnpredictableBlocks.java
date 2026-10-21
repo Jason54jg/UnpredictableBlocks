@@ -16,6 +16,7 @@ import com.jason54.unpredictableblocks.quest.FortuneCookieHandler;
 import com.jason54.unpredictableblocks.quest.QuestEventHandler;
 import com.jason54.unpredictableblocks.quest.QuestExtendedHandler;
 import com.jason54.unpredictableblocks.world.LuckyBlockSpawnHooks;
+import com.jason54.unpredictableblocks.world.WorldSetupHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,6 +34,7 @@ public final class UnpredictableBlocks {
         ModLoot.register();
         ModAdvancements.register();
         LuckyBlockSpawnHooks.register();
+        WorldSetupHandler.register();
         QuestEventHandler.register();
         QuestExtendedHandler.register();
         FortuneCookieHandler.register();

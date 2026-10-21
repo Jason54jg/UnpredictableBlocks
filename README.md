@@ -14,7 +14,8 @@ Lucky Blocks chaotiques à thèmes, système de **chance (-100…+100)**, quête
 - **Événements** : loot tables + `ThemeEventEffects` + structures NBT (`StructurePlacer`).
 - **Quêtes** : advancements sous `data/unpredictableblocks/advancement/quest/` + **Journal des quêtes** (item).
 - **HUD Luck** (barre d’action) ; config optionnelle `unpredictableblocks.json` (**spawn** / pondérations uniquement — les **32 thèmes** restent toujours actifs en jeu).
-- **Paliers quêtes** 8/16/24, **Lucky mystère**, **aura de chunk**, **pari Luck** (sneak + poussière d’émeraude en off-hand au cassage).
+- **Paliers quêtes** 8/16/24/32, **Lucky mystère**, **aura de chunk**, **pari Luck** (sneak + poussière d’émeraude en off-hand au cassage).
+- **Profil monde** (avant / au 1er lancement) : Normal, Facile, Difficile, Hardcore, **OneBlock** (1–4 joueurs). Fabric : bouton **UB World profile** dans le menu titre. Commandes : `/unpredictableblocks world next|setup|show|menu`. Préréglages : `ub_normal`, `ub_oneblock_void`.
 
 ## Build
 
