@@ -1,12 +1,20 @@
 package com.jason54.unpredictableblocks.item;
 
+import com.jason54.unpredictableblocks.config.ModConfig;
+import com.jason54.unpredictableblocks.lucky.PlayerLuckyBreakStats;
+import com.jason54.unpredictableblocks.quest.QuestRewards;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.level.Level;
 
 /** Carte à collectionner ; tag NBT {@code Theme} = id thème. */
 public class CollectionCardItem extends Item {
@@ -41,5 +49,34 @@ public class CollectionCardItem extends Item {
             }
         }
         return null;
+    }
+
+    @Override
+    public InteractionResult use(Level level, Player player, InteractionHand hand) {
+        if (level.isClientSide() || !(player instanceof ServerPlayer sp)) {
+            return InteractionResult.CONSUME;
+        }
+        ItemStack stack = player.getItemInHand(hand);
+        LuckyTheme theme = readTheme(stack);
+        if (theme == null) {
+            sp.sendSystemMessage(Component.literal("§7Carte vierge (aucun thème)."));
+            return InteractionResult.SUCCESS;
+        }
+        var spawn = ModConfig.themeSpawn(theme);
+        String biomes = String.join(", ", spawn.preferredBiomes());
+        boolean quest = QuestRewards.isDone(sp, "quest/" + theme.id());
+        boolean master = QuestRewards.isDone(sp, "theme_master/" + theme.id());
+        sp.sendSystemMessage(Component.literal("§b§lCarte — §f" + theme.id()));
+        sp.sendSystemMessage(Component.literal(
+                "§7Cassages §f" + PlayerLuckyBreakStats.breaks(sp, theme)
+                        + " §aH" + PlayerLuckyBreakStats.highs(sp, theme)
+                        + " §cL" + PlayerLuckyBreakStats.lows(sp, theme)
+        ));
+        sp.sendSystemMessage(Component.literal(
+                "§7Quête : " + (quest ? "§a✔" : "§7○")
+                        + " §7| Maître : " + (master ? "§6★" : "§7○")
+                        + " §8| §7" + biomes
+        ));
+        return InteractionResult.SUCCESS;
     }
 }

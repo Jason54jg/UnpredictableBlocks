@@ -55,6 +55,8 @@
   "advancements.unpredictableblocks.root.description": "Find your first utterly absurd block.",
   "advancements.unpredictableblocks.collector.title": "Chaos Collector",
   "advancements.unpredictableblocks.collector.description": "Hold all 32 Lucky Block items.",
+  "advancements.unpredictableblocks.card_collector.title": "Complete Card Album",
+  "advancements.unpredictableblocks.card_collector.description": "Collect one collection card for each of the 32 themes.",
   "advancements.unpredictableblocks.milestone.quest_8.title": "Chaos Apprentice",
   "advancements.unpredictableblocks.milestone.quest_8.description": "Complete 8 theme quests.",
   "advancements.unpredictableblocks.milestone.quest_16.title": "Absurd Expert",

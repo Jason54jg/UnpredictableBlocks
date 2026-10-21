@@ -17,7 +17,10 @@ public final class QuestJournal {
                 done++;
             }
         }
-        player.sendSystemMessage(Component.literal("§6§lJournal des quêtes §8(" + done + "/32)"));
+        int cards = CardCollection.uniqueCount(player);
+        player.sendSystemMessage(Component.literal(
+                "§6§lJournal des quêtes §8(" + done + "/32) §7| §bCartes §8(" + cards + "/32)"
+        ));
         for (LuckyTheme theme : LuckyTheme.values()) {
             String mark = isQuestDone(player, theme) ? "§a✔" : "§7○";
             Component title = Component.translatable("advancements.unpredictableblocks." + theme.id() + ".title");
@@ -26,11 +29,13 @@ public final class QuestJournal {
             String night = spawn.nightOnly() ? " §8(nuit)" : "";
             int br = PlayerLuckyBreakStats.breaks(player, theme);
             String master = QuestRewards.isDone(player, "theme_master/" + theme.id()) ? " §6★" : "";
+            String card = CardCollection.hasCard(player, theme) ? " §b◆" : "";
             player.sendSystemMessage(Component.literal(
-                    mark + " " + master + " §8[" + br + " breaks] §7" + biomes + night + " — "
+                    mark + card + master + " §8[" + br + " breaks] §7" + biomes + night + " — "
             ).append(title));
         }
         QuestCollection.tryAwardCollector(player);
+        CardCollection.tryAwardCardAlbum(player);
         QuestMilestones.checkAfterQuest(player);
     }
 

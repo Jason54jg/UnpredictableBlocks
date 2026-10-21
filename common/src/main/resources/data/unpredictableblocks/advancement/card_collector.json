@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": { "id": "unpredictableblocks:carte_collection" },
+    "title": {
+      "translate": "advancements.unpredictableblocks.card_collector.title",
+      "fallback": "Complete Card Album"
+    },
+    "description": {
+      "translate": "advancements.unpredictableblocks.card_collector.description",
+      "fallback": "Collect one collection card for each of the 32 themes."
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "unpredictableblocks:collector",
+  "criteria": {
+    "all_cards": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [["all_cards"]]
+}

@@ -7,6 +7,7 @@ import com.jason54.unpredictableblocks.lucky.LootTablePaths;
 import com.jason54.unpredictableblocks.luck.LuckResolver;
 import com.jason54.unpredictableblocks.luck.LuckTier;
 import com.jason54.unpredictableblocks.lucky.PlayerLuckyBreakStats;
+import com.jason54.unpredictableblocks.quest.CardCollection;
 import com.jason54.unpredictableblocks.quest.ThemeMasterProgress;
 import com.jason54.unpredictableblocks.quest.CasinoJackpot;
 import com.jason54.unpredictableblocks.quest.JdrDiceRoll;
@@ -95,6 +96,7 @@ public final class LuckyBlockEventDispatcher {
 
         if (effective.tier() == LuckTier.HIGH && level.getRandom().nextFloat() < 0.12f) {
             player.getInventory().add(CollectionCardItem.forTheme(theme));
+            CardCollection.tryAwardCardAlbum(player);
         }
 
         Identifier table = Identifier.fromNamespaceAndPath(
