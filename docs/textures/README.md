@@ -10,13 +10,15 @@ python3 tools/generate_textures.py
 python3 tools/generate_item_textures.py
 ```
 
-Sortie : `common/src/main/resources/assets/unpredictableblocks/textures/block/lucky_*.png` (+ `icon.png`).
+Sortie : `textures/block/lucky_*.png` et `textures/item/*.png` en **32×32** (+ `icon.png` 128×128).
+
+Les scripts dessinent sur une grille **16×16** puis exportent en **32×32** (nearest-neighbor, pixel art net) — voir `tools/texture_size.py`.
 
 ## Qualité artistique
 
-- **16×16** : placeholders lisibles en jeu, fidèles au catalogue (`CATALOGUE.md`).
-- **32×32** ou retouche manuelle : optionnel (Aseprite, GIMP, Photoshop) — remplacez les PNG générés, gardez les mêmes noms de fichiers.
-- **Upscale** : `python3 tools/upscale_textures.py` (à venir) ou nearest-neighbor ×2 dans votre outil préféré.
+- **32×32** : résolution par défaut du mod (placeholders procéduraux, catalogue `CATALOGUE.md`).
+- Retouche manuelle (Aseprite, GIMP, etc.) : remplacez les PNG, gardez les mêmes chemins et la taille **32×32** pour rester cohérent.
+- Régénération rapide : `python3 tools/upscale_textures.py` relance les deux générateurs.
 
 ## Convention
 

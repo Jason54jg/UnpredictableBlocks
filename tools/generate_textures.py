@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
-"""Génère les PNG 16×16 des Lucky Blocks (Pillow). Aucun outil graphique externe requis."""
+"""Génère les PNG 32×32 des Lucky Blocks (Pillow, pixel art 16×16 upscalé ×2)."""
 from __future__ import annotations
 
 from pathlib import Path
 from PIL import Image, ImageDraw
 
+from texture_size import OUTPUT_SIZE, to_output_size
+
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "common/src/main/resources/assets/unpredictableblocks/textures"
-SIZE = 16
+SIZE = 16  # grille de dessin ; export via to_output_size()
 
 
 def rgb(h: str) -> tuple[int, int, int]:
@@ -19,11 +21,12 @@ def base() -> Image.Image:
     return Image.new("RGBA", (SIZE, SIZE), (0, 0, 0, 0))
 
 
-def save(img: Image.Image, rel: str) -> None:
+def save(img: Image.Image, rel: str, *, skip_upscale: bool = False) -> None:
     path = OUT / rel
     path.parent.mkdir(parents=True, exist_ok=True)
-    img.save(path)
-    print("wrote", path.relative_to(ROOT))
+    out = img if skip_upscale else to_output_size(img)
+    out.save(path)
+    print("wrote", path.relative_to(ROOT), f"({out.size[0]}×{out.size[1]})")
 
 
 def qmark(draw: ImageDraw.ImageDraw, color: tuple[int, int, int]) -> None:
@@ -314,15 +317,15 @@ GENERATORS = {
 
 
 def icon() -> None:
-    img = gen_invasion_memes().resize((128, 128), Image.NEAREST)
-    save(img, "icon.png")
+    img = to_output_size(gen_invasion_memes()).resize((128, 128), Image.NEAREST)
+    save(img, "icon.png", skip_upscale=True)
 
 
 def main() -> None:
     for name, fn in GENERATORS.items():
         save(fn(), f"block/{name}.png")
     icon()
-    print(f"Generated {len(GENERATORS)} block textures + icon.")
+    print(f"Generated {len(GENERATORS)} block textures ({OUTPUT_SIZE}×{OUTPUT_SIZE}) + icon.")
 
 
 if __name__ == "__main__":

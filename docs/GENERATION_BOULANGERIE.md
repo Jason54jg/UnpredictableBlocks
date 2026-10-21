@@ -7,7 +7,7 @@
 - **Biomes** : tous biomes terrestres (poids Overworld 1.5)
 - **Dimension** : Overworld principalement
 
-## 2. Description visuelle détaillée (PNG 16×16 / 32×32)
+## 2. Description visuelle détaillée (PNG 32×32 en jeu)
 
 - **Base** : cube pain baguette — croûte dorée (#C8A040) avec grignotines transversales tous les 4 px.
 - **Motif central** : deux taches chocolat (#5C3317) en diagonale (pépites).

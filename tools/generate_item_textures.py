@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
+"""Textures d'objets 32×32 (grille 16×16 upscalée ×2)."""
 from pathlib import Path
 from PIL import Image, ImageDraw
+
+from texture_size import OUTPUT_SIZE, to_output_size
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "common/src/main/resources/assets/unpredictableblocks/textures/item"
@@ -9,8 +12,8 @@ OUT = ROOT / "common/src/main/resources/assets/unpredictableblocks/textures/item
 def save(img: Image.Image, name: str) -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     p = OUT / name
-    img.save(p)
-    print("wrote", p.relative_to(ROOT))
+    to_output_size(img).save(p)
+    print("wrote", p.relative_to(ROOT), f"({OUTPUT_SIZE}×{OUTPUT_SIZE})")
 
 
 def item_base(color: tuple[int, int, int]) -> Image.Image:

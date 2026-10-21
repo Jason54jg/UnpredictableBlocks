@@ -26,9 +26,9 @@ Lucky Blocks chaotiques à thèmes, système de **chance (-100…+100)**, quête
 
 ```bash
 pip install -r tools/requirements.txt
-python3 tools/generate_textures.py      # 16×16 + icon
-python3 tools/upscale_textures.py       # optionnel : 32×32 dans textures/block_hd/
-python3 tools/generate_item_textures.py
+python3 tools/generate_textures.py      # blocs 32×32 + icon 128×128
+python3 tools/generate_item_textures.py # objets 32×32
+python3 tools/upscale_textures.py       # relance les deux générateurs ci-dessus
 python3 tools/generate_structures.py    # 15 structures .nbt
 ```
 
