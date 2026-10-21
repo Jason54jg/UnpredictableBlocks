@@ -4,12 +4,15 @@
       "rolls": 1,
       "entries": [
         {
-          "type": "minecraft:entity",
-          "name": "minecraft:chicken",
+          "type": "minecraft:item",
+          "name": "minecraft:bread",
           "functions": [
             {
               "function": "minecraft:set_count",
-              "count": 6
+              "count": {
+                "min": 8,
+                "max": 16
+              }
             }
           ]
         }

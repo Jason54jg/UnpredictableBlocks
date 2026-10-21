@@ -1,0 +1,371 @@
+{
+	"meta": {
+		"format_version": "4.10",
+		"model_format": "java_block",
+		"box_uv": false,
+		"unpredictableblocks_concept": "Pizza + ananas bounce + shine",
+		"unpredictableblocks_title": "Ananas sur la Pizza"
+	},
+	"name": "lucky_ananas_pizza",
+	"model_identifier": "lucky_ananas_pizza",
+	"visible_box": [
+		1,
+		1,
+		0
+	],
+	"variable_placeholders": "",
+	"variable_placeholder_buttons": [],
+	"resolution": {
+		"width": 32,
+		"height": 32
+	},
+	"elements": [
+		{
+			"name": "cube",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"from": [
+				0,
+				0,
+				0
+			],
+			"to": [
+				16,
+				16,
+				16
+			],
+			"autouv": 0,
+			"color": 0,
+			"origin": [
+				8,
+				8,
+				8
+			],
+			"faces": {
+				"north": {
+					"uv": [
+						0,
+						0,
+						32,
+						32
+					],
+					"texture": "#0"
+				},
+				"east": {
+					"uv": [
+						0,
+						0,
+						32,
+						32
+					],
+					"texture": "#0"
+				},
+				"south": {
+					"uv": [
+						0,
+						0,
+						32,
+						32
+					],
+					"texture": "#0"
+				},
+				"west": {
+					"uv": [
+						0,
+						0,
+						32,
+						32
+					],
+					"texture": "#0"
+				},
+				"up": {
+					"uv": [
+						0,
+						0,
+						32,
+						32
+					],
+					"texture": "#0"
+				},
+				"down": {
+					"uv": [
+						0,
+						0,
+						32,
+						32
+					],
+					"texture": "#0"
+				}
+			},
+			"uuid": "990b9a7b-1e18-496a-baaf-40a7e59fd315"
+		}
+	],
+	"outliner": [
+		{
+			"name": "root",
+			"origin": [
+				8,
+				8,
+				8
+			],
+			"color": 0,
+			"uuid": "fe4aa4be-796e-49b3-8fb2-18bd592db0fd",
+			"export": true,
+			"mirror_uv": false,
+			"reset": false,
+			"children": [
+				{
+					"name": "block",
+					"origin": [
+						8,
+						8,
+						8
+					],
+					"color": 0,
+					"uuid": "c2a2c1cf-dad8-4801-93e1-1f66a10be7b9",
+					"export": true,
+					"mirror_uv": false,
+					"reset": false,
+					"children": [
+						"990b9a7b-1e18-496a-baaf-40a7e59fd315",
+						{
+							"name": "fx",
+							"origin": [
+								8,
+								8,
+								8
+							],
+							"color": 2,
+							"uuid": "ce413e84-3bee-48a6-bdd9-be9e570cbe0d",
+							"export": true,
+							"mirror_uv": false,
+							"reset": false,
+							"children": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"textures": [
+		{
+			"path": "lucky_ananas_pizza.png",
+			"name": "lucky_ananas_pizza.png",
+			"folder": "",
+			"namespace": "",
+			"id": "0",
+			"particle": true,
+			"render_mode": "default",
+			"render_sides": "auto",
+			"frame_time": 2,
+			"frame_order_type": "loop",
+			"frame_order": "",
+			"visible": true,
+			"internal": true,
+			"saved": true,
+			"uuid": "d3a71855-10ff-48eb-a4c7-5c50b039d76a",
+			"relative_path": "./lucky_ananas_pizza.png",
+			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABXElEQVR4nGN8Fsjwn2EAAQuIkFxxZEAsfx5hA3EAGFzeQ1/LWxvANBPDAAOmUQcwjPQoYCFVw83yqQzqK+fhlg9PYlDvzB6mIXATzfdh82vg7FWJLWBafc8rhpsuYkSHAhMDtcHbLSQpZyI77v93oCpA4oPUgdTTJBEig1UJPAyUAiaSfc/5CtP3FIQCEwOp4LsYAwNjBXY5XOKUOOAmgXyPDxATCiwM5AKYb0HBTobPiQqBm+i+F/bB7RAyQ4GJgYZ5nBjARHbcg3IDkQBfKDAxkAtAuYEKgInaKZ/UUGD594+B4R+EgAuC+GAxKgNkc2HGM8EcAMPXSyczqC6fgyJGLQwyF2Q+hA9xBMvfvwwMfyEE2EUgNphPIwAzH2YFC3oUqLZnMvy7d5pmDgCbDw0BsAPQQ4BeAGcI0AvAQ+DfQDvgLzQKnjdNoKsDJKtzGZ63TmZgvGgzsN1zAA8XDBXxcl0aAAAAAElFTkSuQmCC"
+		}
+	],
+	"animations": [
+		{
+			"uuid": "482a8717-7a9b-47aa-ad52-8cd374ee5e02",
+			"name": "idle",
+			"loop": "loop",
+			"override": false,
+			"length": 1.2,
+			"snapping": 24,
+			"selected": true,
+			"saved_name": "idle",
+			"anim_time_update": "",
+			"blend_weight": "",
+			"start_delay": "",
+			"loop_delay": "",
+			"animators": {
+				"c2a2c1cf-dad8-4801-93e1-1f66a10be7b9": {
+					"name": "block",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0",
+									"y": "1.0",
+									"z": "1.0"
+								}
+							],
+							"uuid": "03104def-fb61-4be6-bbcc-f6d8f0590fcf",
+							"time": 0.0,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.015",
+									"y": "1.015",
+									"z": "1.015"
+								}
+							],
+							"uuid": "06961cad-b340-4df6-a33b-956a6bec16df",
+							"time": 0.3,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0",
+									"y": "1.0",
+									"z": "1.0"
+								}
+							],
+							"uuid": "ea82622c-6676-4b87-82b5-e853df6290f0",
+							"time": 0.6,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.015",
+									"y": "1.015",
+									"z": "1.015"
+								}
+							],
+							"uuid": "bb413d1e-0843-46b0-a2cd-0bfb26739248",
+							"time": 0.9,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0",
+									"y": "1.0",
+									"z": "1.0"
+								}
+							],
+							"uuid": "3ef7a496-16b0-421b-a97b-6139e641ba16",
+							"time": 1.2,
+							"color": -1,
+							"interpolation": "catmullrom"
+						}
+					]
+				},
+				"ce413e84-3bee-48a6-bdd9-be9e570cbe0d": {
+					"name": "fx",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0",
+									"y": "1.0",
+									"z": "1.0"
+								}
+							],
+							"uuid": "9f3ced35-ed3c-4bab-8277-57c6cac77293",
+							"time": 0.0,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0346410161513775",
+									"y": "1.0346410161513775",
+									"z": "1.0346410161513775"
+								}
+							],
+							"uuid": "7b1e3902-e687-430b-b055-f022e5a5ec7f",
+							"time": 0.2,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0346410161513775",
+									"y": "1.0346410161513775",
+									"z": "1.0346410161513775"
+								}
+							],
+							"uuid": "ba257a60-fe33-40ef-a699-38dedb51b3ae",
+							"time": 0.4,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0",
+									"y": "1.0",
+									"z": "1.0"
+								}
+							],
+							"uuid": "ee131df4-29a8-4fcd-9497-d007735f64da",
+							"time": 0.6,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0346410161513775",
+									"y": "1.0346410161513775",
+									"z": "1.0346410161513775"
+								}
+							],
+							"uuid": "132150c2-a2b7-4b29-a1f3-bce4ec03cc08",
+							"time": 0.8,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0346410161513775",
+									"y": "1.0346410161513775",
+									"z": "1.0346410161513775"
+								}
+							],
+							"uuid": "9f9eac59-d492-4387-aadb-84818ff6c6a7",
+							"time": 1.0,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0",
+									"y": "1.0",
+									"z": "1.0"
+								}
+							],
+							"uuid": "67bb3508-e309-4014-8ddf-cca439c42f7d",
+							"time": 1.2,
+							"color": -1,
+							"interpolation": "catmullrom"
+						}
+					]
+				}
+			}
+		}
+	],
+	"animation_variable_placeholders": ""
+}

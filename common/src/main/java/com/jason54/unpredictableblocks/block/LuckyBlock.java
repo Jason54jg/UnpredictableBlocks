@@ -13,14 +13,13 @@ import com.jason54.unpredictableblocks.util.ModMessages;
 import com.jason54.unpredictableblocks.world.ChunkLuckAura;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -29,9 +28,11 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Un bloc = un thème fixe ({@link LuckyTheme}) : loot, structure, quête et effets catalogue/legacy
  * de ce thème uniquement. Seul le tier HIGH/NEUTRAL/LOW est aléatoire (luck).
+ * <p>
+ * Étend {@link Block}+{@link EntityBlock} (pas {@code BaseEntityBlock}) pour rester compatible
+ * 26.1.2–26.3 : les codecs de blocs ont été retirés en 26.3.
  */
-public class LuckyBlock extends BaseEntityBlock {
-    public static final MapCodec<LuckyBlock> CODEC = createCodec(LuckyTheme.BOULANGERIE);
+public class LuckyBlock extends Block implements EntityBlock {
     private final LuckyTheme theme;
 
     public LuckyBlock(LuckyTheme theme, Properties properties) {
@@ -41,24 +42,6 @@ public class LuckyBlock extends BaseEntityBlock {
 
     public LuckyTheme theme() {
         return theme;
-    }
-
-    @SuppressWarnings("unchecked")
-    private static MapCodec<LuckyBlock> createCodec(LuckyTheme theme) {
-        try {
-            var method = net.minecraft.world.level.block.Block.class.getDeclaredMethod(
-                    "simpleCodec", java.util.function.Function.class);
-            method.setAccessible(true);
-            return (MapCodec<LuckyBlock>) method.invoke(
-                    null,
-                    (java.util.function.Function<Properties, LuckyBlock>) (properties -> new LuckyBlock(theme, properties)));
-        } catch (ReflectiveOperationException e) {
-            return MapCodec.unit(new LuckyBlock(theme, Properties.of()));
-        }
-    }
-
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return CODEC;
     }
 
     @Override

@@ -17,6 +17,12 @@ loom {
     silentMojangMappingsLicense()
 }
 
+repositories {
+    maven { url = 'https://maven.architectury.dev/' }
+    maven { url = 'https://maven.fabricmc.net/' }
+    mavenCentral()
+}
+
 dependencies {
     minecraft "com.mojang:minecraft:${mcVersion}"
     implementation "dev.architectury:architectury:${archVersion}"

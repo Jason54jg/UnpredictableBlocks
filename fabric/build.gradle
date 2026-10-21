@@ -6,6 +6,7 @@ plugins {
 def mcVersion = rootProject.findProperty('minecraft_version')?.toString() ?: '26.1.2'
 def fabricApi = rootProject.findProperty('fabric_api_version')?.toString()
 def fabricLoader = rootProject.findProperty('fabric_loader_version')?.toString() ?: '0.17.2'
+def archVersion = rootProject.findProperty('architectury_version')?.toString() ?: '22.0.5'
 
 base {
     archivesName = "${rootProject.archives_base_name}-fabric"
@@ -22,11 +23,29 @@ loom {
     silentMojangMappingsLicense()
 }
 
+repositories {
+    maven { url = 'https://maven.fabricmc.net/' }
+    maven { url = 'https://maven.architectury.dev/' }
+    mavenCentral()
+}
+
 dependencies {
     minecraft "com.mojang:minecraft:${mcVersion}"
     implementation "net.fabricmc:fabric-loader:${fabricLoader}"
     implementation "net.fabricmc.fabric-api:fabric-api:${fabricApi}"
+    // Runtime API (install separately in mods/ OR pulled as compile dep)
+    implementation "dev.architectury:architectury-fabric:${archVersion}"
     implementation project(':common')
+}
+
+// Bundle common classes + resources (fabric.mod.json, assets, data) into the distributable jar.
+// Without this, Fabric Loader reports "non-fabric mod" (thin ~2KB entrypoint-only jar).
+tasks.named('jar', Jar).configure {
+    dependsOn(':common:jar')
+    from({
+        zipTree(project(':common').tasks.named('jar', Jar).flatMap { it.archiveFile })
+    })
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 java {

@@ -1,0 +1,371 @@
+{
+	"meta": {
+		"format_version": "4.10",
+		"model_format": "java_block",
+		"box_uv": false,
+		"unpredictableblocks_concept": "Troll pixel bounce + pop zoom",
+		"unpredictableblocks_title": "Invasion de M\u00e8mes"
+	},
+	"name": "lucky_invasion_memes",
+	"model_identifier": "lucky_invasion_memes",
+	"visible_box": [
+		1,
+		1,
+		0
+	],
+	"variable_placeholders": "",
+	"variable_placeholder_buttons": [],
+	"resolution": {
+		"width": 32,
+		"height": 32
+	},
+	"elements": [
+		{
+			"name": "cube",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"from": [
+				0,
+				0,
+				0
+			],
+			"to": [
+				16,
+				16,
+				16
+			],
+			"autouv": 0,
+			"color": 0,
+			"origin": [
+				8,
+				8,
+				8
+			],
+			"faces": {
+				"north": {
+					"uv": [
+						0,
+						0,
+						32,
+						32
+					],
+					"texture": "#0"
+				},
+				"east": {
+					"uv": [
+						0,
+						0,
+						32,
+						32
+					],
+					"texture": "#0"
+				},
+				"south": {
+					"uv": [
+						0,
+						0,
+						32,
+						32
+					],
+					"texture": "#0"
+				},
+				"west": {
+					"uv": [
+						0,
+						0,
+						32,
+						32
+					],
+					"texture": "#0"
+				},
+				"up": {
+					"uv": [
+						0,
+						0,
+						32,
+						32
+					],
+					"texture": "#0"
+				},
+				"down": {
+					"uv": [
+						0,
+						0,
+						32,
+						32
+					],
+					"texture": "#0"
+				}
+			},
+			"uuid": "cda9686c-12f9-4eb0-9a0f-ad06eb1a541b"
+		}
+	],
+	"outliner": [
+		{
+			"name": "root",
+			"origin": [
+				8,
+				8,
+				8
+			],
+			"color": 0,
+			"uuid": "3f9eda21-087f-413a-b46a-7df9c47b040a",
+			"export": true,
+			"mirror_uv": false,
+			"reset": false,
+			"children": [
+				{
+					"name": "block",
+					"origin": [
+						8,
+						8,
+						8
+					],
+					"color": 0,
+					"uuid": "2a981f4d-c9e1-4b72-9069-3157895840c7",
+					"export": true,
+					"mirror_uv": false,
+					"reset": false,
+					"children": [
+						"cda9686c-12f9-4eb0-9a0f-ad06eb1a541b",
+						{
+							"name": "fx",
+							"origin": [
+								8,
+								8,
+								8
+							],
+							"color": 2,
+							"uuid": "b887ae19-963c-4e87-8310-1abc59426caf",
+							"export": true,
+							"mirror_uv": false,
+							"reset": false,
+							"children": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"textures": [
+		{
+			"path": "lucky_invasion_memes.png",
+			"name": "lucky_invasion_memes.png",
+			"folder": "",
+			"namespace": "",
+			"id": "0",
+			"particle": true,
+			"render_mode": "default",
+			"render_sides": "auto",
+			"frame_time": 2,
+			"frame_order_type": "loop",
+			"frame_order": "",
+			"visible": true,
+			"internal": true,
+			"saved": true,
+			"uuid": "eb51ed6a-71be-49d4-92ad-cd9dab9e4a67",
+			"relative_path": "./lucky_invasion_memes.png",
+			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACOElEQVR4nMVXTygEURj/Znayuw5SjhJFIheOrhSpPbhsKUpOOO1JlIMkRWpvkhNOZB2o9be4brlwkhSRSJIIO6VmVvNm33jz5nvzp5j91e578973fb/f/t7MeztSATYLUEIoxpf0kCwJeaE6Ywow8NKyEyp51ds3aRU6kI9HQhYAdgFqLFwBFEqpHHAIUDkH2g+nINc9jSYZcyKIcjwF5ONWl+C4dxYgbg/u3J70LEjFkfwgAlSXeyCxMQFBQcVm++YgoZ1ANtLhISCOC0iujDnGMkMLQmI+3hDvFi8ZO6GxEa2mTsnA08SvzeO1qiNh/o5bFwRY3tpo2nY9uHVHWpl1QORCEHJRHK3P88i0k49FyEf0K/ySi+JH0imLg+WReYV+ii0nrx0x2NjszJLtGnNAoZ18zOxWgDeGM/W+xmhN0bVNAFXlR4Bf8I5iDiu/6v5+K+ZrYhyKmzo3YGvOL0MgB1QXB4wngr8RsTXnsdY/YBeAcMjsacieiDwhtrm4gY9P7G1aHCyPzKrz+k/gVwQWR+vzPDJ7GvInIrb5eInA5ttzO1Z9nkdhFRpYf83YktdfAc7bEoFEsGg9ywLExPOKDjqArsNnVBIGNVzskvaqqcc3cePlvtmJ4vOEFxgBX2ViARTVNwekva/rEsbU3B6ZnTL3WpYADTQATYMPjwQWlY9FEgw+6xBeCOjAX8LhAIQswOHAe7P97v9v6I6nAMJ1oJw6oBWXIArmu1pYMOkBpGdYLOnr+Q/f6uFLHHhHPwAAAABJRU5ErkJggg=="
+		}
+	],
+	"animations": [
+		{
+			"uuid": "6b7bd633-b6c6-46f5-8951-d186f19ce548",
+			"name": "idle",
+			"loop": "loop",
+			"override": false,
+			"length": 1.2,
+			"snapping": 24,
+			"selected": true,
+			"saved_name": "idle",
+			"anim_time_update": "",
+			"blend_weight": "",
+			"start_delay": "",
+			"loop_delay": "",
+			"animators": {
+				"2a981f4d-c9e1-4b72-9069-3157895840c7": {
+					"name": "block",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0",
+									"y": "1.0",
+									"z": "1.0"
+								}
+							],
+							"uuid": "299d33b8-6062-4be2-a2a1-4afcd134e39c",
+							"time": 0.0,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.015",
+									"y": "1.015",
+									"z": "1.015"
+								}
+							],
+							"uuid": "426002e4-cfc0-4147-849f-d52ae1a66741",
+							"time": 0.3,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0",
+									"y": "1.0",
+									"z": "1.0"
+								}
+							],
+							"uuid": "88e021b0-3170-4926-bcda-a6382207e228",
+							"time": 0.6,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.015",
+									"y": "1.015",
+									"z": "1.015"
+								}
+							],
+							"uuid": "1d80b79a-d2f5-4eac-aab3-bdf36817f540",
+							"time": 0.9,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0",
+									"y": "1.0",
+									"z": "1.0"
+								}
+							],
+							"uuid": "c95e8476-8e63-4366-b451-5b62d4e725ea",
+							"time": 1.2,
+							"color": -1,
+							"interpolation": "catmullrom"
+						}
+					]
+				},
+				"b887ae19-963c-4e87-8310-1abc59426caf": {
+					"name": "fx",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0",
+									"y": "1.0",
+									"z": "1.0"
+								}
+							],
+							"uuid": "72cc3795-d228-4b30-ace9-6540346c154d",
+							"time": 0.0,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0346410161513775",
+									"y": "1.0346410161513775",
+									"z": "1.0346410161513775"
+								}
+							],
+							"uuid": "b103808c-642b-4ac0-8f55-137777ac577b",
+							"time": 0.2,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0346410161513775",
+									"y": "1.0346410161513775",
+									"z": "1.0346410161513775"
+								}
+							],
+							"uuid": "dd1e58a5-13a8-4a6c-886b-ad0318c6adb5",
+							"time": 0.4,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0",
+									"y": "1.0",
+									"z": "1.0"
+								}
+							],
+							"uuid": "7573952b-315c-48a0-9a0a-1cadbcb2542b",
+							"time": 0.6,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0346410161513775",
+									"y": "1.0346410161513775",
+									"z": "1.0346410161513775"
+								}
+							],
+							"uuid": "224b8e19-27c9-479d-9a59-bd7f853dede9",
+							"time": 0.8,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0346410161513775",
+									"y": "1.0346410161513775",
+									"z": "1.0346410161513775"
+								}
+							],
+							"uuid": "7209dd53-8d74-4095-a445-a181b49be4d2",
+							"time": 1.0,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0",
+									"y": "1.0",
+									"z": "1.0"
+								}
+							],
+							"uuid": "8ad6eb6c-bd86-413a-a79e-ab60ab7d7233",
+							"time": 1.2,
+							"color": -1,
+							"interpolation": "catmullrom"
+						}
+					]
+				}
+			}
+		}
+	],
+	"animation_variable_placeholders": ""
+}

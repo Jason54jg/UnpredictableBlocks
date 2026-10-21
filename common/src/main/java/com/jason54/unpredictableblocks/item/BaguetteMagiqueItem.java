@@ -8,8 +8,8 @@ import net.minecraft.world.item.ToolMaterial;
 public class BaguetteMagiqueItem extends Item {
     private final java.util.function.Consumer<ItemStack> stackSetup;
 
-    public BaguetteMagiqueItem(java.util.function.Consumer<ItemStack> stackSetup) {
-        super(new Properties().stacksTo(1).sword(ToolMaterial.WOOD, 3.0f, -2.4f));
+    public BaguetteMagiqueItem(Properties properties, java.util.function.Consumer<ItemStack> stackSetup) {
+        super(properties.stacksTo(1).sword(ToolMaterial.WOOD, 3.0f, -2.4f));
         this.stackSetup = stackSetup;
     }
 

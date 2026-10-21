@@ -31,7 +31,7 @@ public final class ThemeCatalogEffects {
     public static boolean applies(LuckyTheme theme, LuckTier tier) {
         return switch (theme) {
             case ANACHRONISME -> tier == LuckTier.HIGH;
-            case BOULANGERIE -> tier == LuckTier.LOW;
+            case BOULANGERIE -> tier == LuckTier.LOW || tier == LuckTier.NEUTRAL;
             case BSOD -> tier == LuckTier.NEUTRAL;
             case VOLAILLE -> tier == LuckTier.HIGH;
             case IMPOTS -> tier == LuckTier.LOW;
@@ -114,6 +114,17 @@ public final class ThemeCatalogEffects {
     }
 
     private static void boulangerie(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
+        if (tier == LuckTier.NEUTRAL) {
+            for (int i = 0; i < 6; i++) {
+                var chicken = EntitySpawnHelper.create(McRefs.CHICKEN, level);
+                if (chicken != null) {
+                    chicken.setPos(Vec3.atBottomCenterOf(origin).add(i * 0.3, 0, 0));
+                    level.addFreshEntity(chicken);
+                }
+            }
+            player.sendSystemMessage(Component.literal("§eLa basse-cour s'échappe de la boutique !"));
+            return;
+        }
         if (tier != LuckTier.LOW) {
             return;
         }

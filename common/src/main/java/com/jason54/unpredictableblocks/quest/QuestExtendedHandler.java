@@ -9,9 +9,9 @@ import dev.architectury.event.events.common.EntityEvent;
 import dev.architectury.event.events.common.InteractionEvent;
 import dev.architectury.event.events.common.PlayerEvent;
 import dev.architectury.event.events.common.TickEvent;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,6 +21,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 
 /** Quêtes runtime (thèmes 1–32) et helpers associés. */
 public final class QuestExtendedHandler {
@@ -28,18 +29,7 @@ public final class QuestExtendedHandler {
     private QuestExtendedHandler() {}
 
     public static void register() {
-        BlockEvent.BREAK.register((level, pos, state, player) -> {
-            if (level.isClientSide()) {
-                return EventResult.pass();
-            }
-            if (state.is(Blocks.HONEYCOMB_BLOCK) || state.is(McRefs.WHITE_WOOL)) {
-                int n = PlayerQuestData.incrementCounter(player, "bubble_pop");
-                if (n >= 50) {
-                    QuestRewards.complete(player, "quest/asmr_fidget", "bubble_pop_50");
-                }
-            }
-            return EventResult.pass();
-        });
+        BlockEvent.BREAK.register(QuestExtendedHandler::onBlockBreak);
 
         EntityEvent.LIVING_DEATH.register(QuestExtendedHandler::onLivingDeath);
 
@@ -111,6 +101,19 @@ public final class QuestExtendedHandler {
                 QuestRewards.complete(sp, "quest/multivers_sliders", "multivers_biomes");
             }
         });
+    }
+
+    private static EventResult onBlockBreak(Level level, BlockPos pos, BlockState state, ServerPlayer player) {
+        if (level.isClientSide()) {
+            return EventResult.pass();
+        }
+        if (state.is(Blocks.HONEYCOMB_BLOCK) || state.is(McRefs.WHITE_WOOL)) {
+            int n = PlayerQuestData.incrementCounter(player, "bubble_pop");
+            if (n >= 50) {
+                QuestRewards.complete(player, "quest/asmr_fidget", "bubble_pop_50");
+            }
+        }
+        return EventResult.pass();
     }
 
     private static EventResult onLivingDeath(LivingEntity entity, DamageSource source) {

@@ -26,26 +26,30 @@ public final class LuckyBlockSpawnPlacement {
             if (random.nextFloat() > 0.65f) {
                 continue;
             }
-            BlockPos sample = sampleSurfacePos(chunk, random);
-            LuckyTheme theme = pickTheme(random, level, sample);
+            int localX = random.nextInt(16);
+            int localZ = random.nextInt(16);
+            int worldX = chunk.getPos().getMinBlockX() + localX;
+            int worldZ = chunk.getPos().getMinBlockZ() + localZ;
+            // Heightmap locale au chunk — évite de forcer le chargement des voisins.
+            int surfaceY = chunk.getHeight(Heightmap.Types.WORLD_SURFACE_WG, localX, localZ);
+            BlockPos surface = new BlockPos(worldX, surfaceY, worldZ);
+            LuckyTheme theme = pickTheme(random, level, surface);
             if (theme == null) {
                 continue;
             }
-            BlockPos surface = level.getHeightmapPos(Heightmap.Types.WORLD_SURFACE_WG, sample);
+            BlockState at = chunk.getBlockState(surface);
+            BlockState below = chunk.getBlockState(surface.below());
+            if (!at.isAir() || !below.isSolidRender()) {
+                continue;
+            }
             BlockState state = ModBlocks.get(theme).defaultBlockState();
-            if (level.getBlockState(surface).isAir() && level.getBlockState(surface.below()).isSolidRender()) {
-                level.setBlock(surface, state, 3);
+            // NOTIFY_CLIENTS seulement : pas de maj voisins (= pas de getChunk pendant le placement).
+            if (level.setBlock(surface, state, 2)) {
                 if (level.getBlockEntity(surface) instanceof com.jason54.unpredictableblocks.block.entity.LuckyBlockEntity luckyBe) {
                     luckyBe.setLuck(com.jason54.unpredictableblocks.config.ModConfig.get().meta().defaultBlockLuck());
                 }
             }
         }
-    }
-
-    private static BlockPos sampleSurfacePos(LevelChunk chunk, RandomSource random) {
-        int x = chunk.getPos().getMinBlockX() + random.nextInt(16);
-        int z = chunk.getPos().getMinBlockZ() + random.nextInt(16);
-        return new BlockPos(x, 0, z);
     }
 
     private static LuckyTheme pickTheme(RandomSource random, ServerLevel level, BlockPos pos) {

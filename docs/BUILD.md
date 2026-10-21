@@ -44,6 +44,12 @@ export JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64   # exemple Linux
 
 JARs collectés : `build/libs-multi/<mc>/unpredictableblocks-{fabric|neoforge}-<mod>+<mc>.jar`.
 
+**Important** — le JAR Fabric/NeoForge **embarque** le module `common` (classes + `fabric.mod.json` / assets). Un jar ~2 Ko = packaging cassé (Loader : « non-fabric mod »).
+
+Dépendance runtime **Architectury API** obligatoire dans `mods/` :
+- Fabric : `architectury-fabric` (même série MC, ex. 22.0.5 pour 26.2)
+- NeoForge : `architectury-neoforge`
+
 ## Assets procéduraux
 
 ```bash

@@ -6,6 +6,7 @@ import com.jason54.unpredictableblocks.block.entity.LuckyBlockEntity;
 import com.jason54.unpredictableblocks.luck.LuckStat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
@@ -20,6 +21,11 @@ public class LuckyBlockItem extends BlockItem {
 
     public LuckyBlockItem(Block block, Properties properties) {
         super(block, properties);
+    }
+
+    @Override
+    public Component getName(ItemStack stack) {
+        return getBlock().getName();
     }
 
     public static int readLuckFromStack(ItemStack stack) {

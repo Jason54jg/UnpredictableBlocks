@@ -1,0 +1,371 @@
+{
+	"meta": {
+		"format_version": "4.10",
+		"model_format": "java_block",
+		"box_uv": false,
+		"unpredictableblocks_concept": "Baguette/croissant + vapeur montante",
+		"unpredictableblocks_title": "Boulangerie Fran\u00e7aise"
+	},
+	"name": "lucky_boulangerie",
+	"model_identifier": "lucky_boulangerie",
+	"visible_box": [
+		1,
+		1,
+		0
+	],
+	"variable_placeholders": "",
+	"variable_placeholder_buttons": [],
+	"resolution": {
+		"width": 32,
+		"height": 32
+	},
+	"elements": [
+		{
+			"name": "cube",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"from": [
+				0,
+				0,
+				0
+			],
+			"to": [
+				16,
+				16,
+				16
+			],
+			"autouv": 0,
+			"color": 0,
+			"origin": [
+				8,
+				8,
+				8
+			],
+			"faces": {
+				"north": {
+					"uv": [
+						0,
+						0,
+						32,
+						32
+					],
+					"texture": "#0"
+				},
+				"east": {
+					"uv": [
+						0,
+						0,
+						32,
+						32
+					],
+					"texture": "#0"
+				},
+				"south": {
+					"uv": [
+						0,
+						0,
+						32,
+						32
+					],
+					"texture": "#0"
+				},
+				"west": {
+					"uv": [
+						0,
+						0,
+						32,
+						32
+					],
+					"texture": "#0"
+				},
+				"up": {
+					"uv": [
+						0,
+						0,
+						32,
+						32
+					],
+					"texture": "#0"
+				},
+				"down": {
+					"uv": [
+						0,
+						0,
+						32,
+						32
+					],
+					"texture": "#0"
+				}
+			},
+			"uuid": "2214a39e-0efd-472f-9255-c95b9499049d"
+		}
+	],
+	"outliner": [
+		{
+			"name": "root",
+			"origin": [
+				8,
+				8,
+				8
+			],
+			"color": 0,
+			"uuid": "bc5d3b65-5588-48db-9911-ac5056f2be0e",
+			"export": true,
+			"mirror_uv": false,
+			"reset": false,
+			"children": [
+				{
+					"name": "block",
+					"origin": [
+						8,
+						8,
+						8
+					],
+					"color": 0,
+					"uuid": "9c8d2c28-1340-4675-b839-b5e3b4992c32",
+					"export": true,
+					"mirror_uv": false,
+					"reset": false,
+					"children": [
+						"2214a39e-0efd-472f-9255-c95b9499049d",
+						{
+							"name": "fx",
+							"origin": [
+								8,
+								8,
+								8
+							],
+							"color": 2,
+							"uuid": "934e1f49-e155-4d64-ba3f-e275eb5b2515",
+							"export": true,
+							"mirror_uv": false,
+							"reset": false,
+							"children": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"textures": [
+		{
+			"path": "lucky_boulangerie.png",
+			"name": "lucky_boulangerie.png",
+			"folder": "",
+			"namespace": "",
+			"id": "0",
+			"particle": true,
+			"render_mode": "default",
+			"render_sides": "auto",
+			"frame_time": 2,
+			"frame_order_type": "loop",
+			"frame_order": "",
+			"visible": true,
+			"internal": true,
+			"saved": true,
+			"uuid": "862f34fc-7c97-441e-8a69-04cdd68f1caf",
+			"relative_path": "./lucky_boulangerie.png",
+			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABuklEQVR4nGNc0GDwn2EAAQuIiM9oGBDLF85ogDgABF6+/UFVw8W1wntfXltZjEt+x+oOMM2ELvHg9AwGWoshAyYGKvkWGx9dnKoOOLz0MsPigmww7nETQQlqWNDjiwKyHSAO9ZVttC5D7ISpDCW73oD5IIeQA5gYKAQgX8IcgS5OdQeIY4lbjs8XSDGCAgc8PooStxoaFmDLZ9fOBqeB1OZUshzAQshSEFCQ0EXwtcLhvgZZjmwxyFE/qBYCjyGWo4OPJyvxxi2pUcJEiuUg8OPDV7wG/uA1oIIDZK3xW4LDETdunCDJctwOIMIRIMtA5QDYQbwGJPucuEQoaw0vz8EJEdlRLy7DLadPNpTFDBFYUUwfB9AIsOCSeHPhDIOiYwiYresGqbuRAUhM1w1TDJu6+/vXMIgYmJDmABAAaaQ1YCJG0ZnTZ8gWo4oDTExNyBajigNoCVj+/fvHAMMgAGML6RnBFYHLAdMMFI2kisHMhwEYnwWXA9AVU1MMxQF///5lgGEQQGbDALXFYOKjITAoQoBxQoHCf1DfkNpdM0IA1jVjgSWSrSta6eoAj9AKsCMYu7OlB7R7DgAHeJPRckqdtgAAAABJRU5ErkJggg=="
+		}
+	],
+	"animations": [
+		{
+			"uuid": "97277331-35bc-40c8-b746-220b0d2c5d6b",
+			"name": "idle",
+			"loop": "loop",
+			"override": false,
+			"length": 1.2,
+			"snapping": 24,
+			"selected": true,
+			"saved_name": "idle",
+			"anim_time_update": "",
+			"blend_weight": "",
+			"start_delay": "",
+			"loop_delay": "",
+			"animators": {
+				"9c8d2c28-1340-4675-b839-b5e3b4992c32": {
+					"name": "block",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0",
+									"y": "1.0",
+									"z": "1.0"
+								}
+							],
+							"uuid": "19c17417-9fd2-4458-9718-78a9496007e0",
+							"time": 0.0,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.015",
+									"y": "1.015",
+									"z": "1.015"
+								}
+							],
+							"uuid": "c8a6e87f-f79f-4d27-9090-9c50834c7493",
+							"time": 0.3,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0",
+									"y": "1.0",
+									"z": "1.0"
+								}
+							],
+							"uuid": "985545e6-6918-4ffa-86ba-fc38a1cf2aee",
+							"time": 0.6,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.015",
+									"y": "1.015",
+									"z": "1.015"
+								}
+							],
+							"uuid": "a3135fb6-f557-4ffc-9239-af163a67513d",
+							"time": 0.9,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0",
+									"y": "1.0",
+									"z": "1.0"
+								}
+							],
+							"uuid": "f6b73579-6699-4e2a-bca8-d2a609f302c1",
+							"time": 1.2,
+							"color": -1,
+							"interpolation": "catmullrom"
+						}
+					]
+				},
+				"934e1f49-e155-4d64-ba3f-e275eb5b2515": {
+					"name": "fx",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0",
+									"y": "1.0",
+									"z": "1.0"
+								}
+							],
+							"uuid": "80734dfa-9b6c-467d-ab49-205b65097211",
+							"time": 0.0,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0346410161513775",
+									"y": "1.0346410161513775",
+									"z": "1.0346410161513775"
+								}
+							],
+							"uuid": "8afd26e1-3885-45fe-a8dc-415ecf2cf92f",
+							"time": 0.2,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0346410161513775",
+									"y": "1.0346410161513775",
+									"z": "1.0346410161513775"
+								}
+							],
+							"uuid": "ca9eb77c-00c5-47a7-a5f3-59d2ed72947f",
+							"time": 0.4,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0",
+									"y": "1.0",
+									"z": "1.0"
+								}
+							],
+							"uuid": "3791daf5-9016-4c4e-9ce9-7b2d1bd1a94b",
+							"time": 0.6,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0346410161513775",
+									"y": "1.0346410161513775",
+									"z": "1.0346410161513775"
+								}
+							],
+							"uuid": "3c16f7d2-fe85-4802-8283-210775ec7dc8",
+							"time": 0.8,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0346410161513775",
+									"y": "1.0346410161513775",
+									"z": "1.0346410161513775"
+								}
+							],
+							"uuid": "9e4d2c52-10db-45d7-94b7-cfc90f89bfa1",
+							"time": 1.0,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0",
+									"y": "1.0",
+									"z": "1.0"
+								}
+							],
+							"uuid": "79cbe7b3-1891-4b4b-a663-a7c486115f16",
+							"time": 1.2,
+							"color": -1,
+							"interpolation": "catmullrom"
+						}
+					]
+				}
+			}
+		}
+	],
+	"animation_variable_placeholders": ""
+}

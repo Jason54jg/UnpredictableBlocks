@@ -5,6 +5,7 @@ plugins {
 
 def mcVersion = rootProject.findProperty('minecraft_version')?.toString() ?: '26.1.2'
 def neoVersion = rootProject.findProperty('neoforge_version')?.toString()
+def archVersion = rootProject.findProperty('architectury_version')?.toString() ?: '22.0.5'
 
 base {
     archivesName = "${rootProject.archives_base_name}-neoforge"
@@ -12,12 +13,28 @@ base {
 
 version = "${rootProject.mod_version}+${mcVersion}"
 
+repositories {
+    maven { url = 'https://maven.architectury.dev/' }
+    maven { url = 'https://maven.neoforged.net/releases/' }
+    mavenCentral()
+}
+
 dependencies {
+    implementation "dev.architectury:architectury-neoforge:${archVersion}"
     implementation project(':common')
 }
 
 neoForge {
     version = neoVersion
+}
+
+// Bundle common classes + resources into the distributable jar.
+tasks.named('jar', Jar).configure {
+    dependsOn(':common:jar')
+    from({
+        zipTree(project(':common').tasks.named('jar', Jar).flatMap { it.archiveFile })
+    })
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 java {

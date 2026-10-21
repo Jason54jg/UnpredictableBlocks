@@ -1,0 +1,371 @@
+{
+	"meta": {
+		"format_version": "4.10",
+		"model_format": "java_block",
+		"box_uv": false,
+		"unpredictableblocks_concept": "Boule disco RGB + sparkle",
+		"unpredictableblocks_title": "Soir\u00e9e Disco 80's"
+	},
+	"name": "lucky_disco_80",
+	"model_identifier": "lucky_disco_80",
+	"visible_box": [
+		1,
+		1,
+		0
+	],
+	"variable_placeholders": "",
+	"variable_placeholder_buttons": [],
+	"resolution": {
+		"width": 32,
+		"height": 32
+	},
+	"elements": [
+		{
+			"name": "cube",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"from": [
+				0,
+				0,
+				0
+			],
+			"to": [
+				16,
+				16,
+				16
+			],
+			"autouv": 0,
+			"color": 0,
+			"origin": [
+				8,
+				8,
+				8
+			],
+			"faces": {
+				"north": {
+					"uv": [
+						0,
+						0,
+						32,
+						32
+					],
+					"texture": "#0"
+				},
+				"east": {
+					"uv": [
+						0,
+						0,
+						32,
+						32
+					],
+					"texture": "#0"
+				},
+				"south": {
+					"uv": [
+						0,
+						0,
+						32,
+						32
+					],
+					"texture": "#0"
+				},
+				"west": {
+					"uv": [
+						0,
+						0,
+						32,
+						32
+					],
+					"texture": "#0"
+				},
+				"up": {
+					"uv": [
+						0,
+						0,
+						32,
+						32
+					],
+					"texture": "#0"
+				},
+				"down": {
+					"uv": [
+						0,
+						0,
+						32,
+						32
+					],
+					"texture": "#0"
+				}
+			},
+			"uuid": "4d0fc70d-9042-4b61-b3f4-0b6e69749640"
+		}
+	],
+	"outliner": [
+		{
+			"name": "root",
+			"origin": [
+				8,
+				8,
+				8
+			],
+			"color": 0,
+			"uuid": "25f04379-ab4b-4472-9cc6-d44592a9e336",
+			"export": true,
+			"mirror_uv": false,
+			"reset": false,
+			"children": [
+				{
+					"name": "block",
+					"origin": [
+						8,
+						8,
+						8
+					],
+					"color": 0,
+					"uuid": "21002b78-4d9e-490d-b8db-07f0f7820b7e",
+					"export": true,
+					"mirror_uv": false,
+					"reset": false,
+					"children": [
+						"4d0fc70d-9042-4b61-b3f4-0b6e69749640",
+						{
+							"name": "fx",
+							"origin": [
+								8,
+								8,
+								8
+							],
+							"color": 2,
+							"uuid": "0f5f6493-407c-4de1-a22c-0e9b18f037f1",
+							"export": true,
+							"mirror_uv": false,
+							"reset": false,
+							"children": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"textures": [
+		{
+			"path": "lucky_disco_80.png",
+			"name": "lucky_disco_80.png",
+			"folder": "",
+			"namespace": "",
+			"id": "0",
+			"particle": true,
+			"render_mode": "default",
+			"render_sides": "auto",
+			"frame_time": 2,
+			"frame_order_type": "loop",
+			"frame_order": "",
+			"visible": true,
+			"internal": true,
+			"saved": true,
+			"uuid": "6a44ce82-1c46-4784-bf50-ffdafb48650a",
+			"relative_path": "./lucky_disco_80.png",
+			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABhUlEQVR4nO2Xv07DMBDGP1tZu0VCjIiidEyfoA+AQIiNN+AFWDN05QV4AzYq9Q14ArLRSDAjqmzMiZEbTjJu/pxtUJb+FMWK5PN9d7rzKUJBKYxIpF9iJAlK/AjQXIhrr0PWR1+4/Jy42+Fpt0qMjDwIQCD580OQfeRjtNzcd35ns7v/E7C0HGtSNUUu3vb2cIVIX+fz5HS3kvN0cTsoNkgAkc4axy/FO9pq4TFJ4ILkbDKjyTe/HdvcFEWrXZAAghsdZYmDZO+0outjKEsmQk9DPYz0LFi/rvYPM4rMped1FkhIX0aEKaALbkW30dWOXsMoVVPWPmpRDtJFgHnh9GG3aLCAzEjjUHRmlji3oYQjFJ1dWHQTcrPkLCCzoqEKp7vB7hDuLBCcLnDpCq5j6oKI7bXDiRbjOoJNoho1mqf2OmB+doJzD1vyF4UKQK0tAwRUqNA8lZ+AqvKyJZvokIE6sAYWkysvy78rQk/InyhRqrgEytj3KD9iHKPEB8QW21F/z78BVTe+Y49XTkQAAAAASUVORK5CYII="
+		}
+	],
+	"animations": [
+		{
+			"uuid": "59b99a90-150d-40e5-bbaf-80e92667aa1d",
+			"name": "idle",
+			"loop": "loop",
+			"override": false,
+			"length": 1.2,
+			"snapping": 24,
+			"selected": true,
+			"saved_name": "idle",
+			"anim_time_update": "",
+			"blend_weight": "",
+			"start_delay": "",
+			"loop_delay": "",
+			"animators": {
+				"21002b78-4d9e-490d-b8db-07f0f7820b7e": {
+					"name": "block",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0",
+									"y": "1.0",
+									"z": "1.0"
+								}
+							],
+							"uuid": "9764e2f5-8ca8-4e5f-912f-4dcc1f8f5b3b",
+							"time": 0.0,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.015",
+									"y": "1.015",
+									"z": "1.015"
+								}
+							],
+							"uuid": "fbd6c2a9-6cb7-470e-9f5d-d204f41a2152",
+							"time": 0.3,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0",
+									"y": "1.0",
+									"z": "1.0"
+								}
+							],
+							"uuid": "4ea0106a-9892-4dda-b423-c757f749fdf4",
+							"time": 0.6,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.015",
+									"y": "1.015",
+									"z": "1.015"
+								}
+							],
+							"uuid": "d4f5f05c-20f0-40a9-a6d3-c406776683a5",
+							"time": 0.9,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0",
+									"y": "1.0",
+									"z": "1.0"
+								}
+							],
+							"uuid": "12670647-fb4d-4d70-a108-7084034da486",
+							"time": 1.2,
+							"color": -1,
+							"interpolation": "catmullrom"
+						}
+					]
+				},
+				"0f5f6493-407c-4de1-a22c-0e9b18f037f1": {
+					"name": "fx",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0",
+									"y": "1.0",
+									"z": "1.0"
+								}
+							],
+							"uuid": "1fafe6dc-7547-490c-9fb6-9e9ff782e400",
+							"time": 0.0,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0346410161513775",
+									"y": "1.0346410161513775",
+									"z": "1.0346410161513775"
+								}
+							],
+							"uuid": "9a60c46b-aa48-4223-8aeb-71aae89cd2ec",
+							"time": 0.2,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0346410161513775",
+									"y": "1.0346410161513775",
+									"z": "1.0346410161513775"
+								}
+							],
+							"uuid": "060f7a67-ac50-47ca-b043-4ceebd44e927",
+							"time": 0.4,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0",
+									"y": "1.0",
+									"z": "1.0"
+								}
+							],
+							"uuid": "a2898002-3e98-496e-99ab-21e692cc331b",
+							"time": 0.6,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0346410161513775",
+									"y": "1.0346410161513775",
+									"z": "1.0346410161513775"
+								}
+							],
+							"uuid": "b56a3060-1ee6-4dea-8504-10adb371a6e5",
+							"time": 0.8,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0346410161513775",
+									"y": "1.0346410161513775",
+									"z": "1.0346410161513775"
+								}
+							],
+							"uuid": "44a0f3a1-fce9-4f28-8816-4961f64ceb2c",
+							"time": 1.0,
+							"color": -1,
+							"interpolation": "catmullrom"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.0",
+									"y": "1.0",
+									"z": "1.0"
+								}
+							],
+							"uuid": "d0b4388b-c6cc-408e-8f0a-6631326f06a9",
+							"time": 1.2,
+							"color": -1,
+							"interpolation": "catmullrom"
+						}
+					]
+				}
+			}
+		}
+	],
+	"animation_variable_placeholders": ""
+}
