@@ -1,5 +1,7 @@
 package com.jason54.unpredictableblocks.event;
 
+import com.jason54.unpredictableblocks.compat.McRefs;
+
 import com.jason54.unpredictableblocks.luck.LuckTier;
 import com.jason54.unpredictableblocks.quest.PlayerQuestData;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
@@ -96,7 +98,7 @@ public final class ThemeCatalogEffects {
         if (tier != LuckTier.HIGH) {
             return;
         }
-        var ally = EntitySpawnHelper.create(EntityType.ZOMBIE, level);
+        var ally = EntitySpawnHelper.create(McRefs.ZOMBIE, level);
         if (ally == null) {
             return;
         }
@@ -137,7 +139,7 @@ public final class ThemeCatalogEffects {
             return;
         }
         for (int i = 0; i < 6; i++) {
-            var chicken = EntitySpawnHelper.create(EntityType.CHICKEN, level);
+            var chicken = EntitySpawnHelper.create(McRefs.CHICKEN, level);
             if (chicken != null) {
                 chicken.setPos(Vec3.atBottomCenterOf(origin).add(i * 0.3, 0, 0));
                 level.addFreshEntity(chicken);
@@ -187,7 +189,7 @@ public final class ThemeCatalogEffects {
         if (tier != LuckTier.NEUTRAL) {
             return;
         }
-        var iron = EntitySpawnHelper.create(EntityType.IRON_GOLEM, level);
+        var iron = EntitySpawnHelper.create(McRefs.IRON_GOLEM, level);
         if (iron != null) {
             iron.setCustomName(Component.literal("Mascotte Hamburger"));
             iron.setPos(Vec3.atBottomCenterOf(origin));
@@ -209,7 +211,7 @@ public final class ThemeCatalogEffects {
         if (tier != LuckTier.LOW) {
             return;
         }
-        var sniper = EntitySpawnHelper.create(EntityType.SKELETON, level);
+        var sniper = EntitySpawnHelper.create(McRefs.SKELETON, level);
         if (sniper != null) {
             sniper.setPos(player.getX() + 12, player.getY() + 2, player.getZ());
             sniper.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
@@ -231,7 +233,7 @@ public final class ThemeCatalogEffects {
         if (tier != LuckTier.HIGH) {
             return;
         }
-        var dealer = EntitySpawnHelper.create(EntityType.VILLAGER, level);
+        var dealer = EntitySpawnHelper.create(McRefs.VILLAGER, level);
         if (dealer != null) {
             dealer.setCustomName(Component.literal("Grossiste Clandestin"));
             dealer.setPos(player.position());
@@ -318,7 +320,7 @@ public final class ThemeCatalogEffects {
         if (tier != LuckTier.HIGH) {
             return;
         }
-        var rabbit = EntitySpawnHelper.create(EntityType.RABBIT, level);
+        var rabbit = EntitySpawnHelper.create(McRefs.RABBIT, level);
         if (rabbit != null) {
             rabbit.setPos(Vec3.atBottomCenterOf(origin).add(0, 2, 0));
             rabbit.setCustomName(Component.literal("Lapin Extirpateur"));

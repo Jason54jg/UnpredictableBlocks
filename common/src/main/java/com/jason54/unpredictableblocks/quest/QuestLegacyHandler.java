@@ -1,5 +1,7 @@
 package com.jason54.unpredictableblocks.quest;
 
+import com.jason54.unpredictableblocks.compat.McRefs;
+
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
@@ -14,7 +16,7 @@ public final class QuestLegacyHandler {
 
     public static void onEntityKilled(ServerPlayer killer, LivingEntity victim) {
         EntityType<?> type = victim.getType();
-        if (type == EntityType.ZOMBIE) {
+        if (type == McRefs.ZOMBIE) {
             int proprete = PlayerQuestData.incrementCounter(killer, "kill_zombie_proprete");
             if (proprete >= 5) {
                 QuestRewards.complete(killer, "quest/proprete", "kills");
@@ -24,25 +26,25 @@ public final class QuestLegacyHandler {
                 QuestRewards.complete(killer, "quest/streamer", "streamer_zombies");
             }
         }
-        if (type == EntityType.CHICKEN) {
+        if (type == McRefs.CHICKEN) {
             int n = PlayerQuestData.incrementCounter(killer, "kill_chicken_boulangerie");
             if (n >= 10) {
                 QuestRewards.complete(killer, "quest/boulangerie", "kill_poultry");
             }
         }
-        if (type == EntityType.RAVAGER) {
+        if (type == McRefs.RAVAGER) {
             QuestRewards.complete(killer, "quest/anachronisme", "kill_ravager");
         }
-        if (type == EntityType.IRON_GOLEM) {
+        if (type == McRefs.IRON_GOLEM) {
             QuestRewards.complete(killer, "quest/volaille", "kill_golem");
         }
-        if (type == EntityType.POLAR_BEAR) {
+        if (type == McRefs.POLAR_BEAR) {
             QuestRewards.complete(killer, "quest/camping", "bear");
         }
-        if (type == EntityType.WOLF) {
+        if (type == McRefs.WOLF) {
             QuestRewards.complete(killer, "quest/magie_comptoir", "wolf");
         }
-        if (type == EntityType.ENDERMAN) {
+        if (type == McRefs.ENDERMAN) {
             QuestRewards.complete(killer, "quest/jdr_d20", "mimic");
         }
         var name = victim.getCustomName();

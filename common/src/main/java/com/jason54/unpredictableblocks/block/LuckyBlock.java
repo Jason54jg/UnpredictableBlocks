@@ -31,9 +31,7 @@ import org.jetbrains.annotations.Nullable;
  * de ce thème uniquement. Seul le tier HIGH/NEUTRAL/LOW est aléatoire (luck).
  */
 public class LuckyBlock extends BaseEntityBlock {
-    public static final MapCodec<LuckyBlock> CODEC = simpleCodec(
-            properties -> new LuckyBlock(LuckyTheme.BOULANGERIE, properties)
-    );
+    public static final MapCodec<LuckyBlock> CODEC = createCodec(LuckyTheme.BOULANGERIE);
     private final LuckyTheme theme;
 
     public LuckyBlock(LuckyTheme theme, Properties properties) {
@@ -45,7 +43,20 @@ public class LuckyBlock extends BaseEntityBlock {
         return theme;
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+    private static MapCodec<LuckyBlock> createCodec(LuckyTheme theme) {
+        try {
+            var method = net.minecraft.world.level.block.Block.class.getDeclaredMethod(
+                    "simpleCodec", java.util.function.Function.class);
+            method.setAccessible(true);
+            return (MapCodec<LuckyBlock>) method.invoke(
+                    null,
+                    (java.util.function.Function<Properties, LuckyBlock>) (properties -> new LuckyBlock(theme, properties)));
+        } catch (ReflectiveOperationException e) {
+            return MapCodec.unit(new LuckyBlock(theme, Properties.of()));
+        }
+    }
+
     protected MapCodec<? extends BaseEntityBlock> codec() {
         return CODEC;
     }

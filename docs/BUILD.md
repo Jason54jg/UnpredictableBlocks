@@ -24,10 +24,25 @@ export JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64   # exemple Linux
 ## Commandes
 
 ```bash
+# Version active (IDE / défaut = 26.1.2, voir stonecutter.active)
 ./gradlew :fabric:build
 ./gradlew :neoforge:build
-./gradlew chiseledBuild   # Stonecutter — variantes MC configurées
+
+# Une version précise (props dans versions/<mc>/gradle.properties)
+./gradlew :fabric:build :neoforge:build \
+  -Pminecraft_version=26.2 \
+  -Pminecraft_dependency=~26.2 \
+  -Pfabric_api_version=0.161.0+26.2 \
+  -Pneoforge_version=26.2.0.93 \
+  -Parchitectury_version=22.0.5 \
+  -Ptarget_mc_version=26.2
+
+# Toutes les versions supportées (26.1.2, 26.2, 26.3) → build/libs-multi/
+./gradlew chiseledBuild
+# alias: ./gradlew buildAllMinecraftVersions
 ```
+
+JARs collectés : `build/libs-multi/<mc>/unpredictableblocks-{fabric|neoforge}-<mod>+<mc>.jar`.
 
 ## Assets procéduraux
 
@@ -51,3 +66,13 @@ python3 tools/enrich_loot_tables.py   # uniquement les loot tables placeholder
 ## CI
 
 `.github/workflows/ci.yml` — assets Python + compilation `:common`, `:fabric`, `:neoforge` en Java 25.
+
+## Multi-version (Stonecutter)
+
+Versions déclarées : **26.1.2**, **26.2**, **26.3**.
+
+| Fichier | Rôle |
+|---------|------|
+| `versions/<mc>/gradle.properties` | pins MC / Fabric API / NeoForge / Architectury |
+| `./gradlew chiseledBuild` | build les 3 versions → `build/libs-multi/<mc>/` |
+| `McRefs` / `McAccess` | ponts d’API Mojmap (EntityTypes, structures, loot…) |

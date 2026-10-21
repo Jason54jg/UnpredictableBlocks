@@ -8,6 +8,7 @@ version = "${version}"
 displayName = "UnpredictableBlocks"
 authors = "Jason54"
 description = "Lucky Blocks chaotiques avec système de chance, quêtes et spawn naturel."
+logoFile = "assets/unpredictableblocks/icon.png"
 
 [[dependencies.unpredictableblocks]]
 modId = "neoforge"

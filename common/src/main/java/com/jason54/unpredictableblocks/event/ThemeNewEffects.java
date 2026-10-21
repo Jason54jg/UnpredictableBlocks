@@ -1,5 +1,7 @@
 package com.jason54.unpredictableblocks.event;
 
+import com.jason54.unpredictableblocks.compat.McRefs;
+
 import com.jason54.unpredictableblocks.luck.LuckTier;
 import com.jason54.unpredictableblocks.quest.PlayerQuestData;
 import com.jason54.unpredictableblocks.quest.QuestExtendedHandler;
@@ -61,7 +63,7 @@ public final class ThemeNewEffects {
                     }
                 }
             }
-            var douanier = EntitySpawnHelper.create(EntityType.VILLAGER, level);
+            var douanier = EntitySpawnHelper.create(McRefs.VILLAGER, level);
             if (douanier != null) {
                 douanier.setCustomName(Component.literal("Douanier"));
                 douanier.setPos(Vec3.atBottomCenterOf(origin));
@@ -75,7 +77,7 @@ public final class ThemeNewEffects {
         if (tier == LuckTier.NEUTRAL) {
             QuestExtendedHandler.onChefsSpawned(player);
             for (int i = 0; i < 10; i++) {
-                var chef = EntitySpawnHelper.create(EntityType.VILLAGER, level);
+                var chef = EntitySpawnHelper.create(McRefs.VILLAGER, level);
                 if (chef != null) {
                     chef.setCustomName(Component.literal(QuestNames.CHEF_ITALIEN));
                     chef.setPos(Vec3.atBottomCenterOf(origin).add(i % 5, 0, i / 5));
@@ -126,7 +128,7 @@ public final class ThemeNewEffects {
             player.addEffect(new MobEffectInstance(MobEffects.STRENGTH, 20 * 90, 1));
             player.sendSystemMessage(Component.literal("§5Pacte des ténèbres — forme d'ombre."));
         } else if (tier == LuckTier.NEUTRAL && player.level() instanceof ServerLevel level) {
-            var dracula = EntitySpawnHelper.create(EntityType.ZOMBIE, level);
+            var dracula = EntitySpawnHelper.create(McRefs.ZOMBIE, level);
             if (dracula != null) {
                 dracula.setCustomName(Component.literal(QuestNames.COMTE_DRACULA));
                 dracula.setCustomNameVisible(true);

@@ -1,5 +1,7 @@
 package com.jason54.unpredictableblocks.item;
 
+import com.jason54.unpredictableblocks.compat.McAccess;
+
 import com.jason54.unpredictableblocks.block.entity.LuckyBlockEntity;
 import com.jason54.unpredictableblocks.luck.LuckStat;
 import net.minecraft.core.BlockPos;
@@ -38,7 +40,6 @@ public class LuckyBlockItem extends BlockItem {
         return true;
     }
 
-    @Override
     public boolean updateCustomBlockEntityTag(
             BlockPos pos,
             Level level,
@@ -46,7 +47,7 @@ public class LuckyBlockItem extends BlockItem {
             ItemStack stack,
             BlockState state
     ) {
-        boolean updated = super.updateCustomBlockEntityTag(pos, level, player, stack, state);
+        boolean updated = McAccess.updateCustomBlockEntityTag(this, pos, level, player, stack, state);
         if (!level.isClientSide()) {
             applyLuckFromStack(level, pos, stack);
         }

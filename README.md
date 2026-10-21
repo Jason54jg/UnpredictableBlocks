@@ -1,5 +1,9 @@
 # UnpredictableBlocks
 
+<p align="center">
+  <img src="docs/branding/logo.png" alt="UnpredictableBlocks" width="160" />
+</p>
+
 *(English: [README.en.md](README.en.md))*
 
 Mod multi-loader **NeoForge + Fabric** (Architectury + Stonecutter) pour Minecraft **26.1.2 → 26.3**, mappings **Mojmap**.
@@ -22,9 +26,9 @@ Lucky Blocks chaotiques à thèmes, système de **chance (-100…+100)**, quête
 **JDK 25** requis (Minecraft 26.1.2). Voir `docs/BUILD.md`.
 
 ```bash
-./gradlew :fabric:build
+./gradlew :fabric:build          # version active (26.1.2)
 ./gradlew :neoforge:build
-./gradlew chiseledBuild
+./gradlew chiseledBuild          # 26.1.2 + 26.2 + 26.3 → build/libs-multi/
 ```
 
 ## Textures (sans Photoshop / Aseprite obligatoire)

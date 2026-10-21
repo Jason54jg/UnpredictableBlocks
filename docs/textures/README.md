@@ -11,7 +11,8 @@ python3 tools/generate_item_textures.py
 python3 tools/texture_contact_sheet.py   # docs/textures/contact_sheet.png
 ```
 
-Sortie : `textures/block/lucky_*.png` et `textures/item/*.png` en **32×32 natif** (+ `icon.png` 128×128).
+Sortie : `textures/block/lucky_*.png` et `textures/item/*.png` en **32×32 natif**.
+L’icône du mod vient de `docs/branding/logo.jpg` → `assets/unpredictableblocks/icon.png` (512×512).
 
 ## Pipeline 32×32 détaillé
 
@@ -35,6 +36,7 @@ Chaque Lucky Block reçoit un **cadre** (bordure + highlight), un **assombrissem
 | Fichier | Usage |
 |---------|--------|
 | `textures/block/lucky_<theme>.png` | faces du cube (block model `cube_all`) |
-| `textures/icon.png` | mod icon Fabric/NeoForge |
+| `assets/unpredictableblocks/icon.png` | icône Fabric / NeoForge (depuis `docs/branding/logo.jpg`) |
+| `textures/icon.png` | copie 128×128 (compat scripts) |
 
 Les objets custom : `textures/item/<id>.png` + model JSON `assets/.../models/item/<id>.json`.

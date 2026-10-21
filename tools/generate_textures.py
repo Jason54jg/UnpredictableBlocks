@@ -491,9 +491,28 @@ GENERATORS = {
 
 
 def icon() -> None:
+    """Icône du pack : logo branding (docs/branding/logo.jpg|.png), sinon fallback pixel."""
+    brand = ROOT / "docs/branding/logo.png"
+    if not brand.is_file():
+        brand = ROOT / "docs/branding/logo.jpg"
+    pack_icon = ROOT / "common/src/main/resources/assets/unpredictableblocks/icon.png"
+    tex_icon = OUT / "icon.png"
+    if brand.is_file():
+        img = Image.open(brand).convert("RGBA")
+        img512 = img.resize((512, 512), Image.LANCZOS)
+        img128 = img.resize((128, 128), Image.LANCZOS)
+        pack_icon.parent.mkdir(parents=True, exist_ok=True)
+        img512.save(pack_icon)
+        img128.save(tex_icon)
+        print("wrote", pack_icon.relative_to(ROOT), "(512×512 depuis branding)")
+        print("wrote", tex_icon.relative_to(ROOT), "(128×128 depuis branding)")
+        return
     img = finish(gen_invasion_memes(), "lucky_invasion_memes")
     img = img.resize((128, 128), Image.NEAREST)
     save(img, "icon.png", "lucky_invasion_memes", skip_upscale=True)
+    pack_icon.parent.mkdir(parents=True, exist_ok=True)
+    img.resize((512, 512), Image.NEAREST).save(pack_icon)
+    print("wrote", pack_icon.relative_to(ROOT), "(512×512 fallback)")
 
 
 def main() -> None:

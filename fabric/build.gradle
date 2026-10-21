@@ -3,9 +3,15 @@ plugins {
     id 'architectury-plugin' version '3.5-SNAPSHOT'
 }
 
+def mcVersion = rootProject.findProperty('minecraft_version')?.toString() ?: '26.1.2'
+def fabricApi = rootProject.findProperty('fabric_api_version')?.toString()
+def fabricLoader = rootProject.findProperty('fabric_loader_version')?.toString() ?: '0.17.2'
+
 base {
     archivesName = "${rootProject.archives_base_name}-fabric"
 }
+
+version = "${rootProject.mod_version}+${mcVersion}"
 
 architectury {
     platformSetupLoomIde()
@@ -17,9 +23,9 @@ loom {
 }
 
 dependencies {
-    minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
-    implementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
-    implementation "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
+    minecraft "com.mojang:minecraft:${mcVersion}"
+    implementation "net.fabricmc:fabric-loader:${fabricLoader}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${fabricApi}"
     implementation project(':common')
 }
 

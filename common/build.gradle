@@ -3,18 +3,32 @@ plugins {
     id 'architectury-plugin' version '3.5-SNAPSHOT'
 }
 
+def mcVersion = rootProject.findProperty('minecraft_version')?.toString() ?: '26.1.2'
+def mcDep = rootProject.findProperty('minecraft_dependency')?.toString() ?: "~${mcVersion}"
+def archVersion = rootProject.findProperty('architectury_version')?.toString() ?: '22.0.5'
+
 base {
     archivesName = "${rootProject.archives_base_name}-common"
 }
+
+version = "${rootProject.mod_version}+${mcVersion}"
 
 loom {
     silentMojangMappingsLicense()
 }
 
 dependencies {
-    minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
-    implementation "dev.architectury:architectury:${rootProject.architectury_version}"
+    minecraft "com.mojang:minecraft:${mcVersion}"
+    implementation "dev.architectury:architectury:${archVersion}"
     implementation "com.google.code.gson:gson:2.11.0"
+}
+
+processResources {
+    inputs.property 'version', version
+    inputs.property 'minecraft_dependency', mcDep
+    filesMatching('fabric.mod.json') {
+        expand version: version, minecraft_dependency: mcDep
+    }
 }
 
 java {

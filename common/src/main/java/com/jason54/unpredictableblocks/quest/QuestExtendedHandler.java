@@ -1,5 +1,7 @@
 package com.jason54.unpredictableblocks.quest;
 
+import com.jason54.unpredictableblocks.compat.McRefs;
+
 import com.jason54.unpredictableblocks.util.ServerLevels;
 import dev.architectury.event.EventResult;
 import dev.architectury.event.events.common.BlockEvent;
@@ -30,7 +32,7 @@ public final class QuestExtendedHandler {
             if (level.isClientSide()) {
                 return EventResult.pass();
             }
-            if (state.is(Blocks.HONEYCOMB_BLOCK) || state.is(Blocks.WHITE_WOOL)) {
+            if (state.is(Blocks.HONEYCOMB_BLOCK) || state.is(McRefs.WHITE_WOOL)) {
                 int n = PlayerQuestData.incrementCounter(player, "bubble_pop");
                 if (n >= 50) {
                     QuestRewards.complete(player, "quest/asmr_fidget", "bubble_pop_50");
@@ -45,7 +47,7 @@ public final class QuestExtendedHandler {
             if (!isMounting || entity.level().isClientSide()) {
                 return EventResult.pass();
             }
-            if (entity instanceof ServerPlayer sp && vehicle.getType() == EntityType.PIG) {
+            if (entity instanceof ServerPlayer sp && vehicle.getType() == McRefs.PIG) {
                 QuestRewards.complete(sp, "quest/fast_food", "ride");
             }
             return EventResult.pass();

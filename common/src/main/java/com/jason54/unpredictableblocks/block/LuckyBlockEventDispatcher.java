@@ -1,5 +1,9 @@
 package com.jason54.unpredictableblocks.block;
 
+import com.jason54.unpredictableblocks.compat.McAccess;
+
+import net.minecraft.world.phys.Vec3;
+
 import com.jason54.unpredictableblocks.config.ModConfig;
 import com.jason54.unpredictableblocks.util.ModMessages;
 import com.jason54.unpredictableblocks.event.LuckyBreakFeedback;
@@ -107,13 +111,15 @@ public final class LuckyBlockEventDispatcher {
         );
 
         LootParams params = new LootParams.Builder(level)
-                .withParameter(LootContextParams.ORIGIN, origin.getCenter())
+                .withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(origin))
                 .withParameter(LootContextParams.THIS_ENTITY, player)
                 .withParameter(LootContextParams.BLOCK_STATE, level.getBlockState(origin))
                 .create(LootContextParamSets.ALL_PARAMS);
 
-        level.getServer().reloadableRegistries().getLootTable(ResourceKey.create(Registries.LOOT_TABLE, table))
-                .getRandomItems(params, player.getInventory()::placeItemBackInInventory);
+                var lootTable = level.getServer().reloadableRegistries().getLootTable(ResourceKey.create(Registries.LOOT_TABLE, table));
+        for (var stack : lootTable.getRandomItems(params)) {
+            McAccess.giveOrDrop(player, stack);
+        }
 
         StructurePlacer.tryPlaceForTheme(level, origin, theme, effective.tier());
         ThemeEventEffects.apply(level, player, origin, theme, effective.tier());

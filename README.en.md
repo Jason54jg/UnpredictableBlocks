@@ -1,5 +1,9 @@
 # UnpredictableBlocks
 
+<p align="center">
+  <img src="docs/branding/logo.png" alt="UnpredictableBlocks" width="160" />
+</p>
+
 **NeoForge + Fabric** mod (Architectury + Stonecutter) for Minecraft **26.1.2 → 26.3**, **Mojmap** mappings.
 
 Chaotic themed Lucky Blocks, **luck (-100…+100)**, quests (advancements), and natural world spawn.
@@ -20,9 +24,9 @@ Chaotic themed Lucky Blocks, **luck (-100…+100)**, quests (advancements), and 
 **JDK 25** required. See `docs/BUILD.md`.
 
 ```bash
-./gradlew :fabric:build
+./gradlew :fabric:build          # active version (26.1.2)
 ./gradlew :neoforge:build
-./gradlew chiseledBuild
+./gradlew chiseledBuild          # 26.1.2 + 26.2 + 26.3 → build/libs-multi/
 ```
 
 ## Textures
