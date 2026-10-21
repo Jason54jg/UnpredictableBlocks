@@ -52,7 +52,12 @@ public final class ModConfig {
         }
     }
 
-    public record UnpredictableBlocksConfig(Meta meta, Spawn spawn, Map<String, ThemeSpawn> themes) {
+    public record UnpredictableBlocksConfig(
+            Meta meta,
+            Spawn spawn,
+            Map<String, ThemeSpawn> themes,
+            Map<String, String> lootHighOverrides
+    ) {
         static UnpredictableBlocksConfig defaults() {
             Map<String, ThemeSpawn> themes = new HashMap<>();
             for (LuckyTheme theme : LuckyTheme.values()) {
@@ -61,7 +66,8 @@ public final class ModConfig {
             return new UnpredictableBlocksConfig(
                     new Meta("26.1.2,26.2,26.3", 0, null, null),
                     Spawn.defaults(),
-                    themes
+                    themes,
+                    new HashMap<>()
             );
         }
     }

@@ -14,6 +14,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
@@ -55,6 +56,42 @@ public class JetonVipItem extends LoreItem {
 
         consumeOne(context, player);
         return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    public InteractionResult interactLivingEntity(
+            ItemStack stack,
+            Player player,
+            LivingEntity entity,
+            InteractionHand hand
+    ) {
+        if (player.level().isClientSide()
+                || !(player instanceof ServerPlayer from)
+                || !(entity instanceof ServerPlayer to)
+                || !player.isShiftKeyDown()) {
+            return InteractionResult.PASS;
+        }
+        if (from.getUUID().equals(to.getUUID())) {
+            return InteractionResult.PASS;
+        }
+        if (!PlayerQuestData.hasMissedReroll(from)) {
+            from.sendSystemMessage(Component.literal("§7Aucun malus en attente à transférer."));
+            return InteractionResult.FAIL;
+        }
+        if (!ItemCooldowns.tryConsume(from, ItemCooldowns.JETON, ItemCooldowns.JETON_TICKS)) {
+            return InteractionResult.FAIL;
+        }
+        if (PlayerQuestData.transferMissedReroll(from, to)) {
+            from.sendSystemMessage(Component.literal("§eMalus VIP transféré à §f" + to.getGameProfile().name()));
+            to.sendSystemMessage(Component.literal(
+                    "§e" + from.getGameProfile().name() + " §7vous a transféré un §6relance VIP§7."
+            ));
+            if (!from.getAbilities().instabuild) {
+                stack.shrink(1);
+            }
+            return InteractionResult.SUCCESS;
+        }
+        return InteractionResult.FAIL;
     }
 
     @Override

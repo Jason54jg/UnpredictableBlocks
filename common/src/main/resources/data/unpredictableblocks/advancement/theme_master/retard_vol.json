@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": { "id": "unpredictableblocks:lucky_retard_vol" },
+    "title": {
+      "translate": "advancements.unpredictableblocks.theme_master.retard_vol.title",
+      "fallback": "Theme master: retard_vol"
+    },
+    "description": {
+      "translate": "advancements.unpredictableblocks.theme_master.retard_vol.description",
+      "fallback": "Break 10 blocks and complete the theme quest."
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "unpredictableblocks:quest/retard_vol",
+  "criteria": {
+    "master": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [["master"]]
+}

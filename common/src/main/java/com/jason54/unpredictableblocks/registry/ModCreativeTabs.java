@@ -30,6 +30,7 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.LUCKY_MYSTERE.get());
                         output.accept(ModItems.JOURNAL_QUETES.get());
                         output.accept(ModItems.JETON_VIP.get());
+                        output.accept(ModItems.CARTE_COLLECTION.get());
                         output.accept(ModItems.LUCK_EMERALD_DUST.get());
                         output.accept(ModItems.LUCK_BLAZE_POWDER_CURSE.get());
                         output.accept(ModItems.ESPRESSO_ULTRA_DOSE.get());

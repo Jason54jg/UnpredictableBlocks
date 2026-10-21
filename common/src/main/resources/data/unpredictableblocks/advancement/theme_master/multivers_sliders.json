@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": { "id": "unpredictableblocks:lucky_multivers_sliders" },
+    "title": {
+      "translate": "advancements.unpredictableblocks.theme_master.multivers_sliders.title",
+      "fallback": "Theme master: multivers_sliders"
+    },
+    "description": {
+      "translate": "advancements.unpredictableblocks.theme_master.multivers_sliders.description",
+      "fallback": "Break 10 blocks and complete the theme quest."
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "unpredictableblocks:quest/multivers_sliders",
+  "criteria": {
+    "master": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [["master"]]
+}

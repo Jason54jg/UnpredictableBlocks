@@ -3,6 +3,8 @@ package com.jason54.unpredictableblocks.block;
 import com.jason54.unpredictableblocks.block.entity.LuckyBlockEntity;
 import com.jason54.unpredictableblocks.luck.LuckResolver;
 import com.jason54.unpredictableblocks.luck.LuckStat;
+import com.jason54.unpredictableblocks.luck.LuckTier;
+import com.jason54.unpredictableblocks.quest.PlayerQuestData;
 import com.jason54.unpredictableblocks.luck.PlayerLuckStorage;
 import com.jason54.unpredictableblocks.registry.ModItems;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
@@ -71,9 +73,13 @@ public class LuckyBlock extends BaseEntityBlock {
                     blockLuck = blockLuck.add(bet);
                     serverPlayer.sendSystemMessage(Component.literal("§ePari Luck : §b+" + bet + " §esur ce cassage !"));
                 }
+                int effectiveLuck = LuckStat.clamp(blockLuck.value() + playerLuck.value());
                 LuckResolver.ResolvedOutcome outcome = LuckResolver.resolve(blockLuck, playerLuck, serverLevel.getRandom());
                 LuckyTheme blockTheme = ((LuckyBlock) state.getBlock()).theme();
-                LuckyBlockEventDispatcher.dispatch(serverLevel, serverPlayer, pos, blockTheme, outcome);
+                if (PlayerQuestData.consumeComboPity(serverPlayer, blockTheme) && outcome.tier() == LuckTier.LOW) {
+                    outcome = new LuckResolver.ResolvedOutcome(LuckTier.NEUTRAL, "neutral");
+                }
+                LuckyBlockEventDispatcher.dispatch(serverLevel, serverPlayer, pos, blockTheme, outcome, effectiveLuck);
             }
         }
         return super.playerWillDestroy(level, pos, state, player);

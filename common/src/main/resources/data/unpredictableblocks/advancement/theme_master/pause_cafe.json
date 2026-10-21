@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": { "id": "unpredictableblocks:lucky_pause_cafe" },
+    "title": {
+      "translate": "advancements.unpredictableblocks.theme_master.pause_cafe.title",
+      "fallback": "Theme master: pause_cafe"
+    },
+    "description": {
+      "translate": "advancements.unpredictableblocks.theme_master.pause_cafe.description",
+      "fallback": "Break 10 blocks and complete the theme quest."
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "unpredictableblocks:quest/pause_cafe",
+  "criteria": {
+    "master": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [["master"]]
+}

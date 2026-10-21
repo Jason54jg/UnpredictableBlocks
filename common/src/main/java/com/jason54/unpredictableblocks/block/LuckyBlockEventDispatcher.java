@@ -2,8 +2,12 @@ package com.jason54.unpredictableblocks.block;
 
 import com.jason54.unpredictableblocks.event.LuckyBreakFeedback;
 import com.jason54.unpredictableblocks.event.ThemeEventEffects;
+import com.jason54.unpredictableblocks.item.CollectionCardItem;
+import com.jason54.unpredictableblocks.lucky.LootTablePaths;
 import com.jason54.unpredictableblocks.luck.LuckResolver;
 import com.jason54.unpredictableblocks.luck.LuckTier;
+import com.jason54.unpredictableblocks.lucky.PlayerLuckyBreakStats;
+import com.jason54.unpredictableblocks.quest.ThemeMasterProgress;
 import com.jason54.unpredictableblocks.quest.CasinoJackpot;
 import com.jason54.unpredictableblocks.quest.JdrDiceRoll;
 import com.jason54.unpredictableblocks.quest.PlayerQuestData;
@@ -34,6 +38,28 @@ public final class LuckyBlockEventDispatcher {
             BlockPos origin,
             LuckyTheme theme,
             LuckResolver.ResolvedOutcome outcome
+    ) {
+        dispatch(level, player, origin, theme, outcome, 0);
+    }
+
+    public static void dispatch(
+            ServerLevel level,
+            ServerPlayer player,
+            BlockPos origin,
+            LuckyTheme theme,
+            LuckResolver.ResolvedOutcome outcome,
+            int effectiveLuck
+    ) {
+        runDispatch(level, player, origin, theme, outcome, effectiveLuck);
+    }
+
+    private static void runDispatch(
+            ServerLevel level,
+            ServerPlayer player,
+            BlockPos origin,
+            LuckyTheme theme,
+            LuckResolver.ResolvedOutcome outcome,
+            int effectiveLuck
     ) {
         ChunkLuckAura.onLuckyBreak(level, origin, player);
 
@@ -67,9 +93,13 @@ public final class LuckyBlockEventDispatcher {
             ));
         }
 
+        if (effective.tier() == LuckTier.HIGH && level.getRandom().nextFloat() < 0.12f) {
+            player.getInventory().add(CollectionCardItem.forTheme(theme));
+        }
+
         Identifier table = Identifier.fromNamespaceAndPath(
                 "unpredictableblocks",
-                LuckResolver.lootTablePath(theme, effective)
+                LootTablePaths.gameplayPath(theme, effective)
         );
 
         LootParams params = new LootParams.Builder(level)
@@ -83,6 +113,9 @@ public final class LuckyBlockEventDispatcher {
 
         StructurePlacer.tryPlaceForTheme(level, origin, theme, effective.tier());
         ThemeEventEffects.apply(level, player, origin, theme, effective.tier());
+
+        PlayerLuckyBreakStats.onBreak(player, theme, effective.tier(), effectiveLuck);
+        ThemeMasterProgress.check(player, theme);
     }
 
     private static String suffixFor(LuckTier tier) {

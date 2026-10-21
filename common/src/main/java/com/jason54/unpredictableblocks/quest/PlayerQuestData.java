@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
+import java.util.function.Consumer;
 
 /** Compteurs de quêtes et relances VIP par joueur. */
 public final class PlayerQuestData {
@@ -255,6 +256,61 @@ public final class PlayerQuestData {
         return missed != null && ServerLevels.of(player).getGameTime() <= missed.expireTick();
     }
 
+    public static boolean transferMissedReroll(ServerPlayer from, ServerPlayer to) {
+        QuestSavedData data = root(from);
+        MissedReroll missed = data.missedRerolls.get(from.getUUID());
+        if (missed == null || ServerLevels.of(from).getGameTime() > missed.expireTick()) {
+            data.missedRerolls.remove(from.getUUID());
+            data.setDirty();
+            return false;
+        }
+        QuestSavedData toData = root(to);
+        toData.missedRerolls.put(to.getUUID(), missed);
+        toData.setDirty();
+        data.missedRerolls.remove(from.getUUID());
+        data.setDirty();
+        return true;
+    }
+
+    public static void updateComboChain(
+            ServerPlayer player,
+            String themeId,
+            long windowTicks,
+            Consumer<ComboChain> onStep
+    ) {
+        QuestSavedData data = root(player);
+        long now = ServerLevels.of(player).getGameTime();
+        UUID uuid = player.getUUID();
+        ComboChain chain = data.comboChains.get(uuid);
+        if (chain == null || now > chain.expireTick() || !chain.themeId().equals(themeId)) {
+            chain = new ComboChain(themeId, 1, now + windowTicks);
+        } else {
+            chain = new ComboChain(themeId, chain.count() + 1, chain.expireTick());
+        }
+        data.comboChains.put(uuid, chain);
+        data.setDirty();
+        onStep.accept(chain);
+    }
+
+    public static void grantComboPity(ServerPlayer player, String themeId) {
+        QuestSavedData data = root(player);
+        data.comboPityTheme.put(player.getUUID(), themeId);
+        data.comboChains.remove(player.getUUID());
+        data.setDirty();
+    }
+
+    /** Consomme le pity combo : prochain cassage de ce thème ne peut pas être LOW. */
+    public static boolean consumeComboPity(ServerPlayer player, LuckyTheme theme) {
+        QuestSavedData data = root(player);
+        String pending = data.comboPityTheme.get(player.getUUID());
+        if (pending == null || !pending.equals(theme.id())) {
+            return false;
+        }
+        data.comboPityTheme.remove(player.getUUID());
+        data.setDirty();
+        return true;
+    }
+
     public static boolean tryCooldown(ServerPlayer player, String key, long cooldownTicks) {
         QuestSavedData data = root(player);
         long now = ServerLevels.of(player).getGameTime();
@@ -287,6 +343,8 @@ public final class PlayerQuestData {
 
     private record FortuneCode(int code, long expireTick) {}
 
+    public record ComboChain(String themeId, int count, long expireTick) {}
+
     public static final class QuestSavedData extends SavedData {
         private static final Codec<QuestSavedData> CODEC = CompoundTag.CODEC.xmap(QuestSavedData::fromTag, QuestSavedData::toTag);
 
@@ -309,6 +367,8 @@ public final class PlayerQuestData {
         private final Map<UUID, Long> gymStrengthUntil = new HashMap<>();
         private final Map<UUID, Integer> emeraldSnapshot = new HashMap<>();
         private final Map<UUID, Long> plomberieUntil = new HashMap<>();
+        private final Map<UUID, ComboChain> comboChains = new HashMap<>();
+        private final Map<UUID, String> comboPityTheme = new HashMap<>();
 
         private QuestSavedData() {}
 
@@ -380,6 +440,22 @@ public final class PlayerQuestData {
             for (String key : plomb.keySet()) {
                 data.plomberieUntil.put(UUID.fromString(key), plomb.getLongOr(key, 0L));
             }
+            CompoundTag combo = tag.getCompoundOrEmpty("ComboChains");
+            for (String key : combo.keySet()) {
+                CompoundTag entry = combo.getCompoundOrEmpty(key);
+                data.comboChains.put(
+                        UUID.fromString(key),
+                        new ComboChain(
+                                entry.getStringOr("Theme", ""),
+                                entry.getIntOr("Count", 0),
+                                entry.getLongOr("Expire", 0L)
+                        )
+                );
+            }
+            CompoundTag pity = tag.getCompoundOrEmpty("ComboPity");
+            for (String key : pity.keySet()) {
+                data.comboPityTheme.put(UUID.fromString(key), pity.getStringOr(key, ""));
+            }
             return data;
         }
 
@@ -442,6 +518,20 @@ public final class PlayerQuestData {
             CompoundTag plomb = new CompoundTag();
             plomberieUntil.forEach((uuid, tick) -> plomb.putLong(uuid.toString(), tick));
             tag.put("PlomberieUntil", plomb);
+
+            CompoundTag combo = new CompoundTag();
+            comboChains.forEach((uuid, chain) -> {
+                CompoundTag entry = new CompoundTag();
+                entry.putString("Theme", chain.themeId());
+                entry.putInt("Count", chain.count());
+                entry.putLong("Expire", chain.expireTick());
+                combo.put(uuid.toString(), entry);
+            });
+            tag.put("ComboChains", combo);
+
+            CompoundTag pity = new CompoundTag();
+            comboPityTheme.forEach((uuid, themeId) -> pity.putString(uuid.toString(), themeId));
+            tag.put("ComboPity", pity);
             return tag;
         }
     }

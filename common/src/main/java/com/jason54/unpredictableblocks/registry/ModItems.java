@@ -1,6 +1,7 @@
 package com.jason54.unpredictableblocks.registry;
 
 import com.jason54.unpredictableblocks.UnpredictableBlocks;
+import com.jason54.unpredictableblocks.item.CollectionCardItem;
 import com.jason54.unpredictableblocks.item.BaguetteMagiqueItem;
 import com.jason54.unpredictableblocks.item.BonkHammerItem;
 import com.jason54.unpredictableblocks.item.Casque5GItem;
@@ -85,8 +86,11 @@ public final class ModItems {
     public static final RegistrySupplier<Item> JETON_VIP = ITEMS.register("jeton_or_vip", () ->
             new JetonVipItem(new Item.Properties(), stack -> {
                 ThemedGearHelper.name(stack, "Jeton d'Or V.I.P.");
-                ThemedGearHelper.lore(stack, "Relance le dernier malus en HIGH.");
+                ThemedGearHelper.lore(stack, "Relance le dernier malus en HIGH.", "Accroupi + clic sur un joueur : transfert malus.");
             }));
+
+    public static final RegistrySupplier<Item> CARTE_COLLECTION = ITEMS.register("carte_collection", () ->
+            new CollectionCardItem(new Item.Properties().stacksTo(64)));
 
     public static final RegistrySupplier<Item> ESPRESSO_ULTRA_DOSE = ITEMS.register("espresso_ultra_dose", ExtendedModItems::espressoUltraDose);
     public static final RegistrySupplier<Item> VALISE_PERDUE = ITEMS.register("valise_perdue", ExtendedModItems::valisePerdue);

@@ -1,5 +1,7 @@
 package com.jason54.unpredictableblocks.quest;
 
+import com.jason54.unpredictableblocks.config.ModConfig;
+import com.jason54.unpredictableblocks.lucky.PlayerLuckyBreakStats;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -19,7 +21,14 @@ public final class QuestJournal {
         for (LuckyTheme theme : LuckyTheme.values()) {
             String mark = isQuestDone(player, theme) ? "§a✔" : "§7○";
             Component title = Component.translatable("advancements.unpredictableblocks." + theme.id() + ".title");
-            player.sendSystemMessage(Component.literal(mark + " ").append(title));
+            var spawn = ModConfig.themeSpawn(theme);
+            String biomes = String.join(", ", spawn.preferredBiomes());
+            String night = spawn.nightOnly() ? " §8(nuit)" : "";
+            int br = PlayerLuckyBreakStats.breaks(player, theme);
+            String master = QuestRewards.isDone(player, "theme_master/" + theme.id()) ? " §6★" : "";
+            player.sendSystemMessage(Component.literal(
+                    mark + " " + master + " §8[" + br + " breaks] §7" + biomes + night + " — "
+            ).append(title));
         }
         QuestCollection.tryAwardCollector(player);
         QuestMilestones.checkAfterQuest(player);

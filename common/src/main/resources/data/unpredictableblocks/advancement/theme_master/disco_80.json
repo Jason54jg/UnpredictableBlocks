@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": { "id": "unpredictableblocks:lucky_disco_80" },
+    "title": {
+      "translate": "advancements.unpredictableblocks.theme_master.disco_80.title",
+      "fallback": "Theme master: disco_80"
+    },
+    "description": {
+      "translate": "advancements.unpredictableblocks.theme_master.disco_80.description",
+      "fallback": "Break 10 blocks and complete the theme quest."
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "unpredictableblocks:quest/disco_80",
+  "criteria": {
+    "master": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [["master"]]
+}

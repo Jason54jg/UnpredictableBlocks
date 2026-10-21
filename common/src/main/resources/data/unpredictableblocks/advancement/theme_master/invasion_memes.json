@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": { "id": "unpredictableblocks:lucky_invasion_memes" },
+    "title": {
+      "translate": "advancements.unpredictableblocks.theme_master.invasion_memes.title",
+      "fallback": "Theme master: invasion_memes"
+    },
+    "description": {
+      "translate": "advancements.unpredictableblocks.theme_master.invasion_memes.description",
+      "fallback": "Break 10 blocks and complete the theme quest."
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "unpredictableblocks:quest/invasion_memes",
+  "criteria": {
+    "master": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [["master"]]
+}

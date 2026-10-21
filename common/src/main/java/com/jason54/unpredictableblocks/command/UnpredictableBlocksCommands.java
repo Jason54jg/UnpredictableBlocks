@@ -7,8 +7,10 @@ import com.jason54.unpredictableblocks.block.entity.LuckyBlockEntity;
 import com.jason54.unpredictableblocks.luck.LuckResolver;
 import com.jason54.unpredictableblocks.luck.LuckTier;
 import com.jason54.unpredictableblocks.quest.CasinoJackpot;
+import com.jason54.unpredictableblocks.quest.PlayerQuestData;
 import com.jason54.unpredictableblocks.registry.ModBlocks;
 import com.jason54.unpredictableblocks.registry.ModItems;
+import com.jason54.unpredictableblocks.lucky.PlayerLuckyBreakStats;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
 import com.jason54.unpredictableblocks.util.ServerLevels;
 import com.mojang.brigadier.CommandDispatcher;
@@ -18,6 +20,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.server.permissions.Permissions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -71,6 +74,7 @@ public final class UnpredictableBlocksCommands {
                                     }
                                     player.getInventory().add(new net.minecraft.world.item.ItemStack(ModItems.JOURNAL_QUETES.get()));
                                     player.getInventory().add(new net.minecraft.world.item.ItemStack(ModItems.LUCKY_MYSTERE.get(), 3));
+                                    player.getInventory().add(new net.minecraft.world.item.ItemStack(ModItems.CARTE_COLLECTION.get(), 8));
                                     return 1;
                                 }))
                         .then(Commands.literal("reload")
@@ -82,6 +86,39 @@ public final class UnpredictableBlocksCommands {
                                     );
                                     return 1;
                                 }))
+                        .then(Commands.literal("stats")
+                                .executes(ctx -> printStats(ctx.getSource(), null))
+                                .then(Commands.argument("theme", StringArgumentType.word())
+                                        .executes(ctx -> printStats(
+                                                ctx.getSource(),
+                                                resolveTheme(StringArgumentType.getString(ctx, "theme"))
+                                        ))))
+                        .then(Commands.literal("transfer")
+                                .then(Commands.argument("target", EntityArgument.player())
+                                        .executes(ctx -> {
+                                            ServerPlayer from = ctx.getSource().getPlayerOrException();
+                                            ServerPlayer to = EntityArgument.getPlayer(ctx, "target");
+                                            if (from.getUUID().equals(to.getUUID())) {
+                                                ctx.getSource().sendFailure(Component.literal("Cible invalide."));
+                                                return 0;
+                                            }
+                                            if (!PlayerQuestData.hasMissedReroll(from)) {
+                                                ctx.getSource().sendFailure(Component.literal("Aucun malus en attente à transférer."));
+                                                return 0;
+                                            }
+                                            if (PlayerQuestData.transferMissedReroll(from, to)) {
+                                                ctx.getSource().sendSuccess(
+                                                        () -> Component.literal("Malus VIP transféré à " + to.getGameProfile().name()),
+                                                        true
+                                                );
+                                                to.sendSystemMessage(Component.literal(
+                                                        "§e" + from.getGameProfile().name() + " §7vous a transféré un §6relance VIP§7 (malus en attente)."
+                                                ));
+                                                return 1;
+                                            }
+                                            ctx.getSource().sendFailure(Component.literal("Transfert impossible (expiré ?)."));
+                                            return 0;
+                                        })))
         );
     }
 
@@ -95,6 +132,31 @@ public final class UnpredictableBlocksCommands {
         }
         source.sendSuccess(() -> Component.literal("Placé " + theme.id() + (luck != 0 ? " luck=" + luck : "")), true);
         return 1;
+    }
+
+    private static int printStats(CommandSourceStack source, LuckyTheme only) throws CommandSyntaxException {
+        ServerPlayer player = source.getPlayerOrException();
+        if (only != null) {
+            source.sendSuccess(() -> statLine(player, only), false);
+            return 1;
+        }
+        source.sendSuccess(() -> Component.literal("§6Stats cassages Lucky (HIGH/LOW) :"), false);
+        for (LuckyTheme theme : LuckyTheme.values()) {
+            source.sendSuccess(() -> statLine(player, theme), false);
+        }
+        if (PlayerQuestData.hasMissedReroll(player)) {
+            source.sendSuccess(() -> Component.literal("§eMalus VIP en attente : oui"), false);
+        }
+        return 1;
+    }
+
+    private static Component statLine(ServerPlayer player, LuckyTheme theme) {
+        return Component.literal(
+                "§7" + theme.id() + " §8— breaks "
+                        + PlayerLuckyBreakStats.breaks(player, theme)
+                        + " §aH" + PlayerLuckyBreakStats.highs(player, theme)
+                        + " §cL" + PlayerLuckyBreakStats.lows(player, theme)
+        );
     }
 
     private static LuckyTheme resolveTheme(String id) throws CommandSyntaxException {

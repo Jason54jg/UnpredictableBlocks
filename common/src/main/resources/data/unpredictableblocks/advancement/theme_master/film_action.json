@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": { "id": "unpredictableblocks:lucky_film_action" },
+    "title": {
+      "translate": "advancements.unpredictableblocks.theme_master.film_action.title",
+      "fallback": "Theme master: film_action"
+    },
+    "description": {
+      "translate": "advancements.unpredictableblocks.theme_master.film_action.description",
+      "fallback": "Break 10 blocks and complete the theme quest."
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "unpredictableblocks:quest/film_action",
+  "criteria": {
+    "master": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [["master"]]
+}

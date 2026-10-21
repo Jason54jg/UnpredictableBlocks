@@ -53,7 +53,15 @@ public final class StructurePlacer {
             case ASMR_FIDGET -> "bulle_asmr";
             case VAMPIRE_GOTHIQUE -> "manoir_gothique";
             case MULTIVERS_SLIDERS -> "portail_sliders";
-            default -> null;
+            case BSOD -> "bunker_zone51";
+            case VOLAILLE -> "four_geant";
+            case IMPOTS -> "bunker_zone51";
+            case STREAMER -> "tour_controle";
+            case PROPRETE -> "campement_inonde";
+            case GRAVITE_ZERO -> "portail_sliders";
+            case CAUCHEMAR_MATIN -> "manoir_gothique";
+            case JDR_D20 -> "scene_spectacle";
+            case LAG_BUG -> "stronghold_skip";
         };
     }
 }
