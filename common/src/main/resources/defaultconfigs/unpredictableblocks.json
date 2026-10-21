@@ -16,5 +16,17 @@
       "end": 0.15
     }
   },
-  "themes": {}
+  "themes": {},
+  "lootHighOverrides": {},
+  "gameplay": {
+    "cardDropOnHigh": 0.12,
+    "comboWindowSeconds": 120,
+    "comboHitsRequired": 3,
+    "nearMissLuckMin": -58,
+    "nearMissLuckMax": -50,
+    "malusStreakLength": 3,
+    "malusStreakLuckBonus": 5,
+    "themeMasterBreaks": 10,
+    "missedRerollSeconds": 300
+  }
 }

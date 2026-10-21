@@ -29,6 +29,11 @@ public final class ModConfig {
         return fromFile != null ? fromFile : ThemeSpawn.forTheme(theme);
     }
 
+    public static Gameplay gameplay() {
+        Gameplay fromFile = get().gameplay();
+        return fromFile != null ? fromFile : Gameplay.defaults();
+    }
+
     public static void load() {
         Path path = PlatformConfigPaths.configFile("unpredictableblocks.json");
         if (Files.exists(path)) {
@@ -56,7 +61,8 @@ public final class ModConfig {
             Meta meta,
             Spawn spawn,
             Map<String, ThemeSpawn> themes,
-            Map<String, String> lootHighOverrides
+            Map<String, String> lootHighOverrides,
+            Gameplay gameplay
     ) {
         static UnpredictableBlocksConfig defaults() {
             Map<String, ThemeSpawn> themes = new HashMap<>();
@@ -67,8 +73,67 @@ public final class ModConfig {
                     new Meta("26.1.2,26.2,26.3", 0, null, null),
                     Spawn.defaults(),
                     themes,
-                    new HashMap<>()
+                    new HashMap<>(),
+                    Gameplay.defaults()
             );
+        }
+    }
+
+    /** Réglages meta-game (combo, cartes, near miss, maître thème, VIP). */
+    public record Gameplay(
+            Double cardDropOnHigh,
+            Integer comboWindowSeconds,
+            Integer comboHitsRequired,
+            Integer nearMissLuckMin,
+            Integer nearMissLuckMax,
+            Integer malusStreakLength,
+            Integer malusStreakLuckBonus,
+            Integer themeMasterBreaks,
+            Integer missedRerollSeconds
+    ) {
+        static Gameplay defaults() {
+            return new Gameplay(0.12, 120, 3, -58, -50, 3, 5, 10, 300);
+        }
+
+        public double cardDropOnHighOrDefault() {
+            if (cardDropOnHigh == null) {
+                return 0.12;
+            }
+            return Math.clamp(cardDropOnHigh, 0.0, 1.0);
+        }
+
+        public long comboWindowTicksOrDefault() {
+            int seconds = comboWindowSeconds == null ? 120 : Math.max(5, comboWindowSeconds);
+            return seconds * 20L;
+        }
+
+        public int comboHitsRequiredOrDefault() {
+            return comboHitsRequired == null ? 3 : Math.max(2, comboHitsRequired);
+        }
+
+        public int nearMissLuckMinOrDefault() {
+            return nearMissLuckMin == null ? -58 : nearMissLuckMin;
+        }
+
+        public int nearMissLuckMaxOrDefault() {
+            return nearMissLuckMax == null ? -50 : nearMissLuckMax;
+        }
+
+        public int malusStreakLengthOrDefault() {
+            return malusStreakLength == null ? 3 : Math.max(1, malusStreakLength);
+        }
+
+        public int malusStreakLuckBonusOrDefault() {
+            return malusStreakLuckBonus == null ? 5 : malusStreakLuckBonus;
+        }
+
+        public int themeMasterBreaksOrDefault() {
+            return themeMasterBreaks == null ? 10 : Math.max(1, themeMasterBreaks);
+        }
+
+        public long missedRerollTicksOrDefault() {
+            int seconds = missedRerollSeconds == null ? 300 : Math.max(30, missedRerollSeconds);
+            return seconds * 20L;
         }
     }
 

@@ -1,5 +1,6 @@
 package com.jason54.unpredictableblocks.block;
 
+import com.jason54.unpredictableblocks.config.ModConfig;
 import com.jason54.unpredictableblocks.event.LuckyBreakFeedback;
 import com.jason54.unpredictableblocks.event.ThemeEventEffects;
 import com.jason54.unpredictableblocks.item.CollectionCardItem;
@@ -89,12 +90,15 @@ public final class LuckyBlockEventDispatcher {
 
         if (effective.tier() == LuckTier.LOW) {
             PlayerQuestData.setMissedReroll(player, theme);
+            long vipSeconds = ModConfig.gameplay().missedRerollTicksOrDefault() / 20L;
             player.sendSystemMessage(Component.literal(
-                    "§cMalus enregistré — Jeton VIP utilisable (5 min) pour relancer « " + theme.id() + " »."
+                    "§cMalus enregistré — Jeton VIP utilisable (" + vipSeconds + "s) pour relancer « "
+                            + theme.id() + " »."
             ));
         }
 
-        if (effective.tier() == LuckTier.HIGH && level.getRandom().nextFloat() < 0.12f) {
+        float cardChance = (float) ModConfig.gameplay().cardDropOnHighOrDefault();
+        if (effective.tier() == LuckTier.HIGH && cardChance > 0f && level.getRandom().nextFloat() < cardChance) {
             player.getInventory().add(CollectionCardItem.forTheme(theme));
             CardCollection.tryAwardCardAlbum(player);
         }

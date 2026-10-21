@@ -86,6 +86,27 @@ public final class UnpredictableBlocksCommands {
                                     );
                                     return 1;
                                 }))
+                        .then(Commands.literal("gameplay")
+                                .executes(ctx -> {
+                                    var g = ModConfig.gameplay();
+                                    ctx.getSource().sendSuccess(() -> Component.literal("§6Gameplay (config) :"), false);
+                                    ctx.getSource().sendSuccess(() -> Component.literal(
+                                            "§7carte HIGH §f" + (int) (g.cardDropOnHighOrDefault() * 100) + "%"
+                                                    + " §7| combo §f" + g.comboHitsRequiredOrDefault()
+                                                    + "× / " + (g.comboWindowTicksOrDefault() / 20) + "s"
+                                    ), false);
+                                    ctx.getSource().sendSuccess(() -> Component.literal(
+                                            "§7near miss luck §f[" + g.nearMissLuckMinOrDefault()
+                                                    + "…" + g.nearMissLuckMaxOrDefault() + "]"
+                                                    + " §7| maître §f" + g.themeMasterBreaksOrDefault() + " breaks"
+                                    ), false);
+                                    ctx.getSource().sendSuccess(() -> Component.literal(
+                                            "§7série malus §f" + g.malusStreakLengthOrDefault()
+                                                    + " LOW → +" + g.malusStreakLuckBonusOrDefault() + " luck"
+                                                    + " §7| VIP TTL §f" + (g.missedRerollTicksOrDefault() / 20) + "s"
+                                    ), false);
+                                    return 1;
+                                }))
                         .then(Commands.literal("stats")
                                 .executes(ctx -> printStats(ctx.getSource(), null))
                                 .then(Commands.argument("theme", StringArgumentType.word())

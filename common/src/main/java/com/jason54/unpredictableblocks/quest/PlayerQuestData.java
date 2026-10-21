@@ -1,6 +1,7 @@
 package com.jason54.unpredictableblocks.quest;
 
 import com.jason54.unpredictableblocks.UnpredictableBlocks;
+import com.jason54.unpredictableblocks.config.ModConfig;
 import com.jason54.unpredictableblocks.luck.LuckTier;
 import com.jason54.unpredictableblocks.luck.PlayerLuckStorage;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
@@ -25,9 +26,11 @@ import java.util.function.Consumer;
 
 /** Compteurs de quêtes et relances VIP par joueur. */
 public final class PlayerQuestData {
-    private static final long REROLL_TTL_TICKS = 6000;
-
     private PlayerQuestData() {}
+
+    private static long rerollTtlTicks() {
+        return ModConfig.gameplay().missedRerollTicksOrDefault();
+    }
 
     public static int getBonkCount(ServerPlayer player) {
         return root(player).bonkCounts.getOrDefault(player.getUUID(), 0);
@@ -67,11 +70,15 @@ public final class PlayerQuestData {
     /** Après 3 malus LOW consécutifs, bonus +5 Luck (une fois par série). */
     public static void recordLuckOutcome(ServerPlayer player, LuckTier tier) {
         if (tier == LuckTier.LOW) {
+            var gameplay = ModConfig.gameplay();
             int streak = incrementCounter(player, "malus_streak");
-            if (streak >= 3) {
+            if (streak >= gameplay.malusStreakLengthOrDefault()) {
                 resetCounter(player, "malus_streak");
-                PlayerLuckStorage.addModifier(player, 5);
-                player.sendSystemMessage(Component.literal("§dSérie malchanceuse — compensation §b+5 Luck§d !"));
+                int bonus = gameplay.malusStreakLuckBonusOrDefault();
+                PlayerLuckStorage.addModifier(player, bonus);
+                player.sendSystemMessage(Component.literal(
+                        "§dSérie malchanceuse — compensation §b+" + bonus + " Luck§d !"
+                ));
             }
         } else {
             resetCounter(player, "malus_streak");
@@ -228,7 +235,7 @@ public final class PlayerQuestData {
 
     public static void setMissedReroll(ServerPlayer player, LuckyTheme theme) {
         QuestSavedData data = root(player);
-        long expire = ServerLevels.of(player).getGameTime() + REROLL_TTL_TICKS;
+        long expire = ServerLevels.of(player).getGameTime() + rerollTtlTicks();
         data.missedRerolls.put(player.getUUID(), new MissedReroll(theme.id(), expire));
         data.setDirty();
     }

@@ -1,5 +1,6 @@
 package com.jason54.unpredictableblocks.lucky;
 
+import com.jason54.unpredictableblocks.config.ModConfig;
 import com.jason54.unpredictableblocks.luck.LuckTier;
 import com.jason54.unpredictableblocks.registry.ModItems;
 import net.minecraft.network.chat.Component;
@@ -14,7 +15,10 @@ public final class NearMissHandler {
         if (tier != LuckTier.LOW) {
             return;
         }
-        if (effectiveLuck < -58 || effectiveLuck > -50) {
+        var gameplay = ModConfig.gameplay();
+        int min = gameplay.nearMissLuckMinOrDefault();
+        int max = gameplay.nearMissLuckMaxOrDefault();
+        if (effectiveLuck < min || effectiveLuck > max) {
             return;
         }
         player.sendSystemMessage(Component.literal("§7Presque neutre… §8(near miss) §7→ §a+1 poussière"));
