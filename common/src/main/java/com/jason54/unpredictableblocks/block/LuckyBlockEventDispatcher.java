@@ -10,6 +10,7 @@ import com.jason54.unpredictableblocks.structure.StructurePlacer;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.storage.loot.LootParams;
@@ -41,6 +42,9 @@ public final class LuckyBlockEventDispatcher {
 
         if (effective.tier() == LuckTier.LOW) {
             PlayerQuestData.setMissedReroll(player, theme);
+            player.sendSystemMessage(Component.literal(
+                    "§cMalus enregistré — Jeton VIP utilisable (5 min) pour relancer « " + theme.id() + " »."
+            ));
         }
 
         ResourceLocation table = ResourceLocation.fromNamespaceAndPath(

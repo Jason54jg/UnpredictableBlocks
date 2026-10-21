@@ -62,6 +62,29 @@ public final class PlayerQuestData {
         return missed != null && player.serverLevel().getGameTime() <= missed.expireTick();
     }
 
+    public static boolean tryCooldown(ServerPlayer player, String key, long cooldownTicks) {
+        QuestSavedData data = root(player);
+        long now = player.serverLevel().getGameTime();
+        long readyAt = data.cooldowns.getOrDefault(cooldownKey(player.getUUID(), key), 0L);
+        if (now < readyAt) {
+            return false;
+        }
+        data.cooldowns.put(cooldownKey(player.getUUID(), key), now + cooldownTicks);
+        data.setDirty();
+        return true;
+    }
+
+    public static long cooldownRemaining(ServerPlayer player, String key) {
+        QuestSavedData data = root(player);
+        long now = player.serverLevel().getGameTime();
+        long readyAt = data.cooldowns.getOrDefault(cooldownKey(player.getUUID(), key), 0L);
+        return Math.max(0, readyAt - now);
+    }
+
+    private static String cooldownKey(UUID uuid, String key) {
+        return uuid + ":" + key;
+    }
+
     private static QuestSavedData root(ServerPlayer player) {
         DimensionDataStorage storage = player.serverLevel().getDataStorage();
         return storage.computeIfAbsent(new SavedData.Factory<>(QuestSavedData::new, QuestSavedData::load, null), DATA_ID);
@@ -72,6 +95,7 @@ public final class PlayerQuestData {
     public static final class QuestSavedData extends SavedData {
         private final Map<UUID, Integer> bonkCounts = new HashMap<>();
         private final Map<UUID, MissedReroll> missedRerolls = new HashMap<>();
+        private final Map<String, Long> cooldowns = new HashMap<>();
 
         static QuestSavedData load(CompoundTag tag, HolderLookup.Provider registries) {
             QuestSavedData data = new QuestSavedData();
@@ -86,6 +110,10 @@ public final class PlayerQuestData {
                         UUID.fromString(key),
                         new MissedReroll(entry.getString("Theme"), entry.getLong("Expire"))
                 );
+            }
+            CompoundTag cds = tag.getCompound("Cooldowns");
+            for (String key : cds.getAllKeys()) {
+                data.cooldowns.put(key, cds.getLong(key));
             }
             return data;
         }
@@ -104,6 +132,10 @@ public final class PlayerQuestData {
                 missed.put(uuid.toString(), entry);
             });
             tag.put("MissedRerolls", missed);
+
+            CompoundTag cds = new CompoundTag();
+            cooldowns.forEach(cds::putLong);
+            tag.put("Cooldowns", cds);
             return tag;
         }
     }

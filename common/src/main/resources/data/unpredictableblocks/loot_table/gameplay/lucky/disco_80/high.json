@@ -5,22 +5,13 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "unpredictableblocks:lucky_disco_80",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": 0
-            }
-          ]
-        }
-      ],
-      "functions": [
+          "name": "minecraft:music_disc_13",
+          "weight": 1
+        },
         {
-          "function": "minecraft:set_name",
-          "name": {
-            "text": "\u00c9v\u00e9nement high (disco_80)",
-            "color": "gold"
-          }
+          "type": "minecraft:item",
+          "name": "minecraft:leather_boots",
+          "weight": 1
         }
       ]
     }

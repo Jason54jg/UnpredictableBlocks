@@ -5,22 +5,22 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "unpredictableblocks:lucky_complot",
+          "name": "unpredictableblocks:casque_5g",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:ender_pearl",
+          "weight": 2,
           "functions": [
             {
               "function": "minecraft:set_count",
-              "count": 0
+              "count": {
+                "min": 2,
+                "max": 4
+              }
             }
           ]
-        }
-      ],
-      "functions": [
-        {
-          "function": "minecraft:set_name",
-          "name": {
-            "text": "\u00c9v\u00e9nement high (complot)",
-            "color": "gold"
-          }
         }
       ]
     }

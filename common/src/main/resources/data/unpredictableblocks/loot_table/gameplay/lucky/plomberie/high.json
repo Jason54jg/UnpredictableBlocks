@@ -5,22 +5,22 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "unpredictableblocks:lucky_plomberie",
+          "name": "unpredictableblocks:cle_molette_legendaire",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:copper_ingot",
+          "weight": 2,
           "functions": [
             {
               "function": "minecraft:set_count",
-              "count": 0
+              "count": {
+                "min": 16,
+                "max": 32
+              }
             }
           ]
-        }
-      ],
-      "functions": [
-        {
-          "function": "minecraft:set_name",
-          "name": {
-            "text": "\u00c9v\u00e9nement high (plomberie)",
-            "color": "gold"
-          }
         }
       ]
     }

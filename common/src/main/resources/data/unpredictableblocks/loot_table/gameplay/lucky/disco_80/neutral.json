@@ -1,26 +1,35 @@
 {
   "pools": [
     {
-      "rolls": 1,
+      "rolls": 2,
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "unpredictableblocks:lucky_disco_80",
+          "name": "minecraft:glow_ink_sac",
+          "weight": 2,
           "functions": [
             {
               "function": "minecraft:set_count",
-              "count": 0
+              "count": {
+                "min": 4,
+                "max": 8
+              }
             }
           ]
-        }
-      ],
-      "functions": [
+        },
         {
-          "function": "minecraft:set_name",
-          "name": {
-            "text": "\u00c9v\u00e9nement neutral (disco_80)",
-            "color": "gold"
-          }
+          "type": "minecraft:item",
+          "name": "minecraft:purple_dye",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 4,
+                "max": 8
+              }
+            }
+          ]
         }
       ]
     }

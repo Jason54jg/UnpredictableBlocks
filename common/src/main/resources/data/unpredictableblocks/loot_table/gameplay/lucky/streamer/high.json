@@ -5,22 +5,41 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "unpredictableblocks:lucky_streamer",
+          "name": "unpredictableblocks:cle_usb_hacker",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:emerald",
+          "weight": 2,
           "functions": [
             {
               "function": "minecraft:set_count",
-              "count": 0
+              "count": {
+                "min": 4,
+                "max": 12
+              }
             }
           ]
-        }
-      ],
-      "functions": [
+        },
         {
-          "function": "minecraft:set_name",
-          "name": {
-            "text": "\u00c9v\u00e9nement high (streamer)",
-            "color": "gold"
-          }
+          "type": "minecraft:item",
+          "name": "unpredictableblocks:luck_emerald_dust",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 2,
+                "max": 5
+              }
+            }
+          ]
         }
       ]
     }

@@ -5,22 +5,22 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "unpredictableblocks:lucky_complot",
+          "name": "minecraft:amethyst_shard",
+          "weight": 2,
           "functions": [
             {
               "function": "minecraft:set_count",
-              "count": 0
+              "count": {
+                "min": 4,
+                "max": 8
+              }
             }
           ]
-        }
-      ],
-      "functions": [
+        },
         {
-          "function": "minecraft:set_name",
-          "name": {
-            "text": "\u00c9v\u00e9nement neutral (complot)",
-            "color": "gold"
-          }
+          "type": "minecraft:item",
+          "name": "minecraft:spyglass",
+          "weight": 1
         }
       ]
     }

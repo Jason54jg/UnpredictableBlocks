@@ -1,26 +1,35 @@
 {
   "pools": [
     {
-      "rolls": 1,
+      "rolls": 2,
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "unpredictableblocks:lucky_gym_bro",
+          "name": "minecraft:cooked_beef",
+          "weight": 2,
           "functions": [
             {
               "function": "minecraft:set_count",
-              "count": 0
+              "count": {
+                "min": 8,
+                "max": 16
+              }
             }
           ]
-        }
-      ],
-      "functions": [
+        },
         {
-          "function": "minecraft:set_name",
-          "name": {
-            "text": "\u00c9v\u00e9nement neutral (gym_bro)",
-            "color": "gold"
-          }
+          "type": "minecraft:item",
+          "name": "minecraft:iron_ingot",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 4,
+                "max": 8
+              }
+            }
+          ]
         }
       ]
     }

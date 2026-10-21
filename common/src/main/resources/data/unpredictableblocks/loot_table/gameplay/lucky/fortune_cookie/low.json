@@ -5,22 +5,31 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "unpredictableblocks:lucky_fortune_cookie",
+          "name": "minecraft:poisonous_potato",
+          "weight": 2,
           "functions": [
             {
               "function": "minecraft:set_count",
-              "count": 0
+              "count": {
+                "min": 2,
+                "max": 4
+              }
             }
           ]
-        }
-      ],
-      "functions": [
+        },
         {
-          "function": "minecraft:set_name",
-          "name": {
-            "text": "\u00c9v\u00e9nement low (fortune_cookie)",
-            "color": "gold"
-          }
+          "type": "minecraft:item",
+          "name": "unpredictableblocks:luck_blaze_curse",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 3
+              }
+            }
+          ]
         }
       ]
     }

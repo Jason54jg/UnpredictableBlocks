@@ -19,6 +19,9 @@ public class ShakerProtItem extends LoreItem {
         if (level.isClientSide || !(player instanceof ServerPlayer serverPlayer)) {
             return InteractionResult.CONSUME;
         }
+        if (!ItemCooldowns.tryConsume(serverPlayer, ItemCooldowns.SHAKER, ItemCooldowns.SHAKER_TICKS)) {
+            return InteractionResult.FAIL;
+        }
         serverPlayer.addEffect(new MobEffectInstance(MobEffects.STRENGTH, 20 * 90, 2));
         serverPlayer.addEffect(new MobEffectInstance(MobEffects.SPEED, 20 * 90, 1));
         serverPlayer.addEffect(new MobEffectInstance(MobEffects.HUNGER, 20 * 90, 1));

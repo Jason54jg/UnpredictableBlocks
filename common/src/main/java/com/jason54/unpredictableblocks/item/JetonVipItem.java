@@ -34,9 +34,11 @@ public class JetonVipItem extends LoreItem {
         if (level.isClientSide || !(level instanceof ServerLevel serverLevel) || !(context.getPlayer() instanceof ServerPlayer player)) {
             return InteractionResult.SUCCESS;
         }
-
         BlockPos pos = context.getClickedPos().relative(context.getClickedFace());
         if (!level.getBlockState(pos).canBeReplaced()) {
+            return InteractionResult.FAIL;
+        }
+        if (!ItemCooldowns.tryConsume(player, ItemCooldowns.JETON, ItemCooldowns.JETON_TICKS)) {
             return InteractionResult.FAIL;
         }
 
@@ -60,6 +62,9 @@ public class JetonVipItem extends LoreItem {
         if (level.isClientSide || !(player instanceof ServerPlayer serverPlayer) || !(level instanceof ServerLevel serverLevel)) {
             return InteractionResult.CONSUME;
         }
+        if (!ItemCooldowns.tryConsume(serverPlayer, ItemCooldowns.JETON, ItemCooldowns.JETON_TICKS)) {
+            return InteractionResult.FAIL;
+        }
 
         Optional<LuckyTheme> theme = PlayerQuestData.consumeMissedReroll(serverPlayer);
         LuckyTheme chosen = theme.orElseGet(() -> LuckyTheme.values()[level.random.nextInt(LuckyTheme.values().length)]);
@@ -67,7 +72,13 @@ public class JetonVipItem extends LoreItem {
         var forced = new LuckResolver.ResolvedOutcome(LuckTier.HIGH, "high");
         LuckyBlockEventDispatcher.dispatch(serverLevel, serverPlayer, serverPlayer.blockPosition(), chosen, forced);
 
-        serverPlayer.sendSystemMessage(Component.literal("§eRelance VIP : " + chosen.id() + " (HIGH)"));
+        if (theme.isPresent()) {
+            serverPlayer.sendSystemMessage(Component.literal("§eRelance VIP (malus) : " + chosen.id() + " (HIGH)"));
+        } else {
+            serverPlayer.sendSystemMessage(Component.literal(
+                    "§eJeton VIP : aucun malus en attente — " + chosen.id() + " (HIGH aléatoire)"
+            ));
+        }
 
         if (!serverPlayer.getAbilities().instabuild) {
             serverPlayer.getItemInHand(hand).shrink(1);
