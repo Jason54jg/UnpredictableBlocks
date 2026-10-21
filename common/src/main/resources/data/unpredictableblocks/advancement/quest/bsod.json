@@ -5,11 +5,11 @@
     },
     "title": {
       "translate": "advancements.unpredictableblocks.bsod.title",
-      "fallback": "D\u00e9bogage du Syst\u00e8me"
+      "fallback": "Débogage du Système"
     },
     "description": {
       "translate": "advancements.unpredictableblocks.bsod.description",
-      "fallback": "Casser 5 blocs Missing Texture sans mourir"
+      "fallback": "Subir Cécité et Confusion."
     },
     "frame": "goal",
     "show_toast": true,
@@ -17,8 +17,14 @@
   },
   "parent": "unpredictableblocks:root",
   "criteria": {
-    "completed": {
-      "trigger": "minecraft:impossible"
+    "glitched": {
+      "trigger": "minecraft:effects_changed",
+      "conditions": {
+        "effects": {
+          "minecraft:blindness": {},
+          "minecraft:nausea": {}
+        }
+      }
     }
   },
   "rewards": {

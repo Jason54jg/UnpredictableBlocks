@@ -5,11 +5,11 @@
     },
     "title": {
       "translate": "advancements.unpredictableblocks.fast_food.title",
-      "fallback": "Livreur de l'Extr\u00eame"
+      "fallback": "Livreur de l'Extrême"
     },
     "description": {
       "translate": "advancements.unpredictableblocks.fast_food.description",
-      "fallback": "Intercepter le livreur en <10s"
+      "fallback": "Monter un cochon."
     },
     "frame": "task",
     "show_toast": true,
@@ -17,8 +17,15 @@
   },
   "parent": "unpredictableblocks:root",
   "criteria": {
-    "completed": {
-      "trigger": "minecraft:impossible"
+    "ride": {
+      "trigger": "minecraft:started_riding",
+      "conditions": {
+        "entity": [
+          {
+            "type": "minecraft:pig"
+          }
+        ]
+      }
     }
   },
   "rewards": {

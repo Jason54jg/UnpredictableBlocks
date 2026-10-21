@@ -9,7 +9,7 @@
     },
     "description": {
       "translate": "advancements.unpredictableblocks.streamer.description",
-      "fallback": "Repousser 15 Haters zombies"
+      "fallback": "Vaincre 15 zombies."
     },
     "frame": "task",
     "show_toast": true,
@@ -17,8 +17,15 @@
   },
   "parent": "unpredictableblocks:root",
   "criteria": {
-    "completed": {
-      "trigger": "minecraft:impossible"
+    "z1": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "type": "minecraft:zombie"
+          }
+        ]
+      }
     }
   },
   "rewards": {

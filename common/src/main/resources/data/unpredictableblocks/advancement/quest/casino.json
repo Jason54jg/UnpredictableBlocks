@@ -9,7 +9,7 @@
     },
     "description": {
       "translate": "advancements.unpredictableblocks.casino.description",
-      "fallback": "Obtenir le Jackpot 777"
+      "fallback": "Posséder 16 lingots d'or et 8 émeraudes."
     },
     "frame": "goal",
     "show_toast": true,
@@ -17,13 +17,42 @@
   },
   "parent": "unpredictableblocks:root",
   "criteria": {
-    "completed": {
-      "trigger": "minecraft:impossible"
+    "gold": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:gold_ingot",
+            "count": {
+              "min": 16
+            }
+          }
+        ]
+      }
+    },
+    "gems": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:emerald",
+            "count": {
+              "min": 8
+            }
+          }
+        ]
+      }
     }
   },
   "rewards": {
     "loot": [
       "unpredictableblocks:rewards/quest_casino"
     ]
-  }
+  },
+  "requirements": [
+    [
+      "gold",
+      "gems"
+    ]
+  ]
 }

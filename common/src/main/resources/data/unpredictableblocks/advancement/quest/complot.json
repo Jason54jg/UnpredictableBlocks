@@ -9,7 +9,7 @@
     },
     "description": {
       "translate": "advancements.unpredictableblocks.complot.description",
-      "fallback": "Fabriquer le Casque 5G et survivre \u00e0 l'abduction"
+      "fallback": "Porter un casque en or."
     },
     "frame": "goal",
     "show_toast": true,
@@ -17,8 +17,15 @@
   },
   "parent": "unpredictableblocks:root",
   "criteria": {
-    "completed": {
-      "trigger": "minecraft:impossible"
+    "hat": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:golden_helmet"
+          }
+        ]
+      }
     }
   },
   "rewards": {

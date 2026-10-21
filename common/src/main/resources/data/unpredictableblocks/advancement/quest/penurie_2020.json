@@ -9,7 +9,7 @@
     },
     "description": {
       "translate": "advancements.unpredictableblocks.penurie_2020.description",
-      "fallback": "64 Papier Toilette 4 \u00c9paisseurs"
+      "fallback": "Posséder 64 papiers."
     },
     "frame": "task",
     "show_toast": true,
@@ -17,8 +17,18 @@
   },
   "parent": "unpredictableblocks:root",
   "criteria": {
-    "completed": {
-      "trigger": "minecraft:impossible"
+    "tp": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:paper",
+            "count": {
+              "min": 64
+            }
+          }
+        ]
+      }
     }
   },
   "rewards": {

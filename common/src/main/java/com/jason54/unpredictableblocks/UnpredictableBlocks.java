@@ -6,7 +6,9 @@ import com.jason54.unpredictableblocks.registry.ModBlockEntities;
 import com.jason54.unpredictableblocks.registry.ModBlocks;
 import com.jason54.unpredictableblocks.registry.ModItems;
 import com.jason54.unpredictableblocks.registry.ModLoot;
+import com.jason54.unpredictableblocks.registry.ModCreativeTabs;
 import com.jason54.unpredictableblocks.registry.ModSounds;
+import com.jason54.unpredictableblocks.quest.QuestEventHandler;
 import com.jason54.unpredictableblocks.world.LuckyBlockSpawnHooks;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,10 +22,12 @@ public final class UnpredictableBlocks {
         ModBlocks.register();
         ModBlockEntities.register();
         ModItems.register();
+        ModCreativeTabs.register();
         ModSounds.register();
         ModLoot.register();
         ModAdvancements.register();
         LuckyBlockSpawnHooks.register();
+        QuestEventHandler.register();
         LOGGER.info("UnpredictableBlocks initialisé (MC {}+)", ModConfig.get().meta().supportedVersions());
     }
 }

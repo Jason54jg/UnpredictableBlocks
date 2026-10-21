@@ -29,5 +29,6 @@
   "advancements.unpredictableblocks.root.title": "UnpredictableBlocks",
   "advancements.unpredictableblocks.root.description": "Trouvez votre premier bloc complètement absurde.",
   "advancements.unpredictableblocks.boulangerie.title": "Le Chef Manque d'Ingrédients",
-  "advancements.unpredictableblocks.boulangerie.description": "Vaincre les Pigeons Géants et fournir 32 pains."
+  "advancements.unpredictableblocks.boulangerie.description": "Vaincre les Pigeons Géants et fournir 32 pains.",
+  "itemGroup.unpredictableblocks.main": "UnpredictableBlocks"
 }

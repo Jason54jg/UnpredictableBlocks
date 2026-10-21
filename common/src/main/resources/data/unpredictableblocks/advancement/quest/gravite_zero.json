@@ -9,7 +9,7 @@
     },
     "description": {
       "translate": "advancements.unpredictableblocks.gravite_zero.description",
-      "fallback": "Survivre 1 min en Marche sur la Lune"
+      "fallback": "Obtenir Lévitation."
     },
     "frame": "goal",
     "show_toast": true,
@@ -17,8 +17,13 @@
   },
   "parent": "unpredictableblocks:root",
   "criteria": {
-    "completed": {
-      "trigger": "minecraft:impossible"
+    "levitate": {
+      "trigger": "minecraft:effects_changed",
+      "conditions": {
+        "effects": {
+          "minecraft:levitation": {}
+        }
+      }
     }
   },
   "rewards": {

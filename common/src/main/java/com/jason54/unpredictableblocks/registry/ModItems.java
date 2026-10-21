@@ -2,8 +2,8 @@ package com.jason54.unpredictableblocks.registry;
 
 import com.jason54.unpredictableblocks.UnpredictableBlocks;
 import com.jason54.unpredictableblocks.item.LoreItem;
+import com.jason54.unpredictableblocks.item.LuckyBlockItem;
 import com.jason54.unpredictableblocks.item.UsableLuckItem;
-import com.jason54.unpredictableblocks.luck.LuckStat;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.registries.Registries;
@@ -37,7 +37,7 @@ public final class ModItems {
     public static void register() {
         for (var theme : com.jason54.unpredictableblocks.theme.LuckyTheme.values()) {
             ITEMS.register("lucky_" + theme.id(), () ->
-                    new net.minecraft.world.item.BlockItem(ModBlocks.get(theme), new Item.Properties()));
+                    new LuckyBlockItem(ModBlocks.get(theme), new Item.Properties()));
         }
         ITEMS.register();
     }

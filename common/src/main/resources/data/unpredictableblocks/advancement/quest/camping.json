@@ -9,7 +9,7 @@
     },
     "description": {
       "translate": "advancements.unpredictableblocks.camping.description",
-      "fallback": "Vaincre l'Ours Mal L\u00e9ch\u00e9"
+      "fallback": "Vaincre un ours polaire."
     },
     "frame": "task",
     "show_toast": true,
@@ -17,8 +17,15 @@
   },
   "parent": "unpredictableblocks:root",
   "criteria": {
-    "completed": {
-      "trigger": "minecraft:impossible"
+    "bear": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "type": "minecraft:polar_bear"
+          }
+        ]
+      }
     }
   },
   "rewards": {

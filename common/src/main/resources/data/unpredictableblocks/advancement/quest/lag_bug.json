@@ -9,7 +9,7 @@
     },
     "description": {
       "translate": "advancements.unpredictableblocks.lag_bug.description",
-      "fallback": "Traverser un Chunk Incomplet"
+      "fallback": "Entrer dans l'End."
     },
     "frame": "goal",
     "show_toast": true,
@@ -17,8 +17,11 @@
   },
   "parent": "unpredictableblocks:root",
   "criteria": {
-    "completed": {
-      "trigger": "minecraft:impossible"
+    "end": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "minecraft:the_end"
+      }
     }
   },
   "rewards": {

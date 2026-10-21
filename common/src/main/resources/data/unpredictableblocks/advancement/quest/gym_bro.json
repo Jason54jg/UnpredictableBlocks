@@ -5,11 +5,11 @@
     },
     "title": {
       "translate": "advancements.unpredictableblocks.gym_bro.title",
-      "fallback": "Le Leg Day Incurable"
+      "fallback": "Leg Day Incurable"
     },
     "description": {
       "translate": "advancements.unpredictableblocks.gym_bro.description",
-      "fallback": "500m sous Lenteur III post-sport"
+      "fallback": "Obtenir Force puis Lenteur."
     },
     "frame": "task",
     "show_toast": true,
@@ -17,8 +17,14 @@
   },
   "parent": "unpredictableblocks:root",
   "criteria": {
-    "completed": {
-      "trigger": "minecraft:impossible"
+    "buff": {
+      "trigger": "minecraft:effects_changed",
+      "conditions": {
+        "effects": {
+          "minecraft:strength": {},
+          "minecraft:slowness": {}
+        }
+      }
     }
   },
   "rewards": {

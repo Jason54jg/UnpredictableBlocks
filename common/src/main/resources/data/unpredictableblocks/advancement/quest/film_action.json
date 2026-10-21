@@ -5,11 +5,11 @@
     },
     "title": {
       "translate": "advancements.unpredictableblocks.film_action.title",
-      "fallback": "Cascadeur du Si\u00e8cle"
+      "fallback": "Cascadeur du Siècle"
     },
     "description": {
       "translate": "advancements.unpredictableblocks.film_action.description",
-      "fallback": "Saut 50 blocs sans d\u00e9g\u00e2ts"
+      "fallback": "Chute lente après chute."
     },
     "frame": "task",
     "show_toast": true,
@@ -17,8 +17,13 @@
   },
   "parent": "unpredictableblocks:root",
   "criteria": {
-    "completed": {
-      "trigger": "minecraft:impossible"
+    "slow_fall": {
+      "trigger": "minecraft:effects_changed",
+      "conditions": {
+        "effects": {
+          "minecraft:slow_falling": {}
+        }
+      }
     }
   },
   "rewards": {

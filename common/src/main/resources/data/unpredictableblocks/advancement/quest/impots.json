@@ -5,11 +5,11 @@
     },
     "title": {
       "translate": "advancements.unpredictableblocks.impots.title",
-      "fallback": "D\u00e9claration de Revenus"
+      "fallback": "Déclaration de Revenus"
     },
     "description": {
       "translate": "advancements.unpredictableblocks.impots.description",
-      "fallback": "Payer 16 \u00e9meraudes au Contr\u00f4leur Fiscal"
+      "fallback": "Échanger 16 émeraudes avec un villageois."
     },
     "frame": "task",
     "show_toast": true,
@@ -17,8 +17,13 @@
   },
   "parent": "unpredictableblocks:root",
   "criteria": {
-    "completed": {
-      "trigger": "minecraft:impossible"
+    "pay": {
+      "trigger": "minecraft:villager_trade",
+      "conditions": {
+        "villager": {
+          "type": "minecraft:villager"
+        }
+      }
     }
   },
   "rewards": {

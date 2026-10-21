@@ -9,7 +9,7 @@
     },
     "description": {
       "translate": "advancements.unpredictableblocks.disco_80.description",
-      "fallback": "Danser 20s sur la piste disco"
+      "fallback": "Jouer un disque."
     },
     "frame": "task",
     "show_toast": true,
@@ -17,8 +17,20 @@
   },
   "parent": "unpredictableblocks:root",
   "criteria": {
-    "completed": {
-      "trigger": "minecraft:impossible"
+    "music": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": [
+          {
+            "block": {
+              "blocks": "minecraft:jukebox"
+            }
+          }
+        ],
+        "item": {
+          "items": "#minecraft:music_discs"
+        }
+      }
     }
   },
   "rewards": {

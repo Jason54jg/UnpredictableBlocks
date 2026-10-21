@@ -5,11 +5,11 @@
     },
     "title": {
       "translate": "advancements.unpredictableblocks.invasion_memes.title",
-      "fallback": "Seigneur des M\u00e8mes"
+      "fallback": "Seigneur des Mèmes"
     },
     "description": {
       "translate": "advancements.unpredictableblocks.invasion_memes.description",
-      "fallback": "50 coups BONK au Marteau"
+      "fallback": "50 coups BONK (auto)."
     },
     "frame": "goal",
     "show_toast": true,

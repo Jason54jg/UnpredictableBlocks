@@ -9,7 +9,7 @@
     },
     "description": {
       "translate": "advancements.unpredictableblocks.cauchemar_matin.description",
-      "fallback": "Utiliser R\u00e9p\u00e9tition 3 fois"
+      "fallback": "Dormir dans un lit."
     },
     "frame": "task",
     "show_toast": true,
@@ -17,8 +17,9 @@
   },
   "parent": "unpredictableblocks:root",
   "criteria": {
-    "completed": {
-      "trigger": "minecraft:impossible"
+    "sleep": {
+      "trigger": "minecraft:slept_in_bed",
+      "conditions": {}
     }
   },
   "rewards": {

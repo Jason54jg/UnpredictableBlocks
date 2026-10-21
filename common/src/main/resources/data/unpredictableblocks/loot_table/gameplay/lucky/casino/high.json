@@ -1,28 +1,16 @@
 {
   "pools": [
     {
-      "rolls": 1,
+      "rolls": 3,
       "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "unpredictableblocks:lucky_casino",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": 0
-            }
-          ]
-        }
-      ],
-      "functions": [
-        {
-          "function": "minecraft:set_name",
-          "name": {
-            "text": "\u00c9v\u00e9nement high (casino)",
-            "color": "gold"
-          }
-        }
+        { "type": "minecraft:item", "name": "minecraft:emerald", "weight": 3, "functions": [{ "function": "minecraft:set_count", "count": { "min": 8, "max": 16 } }] },
+        { "type": "minecraft:item", "name": "minecraft:diamond", "weight": 2, "functions": [{ "function": "minecraft:set_count", "count": { "min": 4, "max": 8 } }] },
+        { "type": "minecraft:item", "name": "minecraft:gold_ingot", "weight": 4, "functions": [{ "function": "minecraft:set_count", "count": { "min": 16, "max": 32 } }] }
       ]
+    },
+    {
+      "rolls": 1,
+      "entries": [{ "type": "minecraft:item", "name": "unpredictableblocks:jeton_or_vip" }]
     }
   ]
 }

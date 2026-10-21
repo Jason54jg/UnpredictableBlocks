@@ -1,13 +1,15 @@
 {
   "display": {
-    "icon": { "id": "unpredictableblocks:lucky_boulangerie" },
+    "icon": {
+      "id": "unpredictableblocks:lucky_boulangerie"
+    },
     "title": {
       "translate": "advancements.unpredictableblocks.boulangerie.title",
       "fallback": "Le Chef Manque d'Ingrédients"
     },
     "description": {
       "translate": "advancements.unpredictableblocks.boulangerie.description",
-      "fallback": "Vaincre 10 poulets agressifs et posséder 32 pains."
+      "fallback": "10 poulets + 32 pains."
     },
     "frame": "task",
     "show_toast": true,
@@ -18,7 +20,11 @@
     "kill_poultry": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "entity": [{ "type": "minecraft:chicken" }]
+        "entity": [
+          {
+            "type": "minecraft:chicken"
+          }
+        ]
       }
     },
     "have_bread": {
@@ -27,14 +33,23 @@
         "items": [
           {
             "items": "minecraft:bread",
-            "count": { "min": 32 }
+            "count": {
+              "min": 32
+            }
           }
         ]
       }
     }
   },
-  "requirements": [["kill_poultry", "have_bread"]],
   "rewards": {
-    "loot": ["unpredictableblocks:rewards/quest_boulangerie"]
-  }
+    "loot": [
+      "unpredictableblocks:rewards/quest_boulangerie"
+    ]
+  },
+  "requirements": [
+    [
+      "kill_poultry",
+      "have_bread"
+    ]
+  ]
 }
