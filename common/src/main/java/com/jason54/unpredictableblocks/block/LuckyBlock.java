@@ -1,6 +1,5 @@
 package com.jason54.unpredictableblocks.block;
 
-import com.jason54.unpredictableblocks.config.ModConfig;
 import com.jason54.unpredictableblocks.block.entity.LuckyBlockEntity;
 import com.jason54.unpredictableblocks.luck.LuckResolver;
 import com.jason54.unpredictableblocks.luck.LuckStat;
@@ -61,20 +60,15 @@ public class LuckyBlock extends BaseEntityBlock {
             if (be instanceof LuckyBlockEntity luckyBe) {
                 LuckStat blockLuck = new LuckStat(luckyBe.getLuck());
                 LuckStat playerLuck = PlayerLuckStorage.getModifier(serverPlayer);
-                if (!ModConfig.isThemeEnabled(theme)) {
-                    serverPlayer.sendSystemMessage(Component.literal(
-                            "§7Thème « " + theme.id() + " » désactivé (unpredictableblocks.json)."));
-                } else {
-                    int aura = ChunkLuckAura.luckModifier(serverLevel, pos);
-                    blockLuck = blockLuck.add(aura);
-                    int bet = consumeLuckBet(serverPlayer);
-                    if (bet != 0) {
-                        blockLuck = blockLuck.add(bet);
-                        serverPlayer.sendSystemMessage(Component.literal("§ePari Luck : §b+" + bet + " §esur ce cassage !"));
-                    }
-                    LuckResolver.ResolvedOutcome outcome = LuckResolver.resolve(blockLuck, playerLuck, serverLevel.getRandom());
-                    LuckyBlockEventDispatcher.dispatch(serverLevel, serverPlayer, pos, theme, outcome);
+                int aura = ChunkLuckAura.luckModifier(serverLevel, pos);
+                blockLuck = blockLuck.add(aura);
+                int bet = consumeLuckBet(serverPlayer);
+                if (bet != 0) {
+                    blockLuck = blockLuck.add(bet);
+                    serverPlayer.sendSystemMessage(Component.literal("§ePari Luck : §b+" + bet + " §esur ce cassage !"));
                 }
+                LuckResolver.ResolvedOutcome outcome = LuckResolver.resolve(blockLuck, playerLuck, serverLevel.getRandom());
+                LuckyBlockEventDispatcher.dispatch(serverLevel, serverPlayer, pos, theme, outcome);
             }
         }
         return super.playerWillDestroy(level, pos, state, player);

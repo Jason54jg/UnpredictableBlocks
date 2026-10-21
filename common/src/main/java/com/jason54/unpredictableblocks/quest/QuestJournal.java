@@ -1,6 +1,5 @@
 package com.jason54.unpredictableblocks.quest;
 
-import com.jason54.unpredictableblocks.config.ModConfig;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -19,9 +18,8 @@ public final class QuestJournal {
         player.sendSystemMessage(Component.literal("§6§lJournal des quêtes §8(" + done + "/32)"));
         for (LuckyTheme theme : LuckyTheme.values()) {
             String mark = isQuestDone(player, theme) ? "§a✔" : "§7○";
-            String disabled = ModConfig.isThemeEnabled(theme) ? "" : " §8[off]";
             Component title = Component.translatable("advancements.unpredictableblocks." + theme.id() + ".title");
-            player.sendSystemMessage(Component.literal(mark + " ").append(title).append(Component.literal(disabled)));
+            player.sendSystemMessage(Component.literal(mark + " ").append(title));
         }
         QuestCollection.tryAwardCollector(player);
         QuestMilestones.checkAfterQuest(player);

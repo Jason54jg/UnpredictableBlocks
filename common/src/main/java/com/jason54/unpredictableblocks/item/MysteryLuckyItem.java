@@ -1,7 +1,6 @@
 package com.jason54.unpredictableblocks.item;
 
 import com.jason54.unpredictableblocks.block.LuckyBlockEventDispatcher;
-import com.jason54.unpredictableblocks.config.ModConfig;
 import com.jason54.unpredictableblocks.luck.LuckResolver;
 import com.jason54.unpredictableblocks.luck.LuckStat;
 import com.jason54.unpredictableblocks.luck.PlayerLuckStorage;
@@ -15,10 +14,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-import java.util.ArrayList;
-import java.util.List;
-
-/** Clic droit : événement Lucky aléatoire (thème activé en config). */
+/** Clic droit : événement Lucky aléatoire parmi les 32 thèmes. */
 public class MysteryLuckyItem extends LoreItem {
     public MysteryLuckyItem(Properties properties, java.util.function.Consumer<ItemStack> setup) {
         super(properties, setup);
@@ -32,17 +28,8 @@ public class MysteryLuckyItem extends LoreItem {
         if (!ItemCooldowns.tryConsume(sp, "lucky_mystere", 20 * 30)) {
             return InteractionResult.FAIL;
         }
-        List<LuckyTheme> enabled = new ArrayList<>();
-        for (LuckyTheme theme : LuckyTheme.values()) {
-            if (ModConfig.isThemeEnabled(theme)) {
-                enabled.add(theme);
-            }
-        }
-        if (enabled.isEmpty()) {
-            sp.sendSystemMessage(Component.literal("§cAucun thème actif dans la config."));
-            return InteractionResult.FAIL;
-        }
-        LuckyTheme theme = enabled.get(serverLevel.getRandom().nextInt(enabled.size()));
+        LuckyTheme[] themes = LuckyTheme.values();
+        LuckyTheme theme = themes[serverLevel.getRandom().nextInt(themes.length)];
         LuckStat playerLuck = PlayerLuckStorage.getModifier(sp);
         var outcome = LuckResolver.resolve(new LuckStat(0), playerLuck, serverLevel.getRandom());
         LuckyBlockEventDispatcher.dispatch(serverLevel, sp, sp.blockPosition(), theme, outcome);

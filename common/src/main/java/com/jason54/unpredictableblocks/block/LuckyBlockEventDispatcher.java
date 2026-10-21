@@ -1,6 +1,5 @@
 package com.jason54.unpredictableblocks.block;
 
-import com.jason54.unpredictableblocks.config.ModConfig;
 import com.jason54.unpredictableblocks.event.LuckyBreakFeedback;
 import com.jason54.unpredictableblocks.event.ThemeEventEffects;
 import com.jason54.unpredictableblocks.luck.LuckResolver;
@@ -35,11 +34,6 @@ public final class LuckyBlockEventDispatcher {
             LuckyTheme theme,
             LuckResolver.ResolvedOutcome outcome
     ) {
-        if (!ModConfig.isThemeEnabled(theme)) {
-            player.sendSystemMessage(Component.literal("§7Événement ignoré — thème désactivé : " + theme.id()));
-            return;
-        }
-
         ChunkLuckAura.onLuckyBreak(level, origin, player);
 
         LuckResolver.ResolvedOutcome effective = outcome;
