@@ -73,7 +73,7 @@ public final class ModItems {
     public static final RegistrySupplier<Item> LUCKY_MYSTERE = ITEMS.register("lucky_mystere", () ->
             new MysteryLuckyItem(new Item.Properties(), stack -> {
                 ThemedGearHelper.name(stack, "Lucky Block Mystère");
-                ThemedGearHelper.lore(stack, "Clic droit : thème aléatoire.", "Recharge 30s.");
+                ThemedGearHelper.lore(stack, "Clic droit : 1 des 32 thèmes.", "Recharge 30s.");
             }));
 
     public static final RegistrySupplier<Item> JOURNAL_QUETES = ITEMS.register("journal_quetes", () ->

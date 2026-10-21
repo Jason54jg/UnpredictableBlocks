@@ -6,7 +6,7 @@ Lucky Blocks chaotiques à thèmes, système de **chance (-100…+100)**, quête
 
 ## Fonctionnalités (v0.1.0-SNAPSHOT)
 
-- **32 Lucky Blocks** (`LuckyTheme`, thèmes 1–24 + 25–32) — communs / rares / légendaires.
+- **32 Lucky Blocks** (`LuckyTheme`, thèmes 1–24 + 25–32) — communs / rares / légendaires. **Chaque bloc a sa spécification fixe** (texture, loot, structure, quête, effets) ; l’aléatoire porte sur le **tier** (HIGH / NEUTRAL / LOW) via la luck, pas sur le changement de thème au cassage. Exception volontaire : l’item **Lucky mystère** (tirage parmi les 32).
 - **Luck Stat** + modificateurs craft ±10 (`luck_emerald_dust`, `luck_blaze_curse`).
 - **Spawn** : `config/unpredictableblocks.json`, hook Architectury `CHUNK_LOAD` + marqueurs par chunk.
 - **Événements** : loot tables + `ThemeEventEffects` + structures NBT (`StructurePlacer`).

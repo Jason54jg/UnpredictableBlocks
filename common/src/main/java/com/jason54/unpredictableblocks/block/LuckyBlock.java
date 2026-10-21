@@ -22,6 +22,10 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Un bloc = un thème fixe ({@link LuckyTheme}) : loot, structure, quête et effets catalogue/legacy
+ * de ce thème uniquement. Seul le tier HIGH/NEUTRAL/LOW est aléatoire (luck).
+ */
 public class LuckyBlock extends BaseEntityBlock {
     public static final MapCodec<LuckyBlock> CODEC = simpleCodec(
             properties -> new LuckyBlock(LuckyTheme.BOULANGERIE, properties)
@@ -68,7 +72,8 @@ public class LuckyBlock extends BaseEntityBlock {
                     serverPlayer.sendSystemMessage(Component.literal("§ePari Luck : §b+" + bet + " §esur ce cassage !"));
                 }
                 LuckResolver.ResolvedOutcome outcome = LuckResolver.resolve(blockLuck, playerLuck, serverLevel.getRandom());
-                LuckyBlockEventDispatcher.dispatch(serverLevel, serverPlayer, pos, theme, outcome);
+                LuckyTheme blockTheme = ((LuckyBlock) state.getBlock()).theme();
+                LuckyBlockEventDispatcher.dispatch(serverLevel, serverPlayer, pos, blockTheme, outcome);
             }
         }
         return super.playerWillDestroy(level, pos, state, player);

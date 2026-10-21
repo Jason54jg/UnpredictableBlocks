@@ -2,6 +2,8 @@
 
 Index des fiches alignées sur le cahier des charges (chance −100…+100, quêtes, assets 32×32).
 
+**Invariant :** `unpredictableblocks:lucky_<theme>` → toujours le catalogue de ce thème (§4 + legacy le cas échéant). Pas de mélange de thèmes sur un même bloc posé.
+
 | Document | Contenu |
 |----------|---------|
 | [`GENERATION_BOULANGERIE.md`](../GENERATION_BOULANGERIE.md) | Fiche complète exemple (thème 2) |

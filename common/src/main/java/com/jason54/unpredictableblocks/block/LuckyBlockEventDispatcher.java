@@ -22,7 +22,8 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 
 /**
- * Déclenche loot tables, structures et scripts d'événements par thème.
+ * Déclenche loot tables, structures et scripts d'événements pour le {@link LuckyTheme}
+ * du bloc cassé (spécification fixe). Le paramètre {@code outcome} porte l'aléatoire tier.
  */
 public final class LuckyBlockEventDispatcher {
     private LuckyBlockEventDispatcher() {}

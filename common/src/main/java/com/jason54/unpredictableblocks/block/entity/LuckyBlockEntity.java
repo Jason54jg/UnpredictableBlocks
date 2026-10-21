@@ -51,6 +51,12 @@ public class LuckyBlockEntity extends BlockEntity {
 
     @Override
     protected void loadAdditional(ValueInput input) {
+        luck = input.getIntOr(TAG_LUCK, 0);
+        // Le thème est imposé par le bloc posé (lucky_<id>), pas par un tirage aléatoire.
+        if (getBlockState().getBlock() instanceof com.jason54.unpredictableblocks.block.LuckyBlock luckyBlock) {
+            theme = luckyBlock.theme();
+            return;
+        }
         String id = input.getStringOr(TAG_THEME, "");
         if (!id.isEmpty()) {
             for (LuckyTheme candidate : LuckyTheme.values()) {
@@ -60,7 +66,6 @@ public class LuckyBlockEntity extends BlockEntity {
                 }
             }
         }
-        luck = input.getIntOr(TAG_LUCK, 0);
     }
 
     @Override
