@@ -277,6 +277,80 @@ def gen_casino() -> Image.Image:
     return img
 
 
+def gen_pause_cafe() -> Image.Image:
+    img = base()
+    d = ImageDraw.Draw(img)
+    d.rectangle((0, 0, 15, 15), fill=rgb("4A2C1A"))
+    d.rectangle((4, 3, 11, 10), fill=rgb("FFFFFF"))
+    d.rectangle((6, 5, 9, 8), fill=rgb("2F1810"))
+    return img
+
+
+def gen_retard_vol() -> Image.Image:
+    img = base()
+    d = ImageDraw.Draw(img)
+    d.rectangle((0, 0, 15, 15), fill=rgb("87CEEB"))
+    d.rectangle((2, 8, 13, 14), fill=rgb("C0C0C0"))
+    d.polygon([(8, 2), (12, 8), (4, 8)], fill=rgb("FFFFFF"))
+    return img
+
+
+def gen_ananas_pizza() -> Image.Image:
+    img = base()
+    d = ImageDraw.Draw(img)
+    d.rectangle((0, 0, 15, 15), fill=rgb("E8C040"))
+    d.ellipse((3, 3, 12, 12), fill=rgb("FFCC00"))
+    for x, y in [(5, 5), (9, 6), (7, 9)]:
+        d.rectangle((x, y, x + 1, y + 1), fill=rgb("FFD700"))
+    return img
+
+
+def gen_speedrunner() -> Image.Image:
+    img = base()
+    d = ImageDraw.Draw(img)
+    d.rectangle((0, 0, 15, 15), fill=rgb("111111"))
+    d.rectangle((3, 5, 12, 9), fill=rgb("00FF00"))
+    d.text((4, 4), "WR", fill=rgb("FFFFFF"))
+    return img
+
+
+def gen_piraterie_torrent() -> Image.Image:
+    img = base()
+    d = ImageDraw.Draw(img)
+    d.rectangle((0, 0, 15, 15), fill=rgb("1A3A5A"))
+    d.rectangle((2, 6, 13, 12), fill=rgb("333333"))
+    d.ellipse((6, 3, 9, 6), fill=rgb("FFFFFF"))
+    return img
+
+
+def gen_asmr_fidget() -> Image.Image:
+    img = base()
+    d = ImageDraw.Draw(img)
+    d.rectangle((0, 0, 15, 15), fill=rgb("FFB6C1"))
+    for x in range(3, 13, 3):
+        for y in range(3, 13, 3):
+            d.ellipse((x, y, x + 1, y + 1), fill=rgb("FF69B4"))
+    return img
+
+
+def gen_vampire_gothique() -> Image.Image:
+    img = base()
+    d = ImageDraw.Draw(img)
+    d.rectangle((0, 0, 15, 15), fill=rgb("1A001A"))
+    d.polygon([(8, 2), (12, 10), (4, 10)], fill=rgb("8B0000"))
+    d.ellipse((6, 6, 9, 9), fill=rgb("FF0000"))
+    return img
+
+
+def gen_multivers_sliders() -> Image.Image:
+    img = base()
+    d = ImageDraw.Draw(img)
+    d.rectangle((0, 0, 7, 15), fill=rgb("4400FF"))
+    d.rectangle((8, 0, 15, 15), fill=rgb("FF4400"))
+    d.rectangle((6, 0, 9, 15), fill=rgb("FFFFFF"))
+    return img
+
+
 def gen_invasion_memes() -> Image.Image:
     img = base()
     d = ImageDraw.Draw(img)
@@ -313,6 +387,14 @@ GENERATORS = {
     "lucky_magie_comptoir": gen_magie_comptoir,
     "lucky_casino": gen_casino,
     "lucky_invasion_memes": gen_invasion_memes,
+    "lucky_pause_cafe": gen_pause_cafe,
+    "lucky_retard_vol": gen_retard_vol,
+    "lucky_ananas_pizza": gen_ananas_pizza,
+    "lucky_speedrunner": gen_speedrunner,
+    "lucky_piraterie_torrent": gen_piraterie_torrent,
+    "lucky_asmr_fidget": gen_asmr_fidget,
+    "lucky_vampire_gothique": gen_vampire_gothique,
+    "lucky_multivers_sliders": gen_multivers_sliders,
 }
 
 

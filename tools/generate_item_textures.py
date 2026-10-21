@@ -36,6 +36,14 @@ def main() -> None:
     save(item_base((255, 200, 0)), "jeton_or_vip.png")
     save(item_base((80, 200, 120)), "luck_emerald_dust.png")
     save(item_base((200, 60, 20)), "luck_blaze_curse.png")
+    save(item_base((80, 50, 30)), "espresso_ultra_dose.png")
+    save(item_base((120, 90, 50)), "valise_perdue.png")
+    save(item_base((255, 200, 0)), "tranche_debat.png")
+    save(item_base((50, 50, 50)), "chrono_world_record.png")
+    save(item_base((40, 40, 40)), "disque_dur_capitaine.png")
+    save(item_base((255, 150, 200)), "pop_it_supreme.png")
+    save(item_base((120, 0, 0)), "fiole_sang_noble.png")
+    save(item_base((100, 200, 255)), "zapper_dimensions.png")
     print("item textures ok")
 
 

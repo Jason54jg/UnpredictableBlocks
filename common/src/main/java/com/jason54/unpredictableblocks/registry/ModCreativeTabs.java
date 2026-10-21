@@ -30,6 +30,14 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.JETON_VIP.get());
                         output.accept(ModItems.LUCK_EMERALD_DUST.get());
                         output.accept(ModItems.LUCK_BLAZE_POWDER_CURSE.get());
+                        output.accept(ModItems.ESPRESSO_ULTRA_DOSE.get());
+                        output.accept(ModItems.VALISE_PERDUE.get());
+                        output.accept(ModItems.TRANCHE_DEBAT.get());
+                        output.accept(ModItems.CHRONO_WORLD_RECORD.get());
+                        output.accept(ModItems.DISQUE_DUR_CAPITAINE.get());
+                        output.accept(ModItems.POP_IT_SUPREME.get());
+                        output.accept(ModItems.FIOLE_SANG_NOBLE.get());
+                        output.accept(ModItems.ZAPPER_DIMENSIONS.get());
                     })
                     .build());
 

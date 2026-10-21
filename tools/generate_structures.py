@@ -174,6 +174,52 @@ def autel_mochi() -> Compound:
     return build(b)
 
 
+def barista_corner() -> Compound:
+    b = cuboid((5, 4, 5), "minecraft:bricks", hollow=True)
+    b[(2, 1, 2)] = "minecraft:brewing_stand"
+    return build(b)
+
+
+def tour_controle() -> Compound:
+    b = cuboid((7, 6, 7), "minecraft:glass", hollow=True)
+    b[(3, 1, 3)] = "minecraft:iron_block"
+    return build(b)
+
+
+def pizzeria_debat() -> Compound:
+    b = cuboid((6, 3, 6), "minecraft:yellow_terracotta", hollow=True)
+    b[(2, 1, 2)] = "minecraft:furnace"
+    return build(b)
+
+
+def stronghold_skip() -> Compound:
+    b = cuboid((5, 5, 5), "minecraft:stone_bricks", hollow=True)
+    b[(2, 1, 2)] = "minecraft:end_portal_frame"
+    return build(b)
+
+
+def epave_pirate() -> Compound:
+    b = cuboid((8, 3, 4), "minecraft:oak_planks", hollow=False)
+    b[(3, 2, 1)] = "minecraft:chest"
+    return build(b)
+
+
+def bulle_asmr() -> Compound:
+    return build(cuboid((5, 5, 5), "minecraft:glass", hollow=True))
+
+
+def manoir_gothique() -> Compound:
+    b = cuboid((8, 5, 8), "minecraft:deepslate_bricks", hollow=True)
+    b[(4, 1, 4)] = "minecraft:red_bed"
+    return build(b)
+
+
+def portail_sliders() -> Compound:
+    b = cuboid((5, 6, 5), "minecraft:obsidian", hollow=True)
+    b[(2, 1, 2)] = "minecraft:beacon"
+    return build(b)
+
+
 STRUCTURES = {
     "four_geant": four_geant,
     "drive_thru": drive_thru,
@@ -190,6 +236,14 @@ STRUCTURES = {
     "campement_inonde": campement_inonde,
     "salle_gym": salle_gym,
     "autel_mochi": autel_mochi,
+    "barista_corner": barista_corner,
+    "tour_controle": tour_controle,
+    "pizzeria_debat": pizzeria_debat,
+    "stronghold_skip": stronghold_skip,
+    "epave_pirate": epave_pirate,
+    "bulle_asmr": bulle_asmr,
+    "manoir_gothique": manoir_gothique,
+    "portail_sliders": portail_sliders,
 }
 
 

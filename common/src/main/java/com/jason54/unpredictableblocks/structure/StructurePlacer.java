@@ -45,6 +45,14 @@ public final class StructurePlacer {
             case CAMPING -> "campement_inonde";
             case GYM_BRO -> "salle_gym";
             case FORTUNE_COOKIE -> "autel_mochi";
+            case PAUSE_CAFE -> "barista_corner";
+            case RETARD_VOL -> "tour_controle";
+            case ANANAS_PIZZA -> "pizzeria_debat";
+            case SPEEDRUNNER -> "stronghold_skip";
+            case PIRATERIE_TORRENT -> "epave_pirate";
+            case ASMR_FIDGET -> "bulle_asmr";
+            case VAMPIRE_GOTHIQUE -> "manoir_gothique";
+            case MULTIVERS_SLIDERS -> "portail_sliders";
             default -> null;
         };
     }

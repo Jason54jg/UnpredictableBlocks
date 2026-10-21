@@ -117,6 +117,14 @@ public final class ModConfig {
                 case MAGIE_COMPTOIR -> new ThemeSpawn(LuckyRarity.COMMON, 0.9, 0.5, 0.2, new String[]{"swamp", "mansion"}, false);
                 case CASINO -> new ThemeSpawn(LuckyRarity.LEGENDARY, 0.4, 0.6, 0.1, new String[]{"desert", "badlands"}, false);
                 case INVASION_MEMES -> new ThemeSpawn(LuckyRarity.LEGENDARY, 0.5, 0.5, 0.5, new String[]{"*"}, false);
+                case PAUSE_CAFE -> new ThemeSpawn(LuckyRarity.COMMON, 1.3, 0.1, 0.0, new String[]{"plains", "village"}, false);
+                case RETARD_VOL -> new ThemeSpawn(LuckyRarity.RARE, 1.0, 0.2, 0.1, new String[]{"plains", "desert"}, false);
+                case ANANAS_PIZZA -> new ThemeSpawn(LuckyRarity.RARE, 1.1, 0.2, 0.0, new String[]{"jungle", "savanna"}, false);
+                case SPEEDRUNNER -> new ThemeSpawn(LuckyRarity.LEGENDARY, 0.3, 0.8, 0.6, new String[]{"stronghold", "nether_wastes"}, false);
+                case PIRATERIE_TORRENT -> new ThemeSpawn(LuckyRarity.RARE, 0.8, 0.2, 0.1, new String[]{"ocean", "beach"}, false);
+                case ASMR_FIDGET -> new ThemeSpawn(LuckyRarity.COMMON, 1.2, 0.2, 0.2, new String[]{"*"}, false);
+                case VAMPIRE_GOTHIQUE -> new ThemeSpawn(LuckyRarity.RARE, 1.0, 0.3, 0.1, new String[]{"dark_forest", "roofed_forest"}, true);
+                case MULTIVERS_SLIDERS -> new ThemeSpawn(LuckyRarity.LEGENDARY, 0.2, 0.7, 1.2, new String[]{"end_highlands", "nether_wastes"}, false);
             };
         }
     }

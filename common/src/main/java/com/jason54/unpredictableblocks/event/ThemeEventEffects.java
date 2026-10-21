@@ -54,7 +54,10 @@ public final class ThemeEventEffects {
             case MAGIE_COMPTOIR -> applyMagie(level, origin, tier);
             case CASINO -> applyCasino(level, player, tier);
             case INVASION_MEMES -> applyMemes(level, player, tier);
+            case PAUSE_CAFE, RETARD_VOL, ANANAS_PIZZA, SPEEDRUNNER, PIRATERIE_TORRENT, ASMR_FIDGET, VAMPIRE_GOTHIQUE, MULTIVERS_SLIDERS ->
+                    ThemeNewEffects.apply(level, player, origin, theme, tier);
         }
+        ThemeCatalogEffects.apply(level, player, origin, theme, tier);
     }
 
     private static void applyAnachronisme(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {

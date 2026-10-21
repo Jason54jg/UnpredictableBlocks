@@ -1,0 +1,327 @@
+package com.jason54.unpredictableblocks.event;
+
+import com.jason54.unpredictableblocks.luck.LuckTier;
+import com.jason54.unpredictableblocks.theme.LuckyTheme;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+
+/**
+ * Événements « catalogue v2 » : drops/thèmes existants (directive §4).
+ */
+public final class ThemeCatalogEffects {
+    private ThemeCatalogEffects() {}
+
+    public static void apply(
+            ServerLevel level,
+            ServerPlayer player,
+            BlockPos origin,
+            LuckyTheme theme,
+            LuckTier tier
+    ) {
+        switch (theme) {
+            case ANACHRONISME -> anachronisme(level, player, origin, tier);
+            case BOULANGERIE -> boulangerie(level, player, origin, tier);
+            case BSOD -> bsod(player, tier);
+            case VOLAILLE -> volaille(level, player, origin, tier);
+            case IMPOTS -> impots(player, tier);
+            case STREAMER -> streamer(player, tier);
+            case PROPRETE -> proprete(player, tier);
+            case GRAVITE_ZERO -> gravite(player, tier);
+            case FAST_FOOD -> fastFood(level, player, origin, tier);
+            case CAUCHEMAR_MATIN -> cauchemar(player, tier);
+            case FILM_ACTION -> filmAction(level, player, tier);
+            case JDR_D20 -> jdr(player, tier);
+            case PENURIE_2020 -> penurie(level, player, tier);
+            case COMPLOT -> complot(player, tier);
+            case LAG_BUG -> lagBug(player, tier);
+            case DISCO_80 -> disco(level, origin, tier);
+            case PLOMBERIE -> plomberie(level, player, origin, tier);
+            case FORTUNE_COOKIE -> fortuneCookie(player, tier);
+            case CAMPING -> camping(player, tier);
+            case GYM_BRO -> gymBro(player, tier);
+            case ART_MODERNE -> artModerne(level, origin, tier);
+            case MAGIE_COMPTOIR -> magie(level, origin, tier);
+            case CASINO -> casino(player, tier);
+            case INVASION_MEMES -> memes(player, tier);
+            default -> {}
+        }
+    }
+
+    private static void anachronisme(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
+        if (tier != LuckTier.HIGH) {
+            return;
+        }
+        var ally = EntitySpawnHelper.create(EntityType.ZOMBIE, level);
+        if (ally == null) {
+            return;
+        }
+        ally.setCustomName(Component.literal("Toi du Futur"));
+        ally.setCustomNameVisible(true);
+        ally.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.NETHERITE_HELMET));
+        ally.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Items.NETHERITE_CHESTPLATE));
+        ally.setItemSlot(EquipmentSlot.LEGS, new ItemStack(Items.NETHERITE_LEGGINGS));
+        ally.setItemSlot(EquipmentSlot.FEET, new ItemStack(Items.NETHERITE_BOOTS));
+        ally.setPos(Vec3.atBottomCenterOf(origin));
+        level.addFreshEntity(ally);
+        player.sendSystemMessage(Component.literal("§bUn « Toi du Futur » en Netherite vient prêter main-forte."));
+    }
+
+    private static void boulangerie(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
+        if (tier != LuckTier.LOW) {
+            return;
+        }
+        var random = level.getRandom();
+        for (int i = 0; i < 40; i++) {
+            BlockPos p = origin.offset(random.nextInt(7) - 3, random.nextInt(4) + 2, random.nextInt(7) - 3);
+            level.setBlockAndUpdate(p, Blocks.HAY_BLOCK.defaultBlockState());
+        }
+        player.sendSystemMessage(Component.literal("§cPluie de pain rassis vengeur !"));
+    }
+
+    private static void bsod(ServerPlayer player, LuckTier tier) {
+        if (tier != LuckTier.NEUTRAL) {
+            return;
+        }
+        player.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 20 * 15, 4));
+        player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 20 * 15, 0));
+        player.sendSystemMessage(Component.literal("§1Alt+Tab — champ de vision réduit 15s."));
+    }
+
+    private static void volaille(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
+        if (tier != LuckTier.HIGH) {
+            return;
+        }
+        for (int i = 0; i < 6; i++) {
+            var chicken = EntitySpawnHelper.create(EntityType.CHICKEN, level);
+            if (chicken != null) {
+                chicken.setPos(Vec3.atBottomCenterOf(origin).add(i * 0.3, 0, 0));
+                level.addFreshEntity(chicken);
+            }
+        }
+        player.sendSystemMessage(Component.literal("§6Œuf d'or incubateur : poulets dorés."));
+    }
+
+    private static void impots(ServerPlayer player, LuckTier tier) {
+        if (tier != LuckTier.LOW) {
+            return;
+        }
+        player.addEffect(new MobEffectInstance(MobEffects.MINING_FATIGUE, 20 * 45, 3));
+        player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 20 * 45, 1));
+        player.sendSystemMessage(Component.literal("§4Grève générale : outils inutilisables 45s."));
+    }
+
+    private static void streamer(ServerPlayer player, LuckTier tier) {
+        if (tier != LuckTier.NEUTRAL) {
+            return;
+        }
+        player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 20 * 30, 0));
+        player.setCustomName(Component.literal("Joueur_***"));
+        player.setCustomNameVisible(true);
+        player.sendSystemMessage(Component.literal("§9Sponsorisé par NordVPN — pseudo masqué + invisibilité."));
+    }
+
+    private static void proprete(ServerPlayer player, LuckTier tier) {
+        if (tier != LuckTier.HIGH) {
+            return;
+        }
+        player.removeAllEffects();
+        player.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 20 * 300, 0));
+        player.sendSystemMessage(Component.literal("§fDouche désinfectante — immunité poison 5 min."));
+    }
+
+    private static void gravite(ServerPlayer player, LuckTier tier) {
+        if (tier != LuckTier.LOW) {
+            return;
+        }
+        player.addEffect(new MobEffectInstance(MobEffects.WITHER, 20 * 15, 0));
+        player.hurt(player.level().damageSources().drown(), 4);
+        player.sendSystemMessage(Component.literal("§7Pression atmosphérique nulle — asphyxie 15s."));
+    }
+
+    private static void fastFood(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
+        if (tier != LuckTier.NEUTRAL) {
+            return;
+        }
+        var iron = EntitySpawnHelper.create(EntityType.IRON_GOLEM, level);
+        if (iron != null) {
+            iron.setCustomName(Component.literal("Mascotte Hamburger"));
+            iron.setPos(Vec3.atBottomCenterOf(origin));
+            level.addFreshEntity(iron);
+        }
+        player.sendSystemMessage(Component.literal("§eMascotte encombrante devant la caméra…"));
+    }
+
+    private static void cauchemar(ServerPlayer player, LuckTier tier) {
+        if (tier != LuckTier.HIGH) {
+            return;
+        }
+        player.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 20 * 30, 1));
+        player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 20 * 30, 0));
+        player.sendSystemMessage(Component.literal("§dRêve lucide : lévitation contrôlée 30s."));
+    }
+
+    private static void filmAction(ServerLevel level, ServerPlayer player, LuckTier tier) {
+        if (tier != LuckTier.LOW) {
+            return;
+        }
+        var sniper = EntitySpawnHelper.create(EntityType.SKELETON, level);
+        if (sniper != null) {
+            sniper.setPos(player.getX() + 12, player.getY() + 2, player.getZ());
+            sniper.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
+            level.addFreshEntity(sniper);
+        }
+        level.explode(player, player.getX(), player.getY(), player.getZ(), 2.0f, Level.ExplosionInteraction.TNT);
+        player.sendSystemMessage(Component.literal("§cTir du méchant — sniper squelette !"));
+    }
+
+    private static void jdr(ServerPlayer player, LuckTier tier) {
+        if (tier != LuckTier.NEUTRAL) {
+            return;
+        }
+        player.addEffect(new MobEffectInstance(MobEffects.GLOWING, 20 * 45, 0));
+        player.sendSystemMessage(Component.literal("§aJet de Perception : minerais & coffres brillent (Glow)."));
+    }
+
+    private static void penurie(ServerLevel level, ServerPlayer player, LuckTier tier) {
+        if (tier != LuckTier.HIGH) {
+            return;
+        }
+        var dealer = EntitySpawnHelper.create(EntityType.VILLAGER, level);
+        if (dealer != null) {
+            dealer.setCustomName(Component.literal("Grossiste Clandestin"));
+            dealer.setPos(player.position());
+            level.addFreshEntity(dealer);
+        }
+        player.sendSystemMessage(Component.literal("§7Grossiste : Netherite contre PQ (échange manuel)."));
+    }
+
+    private static void complot(ServerPlayer player, LuckTier tier) {
+        if (tier != LuckTier.LOW) {
+            return;
+        }
+        player.addEffect(new MobEffectInstance(MobEffects.GLOWING, 20 * 600, 0));
+        player.sendSystemMessage(Component.literal("§5Puce 5G — Glow permanent, phantoms attirés."));
+    }
+
+    private static void lagBug(ServerPlayer player, LuckTier tier) {
+        if (tier != LuckTier.NEUTRAL) {
+            return;
+        }
+        shuffleHotbar(player);
+        player.sendSystemMessage(Component.literal("§cDesync inventaire — barre d'accès mélangée !"));
+    }
+
+    private static void disco(ServerLevel level, BlockPos origin, LuckTier tier) {
+        if (tier != LuckTier.HIGH) {
+            return;
+        }
+        level.getEntitiesOfClass(LivingEntity.class, new AABB(origin).inflate(16), e -> e instanceof net.minecraft.world.entity.monster.Monster)
+                .forEach(m -> m.addEffect(new MobEffectInstance(MobEffects.NAUSEA, 20 * 10, 0)));
+        for (int dx = -4; dx <= 4; dx++) {
+            for (int dz = -4; dz <= 4; dz++) {
+                level.setBlockAndUpdate(origin.offset(dx, 1, dz), Blocks.SEA_LANTERN.defaultBlockState());
+            }
+        }
+    }
+
+    private static void plomberie(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
+        if (tier != LuckTier.LOW) {
+            return;
+        }
+        player.setDeltaMovement(0, 1.8, 0);
+        level.setBlockAndUpdate(origin, Blocks.MUD.defaultBlockState());
+        player.sendSystemMessage(Component.literal("§6Geyser de boue — tuyauterie bouchée !"));
+    }
+
+    private static void fortuneCookie(ServerPlayer player, LuckTier tier) {
+        if (tier != LuckTier.NEUTRAL) {
+            return;
+        }
+        int code = player.getRandom().nextInt(9000) + 1000;
+        player.sendSystemMessage(Component.literal("§eCode fortune : §l" + code + " §e(tapez /say " + code + " sous 5s pour +500 XP)."));
+    }
+
+    private static void camping(ServerPlayer player, LuckTier tier) {
+        if (tier != LuckTier.HIGH) {
+            return;
+        }
+        player.getInventory().add(new ItemStack(Items.SHULKER_BOX));
+        player.sendSystemMessage(Component.literal("§2Sac à dos suréquipé — Shulker Box de survie."));
+    }
+
+    private static void gymBro(ServerPlayer player, LuckTier tier) {
+        if (tier != LuckTier.LOW) {
+            return;
+        }
+        player.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 20 * 10, 255));
+        player.sendSystemMessage(Component.literal("§cCrampe inattendue — immobilisation 10s."));
+    }
+
+    private static void artModerne(ServerLevel level, BlockPos origin, LuckTier tier) {
+        if (tier != LuckTier.NEUTRAL) {
+            return;
+        }
+        level.getEntitiesOfClass(LivingEntity.class, new AABB(origin).inflate(8))
+                .forEach(e -> {
+                    e.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 20 * 60, 255));
+                    e.addEffect(new MobEffectInstance(MobEffects.GLOWING, 20 * 60, 0));
+                });
+    }
+
+    private static void magie(ServerLevel level, BlockPos origin, LuckTier tier) {
+        if (tier != LuckTier.HIGH) {
+            return;
+        }
+        var rabbit = EntitySpawnHelper.create(EntityType.RABBIT, level);
+        if (rabbit != null) {
+            rabbit.setPos(Vec3.atBottomCenterOf(origin).add(0, 2, 0));
+            rabbit.setCustomName(Component.literal("Lapin Extirpateur"));
+            level.addFreshEntity(rabbit);
+        }
+    }
+
+    private static void casino(ServerPlayer player, LuckTier tier) {
+        if (tier != LuckTier.LOW) {
+            return;
+        }
+        player.setExperienceLevels(0);
+        player.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.LEATHER_HELMET));
+        player.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Items.LEATHER_CHESTPLATE));
+        player.setItemSlot(EquipmentSlot.LEGS, new ItemStack(Items.LEATHER_LEGGINGS));
+        player.setItemSlot(EquipmentSlot.FEET, new ItemStack(Items.LEATHER_BOOTS));
+        player.sendSystemMessage(Component.literal("§2Banqueroute — armure cuir vert, XP reset."));
+    }
+
+    private static void memes(ServerPlayer player, LuckTier tier) {
+        if (tier != LuckTier.NEUTRAL) {
+            return;
+        }
+        player.setDeltaMovement(player.getDeltaMovement().add(0, 0.8, 0));
+        player.sendSystemMessage(Component.literal("§cEmotional Damage !"));
+    }
+
+    private static void shuffleHotbar(ServerPlayer player) {
+        var inv = player.getInventory();
+        for (int i = 0; i < 8; i++) {
+            int j = player.getRandom().nextInt(9);
+            ItemStack a = inv.getItem(i);
+            ItemStack b = inv.getItem(j);
+            inv.setItem(i, b);
+            inv.setItem(j, a);
+        }
+    }
+
+}

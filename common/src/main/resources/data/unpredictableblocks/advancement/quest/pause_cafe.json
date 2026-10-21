@@ -1,0 +1,36 @@
+{
+  "display": {
+    "icon": {
+      "id": "unpredictableblocks:lucky_pause_cafe"
+    },
+    "title": {
+      "translate": "advancements.unpredictableblocks.pause_cafe.title",
+      "fallback": "Pause Café / Barista"
+    },
+    "description": {
+      "translate": "advancements.unpredictableblocks.pause_cafe.description",
+      "fallback": "Quête thématique — Pause Café / Barista"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "unpredictableblocks:root",
+  "criteria": {
+    "trigger_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "unpredictableblocks:lucky_pause_cafe"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "trigger_block"
+    ]
+  ]
+}

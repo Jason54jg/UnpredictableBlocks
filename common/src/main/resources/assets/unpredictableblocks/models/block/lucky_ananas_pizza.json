@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "unpredictableblocks:block/lucky_ananas_pizza"
+  }
+}

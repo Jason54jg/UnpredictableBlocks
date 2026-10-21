@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "unpredictableblocks:item/espresso_ultra_dose"
+  }
+}

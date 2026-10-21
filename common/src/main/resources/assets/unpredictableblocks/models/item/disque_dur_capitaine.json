@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "unpredictableblocks:item/disque_dur_capitaine"
+  }
+}

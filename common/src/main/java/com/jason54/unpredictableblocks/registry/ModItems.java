@@ -74,6 +74,15 @@ public final class ModItems {
                 ThemedGearHelper.lore(stack, "Relance le dernier malus en HIGH.");
             }));
 
+    public static final RegistrySupplier<Item> ESPRESSO_ULTRA_DOSE = ITEMS.register("espresso_ultra_dose", ExtendedModItems::espressoUltraDose);
+    public static final RegistrySupplier<Item> VALISE_PERDUE = ITEMS.register("valise_perdue", ExtendedModItems::valisePerdue);
+    public static final RegistrySupplier<Item> TRANCHE_DEBAT = ITEMS.register("tranche_debat", ExtendedModItems::trancheDebat);
+    public static final RegistrySupplier<Item> CHRONO_WORLD_RECORD = ITEMS.register("chrono_world_record", ExtendedModItems::chronoWorldRecord);
+    public static final RegistrySupplier<Item> DISQUE_DUR_CAPITAINE = ITEMS.register("disque_dur_capitaine", ExtendedModItems::disqueDurCapitaine);
+    public static final RegistrySupplier<Item> POP_IT_SUPREME = ITEMS.register("pop_it_supreme", ExtendedModItems::popItSupreme);
+    public static final RegistrySupplier<Item> FIOLE_SANG_NOBLE = ITEMS.register("fiole_sang_noble", ExtendedModItems::fioleSangNoble);
+    public static final RegistrySupplier<Item> ZAPPER_DIMENSIONS = ITEMS.register("zapper_dimensions", ExtendedModItems::zapperDimensions);
+
     private ModItems() {}
 
     public static void register() {

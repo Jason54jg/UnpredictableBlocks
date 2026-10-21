@@ -35,6 +35,23 @@ public final class PlayerQuestData {
         return next;
     }
 
+    public static int incrementCounter(ServerPlayer player, String key) {
+        QuestSavedData data = root(player);
+        String ck = counterKey(player.getUUID(), key);
+        int next = data.counters.getOrDefault(ck, 0) + 1;
+        data.counters.put(ck, next);
+        data.setDirty();
+        return next;
+    }
+
+    public static int getCounter(ServerPlayer player, String key) {
+        return root(player).counters.getOrDefault(counterKey(player.getUUID(), key), 0);
+    }
+
+    private static String counterKey(UUID uuid, String key) {
+        return uuid + ":" + key;
+    }
+
     public static void setMissedReroll(ServerPlayer player, LuckyTheme theme) {
         QuestSavedData data = root(player);
         long expire = ServerLevels.of(player).getGameTime() + REROLL_TTL_TICKS;
@@ -108,6 +125,7 @@ public final class PlayerQuestData {
         private final Map<UUID, Integer> bonkCounts = new HashMap<>();
         private final Map<UUID, MissedReroll> missedRerolls = new HashMap<>();
         private final Map<String, Long> cooldowns = new HashMap<>();
+        private final Map<String, Integer> counters = new HashMap<>();
 
         private QuestSavedData() {}
 
@@ -128,6 +146,10 @@ public final class PlayerQuestData {
             CompoundTag cds = tag.getCompoundOrEmpty("Cooldowns");
             for (String key : cds.keySet()) {
                 data.cooldowns.put(key, cds.getLongOr(key, 0L));
+            }
+            CompoundTag ctr = tag.getCompoundOrEmpty("Counters");
+            for (String key : ctr.keySet()) {
+                data.counters.put(key, ctr.getIntOr(key, 0));
             }
             return data;
         }
@@ -150,6 +172,10 @@ public final class PlayerQuestData {
             CompoundTag cds = new CompoundTag();
             cooldowns.forEach(cds::putLong);
             tag.put("Cooldowns", cds);
+
+            CompoundTag ctr = new CompoundTag();
+            counters.forEach(ctr::putInt);
+            tag.put("Counters", ctr);
             return tag;
         }
     }
