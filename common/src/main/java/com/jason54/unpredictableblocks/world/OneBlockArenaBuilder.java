@@ -38,4 +38,17 @@ public final class OneBlockArenaBuilder {
         profile.setOneBlockBuilt(true);
         profile.setDirty();
     }
+
+    public static void expandPlatform(ServerLevel level, BlockPos center, int extraRadius) {
+        for (int dx = -extraRadius; dx <= extraRadius; dx++) {
+            for (int dz = -extraRadius; dz <= extraRadius; dz++) {
+                if (Math.abs(dx) <= 1 && Math.abs(dz) <= 1) {
+                    continue;
+                }
+                BlockPos top = center.offset(dx, -1, dz);
+                level.setBlock(top.below(), Blocks.BEDROCK.defaultBlockState(), 3);
+                level.setBlock(top, Blocks.GRASS_BLOCK.defaultBlockState(), 3);
+            }
+        }
+    }
 }

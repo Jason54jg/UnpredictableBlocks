@@ -32,10 +32,10 @@ public final class WorldSetupHandler {
             }
             ServerLevel overworld = ServerLevels.server(sp).overworld();
             WorldModProfile.WorldProfileData profile = WorldModProfile.get(overworld);
-            if (profile.configured() && profile.mode() == WorldPlayMode.PARCOURS && profile.parcoursBuilt()) {
-                sendToParcoursLane(sp, profile);
-            }
             if (profile.configured()) {
+                if (profile.parcoursBuilt() && ParcoursWorldState.get(overworld).sessionOpen()) {
+                    ModeGameplayHandler.onSessionStart(sp, profile);
+                }
                 return;
             }
             if (!canConfigure(sp)) {
@@ -67,6 +67,9 @@ public final class WorldSetupHandler {
         player.sendSystemMessage(clickable("world.setup_parcours_duo", "/unpredictableblocks world setup parcours 2"));
         player.sendSystemMessage(clickable("world.setup_parcours_trio", "/unpredictableblocks world setup parcours 3"));
         player.sendSystemMessage(clickable("world.setup_parcours_squad", "/unpredictableblocks world setup parcours 4"));
+        player.sendSystemMessage(clickable("world.setup_preset_race", "/unpredictableblocks world preset race 1"));
+        player.sendSystemMessage(clickable("world.setup_preset_coop", "/unpredictableblocks world preset coop 2"));
+        player.sendSystemMessage(clickable("world.setup_preset_battle", "/unpredictableblocks world preset battle 4"));
         NextWorldProfileStorage.peek().ifPresent(p ->
                 player.sendSystemMessage(ModMessages.msg("world.setup_pending_hint", p.mode().id(), p.oneBlockPlayers()))
         );
@@ -76,7 +79,7 @@ public final class WorldSetupHandler {
         return ModMessages.msg(messageKey).copy().withStyle(Style.EMPTY.withClickEvent(new ClickEvent.RunCommand(command)));
     }
 
-    static void sendToParcoursLane(ServerPlayer player, WorldModProfile.WorldProfileData profile) {
+    public static void sendToParcoursLane(ServerPlayer player, WorldModProfile.WorldProfileData profile) {
         int lanes = Math.clamp(profile.oneBlockPlayers(), 1, 4);
         int lane = ParcoursArenaBuilder.laneForPlayer(player.getUUID(), lanes);
         var origin = WorldProfileApplier.arenaOrigin(profile, player.blockPosition());

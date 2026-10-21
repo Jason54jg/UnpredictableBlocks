@@ -35,6 +35,7 @@ public final class UnpredictableBlocks {
         ModAdvancements.register();
         LuckyBlockSpawnHooks.register();
         WorldSetupHandler.register();
+        com.jason54.unpredictableblocks.world.ModeGameplayHandler.register();
         QuestEventHandler.register();
         QuestExtendedHandler.register();
         FortuneCookieHandler.register();

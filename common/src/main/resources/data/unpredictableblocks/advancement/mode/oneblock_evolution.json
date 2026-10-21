@@ -1,0 +1,13 @@
+{
+  "display": {
+    "icon": { "id": "unpredictableblocks:lucky_gravite_zero" },
+    "title": { "translate": "advancements.unpredictableblocks.oneblock_evolution.title", "fallback": "OneBlock évolutif" },
+    "description": { "translate": "advancements.unpredictableblocks.oneblock_evolution.description", "fallback": "Atteindre la phase 3 du OneBlock (100 cassages)." },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "unpredictableblocks:root",
+  "criteria": { "evolved": { "trigger": "minecraft:impossible" } },
+  "requirements": [["evolved"]]
+}

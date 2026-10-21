@@ -18,6 +18,9 @@ public final class WorldProfileApplier {
         OneBlockArenaBuilder.buildIfNeeded(level, profile, origin);
         ParcoursArenaBuilder.buildIfNeeded(level, profile, origin);
         applyWorldBorder(level, profile, origin);
+        if (profile.mode() == WorldPlayMode.PARCOURS || profile.mode() == WorldPlayMode.ONEBLOCK) {
+            ParcoursWorldState.get(level).setSessionOpen(true);
+        }
     }
 
     public static BlockPos arenaOrigin(WorldModProfile.WorldProfileData profile, BlockPos suggested) {
@@ -35,9 +38,10 @@ public final class WorldProfileApplier {
             border.setSize(size);
         } else if (profile.mode() == WorldPlayMode.PARCOURS) {
             int lanes = profile.oneBlockPlayers();
+            int length = profile.modeSettings().pathLengthBlocks();
             double zSpan = Math.max(24, lanes * ParcoursArenaBuilder.LANE_SPACING + 16);
-            double xSpan = ParcoursArenaBuilder.PATH_LENGTH + 24;
-            border.setCenter(center.getX() + ParcoursArenaBuilder.PATH_LENGTH / 2.0, center.getZ() + 0.5);
+            double xSpan = length + 24;
+            border.setCenter(center.getX() + length / 2.0, center.getZ() + 0.5);
             border.setSize(Math.max(xSpan, zSpan));
         }
     }
@@ -67,7 +71,7 @@ public final class WorldProfileApplier {
                 profile.oneBlockPlayers()
         ));
         if (mode == WorldPlayMode.PARCOURS && profile.parcoursBuilt()) {
-            WorldSetupHandler.sendToParcoursLane(player, profile);
+            ModeGameplayHandler.onSessionStart(player, profile);
         }
     }
 }

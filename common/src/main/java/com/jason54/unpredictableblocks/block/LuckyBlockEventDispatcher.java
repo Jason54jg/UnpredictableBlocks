@@ -120,6 +120,7 @@ public final class LuckyBlockEventDispatcher {
 
         PlayerLuckyBreakStats.onBreak(player, theme, effective.tier(), effectiveLuck);
         ThemeMasterProgress.check(player, theme);
+        com.jason54.unpredictableblocks.world.ModeGameplayHandler.afterLuckyBreak(level, player, origin, theme, effective.tier());
     }
 
     private static String suffixFor(LuckTier tier) {

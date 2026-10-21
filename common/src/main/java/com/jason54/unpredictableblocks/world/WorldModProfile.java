@@ -50,6 +50,7 @@ public final class WorldModProfile {
     private static void applyPending(WorldProfileData data, NextWorldProfileStorage.Pending pending) {
         data.setMode(pending.mode());
         data.setOneBlockPlayers(pending.oneBlockPlayers());
+        data.setModeSettings(pending.settings());
         tuneForMode(data);
     }
 
@@ -59,8 +60,13 @@ public final class WorldModProfile {
     }
 
     public static void configure(WorldProfileData data, WorldPlayMode mode, int oneBlockPlayers) {
+        configure(data, mode, oneBlockPlayers, WorldModeSettings.defaults(mode));
+    }
+
+    public static void configure(WorldProfileData data, WorldPlayMode mode, int oneBlockPlayers, WorldModeSettings settings) {
         data.setMode(mode);
         data.setOneBlockPlayers(Math.clamp(oneBlockPlayers, 1, 4));
+        data.setModeSettings(settings == null ? WorldModeSettings.defaults(mode) : settings);
         tuneForMode(data);
         data.setConfigured(true);
     }
@@ -81,6 +87,7 @@ public final class WorldModProfile {
                 default -> WorldPlayMode.NORMAL;
             });
         }
+        data.setModeSettings(WorldModeSettings.defaults(data.mode()));
         tuneForMode(data);
     }
 
@@ -137,6 +144,7 @@ public final class WorldModProfile {
         private boolean naturalSpawn = true;
         private boolean oneBlockBuilt;
         private boolean parcoursBuilt;
+        private WorldModeSettings modeSettings = WorldModeSettings.defaults(WorldPlayMode.NORMAL);
 
         private WorldProfileData() {}
 
@@ -204,6 +212,14 @@ public final class WorldModProfile {
             this.parcoursBuilt = parcoursBuilt;
         }
 
+        public WorldModeSettings modeSettings() {
+            return modeSettings;
+        }
+
+        public void setModeSettings(WorldModeSettings modeSettings) {
+            this.modeSettings = modeSettings == null ? WorldModeSettings.defaults(mode) : modeSettings;
+        }
+
         private static WorldProfileData fromTag(CompoundTag tag) {
             WorldProfileData data = new WorldProfileData();
             data.configured = tag.getBooleanOr("Configured", false);
@@ -214,7 +230,33 @@ public final class WorldModProfile {
             data.naturalSpawn = tag.getBooleanOr("NaturalSpawn", true);
             data.oneBlockBuilt = tag.getBooleanOr("OneBlockBuilt", false);
             data.parcoursBuilt = tag.getBooleanOr("ParcoursBuilt", false);
+            data.modeSettings = readSettings(tag, data.mode);
             return data;
+        }
+
+        private static WorldModeSettings readSettings(CompoundTag tag, WorldPlayMode mode) {
+            if (!tag.contains("PathScale")) {
+                return WorldModeSettings.defaults(mode);
+            }
+            WorldModeSettings.PathScale scale = WorldModeSettings.parsePathScale(tag.getStringOr("PathScale", "standard"))
+                    .orElse(WorldModeSettings.PathScale.STANDARD);
+            WorldModeSettings.LuckyDensity density = WorldModeSettings.parseDensity(tag.getStringOr("LuckyDensity", "normal"))
+                    .orElse(WorldModeSettings.LuckyDensity.NORMAL);
+            WorldModeSettings.ParcoursLayout layout = WorldModeSettings.parseLayout(tag.getStringOr("ParcoursLayout", "lanes"))
+                    .orElse(WorldModeSettings.ParcoursLayout.LANES);
+            WorldModeSettings.ParcoursRules rules = WorldModeSettings.parseRules(tag.getStringOr("ParcoursRules", "standard"))
+                    .orElse(WorldModeSettings.ParcoursRules.STANDARD);
+            WorldModeSettings.ArenaDecor decor = WorldModeSettings.parseDecor(tag.getStringOr("ArenaDecor", "void"))
+                    .orElse(WorldModeSettings.ArenaDecor.VOID);
+            return new WorldModeSettings(
+                    scale,
+                    density,
+                    layout,
+                    rules,
+                    decor,
+                    tag.getBooleanOr("DailySeed", false),
+                    tag.getBooleanOr("OneBlockEvolution", mode == WorldPlayMode.ONEBLOCK)
+            );
         }
 
         private CompoundTag toTag() {
@@ -227,6 +269,13 @@ public final class WorldModProfile {
             tag.putBoolean("NaturalSpawn", naturalSpawn);
             tag.putBoolean("OneBlockBuilt", oneBlockBuilt);
             tag.putBoolean("ParcoursBuilt", parcoursBuilt);
+            tag.putString("PathScale", modeSettings.pathScale().name());
+            tag.putString("LuckyDensity", modeSettings.luckyDensity().name());
+            tag.putString("ParcoursLayout", modeSettings.parcoursLayout().name());
+            tag.putString("ParcoursRules", modeSettings.parcoursRules().name());
+            tag.putString("ArenaDecor", modeSettings.arenaDecor().name());
+            tag.putBoolean("DailySeed", modeSettings.dailySeed());
+            tag.putBoolean("OneBlockEvolution", modeSettings.oneBlockEvolution());
             return tag;
         }
     }
