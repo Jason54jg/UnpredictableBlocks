@@ -1,10 +1,7 @@
 package com.jason54.unpredictableblocks.quest;
 
-import com.jason54.unpredictableblocks.UnpredictableBlocks;
 import com.jason54.unpredictableblocks.registry.ModItems;
 import dev.architectury.event.events.player.PlayerEvent;
-import net.minecraft.advancements.AdvancementHolder;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
@@ -26,15 +23,7 @@ public final class QuestEventHandler {
         }
         int bonks = PlayerQuestData.incrementBonk(serverPlayer);
         if (bonks >= 50) {
-            grant(serverPlayer, "quest/invasion_memes", "completed");
-        }
-    }
-
-    private static void grant(ServerPlayer player, String path, String criterion) {
-        ResourceLocation id = ResourceLocation.fromNamespaceAndPath(UnpredictableBlocks.MOD_ID, path);
-        AdvancementHolder advancement = player.server.getAdvancements().get(id);
-        if (advancement != null) {
-            player.getAdvancements().award(advancement, criterion);
+            QuestRewards.complete(serverPlayer, "quest/invasion_memes", "completed");
         }
     }
 }

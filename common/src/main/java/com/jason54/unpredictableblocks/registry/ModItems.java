@@ -3,6 +3,8 @@ package com.jason54.unpredictableblocks.registry;
 import com.jason54.unpredictableblocks.UnpredictableBlocks;
 import com.jason54.unpredictableblocks.item.BonkHammerItem;
 import com.jason54.unpredictableblocks.item.CleUsbHackerItem;
+import com.jason54.unpredictableblocks.item.JetonVipItem;
+import com.jason54.unpredictableblocks.item.ShakerProtItem;
 import com.jason54.unpredictableblocks.item.LoreItem;
 import com.jason54.unpredictableblocks.item.LuckyBlockItem;
 import com.jason54.unpredictableblocks.item.ThemedGearHelper;
@@ -48,9 +50,9 @@ public final class ModItems {
             }));
 
     public static final RegistrySupplier<Item> SHAKER_PROT = ITEMS.register("shaker_prot", () ->
-            new LoreItem(new Item.Properties(), stack -> {
+            new ShakerProtItem(new Item.Properties(), stack -> {
                 ThemedGearHelper.name(stack, "Shaker de Prot' Pur Sérotonine");
-                ThemedGearHelper.lore(stack, "Force, vitesse, faim.");
+                ThemedGearHelper.lore(stack, "Force III, Vitesse II, Faim II — 90s.");
             }));
 
     public static final RegistrySupplier<Item> CLE_MOLETTE_LEGENDAIRE = ITEMS.register("cle_molette_legendaire", () ->
@@ -60,9 +62,9 @@ public final class ModItems {
             }));
 
     public static final RegistrySupplier<Item> JETON_VIP = ITEMS.register("jeton_or_vip", () ->
-            new LoreItem(new Item.Properties(), stack -> {
+            new JetonVipItem(new Item.Properties(), stack -> {
                 ThemedGearHelper.name(stack, "Jeton d'Or V.I.P.");
-                ThemedGearHelper.lore(stack, "Relance un Lucky Block manqué.");
+                ThemedGearHelper.lore(stack, "Relance le dernier malus en HIGH.");
             }));
 
     private ModItems() {}

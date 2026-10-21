@@ -1,15 +1,13 @@
 {
   "display": {
-    "icon": {
-      "id": "unpredictableblocks:lucky_casino"
-    },
+    "icon": { "id": "unpredictableblocks:lucky_casino" },
     "title": {
       "translate": "advancements.unpredictableblocks.casino.title",
       "fallback": "High Roller"
     },
     "description": {
       "translate": "advancements.unpredictableblocks.casino.description",
-      "fallback": "Posséder 16 lingots d'or et 8 émeraudes."
+      "fallback": "Obtenir le Jackpot 777 à la machine à sous."
     },
     "frame": "goal",
     "show_toast": true,
@@ -17,42 +15,21 @@
   },
   "parent": "unpredictableblocks:root",
   "criteria": {
-    "gold": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": "minecraft:gold_ingot",
-            "count": {
-              "min": 16
-            }
-          }
-        ]
-      }
+    "jackpot": {
+      "trigger": "minecraft:impossible"
     },
-    "gems": {
+    "rich": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
-          {
-            "items": "minecraft:emerald",
-            "count": {
-              "min": 8
-            }
-          }
+          { "items": "minecraft:gold_ingot", "count": { "min": 16 } },
+          { "items": "minecraft:emerald", "count": { "min": 8 } }
         ]
       }
     }
   },
+  "requirements": [["jackpot"]],
   "rewards": {
-    "loot": [
-      "unpredictableblocks:rewards/quest_casino"
-    ]
-  },
-  "requirements": [
-    [
-      "gold",
-      "gems"
-    ]
-  ]
+    "loot": ["unpredictableblocks:rewards/quest_casino"]
+  }
 }

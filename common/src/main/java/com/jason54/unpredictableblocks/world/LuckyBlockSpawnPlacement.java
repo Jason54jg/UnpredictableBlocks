@@ -35,6 +35,9 @@ public final class LuckyBlockSpawnPlacement {
             BlockState state = ModBlocks.get(theme).defaultBlockState();
             if (level.getBlockState(surface).isAir() && level.getBlockState(surface.below()).isSolidRender(level, surface.below())) {
                 level.setBlock(surface, state, 3);
+                if (level.getBlockEntity(surface) instanceof com.jason54.unpredictableblocks.block.entity.LuckyBlockEntity luckyBe) {
+                    luckyBe.setLuck(com.jason54.unpredictableblocks.config.ModConfig.get().meta().defaultBlockLuck());
+                }
             }
         }
     }
