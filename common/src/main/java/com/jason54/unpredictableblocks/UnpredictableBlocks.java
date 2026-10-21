@@ -21,9 +21,9 @@ public final class UnpredictableBlocks {
         ModConfig.load();
         ModBlocks.register();
         ModBlockEntities.register();
+        ModSounds.register();
         ModItems.register();
         ModCreativeTabs.register();
-        ModSounds.register();
         ModLoot.register();
         ModAdvancements.register();
         LuckyBlockSpawnHooks.register();

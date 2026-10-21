@@ -7,6 +7,7 @@
 ```bash
 pip install pillow
 python3 tools/generate_textures.py
+python3 tools/generate_item_textures.py
 ```
 
 Sortie : `common/src/main/resources/assets/unpredictableblocks/textures/block/lucky_*.png` (+ `icon.png`).

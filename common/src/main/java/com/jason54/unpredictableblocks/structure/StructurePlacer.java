@@ -39,7 +39,7 @@ public final class StructurePlacer {
             case PLOMBERIE -> "chateau_briques";
             case ART_MODERNE -> "galerie_absurde";
             case INVASION_MEMES -> "sanctuaire_doge";
-            case ANACHRONISME -> "pyramide_piège";
+            case ANACHRONISME -> "pyramide_piege";
             case MAGIE_COMPTOIR -> "scene_spectacle";
             case CASINO -> "table_poker_vip";
             case CAMPING -> "campement_inonde";

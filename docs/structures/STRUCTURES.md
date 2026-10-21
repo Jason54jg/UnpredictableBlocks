@@ -1,8 +1,13 @@
 # Structures instantanées (NBT)
 
-Placer les fichiers `.nbt` dans :
+Les fichiers `.nbt` sont générés par :
 
-`common/src/main/resources/data/unpredictableblocks/structures/<id>.nbt`
+```bash
+pip install nbtlib
+python3 tools/generate_structures.py
+```
+
+Sortie : `common/src/main/resources/data/unpredictableblocks/structures/<id>.nbt`
 
 | ID structure | Thème | Notes build |
 |--------------|-------|-------------|
