@@ -15,22 +15,22 @@ import net.minecraft.sounds.SoundSource;
 public final class LuckyBreakFeedback {
     private LuckyBreakFeedback() {}
 
-    public static void play(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
+    public static void play(ServerLevel level, @SuppressWarnings("unused") ServerPlayer player, BlockPos origin, LuckTier tier) {
         double x = origin.getX() + 0.5;
         double y = origin.getY() + 0.65;
         double z = origin.getZ() + 0.5;
         switch (tier) {
             case HIGH -> {
                 playTierSound(level, x, y, z, tier, SoundEvents.PLAYER_LEVELUP, 0.85f, 1.15f);
-                burst(level, player, ParticleTypes.TOTEM_OF_UNDYING, x, y, z, 24, 0.35, 0.08);
+                burst(level, ParticleTypes.TOTEM_OF_UNDYING, x, y, z, 24, 0.35, 0.08);
             }
             case NEUTRAL -> {
                 playTierSound(level, x, y, z, tier, SoundEvents.NOTE_BLOCK_BELL.value(), 0.7f, 1.0f);
-                burst(level, player, ParticleTypes.CLOUD, x, y, z, 16, 0.25, 0.02);
+                burst(level, ParticleTypes.CLOUD, x, y, z, 16, 0.25, 0.02);
             }
             case LOW -> {
                 playTierSound(level, x, y, z, tier, SoundEvents.VILLAGER_NO, 0.9f, 0.75f);
-                burst(level, player, ParticleTypes.SMOKE, x, y, z, 20, 0.3, 0.04);
+                burst(level, ParticleTypes.SMOKE, x, y, z, 20, 0.3, 0.04);
             }
         }
     }
@@ -58,7 +58,6 @@ public final class LuckyBreakFeedback {
 
     private static void burst(
             ServerLevel level,
-            ServerPlayer player,
             net.minecraft.core.particles.SimpleParticleType particle,
             double x,
             double y,
@@ -67,8 +66,8 @@ public final class LuckyBreakFeedback {
             double spread,
             double speed
     ) {
+        // Broadcast à tous les joueurs proches (pas seulement le casseur).
         level.sendParticles(
-                player,
                 particle,
                 true,
                 false,

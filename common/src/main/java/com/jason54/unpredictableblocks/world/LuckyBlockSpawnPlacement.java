@@ -30,8 +30,11 @@ public final class LuckyBlockSpawnPlacement {
             int localZ = random.nextInt(16);
             int worldX = chunk.getPos().getMinBlockX() + localX;
             int worldZ = chunk.getPos().getMinBlockZ() + localZ;
-            // Heightmap locale au chunk — évite de forcer le chargement des voisins.
-            int surfaceY = chunk.getHeight(Heightmap.Types.WORLD_SURFACE_WG, localX, localZ);
+            // WORLD_SURFACE (pas WG) : maintenu après génération ; WG peut rester à 0 / obsolète.
+            int surfaceY = chunk.getHeight(Heightmap.Types.WORLD_SURFACE, localX, localZ);
+            if (surfaceY <= level.getMinY()) {
+                continue;
+            }
             BlockPos surface = new BlockPos(worldX, surfaceY, worldZ);
             LuckyTheme theme = pickTheme(random, level, surface);
             if (theme == null) {
@@ -39,7 +42,8 @@ public final class LuckyBlockSpawnPlacement {
             }
             BlockState at = chunk.getBlockState(surface);
             BlockState below = chunk.getBlockState(surface.below());
-            if (!at.isAir() || !below.isSolidRender()) {
+            // Sol solide au sens collision (herbe, terre, pierre…) — isSolidRender rate trop de sols.
+            if (!at.isAir() || !below.blocksMotion()) {
                 continue;
             }
             BlockState state = ModBlocks.get(theme).defaultBlockState();

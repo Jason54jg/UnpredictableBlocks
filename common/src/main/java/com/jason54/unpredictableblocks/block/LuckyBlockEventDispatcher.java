@@ -110,13 +110,14 @@ public final class LuckyBlockEventDispatcher {
                 LootTablePaths.gameplayPath(theme, effective)
         );
 
+        // CHEST : ORIGIN requis, THIS_ENTITY optionnel.
+        // ALL_PARAMS (generic) exige ~11 clés → IllegalArgumentException → le bloc ne disparaît pas.
         LootParams params = new LootParams.Builder(level)
                 .withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(origin))
-                .withParameter(LootContextParams.THIS_ENTITY, player)
-                .withParameter(LootContextParams.BLOCK_STATE, level.getBlockState(origin))
-                .create(LootContextParamSets.ALL_PARAMS);
+                .withOptionalParameter(LootContextParams.THIS_ENTITY, player)
+                .create(LootContextParamSets.CHEST);
 
-                var lootTable = level.getServer().reloadableRegistries().getLootTable(ResourceKey.create(Registries.LOOT_TABLE, table));
+        var lootTable = level.getServer().reloadableRegistries().getLootTable(ResourceKey.create(Registries.LOOT_TABLE, table));
         for (var stack : lootTable.getRandomItems(params)) {
             McAccess.giveOrDrop(player, stack);
         }

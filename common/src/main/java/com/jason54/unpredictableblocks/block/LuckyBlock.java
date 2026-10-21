@@ -1,5 +1,6 @@
 package com.jason54.unpredictableblocks.block;
 
+import com.jason54.unpredictableblocks.UnpredictableBlocks;
 import com.jason54.unpredictableblocks.block.entity.LuckyBlockEntity;
 import com.jason54.unpredictableblocks.config.ModConfig;
 import com.jason54.unpredictableblocks.luck.LuckResolver;
@@ -60,22 +61,32 @@ public class LuckyBlock extends Block implements EntityBlock {
         if (!level.isClientSide() && level instanceof ServerLevel serverLevel && player instanceof ServerPlayer serverPlayer) {
             BlockEntity be = level.getBlockEntity(pos);
             if (be instanceof LuckyBlockEntity luckyBe) {
-                LuckStat blockLuck = new LuckStat(luckyBe.getLuck());
-                LuckStat playerLuck = PlayerLuckStorage.getModifier(serverPlayer);
-                int aura = ChunkLuckAura.luckModifier(serverLevel, pos);
-                blockLuck = blockLuck.add(aura);
-                int bet = consumeLuckBet(serverPlayer);
-                if (bet != 0) {
-                    blockLuck = blockLuck.add(bet);
-                    serverPlayer.sendSystemMessage(ModMessages.msg("luck_bet", bet));
+                try {
+                    LuckStat blockLuck = new LuckStat(luckyBe.getLuck());
+                    LuckStat playerLuck = PlayerLuckStorage.getModifier(serverPlayer);
+                    int aura = ChunkLuckAura.luckModifier(serverLevel, pos);
+                    blockLuck = blockLuck.add(aura);
+                    int bet = consumeLuckBet(serverPlayer);
+                    if (bet != 0) {
+                        blockLuck = blockLuck.add(bet);
+                        serverPlayer.sendSystemMessage(ModMessages.msg("luck_bet", bet));
+                    }
+                    int effectiveLuck = LuckStat.clamp(blockLuck.value() + playerLuck.value());
+                    LuckResolver.ResolvedOutcome outcome = LuckResolver.resolve(blockLuck, playerLuck, serverLevel.getRandom());
+                    LuckyTheme blockTheme = ((LuckyBlock) state.getBlock()).theme();
+                    if (PlayerQuestData.consumeComboPity(serverPlayer, blockTheme) && outcome.tier() == LuckTier.LOW) {
+                        outcome = new LuckResolver.ResolvedOutcome(LuckTier.NEUTRAL, "neutral");
+                    }
+                    LuckyBlockEventDispatcher.dispatch(serverLevel, serverPlayer, pos, blockTheme, outcome, effectiveLuck);
+                } catch (Exception e) {
+                    // Une exception ici empêche removeBlock côté GameMode → le Lucky reste planté.
+                    UnpredictableBlocks.LOGGER.error(
+                            "Échec dispatch Lucky Block {} à {} — le bloc sera quand même retiré",
+                            theme.id(),
+                            pos,
+                            e
+                    );
                 }
-                int effectiveLuck = LuckStat.clamp(blockLuck.value() + playerLuck.value());
-                LuckResolver.ResolvedOutcome outcome = LuckResolver.resolve(blockLuck, playerLuck, serverLevel.getRandom());
-                LuckyTheme blockTheme = ((LuckyBlock) state.getBlock()).theme();
-                if (PlayerQuestData.consumeComboPity(serverPlayer, blockTheme) && outcome.tier() == LuckTier.LOW) {
-                    outcome = new LuckResolver.ResolvedOutcome(LuckTier.NEUTRAL, "neutral");
-                }
-                LuckyBlockEventDispatcher.dispatch(serverLevel, serverPlayer, pos, blockTheme, outcome, effectiveLuck);
             }
         }
         return super.playerWillDestroy(level, pos, state, player);
