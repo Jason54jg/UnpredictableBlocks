@@ -254,6 +254,11 @@
   "message.unpredictableblocks.world.setup_oneblock_duo": "[ OneBlock — 2 joueurs ]",
   "message.unpredictableblocks.world.setup_oneblock_trio": "[ OneBlock — 3 joueurs ]",
   "message.unpredictableblocks.world.setup_oneblock_squad": "[ OneBlock — 4 joueurs ]",
+  "message.unpredictableblocks.world.setup_parcours_solo": "[ Parcours Lucky — 1 piste ]",
+  "message.unpredictableblocks.world.setup_parcours_duo": "[ Parcours Lucky — 2 pistes ]",
+  "message.unpredictableblocks.world.setup_parcours_trio": "[ Parcours Lucky — 3 pistes ]",
+  "message.unpredictableblocks.world.setup_parcours_squad": "[ Parcours Lucky — 4 pistes ]",
+  "message.unpredictableblocks.world.parcours_lane": "Ta piste : couloir %1$s / %2$s (Lucky Blocks sur le chemin)",
   "message.unpredictableblocks.world.setup_pending_hint": "Profil en attente : %1$s (%2$s joueurs)",
   "message.unpredictableblocks.world.profile_applied": "Profil appliqué : %1$s (OneBlock : %2$s joueurs)",
   "message.unpredictableblocks.world.next_saved": "Prochain monde : profil %1$s (%2$s joueurs). Créez le monde maintenant.",
@@ -261,5 +266,6 @@
   "message.unpredictableblocks.world.show": "Configuré : %1$s | mode %2$s | OneBlock %3$s | spawn x%4$s | luck %5$s",
   "message.unpredictableblocks.world.unknown_mode": "Mode inconnu : %s",
   "world_preset.unpredictableblocks.ub_normal": "UnpredictableBlocks — Normal",
-  "world_preset.unpredictableblocks.ub_oneblock_void": "UnpredictableBlocks — OneBlock (vide)"
+  "world_preset.unpredictableblocks.ub_oneblock_void": "UnpredictableBlocks — OneBlock (vide)",
+  "world_preset.unpredictableblocks.ub_parcours_void": "UnpredictableBlocks — Parcours Lucky (vide)"
 }

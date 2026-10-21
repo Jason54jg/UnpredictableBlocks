@@ -11,6 +11,7 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 /** Bootstrap profil à la création / 1er join (assistant si non configuré). */
 public final class WorldSetupHandler {
@@ -31,6 +32,9 @@ public final class WorldSetupHandler {
             }
             ServerLevel overworld = ServerLevels.server(sp).overworld();
             WorldModProfile.WorldProfileData profile = WorldModProfile.get(overworld);
+            if (profile.configured() && profile.mode() == WorldPlayMode.PARCOURS && profile.parcoursBuilt()) {
+                sendToParcoursLane(sp, profile);
+            }
             if (profile.configured()) {
                 return;
             }
@@ -59,6 +63,10 @@ public final class WorldSetupHandler {
         player.sendSystemMessage(clickable("world.setup_oneblock_duo", "/unpredictableblocks world setup oneblock 2"));
         player.sendSystemMessage(clickable("world.setup_oneblock_trio", "/unpredictableblocks world setup oneblock 3"));
         player.sendSystemMessage(clickable("world.setup_oneblock_squad", "/unpredictableblocks world setup oneblock 4"));
+        player.sendSystemMessage(clickable("world.setup_parcours_solo", "/unpredictableblocks world setup parcours 1"));
+        player.sendSystemMessage(clickable("world.setup_parcours_duo", "/unpredictableblocks world setup parcours 2"));
+        player.sendSystemMessage(clickable("world.setup_parcours_trio", "/unpredictableblocks world setup parcours 3"));
+        player.sendSystemMessage(clickable("world.setup_parcours_squad", "/unpredictableblocks world setup parcours 4"));
         NextWorldProfileStorage.peek().ifPresent(p ->
                 player.sendSystemMessage(ModMessages.msg("world.setup_pending_hint", p.mode().id(), p.oneBlockPlayers()))
         );
@@ -66,5 +74,24 @@ public final class WorldSetupHandler {
 
     private static MutableComponent clickable(String messageKey, String command) {
         return ModMessages.msg(messageKey).copy().withStyle(Style.EMPTY.withClickEvent(new ClickEvent.RunCommand(command)));
+    }
+
+    static void sendToParcoursLane(ServerPlayer player, WorldModProfile.WorldProfileData profile) {
+        int lanes = Math.clamp(profile.oneBlockPlayers(), 1, 4);
+        int lane = ParcoursArenaBuilder.laneForPlayer(player.getUUID(), lanes);
+        var origin = WorldProfileApplier.arenaOrigin(profile, player.blockPosition());
+        var spawn = ParcoursArenaBuilder.laneSpawnPos(origin, lane, lanes);
+        player.teleportTo(
+                ServerLevels.server(player).overworld(),
+                spawn.getX() + 0.5,
+                spawn.getY(),
+                spawn.getZ() + 0.5,
+                java.util.Set.of(),
+                player.getYRot(),
+                player.getXRot(),
+                true
+        );
+        player.setDeltaMovement(Vec3.ZERO);
+        player.sendSystemMessage(ModMessages.msg("world.parcours_lane", lane + 1, lanes));
     }
 }

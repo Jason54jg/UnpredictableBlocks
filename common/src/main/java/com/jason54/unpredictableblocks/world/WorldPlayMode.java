@@ -9,7 +9,8 @@ public enum WorldPlayMode {
     EASY,
     HARD,
     HARDCORE,
-    ONEBLOCK;
+    ONEBLOCK,
+    PARCOURS;
 
     public String id() {
         return name().toLowerCase(Locale.ROOT);
@@ -27,6 +28,9 @@ public enum WorldPlayMode {
         }
         if ("one_block".equals(norm) || "oneblock".equals(norm)) {
             return Optional.of(ONEBLOCK);
+        }
+        if ("parcour".equals(norm) || "parcours".equals(norm) || "course".equals(norm) || "parkour".equals(norm)) {
+            return Optional.of(PARCOURS);
         }
         return Optional.empty();
     }

@@ -15,7 +15,7 @@ Lucky Blocks chaotiques à thèmes, système de **chance (-100…+100)**, quête
 - **Quêtes** : advancements sous `data/unpredictableblocks/advancement/quest/` + **Journal des quêtes** (item).
 - **HUD Luck** (barre d’action) ; config optionnelle `unpredictableblocks.json` (**spawn** / pondérations uniquement — les **32 thèmes** restent toujours actifs en jeu).
 - **Paliers quêtes** 8/16/24/32, **Lucky mystère**, **aura de chunk**, **pari Luck** (sneak + poussière d’émeraude en off-hand au cassage).
-- **Profil monde** (avant / au 1er lancement) : Normal, Facile, Difficile, Hardcore, **OneBlock** (1–4 joueurs). **Fabric & NeoForge** : bouton **UB World profile** dans le menu titre. Commandes : `/unpredictableblocks world next|setup|show|menu`. Préréglages : `ub_normal`, `ub_oneblock_void`.
+- **Profil monde** (avant / au 1er lancement) : Normal, Facile, Difficile, Hardcore, **OneBlock** (1–4 joueurs), **Parcours Lucky** (1–4 pistes parallèles, générées avec Lucky Blocks sur le chemin). **Fabric & NeoForge** : bouton **UB World profile** dans le menu titre. Commandes : `/unpredictableblocks world next|setup|show|menu` (ex. `parcours 3`). Préréglages : `ub_normal`, `ub_oneblock_void`, `ub_parcours_void`.
 
 ## Build
 

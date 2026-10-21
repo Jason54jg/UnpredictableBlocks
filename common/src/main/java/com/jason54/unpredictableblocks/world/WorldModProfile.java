@@ -106,6 +106,11 @@ public final class WorldModProfile {
                 data.setDefaultBlockLuck(15);
                 data.setNaturalSpawn(false);
             }
+            case PARCOURS -> {
+                data.setSpawnMultiplier(0.0);
+                data.setDefaultBlockLuck(8);
+                data.setNaturalSpawn(false);
+            }
             case NORMAL -> {
                 data.setSpawnMultiplier(1.0);
                 data.setDefaultBlockLuck(0);
@@ -131,6 +136,7 @@ public final class WorldModProfile {
         private int defaultBlockLuck;
         private boolean naturalSpawn = true;
         private boolean oneBlockBuilt;
+        private boolean parcoursBuilt;
 
         private WorldProfileData() {}
 
@@ -190,6 +196,14 @@ public final class WorldModProfile {
             this.oneBlockBuilt = oneBlockBuilt;
         }
 
+        public boolean parcoursBuilt() {
+            return parcoursBuilt;
+        }
+
+        public void setParcoursBuilt(boolean parcoursBuilt) {
+            this.parcoursBuilt = parcoursBuilt;
+        }
+
         private static WorldProfileData fromTag(CompoundTag tag) {
             WorldProfileData data = new WorldProfileData();
             data.configured = tag.getBooleanOr("Configured", false);
@@ -199,6 +213,7 @@ public final class WorldModProfile {
             data.defaultBlockLuck = tag.getIntOr("DefaultBlockLuck", 0);
             data.naturalSpawn = tag.getBooleanOr("NaturalSpawn", true);
             data.oneBlockBuilt = tag.getBooleanOr("OneBlockBuilt", false);
+            data.parcoursBuilt = tag.getBooleanOr("ParcoursBuilt", false);
             return data;
         }
 
@@ -211,6 +226,7 @@ public final class WorldModProfile {
             tag.putInt("DefaultBlockLuck", defaultBlockLuck);
             tag.putBoolean("NaturalSpawn", naturalSpawn);
             tag.putBoolean("OneBlockBuilt", oneBlockBuilt);
+            tag.putBoolean("ParcoursBuilt", parcoursBuilt);
             return tag;
         }
     }

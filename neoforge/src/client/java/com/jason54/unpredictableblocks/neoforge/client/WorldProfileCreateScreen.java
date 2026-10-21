@@ -37,6 +37,14 @@ public class WorldProfileCreateScreen extends Screen {
         y += 24;
         addRenderableWidget(Button.builder(Component.literal("OneBlock — 4 players"), b -> pick(WorldPlayMode.ONEBLOCK, 4)).bounds(x, y, w, 20).build());
         y += 32;
+        addRenderableWidget(Button.builder(Component.literal("Parcours — 1 player"), b -> pick(WorldPlayMode.PARCOURS, 1)).bounds(x, y, w, 20).build());
+        y += 24;
+        addRenderableWidget(Button.builder(Component.literal("Parcours — 2 players"), b -> pick(WorldPlayMode.PARCOURS, 2)).bounds(x, y, w, 20).build());
+        y += 24;
+        addRenderableWidget(Button.builder(Component.literal("Parcours — 3 players"), b -> pick(WorldPlayMode.PARCOURS, 3)).bounds(x, y, w, 20).build());
+        y += 24;
+        addRenderableWidget(Button.builder(Component.literal("Parcours — 4 players"), b -> pick(WorldPlayMode.PARCOURS, 4)).bounds(x, y, w, 20).build());
+        y += 32;
         addRenderableWidget(Button.builder(Component.literal("Done"), b -> onClose()).bounds(x, y, w, 20).build());
     }
 
