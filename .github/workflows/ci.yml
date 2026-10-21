@@ -29,8 +29,7 @@ jobs:
         with:
           distribution: temurin
           java-version: '25'
-      - name: Gradle compile
+      - name: Gradle compile (JDK 25, Gradle 9.8)
         run: |
           chmod +x gradlew
           ./gradlew :common:compileJava :fabric:compileJava :neoforge:compileJava --no-daemon --stacktrace
-        continue-on-error: true
