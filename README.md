@@ -19,6 +19,16 @@ Lucky Blocks chaotiques à thèmes, système de **chance (-100…+100)**, quête
 ./gradlew :neoforge:build
 ```
 
+## Textures (sans Photoshop / Aseprite obligatoire)
+
+```bash
+pip install -r tools/requirements.txt
+python3 tools/generate_textures.py      # 16×16 + icon
+python3 tools/upscale_textures.py       # optionnel : 32×32 dans textures/block_hd/
+```
+
+Détails : `docs/textures/README.md`
+
 ## Documentation
 
 - Fiche génération exemple : `docs/GENERATION_BOULANGERIE.md`
