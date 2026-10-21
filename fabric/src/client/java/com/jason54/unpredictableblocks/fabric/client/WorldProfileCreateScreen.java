@@ -2,7 +2,7 @@ package com.jason54.unpredictableblocks.fabric.client;
 
 import com.jason54.unpredictableblocks.world.NextWorldProfileStorage;
 import com.jason54.unpredictableblocks.world.WorldPlayMode;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -53,10 +53,10 @@ public class WorldProfileCreateScreen extends Screen {
     }
 
     @Override
-    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        super.render(graphics, mouseX, mouseY, partialTick);
-        graphics.drawCenteredString(font, title, width / 2, 15, 0xFFFFFF);
-        graphics.drawCenteredString(
+    public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+        super.extractRenderState(graphics, mouseX, mouseY, a);
+        graphics.centeredText(font, title, width / 2, 15, 0xFFFFFF);
+        graphics.centeredText(
                 font,
                 Component.literal("Pick a mode before Create World"),
                 width / 2,

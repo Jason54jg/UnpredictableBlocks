@@ -7,12 +7,44 @@ base {
     archivesName = "${rootProject.archives_base_name}-neoforge"
 }
 
+sourceSets {
+    client {
+        compileClasspath += sourceSets.main.compileClasspath
+        runtimeClasspath += sourceSets.main.runtimeClasspath
+        compileClasspath += sourceSets.main.output
+        runtimeClasspath += sourceSets.main.output
+    }
+}
+
 dependencies {
     implementation project(':common')
 }
 
 neoForge {
     version = rootProject.neoforge_version
+
+    addModdingDependenciesTo sourceSets.client
+
+    mods {
+        unpredictableblocks {
+            sourceSet sourceSets.main
+        }
+        unpredictableblocks_client {
+            sourceSet sourceSets.main
+            sourceSet sourceSets.client
+        }
+    }
+
+    runs {
+        configureEach {
+            loadedMods = [mods.unpredictableblocks]
+        }
+        client {
+            client()
+            sourceSet = sourceSets.client
+            loadedMods = [mods.unpredictableblocks_client]
+        }
+    }
 }
 
 java {
@@ -24,4 +56,8 @@ java {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+}
+
+jar {
+    from sourceSets.client.output
 }
