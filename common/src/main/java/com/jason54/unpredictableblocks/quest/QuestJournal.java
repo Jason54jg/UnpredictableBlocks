@@ -24,6 +24,7 @@ public final class QuestJournal {
             player.sendSystemMessage(Component.literal(mark + " ").append(title).append(Component.literal(disabled)));
         }
         QuestCollection.tryAwardCollector(player);
+        QuestMilestones.checkAfterQuest(player);
     }
 
     private static boolean isQuestDone(ServerPlayer player, LuckyTheme theme) {

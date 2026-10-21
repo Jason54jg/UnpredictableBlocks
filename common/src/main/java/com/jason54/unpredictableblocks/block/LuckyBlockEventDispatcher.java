@@ -9,6 +9,7 @@ import com.jason54.unpredictableblocks.quest.CasinoJackpot;
 import com.jason54.unpredictableblocks.quest.JdrDiceRoll;
 import com.jason54.unpredictableblocks.quest.PlayerQuestData;
 import com.jason54.unpredictableblocks.structure.StructurePlacer;
+import com.jason54.unpredictableblocks.world.ChunkLuckAura;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -38,6 +39,8 @@ public final class LuckyBlockEventDispatcher {
             player.sendSystemMessage(Component.literal("§7Événement ignoré — thème désactivé : " + theme.id()));
             return;
         }
+
+        ChunkLuckAura.onLuckyBreak(level, origin, player);
 
         LuckResolver.ResolvedOutcome effective = outcome;
         if (theme == LuckyTheme.JDR_D20) {

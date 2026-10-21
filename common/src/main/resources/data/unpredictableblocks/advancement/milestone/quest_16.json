@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": { "id": "unpredictableblocks:jeton_or_vip" },
+    "title": {
+      "translate": "advancements.unpredictableblocks.milestone.quest_16.title",
+      "fallback": "Expert Absurde"
+    },
+    "description": {
+      "translate": "advancements.unpredictableblocks.milestone.quest_16.description",
+      "fallback": "Compléter 16 quêtes thématiques."
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "unpredictableblocks:milestone/quest_8",
+  "criteria": {
+    "tier": { "trigger": "minecraft:impossible" }
+  },
+  "requirements": [["tier"]],
+  "rewards": {
+    "loot": ["unpredictableblocks:rewards/milestone_16"]
+  }
+}

@@ -27,6 +27,7 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.CLE_USB_HACKER.get());
                         output.accept(ModItems.SHAKER_PROT.get());
                         output.accept(ModItems.CLE_MOLETTE_LEGENDAIRE.get());
+                        output.accept(ModItems.LUCKY_MYSTERE.get());
                         output.accept(ModItems.JOURNAL_QUETES.get());
                         output.accept(ModItems.JETON_VIP.get());
                         output.accept(ModItems.LUCK_EMERALD_DUST.get());

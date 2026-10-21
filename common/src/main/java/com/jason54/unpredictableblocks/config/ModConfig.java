@@ -63,16 +63,21 @@ public final class ModConfig {
                 themes.put(theme.id(), ThemeSpawn.forTheme(theme));
             }
             return new UnpredictableBlocksConfig(
-                    new Meta("26.1.2,26.2,26.3", 0, null),
+                    new Meta("26.1.2,26.2,26.3", 0, null, null),
                     Spawn.defaults(),
                     themes
             );
         }
     }
 
-    public record Meta(String supportedVersions, int defaultBlockLuck, Boolean showLuckHud) {
+    public record Meta(String supportedVersions, int defaultBlockLuck, Boolean showLuckHud, Integer chunkAuraThreshold) {
         public boolean showLuckHudOrDefault() {
             return showLuckHud == null || showLuckHud;
+        }
+
+        /** Cassages Lucky par chunk avant aura ; 0 désactive. */
+        public int chunkAuraThresholdOrDefault() {
+            return chunkAuraThreshold == null ? 5 : Math.max(0, chunkAuraThreshold);
         }
     }
 

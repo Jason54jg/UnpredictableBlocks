@@ -10,6 +10,7 @@ import com.jason54.unpredictableblocks.item.JetonVipItem;
 import com.jason54.unpredictableblocks.item.ShakerProtItem;
 import com.jason54.unpredictableblocks.item.LoreItem;
 import com.jason54.unpredictableblocks.item.LuckyBlockItem;
+import com.jason54.unpredictableblocks.item.MysteryLuckyItem;
 import com.jason54.unpredictableblocks.item.QuestJournalItem;
 import com.jason54.unpredictableblocks.item.ThemedGearHelper;
 import com.jason54.unpredictableblocks.item.UsableLuckItem;
@@ -67,6 +68,12 @@ public final class ModItems {
                 ThemedGearHelper.enchant(stack, ThemedGearHelper.efficiency(), 4);
                 ThemedGearHelper.enchant(stack, ThemedGearHelper.unbreaking(), 3);
                 ThemedGearHelper.enchant(stack, ThemedGearHelper.knockback(), 2);
+            }));
+
+    public static final RegistrySupplier<Item> LUCKY_MYSTERE = ITEMS.register("lucky_mystere", () ->
+            new MysteryLuckyItem(new Item.Properties(), stack -> {
+                ThemedGearHelper.name(stack, "Lucky Block Mystère");
+                ThemedGearHelper.lore(stack, "Clic droit : thème aléatoire.", "Recharge 30s.");
             }));
 
     public static final RegistrySupplier<Item> JOURNAL_QUETES = ITEMS.register("journal_quetes", () ->

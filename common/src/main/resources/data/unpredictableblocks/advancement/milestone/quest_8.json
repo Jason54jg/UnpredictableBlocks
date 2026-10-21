@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": { "id": "unpredictableblocks:lucky_mystere" },
+    "title": {
+      "translate": "advancements.unpredictableblocks.milestone.quest_8.title",
+      "fallback": "Apprenti du Chaos"
+    },
+    "description": {
+      "translate": "advancements.unpredictableblocks.milestone.quest_8.description",
+      "fallback": "Compléter 8 quêtes thématiques."
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "unpredictableblocks:root",
+  "criteria": {
+    "tier": { "trigger": "minecraft:impossible" }
+  },
+  "requirements": [["tier"]],
+  "rewards": {
+    "loot": ["unpredictableblocks:rewards/milestone_8"]
+  }
+}

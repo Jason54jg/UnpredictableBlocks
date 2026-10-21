@@ -70,6 +70,7 @@ public final class UnpredictableBlocksCommands {
                                         player.getInventory().add(new net.minecraft.world.item.ItemStack(ModBlocks.get(theme)));
                                     }
                                     player.getInventory().add(new net.minecraft.world.item.ItemStack(ModItems.JOURNAL_QUETES.get()));
+                                    player.getInventory().add(new net.minecraft.world.item.ItemStack(ModItems.LUCKY_MYSTERE.get(), 3));
                                     return 1;
                                 }))
                         .then(Commands.literal("reload")

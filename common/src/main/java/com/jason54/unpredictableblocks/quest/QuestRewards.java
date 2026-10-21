@@ -14,6 +14,9 @@ public final class QuestRewards {
         AdvancementHolder advancement = ServerLevels.of(player).getServer().getAdvancements().get(id);
         if (advancement != null) {
             player.getAdvancements().award(advancement, criterion);
+            if (advancementPath.startsWith("quest/")) {
+                QuestMilestones.checkAfterQuest(player);
+            }
         }
     }
 

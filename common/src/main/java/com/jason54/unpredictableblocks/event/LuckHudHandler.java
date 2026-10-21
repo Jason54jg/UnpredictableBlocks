@@ -1,6 +1,8 @@
 package com.jason54.unpredictableblocks.event;
 
 import com.jason54.unpredictableblocks.config.ModConfig;
+import com.jason54.unpredictableblocks.util.ServerLevels;
+import com.jason54.unpredictableblocks.world.ChunkLuckAura;
 import com.jason54.unpredictableblocks.item.LuckyBlockItem;
 import com.jason54.unpredictableblocks.luck.PlayerLuckStorage;
 import dev.architectury.event.events.common.TickEvent;
@@ -32,7 +34,8 @@ public final class LuckHudHandler {
                     held = " §8| §fBloc §b" + formatLuck(blockLuck);
                 }
             }
-            sp.sendOverlayMessage(Component.literal("§bLuck §f" + formatLuck(modifier) + held));
+            String aura = ChunkLuckAura.hudSuffix(ServerLevels.of(sp), sp.blockPosition());
+            sp.sendOverlayMessage(Component.literal("§bLuck §f" + formatLuck(modifier) + held + aura));
         });
     }
 

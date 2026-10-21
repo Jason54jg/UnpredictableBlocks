@@ -11,7 +11,8 @@ Lucky Blocks chaotiques à thèmes, système de **chance (-100…+100)**, quête
 - **Spawn** : `config/unpredictableblocks.json`, hook Architectury `CHUNK_LOAD` + marqueurs par chunk.
 - **Événements** : loot tables + `ThemeEventEffects` + structures NBT (`StructurePlacer`).
 - **Quêtes** : advancements sous `data/unpredictableblocks/advancement/quest/` + **Journal des quêtes** (item).
-- **HUD Luck** (barre d’action) et **config** `themes.<id>.enabled` / `meta.showLuckHud` dans `unpredictableblocks.json`.
+- **HUD Luck** (barre d’action) et **config** `themes.<id>.enabled` / `meta.showLuckHud` / `meta.chunkAuraThreshold` dans `unpredictableblocks.json`.
+- **Paliers quêtes** 8/16/24, **Lucky mystère**, **aura de chunk**, **pari Luck** (sneak + poussière d’émeraude en off-hand au cassage).
 
 ## Build
 

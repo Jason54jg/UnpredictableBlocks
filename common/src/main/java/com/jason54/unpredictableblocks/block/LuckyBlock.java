@@ -5,7 +5,11 @@ import com.jason54.unpredictableblocks.block.entity.LuckyBlockEntity;
 import com.jason54.unpredictableblocks.luck.LuckResolver;
 import com.jason54.unpredictableblocks.luck.LuckStat;
 import com.jason54.unpredictableblocks.luck.PlayerLuckStorage;
+import com.jason54.unpredictableblocks.registry.ModItems;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
+import com.jason54.unpredictableblocks.world.ChunkLuckAura;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.item.ItemStack;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -61,11 +65,33 @@ public class LuckyBlock extends BaseEntityBlock {
                     serverPlayer.sendSystemMessage(Component.literal(
                             "§7Thème « " + theme.id() + " » désactivé (unpredictableblocks.json)."));
                 } else {
+                    int aura = ChunkLuckAura.luckModifier(serverLevel, pos);
+                    blockLuck = blockLuck.add(aura);
+                    int bet = consumeLuckBet(serverPlayer);
+                    if (bet != 0) {
+                        blockLuck = blockLuck.add(bet);
+                        serverPlayer.sendSystemMessage(Component.literal("§ePari Luck : §b+" + bet + " §esur ce cassage !"));
+                    }
                     LuckResolver.ResolvedOutcome outcome = LuckResolver.resolve(blockLuck, playerLuck, serverLevel.getRandom());
                     LuckyBlockEventDispatcher.dispatch(serverLevel, serverPlayer, pos, theme, outcome);
                 }
             }
         }
         return super.playerWillDestroy(level, pos, state, player);
+    }
+
+    /** Sneak + poussière d'émeraude en main secondaire : +25 luck effectif (1 consommée). */
+    private static int consumeLuckBet(ServerPlayer player) {
+        if (!player.isShiftKeyDown()) {
+            return 0;
+        }
+        ItemStack off = player.getItemInHand(InteractionHand.OFF_HAND);
+        if (!off.is(ModItems.LUCK_EMERALD_DUST.get())) {
+            return 0;
+        }
+        if (!player.getAbilities().instabuild) {
+            off.shrink(1);
+        }
+        return 25;
     }
 }
