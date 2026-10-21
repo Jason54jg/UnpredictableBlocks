@@ -1,0 +1,34 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "unpredictableblocks:luck_emerald_dust",
+          "functions": [{ "function": "minecraft:set_count", "count": 8 }]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "unpredictableblocks:lucky_mystere",
+          "functions": [{ "function": "minecraft:set_count", "count": 5 }]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "unpredictableblocks:jeton_or_vip",
+          "functions": [{ "function": "minecraft:set_count", "count": 2 }]
+        }
+      ]
+    }
+  ]
+}

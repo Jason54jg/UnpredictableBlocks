@@ -28,5 +28,8 @@ public final class QuestMilestones {
         if (done >= 24) {
             QuestRewards.complete(player, "milestone/quest_24", "tier");
         }
+        if (done >= LuckyTheme.values().length) {
+            QuestRewards.complete(player, "milestone/quest_32", "tier");
+        }
     }
 }

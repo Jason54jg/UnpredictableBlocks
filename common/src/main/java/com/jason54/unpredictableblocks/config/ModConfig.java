@@ -89,10 +89,14 @@ public final class ModConfig {
             Integer malusStreakLength,
             Integer malusStreakLuckBonus,
             Integer themeMasterBreaks,
-            Integer missedRerollSeconds
+            Integer missedRerollSeconds,
+            Integer luckBetAmount,
+            Double ambientParticleRadius,
+            Integer ambientParticleIntervalTicks,
+            Boolean useModTierSounds
     ) {
         static Gameplay defaults() {
-            return new Gameplay(0.12, 120, 3, -58, -50, 3, 5, 10, 300);
+            return new Gameplay(0.12, 120, 3, -58, -50, 3, 5, 10, 300, 25, 6.0, 15, true);
         }
 
         public double cardDropOnHighOrDefault() {
@@ -134,6 +138,22 @@ public final class ModConfig {
         public long missedRerollTicksOrDefault() {
             int seconds = missedRerollSeconds == null ? 300 : Math.max(30, missedRerollSeconds);
             return seconds * 20L;
+        }
+
+        public int luckBetAmountOrDefault() {
+            return luckBetAmount == null ? 25 : Math.clamp(luckBetAmount, 1, 100);
+        }
+
+        public double ambientParticleRadiusOrDefault() {
+            return ambientParticleRadius == null ? 6.0 : Math.clamp(ambientParticleRadius, 2.0, 16.0);
+        }
+
+        public int ambientParticleIntervalTicksOrDefault() {
+            return ambientParticleIntervalTicks == null ? 15 : Math.clamp(ambientParticleIntervalTicks, 5, 100);
+        }
+
+        public boolean useModTierSoundsOrDefault() {
+            return useModTierSounds == null || useModTierSounds;
         }
     }
 

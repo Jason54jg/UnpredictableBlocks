@@ -1,6 +1,8 @@
 package com.jason54.unpredictableblocks.quest;
 
 import com.jason54.unpredictableblocks.registry.ModItems;
+import com.jason54.unpredictableblocks.registry.ModSounds;
+import net.minecraft.sounds.SoundSource;
 import dev.architectury.event.EventResult;
 import dev.architectury.event.events.common.PlayerEvent;
 import net.minecraft.server.level.ServerPlayer;
@@ -26,6 +28,16 @@ public final class QuestEventHandler {
         if (!held.is(ModItems.MARTEAU_BONK.get())) {
             return;
         }
+        serverPlayer.level().playSound(
+                null,
+                target.getX(),
+                target.getY(),
+                target.getZ(),
+                ModSounds.BONK.get(),
+                SoundSource.PLAYERS,
+                1.0f,
+                0.9f + serverPlayer.getRandom().nextFloat() * 0.2f
+        );
         int bonks = PlayerQuestData.incrementBonk(serverPlayer);
         if (bonks >= 50) {
             QuestRewards.complete(serverPlayer, "quest/invasion_memes", "completed");

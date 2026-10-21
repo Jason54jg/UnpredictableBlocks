@@ -105,6 +105,12 @@ public final class UnpredictableBlocksCommands {
                                                     + " LOW → +" + g.malusStreakLuckBonusOrDefault() + " luck"
                                                     + " §7| VIP TTL §f" + (g.missedRerollTicksOrDefault() / 20) + "s"
                                     ), false);
+                                    ctx.getSource().sendSuccess(() -> Component.literal(
+                                            "§7pari sneak+dust §f+" + g.luckBetAmountOrDefault() + " luck"
+                                                    + " §7| ambient §f" + g.ambientParticleRadiusOrDefault() + "m / "
+                                                    + g.ambientParticleIntervalTicksOrDefault() + "t"
+                                                    + " §7| sons mod §f" + g.useModTierSoundsOrDefault()
+                                    ), false);
                                     return 1;
                                 }))
                         .then(Commands.literal("stats")

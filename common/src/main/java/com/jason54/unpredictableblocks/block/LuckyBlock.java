@@ -1,6 +1,7 @@
 package com.jason54.unpredictableblocks.block;
 
 import com.jason54.unpredictableblocks.block.entity.LuckyBlockEntity;
+import com.jason54.unpredictableblocks.config.ModConfig;
 import com.jason54.unpredictableblocks.luck.LuckResolver;
 import com.jason54.unpredictableblocks.luck.LuckStat;
 import com.jason54.unpredictableblocks.luck.LuckTier;
@@ -97,6 +98,6 @@ public class LuckyBlock extends BaseEntityBlock {
         if (!player.getAbilities().instabuild) {
             off.shrink(1);
         }
-        return 25;
+        return ModConfig.gameplay().luckBetAmountOrDefault();
     }
 }

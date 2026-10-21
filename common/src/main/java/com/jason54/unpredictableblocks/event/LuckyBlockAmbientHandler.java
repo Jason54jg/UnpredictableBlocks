@@ -1,6 +1,7 @@
 package com.jason54.unpredictableblocks.event;
 
 import com.jason54.unpredictableblocks.block.entity.LuckyBlockEntity;
+import com.jason54.unpredictableblocks.config.ModConfig;
 import com.jason54.unpredictableblocks.util.ServerLevels;
 import dev.architectury.event.events.common.TickEvent;
 import net.minecraft.core.BlockPos;
@@ -19,11 +20,13 @@ public final class LuckyBlockAmbientHandler {
             if (player.level().isClientSide() || !(player instanceof ServerPlayer sp)) {
                 return;
             }
-            if (sp.tickCount % 15 != 0) {
+            int interval = ModConfig.gameplay().ambientParticleIntervalTicksOrDefault();
+            if (interval <= 0 || sp.tickCount % interval != 0) {
                 return;
             }
             ServerLevel level = ServerLevels.of(sp);
-            AABB box = sp.getBoundingBox().inflate(6.0);
+            double radius = ModConfig.gameplay().ambientParticleRadiusOrDefault();
+            AABB box = sp.getBoundingBox().inflate(radius);
             BlockPos.betweenClosedStream(
                     BlockPos.containing(box.minX, box.minY, box.minZ),
                     BlockPos.containing(box.maxX, box.maxY, box.maxZ)

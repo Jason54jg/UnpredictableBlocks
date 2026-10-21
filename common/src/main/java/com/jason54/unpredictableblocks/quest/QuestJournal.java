@@ -18,8 +18,9 @@ public final class QuestJournal {
             }
         }
         int cards = CardCollection.uniqueCount(player);
+        int masters = ThemeMasterMilestones.countMasters(player);
         player.sendSystemMessage(Component.literal(
-                "§6§lJournal des quêtes §8(" + done + "/32) §7| §bCartes §8(" + cards + "/32)"
+                "§6§lJournal §8Q" + done + "/32 §bC" + cards + "/32 §6M" + masters + "/32"
         ));
         for (LuckyTheme theme : LuckyTheme.values()) {
             String mark = isQuestDone(player, theme) ? "§a✔" : "§7○";
@@ -37,6 +38,7 @@ public final class QuestJournal {
         QuestCollection.tryAwardCollector(player);
         CardCollection.tryAwardCardAlbum(player);
         QuestMilestones.checkAfterQuest(player);
+        ThemeMasterMilestones.checkAfterMaster(player);
     }
 
     private static boolean isQuestDone(ServerPlayer player, LuckyTheme theme) {

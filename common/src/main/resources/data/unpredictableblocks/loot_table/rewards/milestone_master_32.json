@@ -1,0 +1,50 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "unpredictableblocks:luck_emerald_dust",
+          "functions": [{ "function": "minecraft:set_count", "count": 16 }]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "unpredictableblocks:jeton_or_vip",
+          "functions": [{ "function": "minecraft:set_count", "count": 3 }]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "unpredictableblocks:carte_collection",
+          "functions": [{ "function": "minecraft:set_count", "count": 16 }]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "unpredictableblocks:lucky_multivers_sliders",
+          "functions": [
+            {
+              "function": "minecraft:set_name",
+              "name": { "text": "Lucky Block Chance +100", "color": "gold" }
+            },
+            { "function": "minecraft:set_custom_data", "tag": "{Luck:100}" }
+          ]
+        }
+      ]
+    }
+  ]
+}

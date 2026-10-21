@@ -27,6 +27,10 @@
     "malusStreakLength": 3,
     "malusStreakLuckBonus": 5,
     "themeMasterBreaks": 10,
-    "missedRerollSeconds": 300
+    "missedRerollSeconds": 300,
+    "luckBetAmount": 25,
+    "ambientParticleRadius": 6.0,
+    "ambientParticleIntervalTicks": 15,
+    "useModTierSounds": true
   }
 }

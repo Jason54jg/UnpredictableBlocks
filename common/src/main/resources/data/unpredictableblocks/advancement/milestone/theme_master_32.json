@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": { "id": "unpredictableblocks:carte_collection" },
+    "title": {
+      "translate": "advancements.unpredictableblocks.milestone.theme_master_32.title",
+      "fallback": "Grand Maître des 32 Thèmes"
+    },
+    "description": {
+      "translate": "advancements.unpredictableblocks.milestone.theme_master_32.description",
+      "fallback": "Devenir maître de chacun des 32 thèmes Lucky."
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "unpredictableblocks:milestone/quest_24",
+  "criteria": {
+    "all_masters": { "trigger": "minecraft:impossible" }
+  },
+  "requirements": [["all_masters"]],
+  "rewards": {
+    "loot": ["unpredictableblocks:rewards/milestone_master_32"]
+  }
+}

@@ -24,5 +24,6 @@ public final class ThemeMasterProgress {
         }
         QuestRewards.complete(player, path, "master");
         player.sendSystemMessage(Component.literal("§6Maître du thème §f" + theme.id() + "§6 !"));
+        ThemeMasterMilestones.checkAfterMaster(player);
     }
 }

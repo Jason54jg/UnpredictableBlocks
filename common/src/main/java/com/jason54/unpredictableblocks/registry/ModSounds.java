@@ -13,6 +13,9 @@ public final class ModSounds {
     public static final RegistrySupplier<SoundEvent> BONK = register("bonk");
     public static final RegistrySupplier<SoundEvent> BSOD_BOOT = register("bsod_boot");
     public static final RegistrySupplier<SoundEvent> JUMPSCARE = register("jumpscare");
+    public static final RegistrySupplier<SoundEvent> TIER_HIGH = register("tier_high");
+    public static final RegistrySupplier<SoundEvent> TIER_NEUTRAL = register("tier_neutral");
+    public static final RegistrySupplier<SoundEvent> TIER_LOW = register("tier_low");
 
     private ModSounds() {}
 

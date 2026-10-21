@@ -1,6 +1,8 @@
 package com.jason54.unpredictableblocks.event;
 
 import com.jason54.unpredictableblocks.luck.LuckTier;
+import com.jason54.unpredictableblocks.registry.ModSounds;
+import net.minecraft.sounds.SoundSource;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -107,10 +109,25 @@ public final class ThemeEventEffects {
             player.addEffect(new MobEffectInstance(MobEffects.HASTE, 20 * 30, 4));
         } else if (tier == LuckTier.NEUTRAL) {
             player.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 20 * 3, 0));
+            playAt(player, ModSounds.BSOD_BOOT.get());
         } else {
             player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 20 * 10, 0));
             player.addEffect(new MobEffectInstance(MobEffects.NAUSEA, 20 * 10, 0));
+            playAt(player, ModSounds.BSOD_BOOT.get());
         }
+    }
+
+    private static void playAt(ServerPlayer player, net.minecraft.sounds.SoundEvent sound) {
+        player.level().playSound(
+                null,
+                player.getX(),
+                player.getY(),
+                player.getZ(),
+                sound,
+                SoundSource.PLAYERS,
+                1.0f,
+                1.0f
+        );
     }
 
     private static void applyVolaille(ServerLevel level, BlockPos origin, LuckTier tier) {
@@ -196,6 +213,7 @@ public final class ThemeEventEffects {
 
     private static void applyCauchemar(ServerLevel level, ServerPlayer player, LuckTier tier) {
         if (tier == LuckTier.LOW) {
+            playAt(player, ModSounds.JUMPSCARE.get());
             player.getFoodData().setFoodLevel(0);
             player.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 20 * 60, 1));
             player.addEffect(new MobEffectInstance(MobEffects.MINING_FATIGUE, 20 * 60, 2));
