@@ -1,15 +1,15 @@
 package com.jason54.unpredictableblocks.item;
 
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.PickaxeItem;
-import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.ToolMaterial;
 
 /** Clé à molette — pioche légendaire du thème Plomberie. */
-public class CleMoletteItem extends PickaxeItem {
+public class CleMoletteItem extends Item {
     private final java.util.function.Consumer<ItemStack> stackSetup;
 
     public CleMoletteItem(java.util.function.Consumer<ItemStack> stackSetup) {
-        super(Tiers.NETHERITE, new Properties().stacksTo(1));
+        super(new Properties().stacksTo(1).pickaxe(ToolMaterial.NETHERITE, 1.0f, -2.8f));
         this.stackSetup = stackSetup;
     }
 

@@ -3,7 +3,7 @@ package com.jason54.unpredictableblocks.structure;
 import com.jason54.unpredictableblocks.luck.LuckTier;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
@@ -16,13 +16,13 @@ public final class StructurePlacer {
         if (structureName == null) {
             return;
         }
-        ResourceLocation id = ResourceLocation.fromNamespaceAndPath("unpredictableblocks", structureName);
+        Identifier id = Identifier.fromNamespaceAndPath("unpredictableblocks", structureName);
         StructureTemplate template = level.getStructureManager().get(id).orElse(null);
         if (template == null) {
             return;
         }
         BlockPos placeAt = origin.offset(-template.getSize().getX() / 2, 0, -template.getSize().getZ() / 2);
-        template.placeInWorld(level, placeAt, placeAt, new StructurePlaceSettings(), level.random, 2);
+        template.placeInWorld(level, placeAt, placeAt, new StructurePlaceSettings(), level.getRandom(), 2);
     }
 
     private static String structureFor(LuckyTheme theme, LuckTier tier) {

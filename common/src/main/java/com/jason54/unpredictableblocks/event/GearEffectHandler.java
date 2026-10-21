@@ -14,8 +14,8 @@ public final class GearEffectHandler {
     private GearEffectHandler() {}
 
     public static void register() {
-        TickEvent.PLAYER.register(player -> {
-            if (player.level().isClientSide || !(player instanceof ServerPlayer serverPlayer)) {
+        TickEvent.PLAYER_POST.register(player -> {
+            if (player.level().isClientSide() || !(player instanceof ServerPlayer serverPlayer)) {
                 return;
             }
             var head = serverPlayer.getItemBySlot(EquipmentSlot.HEAD);

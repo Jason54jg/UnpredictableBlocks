@@ -16,9 +16,9 @@ public class CleUsbHackerItem extends LoreItem {
 
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
-        if (!level.isClientSide && player instanceof ServerPlayer serverPlayer) {
-            serverPlayer.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 20 * 30, 2));
-            serverPlayer.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 20 * 30, 1));
+        if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
+            serverPlayer.addEffect(new MobEffectInstance(MobEffects.HASTE, 20 * 30, 2));
+            serverPlayer.addEffect(new MobEffectInstance(MobEffects.SPEED, 20 * 30, 1));
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.CONSUME;

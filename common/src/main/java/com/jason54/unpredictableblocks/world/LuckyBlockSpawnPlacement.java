@@ -33,7 +33,7 @@ public final class LuckyBlockSpawnPlacement {
             }
             BlockPos surface = level.getHeightmapPos(Heightmap.Types.WORLD_SURFACE_WG, sample);
             BlockState state = ModBlocks.get(theme).defaultBlockState();
-            if (level.getBlockState(surface).isAir() && level.getBlockState(surface.below()).isSolidRender(level, surface.below())) {
+            if (level.getBlockState(surface).isAir() && level.getBlockState(surface.below()).isSolidRender()) {
                 level.setBlock(surface, state, 3);
                 if (level.getBlockEntity(surface) instanceof com.jason54.unpredictableblocks.block.entity.LuckyBlockEntity luckyBe) {
                     luckyBe.setLuck(com.jason54.unpredictableblocks.config.ModConfig.get().meta().defaultBlockLuck());
@@ -51,9 +51,9 @@ public final class LuckyBlockSpawnPlacement {
     private static LuckyTheme pickTheme(RandomSource random, ServerLevel level, BlockPos pos) {
         LuckyRarity rarity = rollRarity(random);
         String biomePath = level.getBiome(pos).unwrapKey()
-                .map(key -> key.location().getPath())
+                .map(key -> key.identifier().getPath())
                 .orElse("");
-        boolean night = level.getDayTime() % 24000 > 13000;
+        boolean night = level.getDefaultClockTime() % 24000 > 13000;
         double dimensionFactor = dimensionWeight(level, spawnConfig().dimensions());
 
         double totalWeight = 0;

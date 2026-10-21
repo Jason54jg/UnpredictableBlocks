@@ -18,7 +18,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 public class LuckyBlock extends BaseEntityBlock {
-    public static final MapCodec<LuckyBlock> CODEC = simpleCodec(LuckyBlock::new);
+    public static final MapCodec<LuckyBlock> CODEC = simpleCodec(
+            properties -> new LuckyBlock(LuckyTheme.BOULANGERIE, properties)
+    );
     private final LuckyTheme theme;
 
     public LuckyBlock(LuckyTheme theme, Properties properties) {
@@ -47,8 +49,8 @@ public class LuckyBlock extends BaseEntityBlock {
     }
 
     @Override
-    public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
-        if (!level.isClientSide && level instanceof ServerLevel serverLevel && player instanceof ServerPlayer serverPlayer) {
+    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        if (!level.isClientSide() && level instanceof ServerLevel serverLevel && player instanceof ServerPlayer serverPlayer) {
             BlockEntity be = level.getBlockEntity(pos);
             if (be instanceof LuckyBlockEntity luckyBe) {
                 LuckStat blockLuck = new LuckStat(luckyBe.getLuck());
@@ -57,6 +59,6 @@ public class LuckyBlock extends BaseEntityBlock {
                 LuckyBlockEventDispatcher.dispatch(serverLevel, serverPlayer, pos, theme, outcome);
             }
         }
-        super.playerWillDestroy(level, pos, state, player);
+        return super.playerWillDestroy(level, pos, state, player);
     }
 }

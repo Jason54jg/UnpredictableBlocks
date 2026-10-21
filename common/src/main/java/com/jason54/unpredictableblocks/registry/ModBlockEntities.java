@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 
 public final class ModBlockEntities {
     private static final DeferredRegister<BlockEntityType<?>> ENTITIES =
-            DeferredRegister.create(UnpredictableBlocks.MOD_ID, Registries.BLOCK_ENTITY);
+            DeferredRegister.create(UnpredictableBlocks.MOD_ID, Registries.BLOCK_ENTITY_TYPE);
 
     public static final RegistrySupplier<BlockEntityType<LuckyBlockEntity>> LUCKY_BLOCK =
             ENTITIES.register("lucky_block", () -> {
@@ -20,7 +20,7 @@ public final class ModBlockEntities {
                 for (LuckyTheme theme : LuckyTheme.values()) {
                     blocks[i++] = ModBlocks.get(theme);
                 }
-                return BlockEntityType.Builder.of(LuckyBlockEntity::new, blocks).build(null);
+                return BlockEntityTypeBuilder.of(LuckyBlockEntity::new, blocks);
             });
 
     public static void register() {

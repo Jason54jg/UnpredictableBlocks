@@ -9,7 +9,9 @@ import com.jason54.unpredictableblocks.quest.PlayerQuestData;
 import com.jason54.unpredictableblocks.structure.StructurePlacer;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -47,7 +49,7 @@ public final class LuckyBlockEventDispatcher {
             ));
         }
 
-        ResourceLocation table = ResourceLocation.fromNamespaceAndPath(
+        Identifier table = Identifier.fromNamespaceAndPath(
                 "unpredictableblocks",
                 LuckResolver.lootTablePath(theme, effective)
         );
@@ -58,7 +60,8 @@ public final class LuckyBlockEventDispatcher {
                 .withParameter(LootContextParams.BLOCK_STATE, level.getBlockState(origin))
                 .create(LootContextParamSets.ALL_PARAMS);
 
-        level.getServer().getLootTables().getLootTable(table).getRandomItems(params, player.getInventory()::placeItemBackInInventory);
+        level.getServer().reloadableRegistries().getLootTable(ResourceKey.create(Registries.LOOT_TABLE, table))
+                .getRandomItems(params, player.getInventory()::placeItemBackInInventory);
 
         StructurePlacer.tryPlaceForTheme(level, origin, theme, effective.tier());
         ThemeEventEffects.apply(level, player, origin, theme, effective.tier());

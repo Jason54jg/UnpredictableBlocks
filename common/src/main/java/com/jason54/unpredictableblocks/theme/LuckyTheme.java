@@ -1,6 +1,6 @@
 package com.jason54.unpredictableblocks.theme;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import com.jason54.unpredictableblocks.UnpredictableBlocks;
 
 /**
@@ -48,11 +48,11 @@ public enum LuckyTheme {
         return rarity;
     }
 
-    public ResourceLocation blockId() {
-        return ResourceLocation.fromNamespaceAndPath(UnpredictableBlocks.MOD_ID, "lucky_" + id);
+    public Identifier blockId() {
+        return Identifier.fromNamespaceAndPath(UnpredictableBlocks.MOD_ID, "lucky_" + id);
     }
 
-    public ResourceLocation questId() {
-        return ResourceLocation.fromNamespaceAndPath(UnpredictableBlocks.MOD_ID, "quest/" + id);
+    public Identifier questId() {
+        return Identifier.fromNamespaceAndPath(UnpredictableBlocks.MOD_ID, "quest/" + id);
     }
 }

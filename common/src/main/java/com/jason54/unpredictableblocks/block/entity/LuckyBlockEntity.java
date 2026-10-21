@@ -10,6 +10,8 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
 public class LuckyBlockEntity extends BlockEntity {
     private static final String TAG_THEME = "Theme";
@@ -42,17 +44,15 @@ public class LuckyBlockEntity extends BlockEntity {
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.saveAdditional(tag, registries);
-        tag.putString(TAG_THEME, theme.id());
-        tag.putInt(TAG_LUCK, luck);
+    protected void saveAdditional(ValueOutput output) {
+        output.putString(TAG_THEME, theme.id());
+        output.putInt(TAG_LUCK, luck);
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.loadAdditional(tag, registries);
-        if (tag.contains(TAG_THEME)) {
-            String id = tag.getString(TAG_THEME);
+    protected void loadAdditional(ValueInput input) {
+        String id = input.getStringOr(TAG_THEME, "");
+        if (!id.isEmpty()) {
             for (LuckyTheme candidate : LuckyTheme.values()) {
                 if (candidate.id().equals(id)) {
                     theme = candidate;
@@ -60,7 +60,7 @@ public class LuckyBlockEntity extends BlockEntity {
                 }
             }
         }
-        luck = tag.getInt(TAG_LUCK);
+        luck = input.getIntOr(TAG_LUCK, 0);
     }
 
     @Override

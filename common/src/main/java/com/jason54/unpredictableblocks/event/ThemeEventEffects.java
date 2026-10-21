@@ -11,7 +11,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Silverfish;
-import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.entity.monster.zombie.Zombie;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
@@ -78,7 +78,7 @@ public final class ThemeEventEffects {
             }
         } else {
             player.addEffect(new MobEffectInstance(MobEffects.SPEED, 20 * 30, 2));
-            player.setSecondsOnFire(5);
+            player.setRemainingFireTicks(5 * 20);
         }
     }
 
@@ -100,9 +100,9 @@ public final class ThemeEventEffects {
                 spawnPassive(level, origin, EntityType.CHICKEN);
             }
         } else if (tier == LuckTier.LOW) {
-            var golem = EntityType.IRON_GOLEM.create(level);
+            var golem = EntitySpawnHelper.create(EntityType.IRON_GOLEM, level);
             if (golem != null) {
-                golem.moveTo(Vec3.atBottomCenterOf(origin));
+                golem.setPos(Vec3.atBottomCenterOf(origin));
                 golem.setHealth(500);
                 level.addFreshEntity(golem);
             }
@@ -129,9 +129,10 @@ public final class ThemeEventEffects {
     private static void applyStreamer(ServerLevel level, BlockPos origin, LuckTier tier) {
         if (tier == LuckTier.LOW) {
             for (int i = 0; i < 15; i++) {
-                Zombie zombie = EntityType.ZOMBIE.create(level);
+                Zombie zombie = EntitySpawnHelper.create(EntityType.ZOMBIE, level);
                 if (zombie != null) {
-                    zombie.moveTo(Vec3.atBottomCenterOf(origin).add(level.random.nextInt(8) - 4, 0, level.random.nextInt(8) - 4));
+                    var random = level.getRandom();
+                    zombie.setPos(Vec3.atBottomCenterOf(origin).add(random.nextInt(8) - 4, 0, random.nextInt(8) - 4));
                     level.addFreshEntity(zombie);
                 }
             }
@@ -179,8 +180,8 @@ public final class ThemeEventEffects {
             player.getFoodData().setFoodLevel(0);
             player.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 20 * 60, 1));
             player.addEffect(new MobEffectInstance(MobEffects.MINING_FATIGUE, 20 * 60, 2));
-        } else if (tier == LuckTier.HIGH && player.getRespawnPosition() != null) {
-            var bed = player.getRespawnPosition();
+        } else if (tier == LuckTier.HIGH && player.getRespawnConfig() != null) {
+            var bed = player.getRespawnConfig().respawnData().pos();
             player.teleportTo(bed.getX() + 0.5, bed.getY(), bed.getZ() + 0.5);
         }
     }
@@ -219,9 +220,9 @@ public final class ThemeEventEffects {
     private static void applyComplot(ServerLevel level, BlockPos origin, LuckTier tier) {
         if (tier == LuckTier.LOW) {
             for (int i = 0; i < 3; i++) {
-                EnderMan man = EntityType.ENDERMAN.create(level);
+                EnderMan man = EntitySpawnHelper.create(EntityType.ENDERMAN, level);
                 if (man != null) {
-                    man.moveTo(Vec3.atBottomCenterOf(origin).add(i, 0, 0));
+                    man.setPos(Vec3.atBottomCenterOf(origin).add(i, 0, 0));
                     level.addFreshEntity(man);
                 }
             }
@@ -243,7 +244,7 @@ public final class ThemeEventEffects {
             for (int dx = -3; dx <= 3; dx++) {
                 for (int dz = -3; dz <= 3; dz++) {
                     BlockPos floor = origin.offset(dx, -1, dz);
-                    if (level.getBlockState(floor).isSolidRender(level, floor)) {
+                    if (level.getBlockState(floor).isSolidRender()) {
                         level.setBlockAndUpdate(floor, Blocks.GLOWSTONE.defaultBlockState());
                     }
                 }
@@ -259,9 +260,9 @@ public final class ThemeEventEffects {
             player.teleportTo(origin.getX(), origin.getY() - 30, origin.getZ());
         } else {
             for (int i = 0; i < 10; i++) {
-                Silverfish fish = EntityType.SILVERFISH.create(level);
+                Silverfish fish = EntitySpawnHelper.create(EntityType.SILVERFISH, level);
                 if (fish != null) {
-                    fish.moveTo(Vec3.atBottomCenterOf(origin));
+                    fish.setPos(Vec3.atBottomCenterOf(origin));
                     level.addFreshEntity(fish);
                 }
             }
@@ -300,7 +301,8 @@ public final class ThemeEventEffects {
     private static void applyArtModerne(ServerLevel level, BlockPos origin, LuckTier tier) {
         if (tier == LuckTier.NEUTRAL) {
             for (int i = 0; i < 32; i++) {
-                BlockPos p = origin.offset(level.random.nextInt(8) - 4, level.random.nextInt(3), level.random.nextInt(8) - 4);
+                var random = level.getRandom();
+                BlockPos p = origin.offset(random.nextInt(8) - 4, random.nextInt(3), random.nextInt(8) - 4);
                 level.setBlockAndUpdate(p, Blocks.WHITE_CONCRETE.defaultBlockState());
             }
         }
@@ -385,18 +387,19 @@ public final class ThemeEventEffects {
         level.getEntitiesOfClass(LivingEntity.class, new net.minecraft.world.phys.AABB(origin).inflate(16),
                 e -> e.getType() == EntityType.COW || e.getType() == EntityType.PIG || e.getType() == EntityType.SHEEP)
                 .forEach(e -> {
-                    var copy = e.getType().create(level);
+                    var copy = EntitySpawnHelper.create(e.getType(), level);
                     if (copy != null) {
-                        copy.moveTo(e.getX() + 1, e.getY(), e.getZ());
+                        copy.setPos(e.getX() + 1, e.getY(), e.getZ());
                         level.addFreshEntity(copy);
                     }
                 });
     }
 
     private static void spawnPassive(ServerLevel level, BlockPos origin, EntityType<?> type) {
-        var entity = type.create(level);
+        var entity = EntitySpawnHelper.create(type, level);
         if (entity != null) {
-            entity.moveTo(Vec3.atBottomCenterOf(origin).add(level.random.nextDouble() * 4 - 2, 0, level.random.nextDouble() * 4 - 2));
+            var random = level.getRandom();
+            entity.setPos(Vec3.atBottomCenterOf(origin).add(random.nextDouble() * 4 - 2, 0, random.nextDouble() * 4 - 2));
             level.addFreshEntity(entity);
         }
     }
@@ -422,9 +425,9 @@ public final class ThemeEventEffects {
     }
 
     private static void spawnMonster(ServerLevel level, BlockPos origin, EntityType<?> type) {
-        var entity = type.create(level);
+        var entity = EntitySpawnHelper.create(type, level);
         if (entity != null) {
-            entity.moveTo(Vec3.atBottomCenterOf(origin));
+            entity.setPos(Vec3.atBottomCenterOf(origin));
             level.addFreshEntity(entity);
         }
     }

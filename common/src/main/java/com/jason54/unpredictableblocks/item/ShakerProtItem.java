@@ -16,7 +16,7 @@ public class ShakerProtItem extends LoreItem {
 
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
-        if (level.isClientSide || !(player instanceof ServerPlayer serverPlayer)) {
+        if (level.isClientSide() || !(player instanceof ServerPlayer serverPlayer)) {
             return InteractionResult.CONSUME;
         }
         if (!ItemCooldowns.tryConsume(serverPlayer, ItemCooldowns.SHAKER, ItemCooldowns.SHAKER_TICKS)) {

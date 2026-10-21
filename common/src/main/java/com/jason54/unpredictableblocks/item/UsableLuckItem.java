@@ -18,7 +18,7 @@ public class UsableLuckItem extends Item {
 
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
-        if (!level.isClientSide && player instanceof ServerPlayer serverPlayer) {
+        if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
             PlayerLuckStorage.addModifier(serverPlayer, luckDelta);
             if (!player.getAbilities().instabuild) {
                 player.getItemInHand(hand).shrink(1);

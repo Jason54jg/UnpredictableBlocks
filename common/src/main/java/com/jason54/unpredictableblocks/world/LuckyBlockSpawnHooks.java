@@ -1,6 +1,6 @@
 package com.jason54.unpredictableblocks.world;
 
-import dev.architectury.event.events.level.LevelEvents;
+import dev.architectury.event.events.common.ChunkEvent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.chunk.LevelChunk;
 
@@ -8,8 +8,8 @@ public final class LuckyBlockSpawnHooks {
     private LuckyBlockSpawnHooks() {}
 
     public static void register() {
-        LevelEvents.CHUNK_LOAD.register((level, chunk) -> {
-            if (level.isClientSide() || !(level instanceof ServerLevel serverLevel) || !(chunk instanceof LevelChunk levelChunk)) {
+        ChunkEvent.LOAD.register((levelChunk, level, newChunk) -> {
+            if (level.isClientSide() || !(level instanceof ServerLevel serverLevel)) {
                 return;
             }
             var chunkPos = levelChunk.getPos();

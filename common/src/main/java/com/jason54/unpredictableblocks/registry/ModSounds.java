@@ -18,7 +18,7 @@ public final class ModSounds {
 
     private static RegistrySupplier<SoundEvent> register(String id) {
         return SOUNDS.register(id, () -> SoundEvent.createVariableRangeEvent(
-                net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(UnpredictableBlocks.MOD_ID, id)));
+                net.minecraft.resources.Identifier.fromNamespaceAndPath(UnpredictableBlocks.MOD_ID, id)));
     }
 
     public static void register() {

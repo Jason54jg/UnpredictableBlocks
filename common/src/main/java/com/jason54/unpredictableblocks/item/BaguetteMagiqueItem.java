@@ -1,15 +1,15 @@
 package com.jason54.unpredictableblocks.item;
 
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.ToolMaterial;
 
 /** La Baguette — épée/bâton à knockback extrême. */
-public class BaguetteMagiqueItem extends SwordItem {
+public class BaguetteMagiqueItem extends Item {
     private final java.util.function.Consumer<ItemStack> stackSetup;
 
     public BaguetteMagiqueItem(java.util.function.Consumer<ItemStack> stackSetup) {
-        super(Tiers.WOOD, new Properties().stacksTo(1));
+        super(new Properties().stacksTo(1).sword(ToolMaterial.WOOD, 3.0f, -2.4f));
         this.stackSetup = stackSetup;
     }
 

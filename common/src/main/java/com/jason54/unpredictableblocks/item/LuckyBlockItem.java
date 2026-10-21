@@ -25,13 +25,13 @@ public class LuckyBlockItem extends BlockItem {
         if (custom == null) {
             return 0;
         }
-        return LuckStat.clamp(custom.copyTag().getInt(TAG_LUCK));
+        return LuckStat.clamp(custom.copyTag().getIntOr(TAG_LUCK, 0));
     }
 
     @Override
     protected boolean placeBlock(BlockPlaceContext context, BlockState state) {
         boolean placed = super.placeBlock(context, state);
-        if (!placed || context.getLevel().isClientSide) {
+        if (!placed || context.getLevel().isClientSide()) {
             return placed;
         }
         applyLuckFromStack(context.getLevel(), context.getClickedPos(), context.getItemInHand());
@@ -47,7 +47,7 @@ public class LuckyBlockItem extends BlockItem {
             BlockState state
     ) {
         boolean updated = super.updateCustomBlockEntityTag(pos, level, player, stack, state);
-        if (!level.isClientSide) {
+        if (!level.isClientSide()) {
             applyLuckFromStack(level, pos, stack);
         }
         return updated;

@@ -14,7 +14,7 @@ public final class ModCreativeTabs {
             DeferredRegister.create(UnpredictableBlocks.MOD_ID, Registries.CREATIVE_MODE_TAB);
 
     public static final RegistrySupplier<CreativeModeTab> MAIN = TABS.register("main", () ->
-            CreativeModeTab.builder()
+            CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
                     .title(Component.translatable("itemGroup.unpredictableblocks.main"))
                     .icon(() -> new ItemStack(ModBlocks.get(LuckyTheme.INVASION_MEMES)))
                     .displayItems((parameters, output) -> {

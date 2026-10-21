@@ -31,7 +31,7 @@ public class JetonVipItem extends LoreItem {
     @Override
     public InteractionResult useOn(UseOnContext context) {
         Level level = context.getLevel();
-        if (level.isClientSide || !(level instanceof ServerLevel serverLevel) || !(context.getPlayer() instanceof ServerPlayer player)) {
+        if (level.isClientSide() || !(level instanceof ServerLevel serverLevel) || !(context.getPlayer() instanceof ServerPlayer player)) {
             return InteractionResult.SUCCESS;
         }
         BlockPos pos = context.getClickedPos().relative(context.getClickedFace());
@@ -59,7 +59,7 @@ public class JetonVipItem extends LoreItem {
 
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
-        if (level.isClientSide || !(player instanceof ServerPlayer serverPlayer) || !(level instanceof ServerLevel serverLevel)) {
+        if (level.isClientSide() || !(player instanceof ServerPlayer serverPlayer) || !(level instanceof ServerLevel serverLevel)) {
             return InteractionResult.CONSUME;
         }
         if (!ItemCooldowns.tryConsume(serverPlayer, ItemCooldowns.JETON, ItemCooldowns.JETON_TICKS)) {
@@ -67,7 +67,7 @@ public class JetonVipItem extends LoreItem {
         }
 
         Optional<LuckyTheme> theme = PlayerQuestData.consumeMissedReroll(serverPlayer);
-        LuckyTheme chosen = theme.orElseGet(() -> LuckyTheme.values()[level.random.nextInt(LuckyTheme.values().length)]);
+        LuckyTheme chosen = theme.orElseGet(() -> LuckyTheme.values()[level.getRandom().nextInt(LuckyTheme.values().length)]);
 
         var forced = new LuckResolver.ResolvedOutcome(LuckTier.HIGH, "high");
         LuckyBlockEventDispatcher.dispatch(serverLevel, serverPlayer, serverPlayer.blockPosition(), chosen, forced);

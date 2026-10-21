@@ -1,26 +1,18 @@
 plugins {
-    id 'dev.architectury.loom' version '1.10-SNAPSHOT'
-    id 'architectury-plugin' version '3.4-SNAPSHOT'
+    id 'java-library'
+    id 'net.neoforged.moddev' version '2.0.148'
 }
 
 base {
     archivesName = "${rootProject.archives_base_name}-neoforge"
 }
 
-architectury {
-    platformSetupLoomIde()
-    neoForge()
-}
-
-loom {
-    silentMojangMappingsLicense()
-}
-
 dependencies {
-    minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
-    mappings loom.officialMojangMappings()
-    neoForge "net.neoforged:neoforge:${rootProject.neoforge_version}"
-    modImplementation project(':common')
+    implementation project(':common')
+}
+
+neoForge {
+    version = rootProject.neoforge_version
 }
 
 java {
