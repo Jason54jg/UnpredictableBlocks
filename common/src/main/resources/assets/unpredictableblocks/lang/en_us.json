@@ -244,5 +244,22 @@
   "message.unpredictableblocks.command.gameplay_line3": "malus streak %1$s LOW → +%2$s luck | V.I.P. TTL %3$ss",
   "message.unpredictableblocks.command.gameplay_line4": "sneak+dust bet +%1$s | ambient %2$sm / %3$st | mod sounds %4$s",
   "message.unpredictableblocks.yes": "yes",
-  "message.unpredictableblocks.no": "no"
+  "message.unpredictableblocks.no": "no",
+  "message.unpredictableblocks.world.setup_header": "Choose UnpredictableBlocks mode for this world (click):",
+  "message.unpredictableblocks.world.setup_normal": "[ Normal generation ]",
+  "message.unpredictableblocks.world.setup_easy": "[ Easy — more Lucky spawns, +5 luck ]",
+  "message.unpredictableblocks.world.setup_hard": "[ Hard — fewer spawns, -5 luck ]",
+  "message.unpredictableblocks.world.setup_hardcore": "[ Hardcore profile ]",
+  "message.unpredictableblocks.world.setup_oneblock_solo": "[ OneBlock — 1 player ]",
+  "message.unpredictableblocks.world.setup_oneblock_duo": "[ OneBlock — 2 players ]",
+  "message.unpredictableblocks.world.setup_oneblock_trio": "[ OneBlock — 3 players ]",
+  "message.unpredictableblocks.world.setup_oneblock_squad": "[ OneBlock — 4 players ]",
+  "message.unpredictableblocks.world.setup_pending_hint": "Pending profile for next world: %1$s (%2$s players)",
+  "message.unpredictableblocks.world.profile_applied": "World profile applied: %1$s (OneBlock slots: %2$s)",
+  "message.unpredictableblocks.world.next_saved": "Next world will use profile %1$s (%2$s players). Create the world now.",
+  "message.unpredictableblocks.world.next_peek": "Queued profile: %1$s (%2$s players)",
+  "message.unpredictableblocks.world.show": "Configured: %1$s | mode %2$s | OneBlock %3$s | spawn x%4$s | default luck %5$s",
+  "message.unpredictableblocks.world.unknown_mode": "Unknown profile: %s",
+  "world_preset.unpredictableblocks.ub_normal": "UnpredictableBlocks — Normal",
+  "world_preset.unpredictableblocks.ub_oneblock_void": "UnpredictableBlocks — OneBlock (void)"
 }
