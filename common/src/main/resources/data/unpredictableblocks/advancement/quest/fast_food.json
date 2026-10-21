@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "id": "unpredictableblocks:lucky_fast_food"
+    },
+    "title": {
+      "translate": "advancements.unpredictableblocks.fast_food.title",
+      "fallback": "Livreur de l'Extr\u00eame"
+    },
+    "description": {
+      "translate": "advancements.unpredictableblocks.fast_food.description",
+      "fallback": "Intercepter le livreur en <10s"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "unpredictableblocks:root",
+  "criteria": {
+    "completed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "loot": [
+      "unpredictableblocks:rewards/quest_fast_food"
+    ]
+  }
+}

@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "id": "wtf_luckyblocks",
+  "id": "unpredictableblocks",
   "version": "${version}",
-  "name": "WTF Lucky Blocks",
+  "name": "UnpredictableBlocks",
   "description": "Lucky Blocks chaotiques avec système de chance, quêtes et spawn naturel.",
   "authors": ["Jason54"],
   "license": "MIT",
-  "icon": "assets/wtf_luckyblocks/icon.png",
+  "icon": "assets/unpredictableblocks/icon.png",
   "environment": "*",
   "entrypoints": {
-    "main": ["com.jason54.wtfluckyblocks.fabric.WtfLuckyBlocksFabric"]
+    "main": ["com.jason54.unpredictableblocks.fabric.UnpredictableBlocksFabric"]
   },
   "depends": {
     "fabricloader": ">=0.17.0",

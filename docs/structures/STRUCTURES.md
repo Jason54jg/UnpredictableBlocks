@@ -2,7 +2,7 @@
 
 Placer les fichiers `.nbt` dans :
 
-`common/src/main/resources/data/wtf_luckyblocks/structures/<id>.nbt`
+`common/src/main/resources/data/unpredictableblocks/structures/<id>.nbt`
 
 | ID structure | Thème | Notes build |
 |--------------|-------|-------------|

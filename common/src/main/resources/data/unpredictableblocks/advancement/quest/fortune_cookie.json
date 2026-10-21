@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "id": "unpredictableblocks:lucky_fortune_cookie"
+    },
+    "title": {
+      "translate": "advancements.unpredictableblocks.fortune_cookie.title",
+      "fallback": "Ma\u00eetre de la Sagesse"
+    },
+    "description": {
+      "translate": "advancements.unpredictableblocks.fortune_cookie.description",
+      "fallback": "5 Billets de la Destin\u00e9e"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "unpredictableblocks:root",
+  "criteria": {
+    "completed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "loot": [
+      "unpredictableblocks:rewards/quest_fortune_cookie"
+    ]
+  }
+}

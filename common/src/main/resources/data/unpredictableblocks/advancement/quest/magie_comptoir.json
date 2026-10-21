@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "id": "unpredictableblocks:lucky_magie_comptoir"
+    },
+    "title": {
+      "translate": "advancements.unpredictableblocks.magie_comptoir.title",
+      "fallback": "Prestidigitateur"
+    },
+    "description": {
+      "translate": "advancements.unpredictableblocks.magie_comptoir.description",
+      "fallback": "Survivre au Killer Bunny"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "unpredictableblocks:root",
+  "criteria": {
+    "completed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "loot": [
+      "unpredictableblocks:rewards/quest_magie_comptoir"
+    ]
+  }
+}

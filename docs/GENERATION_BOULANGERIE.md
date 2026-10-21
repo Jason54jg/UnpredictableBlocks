@@ -2,7 +2,7 @@
 
 ## 1. Nom du Bloc & Rareté/Biome
 
-- **ID** : `wtf_luckyblocks:lucky_boulangerie`
+- **ID** : `unpredictableblocks:lucky_boulangerie`
 - **Rareté** : Commun (~60 % des spawns naturels)
 - **Biomes** : tous biomes terrestres (poids Overworld 1.5)
 - **Dimension** : Overworld principalement
@@ -22,18 +22,18 @@
 | **+100** | HIGH | **Pluie de Croissants** — 64 pains/cookies, saturation infinie 2 min, loot table `gameplay/lucky/boulangerie/high` |
 | **0** | NEUTRAL | **Attaque Pigeons Géants** — 6+ poulets/agressifs, malédiction saut/caquetage |
 | **-100** | LOW | **Inondation de Café Chaud** — lave noire (blackstone) zone locale, Speed III + brûlure |
-| Structure (HIGH/NEUTRAL) | — | **Four Géant 5×5×5** — `wtf_luckyblocks:four_geant` |
+| Structure (HIGH/NEUTRAL) | — | **Four Géant 5×5×5** — `unpredictableblocks:four_geant` |
 
 ## 4. Quête thématique
 
-- **Advancement** : `wtf_luckyblocks:quest/boulangerie`
+- **Advancement** : `unpredictableblocks:quest/boulangerie`
 - **Titre** : *Le Chef Manque d'Ingrédients*
 - **Objectifs** : vaincre l’essaim de « Pigeons Géants » ; déposer 32 `minecraft:bread` (critère custom à brancher sur `minecraft:player_killed_entity` + `minecraft:inventory_changed`).
-- **Récompenses** : loot `wtf_luckyblocks:rewards/quest_boulangerie` → item Lucky Block avec `Luck:100` ; déblocage craft **Baguette Magique**.
+- **Récompenses** : loot `unpredictableblocks:rewards/quest_boulangerie` → item Lucky Block avec `Luck:100` ; déblocage craft **Baguette Magique**.
 
 ## 5. Configuration / code
 
-**Loot table (high)** — `data/wtf_luckyblocks/loot_table/gameplay/lucky/boulangerie/high.json` :
+**Loot table (high)** — `data/unpredictableblocks/loot_table/gameplay/lucky/boulangerie/high.json` :
 
 ```json
 {
@@ -50,7 +50,7 @@
     },
     {
       "rolls": 1,
-      "entries": [{ "type": "minecraft:item", "name": "wtf_luckyblocks:baguette_magique" }]
+      "entries": [{ "type": "minecraft:item", "name": "unpredictableblocks:baguette_magique" }]
     }
   ]
 }
@@ -64,7 +64,7 @@ LuckResolver.ResolvedOutcome outcome =
 LuckyBlockEventDispatcher.dispatch(level, player, pos, LuckyTheme.BOULANGERIE, outcome);
 ```
 
-**Spawn (extrait config)** — clé `themes.boulangerie` générée au premier lancement dans `config/wtf_luckyblocks.json`.
+**Spawn (extrait config)** — clé `themes.boulangerie` générée au premier lancement dans `config/unpredictableblocks.json`.
 
 ## 6. Objets custom & structure NBT
 
@@ -72,6 +72,6 @@ LuckyBlockEventDispatcher.dispatch(level, player, pos, LuckyTheme.BOULANGERIE, o
 |-------|-------------|
 | `baguette_magique` | Bâton, Knockback X (data components / NBT enchant), lore FR |
 | `four_geant.nbt` | 5×5×5 briques rouges, four central avec feu camp + coffre loot pain enchanté |
-| Son | `wtf_luckyblocks:entity.pigeon.caquetage` (optionnel, à ajouter) |
+| Son | `unpredictableblocks:entity.pigeon.caquetage` (optionnel, à ajouter) |
 
-Structure : exporter depuis structure block vers `common/src/main/resources/data/wtf_luckyblocks/structures/four_geant.nbt`.
+Structure : exporter depuis structure block vers `common/src/main/resources/data/unpredictableblocks/structures/four_geant.nbt`.

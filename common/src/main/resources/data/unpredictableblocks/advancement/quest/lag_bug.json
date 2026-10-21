@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "id": "unpredictableblocks:lucky_lag_bug"
+    },
+    "title": {
+      "translate": "advancements.unpredictableblocks.lag_bug.title",
+      "fallback": "Matrix Breaker"
+    },
+    "description": {
+      "translate": "advancements.unpredictableblocks.lag_bug.description",
+      "fallback": "Traverser un Chunk Incomplet"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "unpredictableblocks:root",
+  "criteria": {
+    "completed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "loot": [
+      "unpredictableblocks:rewards/quest_lag_bug"
+    ]
+  }
+}

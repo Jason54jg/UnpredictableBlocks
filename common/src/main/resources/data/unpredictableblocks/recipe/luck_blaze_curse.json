@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {"item": "minecraft:blaze_powder"},
+    {"item": "minecraft:fermented_spider_eye"}
+  ],
+  "result": {
+    "id": "unpredictableblocks:luck_blaze_curse",
+    "count": 2
+  }
+}

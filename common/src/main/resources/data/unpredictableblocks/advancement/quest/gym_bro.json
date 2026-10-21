@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "id": "unpredictableblocks:lucky_gym_bro"
+    },
+    "title": {
+      "translate": "advancements.unpredictableblocks.gym_bro.title",
+      "fallback": "Le Leg Day Incurable"
+    },
+    "description": {
+      "translate": "advancements.unpredictableblocks.gym_bro.description",
+      "fallback": "500m sous Lenteur III post-sport"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "unpredictableblocks:root",
+  "criteria": {
+    "completed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "loot": [
+      "unpredictableblocks:rewards/quest_gym_bro"
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "id": "unpredictableblocks:lucky_camping"
+    },
+    "title": {
+      "translate": "advancements.unpredictableblocks.camping.title",
+      "fallback": "Survivant du Bivouac"
+    },
+    "description": {
+      "translate": "advancements.unpredictableblocks.camping.description",
+      "fallback": "Vaincre l'Ours Mal L\u00e9ch\u00e9"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "unpredictableblocks:root",
+  "criteria": {
+    "completed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "loot": [
+      "unpredictableblocks:rewards/quest_camping"
+    ]
+  }
+}

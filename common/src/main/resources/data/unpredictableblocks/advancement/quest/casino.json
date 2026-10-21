@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "id": "unpredictableblocks:lucky_casino"
+    },
+    "title": {
+      "translate": "advancements.unpredictableblocks.casino.title",
+      "fallback": "High Roller"
+    },
+    "description": {
+      "translate": "advancements.unpredictableblocks.casino.description",
+      "fallback": "Obtenir le Jackpot 777"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "unpredictableblocks:root",
+  "criteria": {
+    "completed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "loot": [
+      "unpredictableblocks:rewards/quest_casino"
+    ]
+  }
+}

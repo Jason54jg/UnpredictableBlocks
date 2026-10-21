@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "id": "unpredictableblocks:lucky_complot"
+    },
+    "title": {
+      "translate": "advancements.unpredictableblocks.complot.title",
+      "fallback": "Chasse aux OVNIs"
+    },
+    "description": {
+      "translate": "advancements.unpredictableblocks.complot.description",
+      "fallback": "Fabriquer le Casque 5G et survivre \u00e0 l'abduction"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "unpredictableblocks:root",
+  "criteria": {
+    "completed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "loot": [
+      "unpredictableblocks:rewards/quest_complot"
+    ]
+  }
+}

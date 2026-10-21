@@ -1,6 +1,6 @@
 # Catalogue textures (16×16 / 32×32)
 
-Chaque fichier `assets/wtf_luckyblocks/textures/block/lucky_<id>.png` doit suivre la description du cahier des charges utilisateur.
+Chaque fichier `assets/unpredictableblocks/textures/block/lucky_<id>.png` doit suivre la description du cahier des charges utilisateur.
 
 | ID | Motifs clés |
 |----|-------------|

@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "id": "unpredictableblocks:lucky_streamer"
+    },
+    "title": {
+      "translate": "advancements.unpredictableblocks.streamer.title",
+      "fallback": "Bad Buzz & Drama"
+    },
+    "description": {
+      "translate": "advancements.unpredictableblocks.streamer.description",
+      "fallback": "Repousser 15 Haters zombies"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "unpredictableblocks:root",
+  "criteria": {
+    "completed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "loot": [
+      "unpredictableblocks:rewards/quest_streamer"
+    ]
+  }
+}

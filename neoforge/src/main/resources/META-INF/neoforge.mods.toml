@@ -3,27 +3,27 @@ loaderVersion = "[1,)"
 license = "MIT"
 
 [[mods]]
-modId = "wtf_luckyblocks"
+modId = "unpredictableblocks"
 version = "${version}"
-displayName = "WTF Lucky Blocks"
+displayName = "UnpredictableBlocks"
 authors = "Jason54"
 description = "Lucky Blocks chaotiques avec système de chance, quêtes et spawn naturel."
 
-[[dependencies.wtf_luckyblocks]]
+[[dependencies.unpredictableblocks]]
 modId = "neoforge"
 type = "required"
 versionRange = "[26.1,26.4)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.wtf_luckyblocks]]
+[[dependencies.unpredictableblocks]]
 modId = "minecraft"
 type = "required"
 versionRange = "[26.1.2,26.4)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.wtf_luckyblocks]]
+[[dependencies.unpredictableblocks]]
 modId = "architectury"
 type = "required"
 versionRange = "[14.0,)"

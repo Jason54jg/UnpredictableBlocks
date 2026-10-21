@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "id": "unpredictableblocks:lucky_film_action"
+    },
+    "title": {
+      "translate": "advancements.unpredictableblocks.film_action.title",
+      "fallback": "Cascadeur du Si\u00e8cle"
+    },
+    "description": {
+      "translate": "advancements.unpredictableblocks.film_action.description",
+      "fallback": "Saut 50 blocs sans d\u00e9g\u00e2ts"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "unpredictableblocks:root",
+  "criteria": {
+    "completed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "loot": [
+      "unpredictableblocks:rewards/quest_film_action"
+    ]
+  }
+}

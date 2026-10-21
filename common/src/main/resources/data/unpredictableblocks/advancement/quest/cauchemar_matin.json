@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "id": "unpredictableblocks:lucky_cauchemar_matin"
+    },
+    "title": {
+      "translate": "advancements.unpredictableblocks.cauchemar_matin.title",
+      "fallback": "Snooze Master"
+    },
+    "description": {
+      "translate": "advancements.unpredictableblocks.cauchemar_matin.description",
+      "fallback": "Utiliser R\u00e9p\u00e9tition 3 fois"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "unpredictableblocks:root",
+  "criteria": {
+    "completed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "loot": [
+      "unpredictableblocks:rewards/quest_cauchemar_matin"
+    ]
+  }
+}

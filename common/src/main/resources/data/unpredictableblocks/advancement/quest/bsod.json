@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "id": "unpredictableblocks:lucky_bsod"
+    },
+    "title": {
+      "translate": "advancements.unpredictableblocks.bsod.title",
+      "fallback": "D\u00e9bogage du Syst\u00e8me"
+    },
+    "description": {
+      "translate": "advancements.unpredictableblocks.bsod.description",
+      "fallback": "Casser 5 blocs Missing Texture sans mourir"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "unpredictableblocks:root",
+  "criteria": {
+    "completed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "loot": [
+      "unpredictableblocks:rewards/quest_bsod"
+    ]
+  }
+}
