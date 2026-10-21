@@ -21,28 +21,18 @@
       "trigger": "minecraft:impossible"
     },
     "have_bread": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": "minecraft:bread",
-            "count": {
-              "min": 32
-            }
-          }
-        ]
-      }
+      "trigger": "minecraft:impossible"
     }
-  },
-  "rewards": {
-    "loot": [
-      "unpredictableblocks:rewards/quest_boulangerie"
-    ]
   },
   "requirements": [
     [
       "kill_poultry",
       "have_bread"
     ]
-  ]
+  ],
+  "rewards": {
+    "loot": [
+      "unpredictableblocks:rewards/quest_boulangerie"
+    ]
+  }
 }

@@ -4,9 +4,12 @@ import com.jason54.unpredictableblocks.util.ServerLevels;
 import dev.architectury.event.EventResult;
 import dev.architectury.event.events.common.BlockEvent;
 import dev.architectury.event.events.common.EntityEvent;
+import dev.architectury.event.events.common.InteractionEvent;
 import dev.architectury.event.events.common.PlayerEvent;
 import dev.architectury.event.events.common.TickEvent;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -37,6 +40,27 @@ public final class QuestExtendedHandler {
         });
 
         EntityEvent.LIVING_DEATH.register(QuestExtendedHandler::onLivingDeath);
+
+        EntityEvent.MOUNT.register((entity, vehicle, isMounting) -> {
+            if (!isMounting || entity.level().isClientSide()) {
+                return EventResult.pass();
+            }
+            if (entity instanceof ServerPlayer sp && vehicle.getType() == EntityType.PIG) {
+                QuestRewards.complete(sp, "quest/fast_food", "ride");
+            }
+            return EventResult.pass();
+        });
+
+        InteractionEvent.USE_ITEM_ON_BLOCK.register((level, player, hand, stack, state, hit) -> {
+            if (level.isClientSide() || !(player instanceof ServerPlayer sp)) {
+                return EventResult.pass();
+            }
+            if (!state.is(Blocks.JUKEBOX) || !stack.has(DataComponents.JUKEBOX_PLAYABLE)) {
+                return EventResult.pass();
+            }
+            QuestRewards.complete(sp, "quest/disco_80", "music");
+            return EventResult.pass();
+        });
 
         PlayerEvent.OPEN_MENU.register((player, menu) -> {
             if (player.level().isClientSide() || !(player instanceof ServerPlayer sp)) {

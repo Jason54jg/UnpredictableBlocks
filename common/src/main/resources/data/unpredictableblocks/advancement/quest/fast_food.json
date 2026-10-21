@@ -18,16 +18,10 @@
   "parent": "unpredictableblocks:root",
   "criteria": {
     "ride": {
-      "trigger": "minecraft:started_riding",
-      "conditions": {
-        "entity": [
-          {
-            "type": "minecraft:pig"
-          }
-        ]
-      }
+      "trigger": "minecraft:impossible"
     }
   },
+  "requirements": [["ride"]],
   "rewards": {
     "loot": [
       "unpredictableblocks:rewards/quest_fast_food"

@@ -18,10 +18,10 @@
   "parent": "unpredictableblocks:root",
   "criteria": {
     "sleep": {
-      "trigger": "minecraft:slept_in_bed",
-      "conditions": {}
+      "trigger": "minecraft:impossible"
     }
   },
+  "requirements": [["sleep"]],
   "rewards": {
     "loot": [
       "unpredictableblocks:rewards/quest_cauchemar_matin"

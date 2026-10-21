@@ -83,6 +83,12 @@ public final class QuestLegacyHandler {
         if (countItem(player, Items.PAINTING) >= 1) {
             QuestRewards.complete(player, "quest/art_moderne", "art");
         }
+        if (countItem(player, Items.BREAD) >= 32) {
+            QuestRewards.complete(player, "quest/boulangerie", "have_bread");
+        }
+        if (player.isSleeping()) {
+            QuestRewards.complete(player, "quest/cauchemar_matin", "sleep");
+        }
         trackImpotsEmeralds(player);
     }
 
