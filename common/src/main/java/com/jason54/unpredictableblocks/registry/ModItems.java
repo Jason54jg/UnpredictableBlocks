@@ -1,7 +1,10 @@
 package com.jason54.unpredictableblocks.registry;
 
 import com.jason54.unpredictableblocks.UnpredictableBlocks;
+import com.jason54.unpredictableblocks.item.BaguetteMagiqueItem;
 import com.jason54.unpredictableblocks.item.BonkHammerItem;
+import com.jason54.unpredictableblocks.item.Casque5GItem;
+import com.jason54.unpredictableblocks.item.CleMoletteItem;
 import com.jason54.unpredictableblocks.item.CleUsbHackerItem;
 import com.jason54.unpredictableblocks.item.JetonVipItem;
 import com.jason54.unpredictableblocks.item.ShakerProtItem;
@@ -24,7 +27,7 @@ public final class ModItems {
             () -> new UsableLuckItem(new Item.Properties(), -10));
 
     public static final RegistrySupplier<Item> BAGUETTE_MAGIQUE = ITEMS.register("baguette_magique", () ->
-            new LoreItem(new Item.Properties(), stack -> {
+            new BaguetteMagiqueItem(stack -> {
                 ThemedGearHelper.name(stack, "La Baguette Magique");
                 ThemedGearHelper.lore(stack, "Knockback absurde.", "Du pain. Beaucoup de pain.");
                 ThemedGearHelper.enchant(stack, ThemedGearHelper.knockback(), 10);
@@ -44,9 +47,10 @@ public final class ModItems {
             }));
 
     public static final RegistrySupplier<Item> CASQUE_5G = ITEMS.register("casque_5g", () ->
-            new LoreItem(new Item.Properties(), stack -> {
+            new Casque5GItem(stack -> {
                 ThemedGearHelper.name(stack, "Casque 5G en Papier d'Aluminium");
-                ThemedGearHelper.lore(stack, "Immunité aux ondes et aux effets.");
+                ThemedGearHelper.lore(stack, "Immunité aux effets néfastes.");
+                ThemedGearHelper.enchant(stack, ThemedGearHelper.protection(), 4);
             }));
 
     public static final RegistrySupplier<Item> SHAKER_PROT = ITEMS.register("shaker_prot", () ->
@@ -56,9 +60,12 @@ public final class ModItems {
             }));
 
     public static final RegistrySupplier<Item> CLE_MOLETTE_LEGENDAIRE = ITEMS.register("cle_molette_legendaire", () ->
-            new LoreItem(new Item.Properties(), stack -> {
+            new CleMoletteItem(stack -> {
                 ThemedGearHelper.name(stack, "Clé à Molette Légendaire");
-                ThemedGearHelper.lore(stack, "Efficiency IV — le royaume coule.");
+                ThemedGearHelper.lore(stack, "Efficiency IV, Unbreaking III, Knockback II.");
+                ThemedGearHelper.enchant(stack, ThemedGearHelper.efficiency(), 4);
+                ThemedGearHelper.enchant(stack, ThemedGearHelper.unbreaking(), 3);
+                ThemedGearHelper.enchant(stack, ThemedGearHelper.knockback(), 2);
             }));
 
     public static final RegistrySupplier<Item> JETON_VIP = ITEMS.register("jeton_or_vip", () ->

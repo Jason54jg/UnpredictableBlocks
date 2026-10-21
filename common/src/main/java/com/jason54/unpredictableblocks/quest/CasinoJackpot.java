@@ -24,7 +24,7 @@ public final class CasinoJackpot {
             QuestRewards.complete(player, "quest/casino", "jackpot");
             player.getInventory().add(new net.minecraft.world.item.ItemStack(Items.EMERALD, 64));
             player.getInventory().add(new net.minecraft.world.item.ItemStack(Items.DIAMOND, 32));
-            level.explode(null, player.getX(), player.getY(), player.getZ(), 0.0f, ServerLevel.ExplosionInteraction.NONE);
+            level.explode(null, player.getX(), player.getY(), player.getZ(), 0.0f, Level.ExplosionInteraction.NONE);
         }
     }
 }

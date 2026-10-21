@@ -18,15 +18,6 @@
     "jackpot": {
       "trigger": "minecraft:impossible"
     },
-    "rich": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          { "items": "minecraft:gold_ingot", "count": { "min": 16 } },
-          { "items": "minecraft:emerald", "count": { "min": 8 } }
-        ]
-      }
-    }
   },
   "requirements": [["jackpot"]],
   "rewards": {

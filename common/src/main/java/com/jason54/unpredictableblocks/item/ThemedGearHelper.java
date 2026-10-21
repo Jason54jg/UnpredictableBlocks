@@ -36,4 +36,16 @@ public final class ThemedGearHelper {
     public static Holder<Enchantment> knockback() {
         return BuiltInRegistries.ENCHANTMENT.getHolderOrThrow(Enchantments.KNOCKBACK);
     }
+
+    public static Holder<Enchantment> efficiency() {
+        return BuiltInRegistries.ENCHANTMENT.getHolderOrThrow(Enchantments.EFFICIENCY);
+    }
+
+    public static Holder<Enchantment> unbreaking() {
+        return BuiltInRegistries.ENCHANTMENT.getHolderOrThrow(Enchantments.UNBREAKING);
+    }
+
+    public static Holder<Enchantment> protection() {
+        return BuiltInRegistries.ENCHANTMENT.getHolderOrThrow(Enchantments.PROTECTION);
+    }
 }
