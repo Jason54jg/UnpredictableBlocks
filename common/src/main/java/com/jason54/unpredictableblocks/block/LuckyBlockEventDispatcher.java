@@ -42,6 +42,11 @@ public final class LuckyBlockEventDispatcher {
             CasinoJackpot.spin(level, player, level.getRandom());
         }
 
+        if (theme == LuckyTheme.SPEEDRUNNER) {
+            PlayerQuestData.startSpeedrun(player);
+            player.sendSystemMessage(Component.literal("§eChrono lancé — atteignez l'End en moins de 3 minutes !"));
+        }
+
         if (effective.tier() == LuckTier.LOW) {
             PlayerQuestData.setMissedReroll(player, theme);
             player.sendSystemMessage(Component.literal(

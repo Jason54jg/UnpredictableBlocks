@@ -29,6 +29,24 @@ public final class ThemeEventEffects {
             LuckyTheme theme,
             LuckTier tier
     ) {
+        if (theme.ordinal() > LuckyTheme.INVASION_MEMES.ordinal()) {
+            ThemeNewEffects.apply(level, player, origin, theme, tier);
+            return;
+        }
+        if (ThemeCatalogEffects.applies(theme, tier)) {
+            ThemeCatalogEffects.apply(level, player, origin, theme, tier);
+            return;
+        }
+        applyLegacy(level, player, origin, theme, tier);
+    }
+
+    private static void applyLegacy(
+            ServerLevel level,
+            ServerPlayer player,
+            BlockPos origin,
+            LuckyTheme theme,
+            LuckTier tier
+    ) {
         switch (theme) {
             case ANACHRONISME -> applyAnachronisme(level, player, origin, tier);
             case BOULANGERIE -> applyBoulangerie(level, player, origin, tier);
@@ -54,10 +72,8 @@ public final class ThemeEventEffects {
             case MAGIE_COMPTOIR -> applyMagie(level, origin, tier);
             case CASINO -> applyCasino(level, player, tier);
             case INVASION_MEMES -> applyMemes(level, player, tier);
-            case PAUSE_CAFE, RETARD_VOL, ANANAS_PIZZA, SPEEDRUNNER, PIRATERIE_TORRENT, ASMR_FIDGET, VAMPIRE_GOTHIQUE, MULTIVERS_SLIDERS ->
-                    ThemeNewEffects.apply(level, player, origin, theme, tier);
+            default -> {}
         }
-        ThemeCatalogEffects.apply(level, player, origin, theme, tier);
     }
 
     private static void applyAnachronisme(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {

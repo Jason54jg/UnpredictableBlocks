@@ -1,7 +1,12 @@
 package com.jason54.unpredictableblocks.event;
 
 import com.jason54.unpredictableblocks.luck.LuckTier;
+import com.jason54.unpredictableblocks.quest.PlayerQuestData;
+import com.jason54.unpredictableblocks.quest.QuestExtendedHandler;
+import com.jason54.unpredictableblocks.quest.QuestNames;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.Items;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -68,11 +73,12 @@ public final class ThemeNewEffects {
 
     private static void ananasPizza(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
         if (tier == LuckTier.NEUTRAL) {
-            for (int i = 0; i < 5; i++) {
+            QuestExtendedHandler.onChefsSpawned(player);
+            for (int i = 0; i < 10; i++) {
                 var chef = EntitySpawnHelper.create(EntityType.VILLAGER, level);
                 if (chef != null) {
-                    chef.setCustomName(Component.literal("Chef Italien"));
-                    chef.setPos(Vec3.atBottomCenterOf(origin).add(i, 0, 0));
+                    chef.setCustomName(Component.literal(QuestNames.CHEF_ITALIEN));
+                    chef.setPos(Vec3.atBottomCenterOf(origin).add(i % 5, 0, i / 5));
                     level.addFreshEntity(chef);
                 }
             }
@@ -119,17 +125,28 @@ public final class ThemeNewEffects {
             player.addEffect(new MobEffectInstance(MobEffects.SPEED, 20 * 90, 2));
             player.addEffect(new MobEffectInstance(MobEffects.STRENGTH, 20 * 90, 1));
             player.sendSystemMessage(Component.literal("§5Pacte des ténèbres — forme d'ombre."));
+        } else if (tier == LuckTier.NEUTRAL && player.level() instanceof ServerLevel level) {
+            var dracula = EntitySpawnHelper.create(EntityType.ZOMBIE, level);
+            if (dracula != null) {
+                dracula.setCustomName(Component.literal(QuestNames.COMTE_DRACULA));
+                dracula.setCustomNameVisible(true);
+                dracula.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.LEATHER_HELMET));
+                dracula.setPos(player.position().add(2, 0, 0));
+                level.addFreshEntity(dracula);
+                player.sendSystemMessage(Component.literal("§5Le Comte Dracula exige un duel sans armure métallique."));
+            }
         }
     }
 
     private static void multivers(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
         if (tier == LuckTier.LOW) {
+            PlayerQuestData.startMultiversTrack(player, 20L * 120);
             level.getEntitiesOfClass(net.minecraft.world.entity.LivingEntity.class, new AABB(origin).inflate(16))
                     .forEach(e -> e.setDeltaMovement(e.getDeltaMovement().add(0, 1.2, 0)));
             for (int y = origin.getY(); y < origin.getY() + 20; y++) {
                 level.setBlockAndUpdate(new BlockPos(origin.getX(), y, origin.getZ()), Blocks.AIR.defaultBlockState());
             }
-            player.sendSystemMessage(Component.literal("§dInversion gravité — chaos dans le chunk !"));
+            player.sendSystemMessage(Component.literal("§dInversion gravité — traversez 3 biomes en 2 min !"));
         } else if (tier == LuckTier.HIGH) {
             var target = level.getEntitiesOfClass(net.minecraft.world.entity.LivingEntity.class, new AABB(origin).inflate(8))
                     .stream().filter(e -> e != player).findFirst();

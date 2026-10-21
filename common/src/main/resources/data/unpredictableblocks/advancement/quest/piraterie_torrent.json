@@ -1,36 +1,29 @@
 {
   "display": {
     "icon": {
-      "id": "unpredictableblocks:lucky_piraterie_torrent"
+      "id": "unpredictableblocks:disque_dur_capitaine"
     },
     "title": {
       "translate": "advancements.unpredictableblocks.piraterie_torrent.title",
-      "fallback": "Piraterie & Torrent"
+      "fallback": "Seed & Peer"
     },
     "description": {
       "translate": "advancements.unpredictableblocks.piraterie_torrent.description",
-      "fallback": "Quête thématique — Piraterie & Torrent"
+      "fallback": "Télécharger la Carte au Trésor Numérique."
     },
-    "frame": "goal",
+    "frame": "task",
     "show_toast": true,
     "announce_to_chat": true
   },
   "parent": "unpredictableblocks:root",
   "criteria": {
-    "trigger_block": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": "unpredictableblocks:lucky_piraterie_torrent"
-          }
-        ]
-      }
+    "treasure_download": {
+      "trigger": "minecraft:impossible"
     }
   },
   "requirements": [
     [
-      "trigger_block"
+      "treasure_download"
     ]
   ]
 }

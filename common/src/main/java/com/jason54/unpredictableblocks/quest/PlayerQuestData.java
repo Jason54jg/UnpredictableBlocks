@@ -13,8 +13,10 @@ import net.minecraft.world.level.saveddata.SavedDataType;
 import net.minecraft.world.level.storage.SavedDataStorage;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 /** Compteurs de quêtes et relances VIP par joueur. */
@@ -46,6 +48,84 @@ public final class PlayerQuestData {
 
     public static int getCounter(ServerPlayer player, String key) {
         return root(player).counters.getOrDefault(counterKey(player.getUUID(), key), 0);
+    }
+
+    public static void resetCounter(ServerPlayer player, String key) {
+        QuestSavedData data = root(player);
+        data.counters.remove(counterKey(player.getUUID(), key));
+        data.setDirty();
+    }
+
+    public static void startSpeedrun(ServerPlayer player) {
+        QuestSavedData data = root(player);
+        data.speedrunStart.put(player.getUUID(), ServerLevels.of(player).getGameTime());
+        data.setDirty();
+    }
+
+    public static Optional<Long> speedrunStartTick(ServerPlayer player) {
+        Long tick = root(player).speedrunStart.get(player.getUUID());
+        return tick == null || tick <= 0 ? Optional.empty() : Optional.of(tick);
+    }
+
+    public static void clearSpeedrun(ServerPlayer player) {
+        QuestSavedData data = root(player);
+        data.speedrunStart.remove(player.getUUID());
+        data.setDirty();
+    }
+
+    public static void startMultiversTrack(ServerPlayer player, long durationTicks) {
+        QuestSavedData data = root(player);
+        long now = ServerLevels.of(player).getGameTime();
+        data.multiversUntil.put(player.getUUID(), now + durationTicks);
+        data.multiversBiomes.remove(player.getUUID());
+        data.setDirty();
+    }
+
+    public static boolean multiversTracking(ServerPlayer player) {
+        QuestSavedData data = root(player);
+        Long until = data.multiversUntil.get(player.getUUID());
+        if (until == null) {
+            return false;
+        }
+        if (ServerLevels.of(player).getGameTime() > until) {
+            data.multiversUntil.remove(player.getUUID());
+            data.multiversBiomes.remove(player.getUUID());
+            data.setDirty();
+            return false;
+        }
+        return true;
+    }
+
+    /** Nombre de biomes distincts enregistrés pendant la fenêtre multivers. */
+    public static int recordMultiversBiome(ServerPlayer player, String biomeId) {
+        QuestSavedData data = root(player);
+        if (!multiversTracking(player)) {
+            return 0;
+        }
+        Set<String> set = data.multiversBiomes.computeIfAbsent(player.getUUID(), u -> new HashSet<>());
+        set.add(biomeId);
+        data.setDirty();
+        return set.size();
+    }
+
+    public static void setAnanasQuestFailed(ServerPlayer player, boolean failed) {
+        QuestSavedData data = root(player);
+        if (failed) {
+            data.ananasFailed.add(player.getUUID());
+            resetCounter(player, "chef_kill");
+        } else {
+            data.ananasFailed.remove(player.getUUID());
+        }
+        data.setDirty();
+    }
+
+    public static boolean isAnanasQuestFailed(ServerPlayer player) {
+        return root(player).ananasFailed.contains(player.getUUID());
+    }
+
+    public static void resetAnanasQuest(ServerPlayer player) {
+        setAnanasQuestFailed(player, false);
+        resetCounter(player, "chef_kill");
     }
 
     private static String counterKey(UUID uuid, String key) {
@@ -126,6 +206,10 @@ public final class PlayerQuestData {
         private final Map<UUID, MissedReroll> missedRerolls = new HashMap<>();
         private final Map<String, Long> cooldowns = new HashMap<>();
         private final Map<String, Integer> counters = new HashMap<>();
+        private final Map<UUID, Long> speedrunStart = new HashMap<>();
+        private final Map<UUID, Long> multiversUntil = new HashMap<>();
+        private final Map<UUID, Set<String>> multiversBiomes = new HashMap<>();
+        private final Set<UUID> ananasFailed = new HashSet<>();
 
         private QuestSavedData() {}
 
@@ -150,6 +234,31 @@ public final class PlayerQuestData {
             CompoundTag ctr = tag.getCompoundOrEmpty("Counters");
             for (String key : ctr.keySet()) {
                 data.counters.put(key, ctr.getIntOr(key, 0));
+            }
+            CompoundTag speed = tag.getCompoundOrEmpty("SpeedrunStart");
+            for (String key : speed.keySet()) {
+                data.speedrunStart.put(UUID.fromString(key), speed.getLongOr(key, 0L));
+            }
+            CompoundTag mvUntil = tag.getCompoundOrEmpty("MultiversUntil");
+            for (String key : mvUntil.keySet()) {
+                data.multiversUntil.put(UUID.fromString(key), mvUntil.getLongOr(key, 0L));
+            }
+            CompoundTag mvBiomes = tag.getCompoundOrEmpty("MultiversBiomes");
+            for (String key : mvBiomes.keySet()) {
+                Set<String> biomes = new HashSet<>();
+                for (String b : mvBiomes.getStringOr(key, "").split(",")) {
+                    if (!b.isEmpty()) {
+                        biomes.add(b);
+                    }
+                }
+                if (!biomes.isEmpty()) {
+                    data.multiversBiomes.put(UUID.fromString(key), biomes);
+                }
+            }
+            for (String key : tag.getCompoundOrEmpty("AnanasFailed").keySet()) {
+                if (tag.getCompoundOrEmpty("AnanasFailed").getBooleanOr(key, false)) {
+                    data.ananasFailed.add(UUID.fromString(key));
+                }
             }
             return data;
         }
@@ -176,6 +285,22 @@ public final class PlayerQuestData {
             CompoundTag ctr = new CompoundTag();
             counters.forEach(ctr::putInt);
             tag.put("Counters", ctr);
+
+            CompoundTag speed = new CompoundTag();
+            speedrunStart.forEach((uuid, tick) -> speed.putLong(uuid.toString(), tick));
+            tag.put("SpeedrunStart", speed);
+
+            CompoundTag mvUntil = new CompoundTag();
+            multiversUntil.forEach((uuid, tick) -> mvUntil.putLong(uuid.toString(), tick));
+            tag.put("MultiversUntil", mvUntil);
+
+            CompoundTag mvBiomes = new CompoundTag();
+            multiversBiomes.forEach((uuid, set) -> mvBiomes.putString(uuid.toString(), String.join(",", set)));
+            tag.put("MultiversBiomes", mvBiomes);
+
+            CompoundTag ananas = new CompoundTag();
+            ananasFailed.forEach(uuid -> ananas.putBoolean(uuid.toString(), true));
+            tag.put("AnanasFailed", ananas);
             return tag;
         }
     }

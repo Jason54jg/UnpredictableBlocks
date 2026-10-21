@@ -1,36 +1,29 @@
 {
   "display": {
     "icon": {
-      "id": "unpredictableblocks:lucky_vampire_gothique"
+      "id": "unpredictableblocks:fiole_sang_noble"
     },
     "title": {
       "translate": "advancements.unpredictableblocks.vampire_gothique.title",
-      "fallback": "Vampire & Gothique"
+      "fallback": "Créature de la Nuit"
     },
     "description": {
       "translate": "advancements.unpredictableblocks.vampire_gothique.description",
-      "fallback": "Quête thématique — Vampire & Gothique"
+      "fallback": "Vaincre le Comte Dracula sans armure métallique."
     },
-    "frame": "goal",
+    "frame": "task",
     "show_toast": true,
     "announce_to_chat": true
   },
   "parent": "unpredictableblocks:root",
   "criteria": {
-    "trigger_block": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": "unpredictableblocks:lucky_vampire_gothique"
-          }
-        ]
-      }
+    "dracula_no_metal": {
+      "trigger": "minecraft:impossible"
     }
   },
   "requirements": [
     [
-      "trigger_block"
+      "dracula_no_metal"
     ]
   ]
 }

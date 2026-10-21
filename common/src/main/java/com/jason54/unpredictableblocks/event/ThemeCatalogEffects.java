@@ -24,6 +24,37 @@ import net.minecraft.world.phys.Vec3;
 public final class ThemeCatalogEffects {
     private ThemeCatalogEffects() {}
 
+    /** Événement catalogue (directive §4) pour ce thème et ce palier — évite le double avec le legacy. */
+    public static boolean applies(LuckyTheme theme, LuckTier tier) {
+        return switch (theme) {
+            case ANACHRONISME -> tier == LuckTier.HIGH;
+            case BOULANGERIE -> tier == LuckTier.LOW;
+            case BSOD -> tier == LuckTier.NEUTRAL;
+            case VOLAILLE -> tier == LuckTier.HIGH;
+            case IMPOTS -> tier == LuckTier.LOW;
+            case STREAMER -> tier == LuckTier.NEUTRAL;
+            case PROPRETE -> tier == LuckTier.HIGH;
+            case GRAVITE_ZERO -> tier == LuckTier.LOW;
+            case FAST_FOOD -> tier == LuckTier.NEUTRAL;
+            case CAUCHEMAR_MATIN -> tier == LuckTier.HIGH;
+            case FILM_ACTION -> tier == LuckTier.LOW;
+            case JDR_D20 -> tier == LuckTier.NEUTRAL;
+            case PENURIE_2020 -> tier == LuckTier.HIGH;
+            case COMPLOT -> tier == LuckTier.LOW;
+            case LAG_BUG -> tier == LuckTier.NEUTRAL;
+            case DISCO_80 -> tier == LuckTier.HIGH;
+            case PLOMBERIE -> tier == LuckTier.LOW;
+            case FORTUNE_COOKIE -> tier == LuckTier.NEUTRAL;
+            case CAMPING -> tier == LuckTier.HIGH;
+            case GYM_BRO -> tier == LuckTier.LOW;
+            case ART_MODERNE -> tier == LuckTier.NEUTRAL;
+            case MAGIE_COMPTOIR -> tier == LuckTier.HIGH;
+            case CASINO -> tier == LuckTier.LOW;
+            case INVASION_MEMES -> tier == LuckTier.NEUTRAL;
+            default -> false;
+        };
+    }
+
     public static void apply(
             ServerLevel level,
             ServerPlayer player,

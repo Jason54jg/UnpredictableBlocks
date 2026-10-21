@@ -1,36 +1,29 @@
 {
   "display": {
     "icon": {
-      "id": "unpredictableblocks:lucky_retard_vol"
+      "id": "unpredictableblocks:valise_perdue"
     },
     "title": {
       "translate": "advancements.unpredictableblocks.retard_vol.title",
-      "fallback": "Retard de Vol / Aéroport"
+      "fallback": "Passage de Douane"
     },
     "description": {
       "translate": "advancements.unpredictableblocks.retard_vol.description",
-      "fallback": "Quête thématique — Retard de Vol / Aéroport"
+      "fallback": "Retrouver 3 Valises Perdues."
     },
-    "frame": "goal",
+    "frame": "task",
     "show_toast": true,
     "announce_to_chat": true
   },
   "parent": "unpredictableblocks:root",
   "criteria": {
-    "trigger_block": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": "unpredictableblocks:lucky_retard_vol"
-          }
-        ]
-      }
+    "three_valises": {
+      "trigger": "minecraft:impossible"
     }
   },
   "requirements": [
     [
-      "trigger_block"
+      "three_valises"
     ]
   ]
 }

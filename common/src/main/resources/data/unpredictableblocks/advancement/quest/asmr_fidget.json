@@ -1,15 +1,15 @@
 {
   "display": {
     "icon": {
-      "id": "unpredictableblocks:lucky_asmr_fidget"
+      "id": "unpredictableblocks:pop_it_supreme"
     },
     "title": {
       "translate": "advancements.unpredictableblocks.asmr_fidget.title",
-      "fallback": "ASMR & Fidget Toy"
+      "fallback": "Instant Réduction du Stress"
     },
     "description": {
       "translate": "advancements.unpredictableblocks.asmr_fidget.description",
-      "fallback": "Quête thématique — ASMR & Fidget Toy"
+      "fallback": "Éclater 50 blocs de papier bulle."
     },
     "frame": "task",
     "show_toast": true,
@@ -17,20 +17,13 @@
   },
   "parent": "unpredictableblocks:root",
   "criteria": {
-    "trigger_block": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": "unpredictableblocks:lucky_asmr_fidget"
-          }
-        ]
-      }
+    "bubble_pop_50": {
+      "trigger": "minecraft:impossible"
     }
   },
   "requirements": [
     [
-      "trigger_block"
+      "bubble_pop_50"
     ]
   ]
 }

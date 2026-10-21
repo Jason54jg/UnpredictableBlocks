@@ -159,6 +159,46 @@ THEME_ENTRIES: dict[str, dict[str, list[dict]]] = {
         "low": [pool(1, [entry_item(f"{NS}:marteau_bonk", 1), luck_dust(False)])],
         "neutral": [pool(1, [entry_item("minecraft:slime_ball", 2, count_min=8, count_max=16), entry_item("minecraft:egg", 2, count_min=8, count_max=16)])],
     },
+    "pause_cafe": {
+        "high": [pool(1, [entry_item(f"{NS}:espresso_ultra_dose", 1), luck_dust(True)])],
+        "neutral": [pool(1, [entry_item("minecraft:cocoa_beans", 2, count_min=4, count_max=8), entry_item("minecraft:sugar", 2, count_min=4, count_max=8)])],
+        "low": [pool(1, [entry_item("minecraft:rotten_flesh", 2, count_min=2, count_max=4), luck_dust(False)])],
+    },
+    "retard_vol": {
+        "high": [pool(1, [entry_item(f"{NS}:valise_perdue", 1), entry_item("minecraft:leather", 2, count_min=4, count_max=8)])],
+        "neutral": [pool(1, [entry_item("minecraft:paper", 2, count_min=8, count_max=16), entry_item("minecraft:compass", 1)])],
+        "low": [pool(1, [entry_item("minecraft:tripwire_hook", 2, count_min=2, count_max=4), luck_dust(False)])],
+    },
+    "ananas_pizza": {
+        "high": [pool(1, [entry_item(f"{NS}:tranche_debat", 1), entry_item("minecraft:golden_carrot", 2, count_min=2, count_max=4)])],
+        "neutral": [pool(1, [entry_item("minecraft:bread", 2, count_min=4, count_max=8), entry_item("minecraft:melon_slice", 2, count_min=4, count_max=8)])],
+        "low": [pool(1, [luck_dust(False)])],
+    },
+    "speedrunner": {
+        "high": [pool(1, [entry_item(f"{NS}:chrono_world_record", 1), entry_item("minecraft:ender_pearl", 2, count_min=2, count_max=4)])],
+        "neutral": [pool(1, [entry_item("minecraft:golden_apple", 1), entry_item("minecraft:cooked_beef", 2, count_min=8, count_max=16)])],
+        "low": [pool(1, [entry_item("minecraft:slime_block", 2, count_min=4, count_max=8), luck_dust(False)])],
+    },
+    "piraterie_torrent": {
+        "high": [pool(1, [entry_item(f"{NS}:disque_dur_capitaine", 1), entry_item("minecraft:map", 1)])],
+        "neutral": [pool(1, [entry_item("minecraft:writable_book", 2, count_min=1, count_max=2), entry_item("minecraft:paper", 2, count_min=8, count_max=16)])],
+        "low": [pool(1, [luck_dust(False)])],
+    },
+    "asmr_fidget": {
+        "high": [pool(1, [entry_item(f"{NS}:pop_it_supreme", 1), luck_dust(True)])],
+        "neutral": [pool(1, [entry_item("minecraft:white_wool", 2, count_min=8, count_max=16), entry_item("minecraft:honeycomb", 2, count_min=4, count_max=8)])],
+        "low": [pool(1, [entry_item("minecraft:slime_ball", 2, count_min=4, count_max=8), luck_dust(False)])],
+    },
+    "vampire_gothique": {
+        "high": [pool(1, [entry_item(f"{NS}:fiole_sang_noble", 1), entry_item("minecraft:golden_apple", 1)])],
+        "neutral": [pool(1, [entry_item("minecraft:redstone", 2, count_min=4, count_max=8), entry_item("minecraft:torch", 2, count_min=8, count_max=16)])],
+        "low": [pool(1, [entry_item("minecraft:spider_eye", 2, count_min=2, count_max=4), luck_dust(False)])],
+    },
+    "multivers_sliders": {
+        "high": [pool(1, [entry_item(f"{NS}:zapper_dimensions", 1), entry_item("minecraft:ender_eye", 2, count_min=1, count_max=2)])],
+        "neutral": [pool(1, [entry_item("minecraft:obsidian", 2, count_min=4, count_max=8), entry_item("minecraft:ender_pearl", 2, count_min=2, count_max=4)])],
+        "low": [pool(1, [luck_dust(False)])],
+    },
 }
 
 
