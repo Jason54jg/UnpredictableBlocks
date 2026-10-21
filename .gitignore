@@ -6,3 +6,4 @@ out/
 *.iml
 *.log
 stonecutter-cache/
+tools/__pycache__/
