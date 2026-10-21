@@ -4,7 +4,9 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.npc.villager.Villager;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.phys.AABB;
 
 /** Quêtes runtime thèmes 1–24 (compteurs & effets catalogue). */
 public final class QuestLegacyHandler {
@@ -81,6 +83,31 @@ public final class QuestLegacyHandler {
         if (countItem(player, Items.PAINTING) >= 1) {
             QuestRewards.complete(player, "quest/art_moderne", "art");
         }
+        trackImpotsEmeralds(player);
+    }
+
+    private static void trackImpotsEmeralds(ServerPlayer player) {
+        int emeralds = countItem(player, Items.EMERALD);
+        int prev = PlayerQuestData.emeraldSnapshot(player);
+        if (prev < 0) {
+            PlayerQuestData.setEmeraldSnapshot(player, emeralds);
+            return;
+        }
+        if (emeralds < prev && nearVillager(player)) {
+            int paid = prev - emeralds;
+            int total = PlayerQuestData.addCounter(player, "impots_emerald", paid);
+            if (total >= 16) {
+                QuestRewards.complete(player, "quest/impots", "pay");
+            }
+        }
+        if (emeralds != prev) {
+            PlayerQuestData.setEmeraldSnapshot(player, emeralds);
+        }
+    }
+
+    private static boolean nearVillager(ServerPlayer player) {
+        AABB box = player.getBoundingBox().inflate(8.0);
+        return !player.level().getEntitiesOfClass(Villager.class, box).isEmpty();
     }
 
     private static int countItem(ServerPlayer player, net.minecraft.world.item.Item item) {

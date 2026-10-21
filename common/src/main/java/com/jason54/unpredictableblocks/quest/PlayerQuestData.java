@@ -38,9 +38,13 @@ public final class PlayerQuestData {
     }
 
     public static int incrementCounter(ServerPlayer player, String key) {
+        return addCounter(player, key, 1);
+    }
+
+    public static int addCounter(ServerPlayer player, String key, int delta) {
         QuestSavedData data = root(player);
         String ck = counterKey(player.getUUID(), key);
-        int next = data.counters.getOrDefault(ck, 0) + 1;
+        int next = data.counters.getOrDefault(ck, 0) + delta;
         data.counters.put(ck, next);
         data.setDirty();
         return next;
@@ -132,6 +136,40 @@ public final class PlayerQuestData {
         QuestSavedData data = root(player);
         long expire = ServerLevels.of(player).getGameTime() + validTicks;
         data.fortuneCodes.put(player.getUUID(), new FortuneCode(code, expire));
+        data.setDirty();
+    }
+
+    public static void setEmeraldSnapshot(ServerPlayer player, int count) {
+        QuestSavedData data = root(player);
+        data.emeraldSnapshot.put(player.getUUID(), count);
+        data.setDirty();
+    }
+
+    public static int emeraldSnapshot(ServerPlayer player) {
+        return root(player).emeraldSnapshot.getOrDefault(player.getUUID(), -1);
+    }
+
+    public static void startPlomberieWindow(ServerPlayer player, long durationTicks) {
+        QuestSavedData data = root(player);
+        data.plomberieUntil.put(player.getUUID(), ServerLevels.of(player).getGameTime() + durationTicks);
+        data.setDirty();
+    }
+
+    public static boolean plomberieWindowActive(ServerPlayer player) {
+        Long until = root(player).plomberieUntil.get(player.getUUID());
+        if (until == null) {
+            return false;
+        }
+        if (ServerLevels.of(player).getGameTime() > until) {
+            root(player).plomberieUntil.remove(player.getUUID());
+            return false;
+        }
+        return true;
+    }
+
+    public static void clearPlomberieWindow(ServerPlayer player) {
+        QuestSavedData data = root(player);
+        data.plomberieUntil.remove(player.getUUID());
         data.setDirty();
     }
 
@@ -252,6 +290,8 @@ public final class PlayerQuestData {
         private final Set<UUID> ananasFailed = new HashSet<>();
         private final Map<UUID, FortuneCode> fortuneCodes = new HashMap<>();
         private final Map<UUID, Long> gymStrengthUntil = new HashMap<>();
+        private final Map<UUID, Integer> emeraldSnapshot = new HashMap<>();
+        private final Map<UUID, Long> plomberieUntil = new HashMap<>();
 
         private QuestSavedData() {}
 
@@ -315,6 +355,14 @@ public final class PlayerQuestData {
             for (String key : gym.keySet()) {
                 data.gymStrengthUntil.put(UUID.fromString(key), gym.getLongOr(key, 0L));
             }
+            CompoundTag em = tag.getCompoundOrEmpty("EmeraldSnapshot");
+            for (String key : em.keySet()) {
+                data.emeraldSnapshot.put(UUID.fromString(key), em.getIntOr(key, 0));
+            }
+            CompoundTag plomb = tag.getCompoundOrEmpty("PlomberieUntil");
+            for (String key : plomb.keySet()) {
+                data.plomberieUntil.put(UUID.fromString(key), plomb.getLongOr(key, 0L));
+            }
             return data;
         }
 
@@ -369,6 +417,14 @@ public final class PlayerQuestData {
             CompoundTag gym = new CompoundTag();
             gymStrengthUntil.forEach((uuid, tick) -> gym.putLong(uuid.toString(), tick));
             tag.put("GymStrengthUntil", gym);
+
+            CompoundTag em = new CompoundTag();
+            emeraldSnapshot.forEach((uuid, count) -> em.putInt(uuid.toString(), count));
+            tag.put("EmeraldSnapshot", em);
+
+            CompoundTag plomb = new CompoundTag();
+            plomberieUntil.forEach((uuid, tick) -> plomb.putLong(uuid.toString(), tick));
+            tag.put("PlomberieUntil", plomb);
             return tag;
         }
     }

@@ -18,14 +18,10 @@
   "parent": "unpredictableblocks:root",
   "criteria": {
     "pay": {
-      "trigger": "minecraft:villager_trade",
-      "conditions": {
-        "villager": {
-          "type": "minecraft:villager"
-        }
-      }
+      "trigger": "minecraft:impossible"
     }
   },
+  "requirements": [["pay"]],
   "rewards": {
     "loot": [
       "unpredictableblocks:rewards/quest_impots"

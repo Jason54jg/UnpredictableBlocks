@@ -18,12 +18,10 @@
   "parent": "unpredictableblocks:root",
   "criteria": {
     "chest": {
-      "trigger": "minecraft:player_generates_container_loot",
-      "conditions": {
-        "loot_table": "minecraft:chests/simple_dungeon"
-      }
+      "trigger": "minecraft:impossible"
     }
   },
+  "requirements": [["chest"]],
   "rewards": {
     "loot": [
       "unpredictableblocks:rewards/quest_plomberie"

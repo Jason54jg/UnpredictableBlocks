@@ -47,6 +47,11 @@ public final class LuckyBlockEventDispatcher {
             player.sendSystemMessage(Component.literal("§eChrono lancé — atteignez l'End en moins de 3 minutes !"));
         }
 
+        if (theme == LuckyTheme.PLOMBERIE) {
+            PlayerQuestData.startPlomberieWindow(player, 20L * 60 * 5);
+            player.sendSystemMessage(Component.literal("§6Fuite détectée — ouvrez un coffre avant 5 minutes !"));
+        }
+
         if (effective.tier() == LuckTier.LOW) {
             PlayerQuestData.setMissedReroll(player, theme);
             player.sendSystemMessage(Component.literal(

@@ -13,6 +13,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 
@@ -36,6 +37,19 @@ public final class QuestExtendedHandler {
         });
 
         EntityEvent.LIVING_DEATH.register(QuestExtendedHandler::onLivingDeath);
+
+        PlayerEvent.OPEN_MENU.register((player, menu) -> {
+            if (player.level().isClientSide() || !(player instanceof ServerPlayer sp)) {
+                return;
+            }
+            if (!PlayerQuestData.plomberieWindowActive(sp)) {
+                return;
+            }
+            if (menu instanceof ChestMenu) {
+                QuestRewards.complete(sp, "quest/plomberie", "chest");
+                PlayerQuestData.clearPlomberieWindow(sp);
+            }
+        });
 
         PlayerEvent.CHANGE_DIMENSION.register((player, from, to) -> {
             if (to == Level.END) {
