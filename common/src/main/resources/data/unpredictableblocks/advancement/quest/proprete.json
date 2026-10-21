@@ -16,12 +16,10 @@
   "parent": "unpredictableblocks:root",
   "criteria": {
     "kills": {
-      "trigger": "minecraft:player_killed_entity",
-      "conditions": {
-        "entity": [{ "type": "minecraft:zombie" }]
-      }
+      "trigger": "minecraft:impossible"
     }
   },
+  "requirements": [["kills"]],
   "rewards": {
     "loot": ["unpredictableblocks:rewards/quest_proprete"]
   }

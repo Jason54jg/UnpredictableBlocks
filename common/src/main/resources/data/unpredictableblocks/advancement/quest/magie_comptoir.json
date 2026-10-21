@@ -18,16 +18,10 @@
   "parent": "unpredictableblocks:root",
   "criteria": {
     "wolf": {
-      "trigger": "minecraft:player_killed_entity",
-      "conditions": {
-        "entity": [
-          {
-            "type": "minecraft:wolf"
-          }
-        ]
-      }
+      "trigger": "minecraft:impossible"
     }
   },
+  "requirements": [["wolf"]],
   "rewards": {
     "loot": [
       "unpredictableblocks:rewards/quest_magie_comptoir"

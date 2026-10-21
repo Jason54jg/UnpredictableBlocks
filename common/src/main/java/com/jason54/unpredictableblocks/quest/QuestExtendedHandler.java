@@ -16,7 +16,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 
-/** Quêtes runtime thèmes 25–32 et helpers associés. */
+/** Quêtes runtime (thèmes 1–32) et helpers associés. */
 public final class QuestExtendedHandler {
     private static final long SPEEDRUN_LIMIT_TICKS = 20L * 60 * 3;
     private QuestExtendedHandler() {}
@@ -39,6 +39,7 @@ public final class QuestExtendedHandler {
 
         PlayerEvent.CHANGE_DIMENSION.register((player, from, to) -> {
             if (to == Level.END) {
+                QuestRewards.complete(player, "quest/lag_bug", "end");
                 PlayerQuestData.speedrunStartTick(player).ifPresent(start -> {
                     long elapsed = ServerLevels.of(player).getGameTime() - start;
                     if (elapsed <= SPEEDRUN_LIMIT_TICKS) {
@@ -53,6 +54,7 @@ public final class QuestExtendedHandler {
             if (player.level().isClientSide() || !(player instanceof ServerPlayer sp)) {
                 return;
             }
+            QuestLegacyHandler.tickEffects(sp);
             if (!PlayerQuestData.multiversTracking(sp)) {
                 return;
             }
@@ -74,6 +76,9 @@ public final class QuestExtendedHandler {
     private static EventResult onLivingDeath(LivingEntity entity, DamageSource source) {
         if (entity.level().isClientSide()) {
             return EventResult.pass();
+        }
+        if (source.getEntity() instanceof ServerPlayer killer) {
+            QuestLegacyHandler.onEntityKilled(killer, entity);
         }
         if (!(source.getEntity() instanceof ServerPlayer killer)) {
             return EventResult.pass();

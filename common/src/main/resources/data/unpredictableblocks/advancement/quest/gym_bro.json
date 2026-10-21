@@ -18,15 +18,10 @@
   "parent": "unpredictableblocks:root",
   "criteria": {
     "buff": {
-      "trigger": "minecraft:effects_changed",
-      "conditions": {
-        "effects": {
-          "minecraft:strength": {},
-          "minecraft:slowness": {}
-        }
-      }
+      "trigger": "minecraft:impossible"
     }
   },
+  "requirements": [["buff"]],
   "rewards": {
     "loot": [
       "unpredictableblocks:rewards/quest_gym_bro"

@@ -18,16 +18,10 @@
   "parent": "unpredictableblocks:root",
   "criteria": {
     "bear": {
-      "trigger": "minecraft:player_killed_entity",
-      "conditions": {
-        "entity": [
-          {
-            "type": "minecraft:polar_bear"
-          }
-        ]
-      }
+      "trigger": "minecraft:impossible"
     }
   },
+  "requirements": [["bear"]],
   "rewards": {
     "loot": [
       "unpredictableblocks:rewards/quest_camping"

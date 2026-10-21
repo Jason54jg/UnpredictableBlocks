@@ -9,7 +9,7 @@
     },
     "description": {
       "translate": "advancements.unpredictableblocks.anachronisme.description",
-      "fallback": "Vaincre un Ravager."
+      "fallback": "Vaincre un Ravager ou le Toi du Futur."
     },
     "frame": "task",
     "show_toast": true,
@@ -18,16 +18,10 @@
   "parent": "unpredictableblocks:root",
   "criteria": {
     "kill_ravager": {
-      "trigger": "minecraft:player_killed_entity",
-      "conditions": {
-        "entity": [
-          {
-            "type": "minecraft:ravager"
-          }
-        ]
-      }
+      "trigger": "minecraft:impossible"
     }
   },
+  "requirements": [["kill_ravager"]],
   "rewards": {
     "loot": [
       "unpredictableblocks:rewards/quest_anachronisme"

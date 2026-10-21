@@ -18,15 +18,10 @@
   "parent": "unpredictableblocks:root",
   "criteria": {
     "glitched": {
-      "trigger": "minecraft:effects_changed",
-      "conditions": {
-        "effects": {
-          "minecraft:blindness": {},
-          "minecraft:nausea": {}
-        }
-      }
+      "trigger": "minecraft:impossible"
     }
   },
+  "requirements": [["glitched"]],
   "rewards": {
     "loot": [
       "unpredictableblocks:rewards/quest_bsod"

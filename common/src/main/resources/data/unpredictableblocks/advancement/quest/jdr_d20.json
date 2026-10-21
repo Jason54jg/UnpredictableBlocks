@@ -18,16 +18,10 @@
   "parent": "unpredictableblocks:root",
   "criteria": {
     "mimic": {
-      "trigger": "minecraft:player_killed_entity",
-      "conditions": {
-        "entity": [
-          {
-            "type": "minecraft:enderman"
-          }
-        ]
-      }
+      "trigger": "minecraft:impossible"
     }
   },
+  "requirements": [["mimic"]],
   "rewards": {
     "loot": [
       "unpredictableblocks:rewards/quest_jdr_d20"

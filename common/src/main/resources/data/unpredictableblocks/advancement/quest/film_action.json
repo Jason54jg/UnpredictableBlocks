@@ -18,14 +18,10 @@
   "parent": "unpredictableblocks:root",
   "criteria": {
     "slow_fall": {
-      "trigger": "minecraft:effects_changed",
-      "conditions": {
-        "effects": {
-          "minecraft:slow_falling": {}
-        }
-      }
+      "trigger": "minecraft:impossible"
     }
   },
+  "requirements": [["slow_fall"]],
   "rewards": {
     "loot": [
       "unpredictableblocks:rewards/quest_film_action"

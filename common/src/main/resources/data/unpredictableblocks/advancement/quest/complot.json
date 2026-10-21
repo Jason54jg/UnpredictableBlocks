@@ -11,23 +11,17 @@
       "translate": "advancements.unpredictableblocks.complot.description",
       "fallback": "Porter un casque en or."
     },
-    "frame": "goal",
+    "frame": "task",
     "show_toast": true,
     "announce_to_chat": true
   },
   "parent": "unpredictableblocks:root",
   "criteria": {
     "hat": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": "minecraft:golden_helmet"
-          }
-        ]
-      }
+      "trigger": "minecraft:impossible"
     }
   },
+  "requirements": [["hat"]],
   "rewards": {
     "loot": [
       "unpredictableblocks:rewards/quest_complot"

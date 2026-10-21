@@ -18,16 +18,10 @@
   "parent": "unpredictableblocks:root",
   "criteria": {
     "art": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": "#minecraft:paintings"
-          }
-        ]
-      }
+      "trigger": "minecraft:impossible"
     }
   },
+  "requirements": [["art"]],
   "rewards": {
     "loot": [
       "unpredictableblocks:rewards/quest_art_moderne"

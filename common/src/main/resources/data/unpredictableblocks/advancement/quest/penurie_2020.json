@@ -18,19 +18,10 @@
   "parent": "unpredictableblocks:root",
   "criteria": {
     "tp": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": "minecraft:paper",
-            "count": {
-              "min": 64
-            }
-          }
-        ]
-      }
+      "trigger": "minecraft:impossible"
     }
   },
+  "requirements": [["tp"]],
   "rewards": {
     "loot": [
       "unpredictableblocks:rewards/quest_penurie_2020"

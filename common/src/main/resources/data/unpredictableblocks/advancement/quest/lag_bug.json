@@ -18,12 +18,10 @@
   "parent": "unpredictableblocks:root",
   "criteria": {
     "end": {
-      "trigger": "minecraft:changed_dimension",
-      "conditions": {
-        "to": "minecraft:the_end"
-      }
+      "trigger": "minecraft:impossible"
     }
   },
+  "requirements": [["end"]],
   "rewards": {
     "loot": [
       "unpredictableblocks:rewards/quest_lag_bug"

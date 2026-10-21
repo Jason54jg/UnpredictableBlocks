@@ -135,6 +135,17 @@ public final class PlayerQuestData {
         data.setDirty();
     }
 
+    public static void markGymStrength(ServerPlayer player, long windowTicks) {
+        QuestSavedData data = root(player);
+        data.gymStrengthUntil.put(player.getUUID(), ServerLevels.of(player).getGameTime() + windowTicks);
+        data.setDirty();
+    }
+
+    public static boolean hadGymStrengthRecently(ServerPlayer player) {
+        Long until = root(player).gymStrengthUntil.get(player.getUUID());
+        return until != null && ServerLevels.of(player).getGameTime() <= until;
+    }
+
     public static boolean tryClaimFortuneCode(ServerPlayer player, String message) {
         QuestSavedData data = root(player);
         FortuneCode pending = data.fortuneCodes.get(player.getUUID());
@@ -240,6 +251,7 @@ public final class PlayerQuestData {
         private final Map<UUID, Set<String>> multiversBiomes = new HashMap<>();
         private final Set<UUID> ananasFailed = new HashSet<>();
         private final Map<UUID, FortuneCode> fortuneCodes = new HashMap<>();
+        private final Map<UUID, Long> gymStrengthUntil = new HashMap<>();
 
         private QuestSavedData() {}
 
@@ -299,6 +311,10 @@ public final class PlayerQuestData {
                         new FortuneCode(entry.getIntOr("Code", 0), entry.getLongOr("Expire", 0L))
                 );
             }
+            CompoundTag gym = tag.getCompoundOrEmpty("GymStrengthUntil");
+            for (String key : gym.keySet()) {
+                data.gymStrengthUntil.put(UUID.fromString(key), gym.getLongOr(key, 0L));
+            }
             return data;
         }
 
@@ -349,6 +365,10 @@ public final class PlayerQuestData {
                 fortune.put(uuid.toString(), entry);
             });
             tag.put("FortuneCodes", fortune);
+
+            CompoundTag gym = new CompoundTag();
+            gymStrengthUntil.forEach((uuid, tick) -> gym.putLong(uuid.toString(), tick));
+            tag.put("GymStrengthUntil", gym);
             return tag;
         }
     }

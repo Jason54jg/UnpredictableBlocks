@@ -18,16 +18,10 @@
   "parent": "unpredictableblocks:root",
   "criteria": {
     "kill_golem": {
-      "trigger": "minecraft:player_killed_entity",
-      "conditions": {
-        "entity": [
-          {
-            "type": "minecraft:iron_golem"
-          }
-        ]
-      }
+      "trigger": "minecraft:impossible"
     }
   },
+  "requirements": [["kill_golem"]],
   "rewards": {
     "loot": [
       "unpredictableblocks:rewards/quest_volaille"

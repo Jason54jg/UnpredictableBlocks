@@ -160,4 +160,6 @@ Légende tiers : **HIGH** ≈ chance +100, **NEUTRAL** ≈ 0, **LOW** ≈ −100
 Advancements : `data/unpredictableblocks/advancement/quest/<id>.json`  
 Loot récompense : `data/unpredictableblocks/loot_table/rewards/quest_<id>.json` → Lucky Block `{Luck:100}` (posé via `LuckyBlockItem.readLuckFromStack`).
 
-Quêtes **25–32** : logique runtime dans `QuestExtendedHandler.java` — voir [`THEMES_25_32.md`](THEMES_25_32.md).
+Quêtes **1–24** : logique runtime dans `QuestLegacyHandler.java` (kills, effets, inventaire) + critères `impossible` côté JSON.
+
+Quêtes **25–32** : `QuestExtendedHandler.java` — voir [`THEMES_25_32.md`](THEMES_25_32.md).

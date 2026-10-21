@@ -17,17 +17,11 @@
   },
   "parent": "unpredictableblocks:root",
   "criteria": {
-    "z1": {
-      "trigger": "minecraft:player_killed_entity",
-      "conditions": {
-        "entity": [
-          {
-            "type": "minecraft:zombie"
-          }
-        ]
-      }
+    "streamer_zombies": {
+      "trigger": "minecraft:impossible"
     }
   },
+  "requirements": [["streamer_zombies"]],
   "rewards": {
     "loot": [
       "unpredictableblocks:rewards/quest_streamer"
