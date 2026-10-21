@@ -21,6 +21,11 @@
       "trigger": "minecraft:impossible"
     }
   },
+  "rewards": {
+    "loot": [
+      "unpredictableblocks:rewards/quest_pause_cafe"
+    ]
+  },
   "requirements": [
     [
       "five_espressos"

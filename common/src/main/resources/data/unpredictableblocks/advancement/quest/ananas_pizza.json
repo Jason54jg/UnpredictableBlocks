@@ -21,6 +21,11 @@
       "trigger": "minecraft:impossible"
     }
   },
+  "rewards": {
+    "loot": [
+      "unpredictableblocks:rewards/quest_ananas_pizza"
+    ]
+  },
   "requirements": [
     [
       "survive_chefs"

@@ -10,15 +10,24 @@ python3 tools/generate_textures.py
 python3 tools/generate_item_textures.py
 ```
 
-Sortie : `textures/block/lucky_*.png` et `textures/item/*.png` en **32×32** (+ `icon.png` 128×128).
+Sortie : `textures/block/lucky_*.png` et `textures/item/*.png` en **32×32 natif** (+ `icon.png` 128×128).
 
-Les scripts dessinent sur une grille **16×16** puis exportent en **32×32** (nearest-neighbor, pixel art net) — voir `tools/texture_size.py`.
+## Pipeline 32×32 détaillé
+
+| Fichier | Rôle |
+|---------|------|
+| `tools/texture_size.py` | Canvas cible **32×32** (plus d’upscale 16→32) |
+| `tools/pixel_canvas.py` | Grille logique 16×16 → pixels 32 (`Draw32`), cadre Lucky Block, ombre basse, reflets |
+| `tools/generate_textures.py` | 32 blocs thématiques + détails natifs (thèmes 25–32 enrichis) |
+| `tools/generate_item_textures.py` | 17 items en pixel art 32×32 |
+
+Chaque Lucky Block reçoit un **cadre** (bordure + highlight), un **assombrissement** en bas de face, et des **détails 32 px** supplémentaires sur les thèmes récents (vapeur café, pistes torrent, bulles pop-it, etc.).
 
 ## Qualité artistique
 
-- **32×32** : résolution par défaut du mod (placeholders procéduraux, catalogue `CATALOGUE.md`).
-- Retouche manuelle (Aseprite, GIMP, etc.) : remplacez les PNG, gardez les mêmes chemins et la taille **32×32** pour rester cohérent.
-- Régénération rapide : `python3 tools/upscale_textures.py` relance les deux générateurs.
+- **32×32** : résolution par défaut du mod (catalogue `CATALOGUE.md`).
+- Retouche manuelle (Aseprite, GIMP, etc.) : remplacez les PNG ou étendez les fonctions `gen_*` / `ITEMS` dans les scripts.
+- Régénération complète : `python3 tools/upscale_textures.py` (relance les deux générateurs).
 
 ## Convention
 
@@ -27,4 +36,4 @@ Les scripts dessinent sur une grille **16×16** puis exportent en **32×32** (ne
 | `textures/block/lucky_<theme>.png` | faces du cube (block model `cube_all`) |
 | `textures/icon.png` | mod icon Fabric/NeoForge |
 
-Les objets custom peuvent réutiliser une texture de bloc ou ajouter `textures/item/<id>.png` + model JSON.
+Les objets custom : `textures/item/<id>.png` + model JSON `assets/.../models/item/<id>.json`.

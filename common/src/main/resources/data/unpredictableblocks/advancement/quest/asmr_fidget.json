@@ -21,6 +21,11 @@
       "trigger": "minecraft:impossible"
     }
   },
+  "rewards": {
+    "loot": [
+      "unpredictableblocks:rewards/quest_asmr_fidget"
+    ]
+  },
   "requirements": [
     [
       "bubble_pop_50"

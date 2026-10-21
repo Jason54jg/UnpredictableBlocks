@@ -1,6 +1,7 @@
 package com.jason54.unpredictableblocks.event;
 
 import com.jason54.unpredictableblocks.luck.LuckTier;
+import com.jason54.unpredictableblocks.quest.PlayerQuestData;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -282,6 +283,7 @@ public final class ThemeCatalogEffects {
             return;
         }
         int code = player.getRandom().nextInt(9000) + 1000;
+        PlayerQuestData.setFortuneCode(player, code, 5L * 20);
         player.sendSystemMessage(Component.literal("§eCode fortune : §l" + code + " §e(tapez /say " + code + " sous 5s pour +500 XP)."));
     }
 

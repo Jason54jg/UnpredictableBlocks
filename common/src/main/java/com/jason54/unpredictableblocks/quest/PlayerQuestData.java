@@ -128,6 +128,33 @@ public final class PlayerQuestData {
         resetCounter(player, "chef_kill");
     }
 
+    public static void setFortuneCode(ServerPlayer player, int code, long validTicks) {
+        QuestSavedData data = root(player);
+        long expire = ServerLevels.of(player).getGameTime() + validTicks;
+        data.fortuneCodes.put(player.getUUID(), new FortuneCode(code, expire));
+        data.setDirty();
+    }
+
+    public static boolean tryClaimFortuneCode(ServerPlayer player, String message) {
+        QuestSavedData data = root(player);
+        FortuneCode pending = data.fortuneCodes.get(player.getUUID());
+        if (pending == null) {
+            return false;
+        }
+        long now = ServerLevels.of(player).getGameTime();
+        if (now > pending.expireTick()) {
+            data.fortuneCodes.remove(player.getUUID());
+            data.setDirty();
+            return false;
+        }
+        if (!message.contains(String.valueOf(pending.code()))) {
+            return false;
+        }
+        data.fortuneCodes.remove(player.getUUID());
+        data.setDirty();
+        return true;
+    }
+
     private static String counterKey(UUID uuid, String key) {
         return uuid + ":" + key;
     }
@@ -192,6 +219,8 @@ public final class PlayerQuestData {
 
     private record MissedReroll(String themeId, long expireTick) {}
 
+    private record FortuneCode(int code, long expireTick) {}
+
     public static final class QuestSavedData extends SavedData {
         private static final Codec<QuestSavedData> CODEC = CompoundTag.CODEC.xmap(QuestSavedData::fromTag, QuestSavedData::toTag);
 
@@ -210,6 +239,7 @@ public final class PlayerQuestData {
         private final Map<UUID, Long> multiversUntil = new HashMap<>();
         private final Map<UUID, Set<String>> multiversBiomes = new HashMap<>();
         private final Set<UUID> ananasFailed = new HashSet<>();
+        private final Map<UUID, FortuneCode> fortuneCodes = new HashMap<>();
 
         private QuestSavedData() {}
 
@@ -255,10 +285,19 @@ public final class PlayerQuestData {
                     data.multiversBiomes.put(UUID.fromString(key), biomes);
                 }
             }
-            for (String key : tag.getCompoundOrEmpty("AnanasFailed").keySet()) {
-                if (tag.getCompoundOrEmpty("AnanasFailed").getBooleanOr(key, false)) {
+            CompoundTag ananasTag = tag.getCompoundOrEmpty("AnanasFailed");
+            for (String key : ananasTag.keySet()) {
+                if (ananasTag.getBooleanOr(key, false)) {
                     data.ananasFailed.add(UUID.fromString(key));
                 }
+            }
+            CompoundTag fortune = tag.getCompoundOrEmpty("FortuneCodes");
+            for (String key : fortune.keySet()) {
+                CompoundTag entry = fortune.getCompoundOrEmpty(key);
+                data.fortuneCodes.put(
+                        UUID.fromString(key),
+                        new FortuneCode(entry.getIntOr("Code", 0), entry.getLongOr("Expire", 0L))
+                );
             }
             return data;
         }
@@ -301,6 +340,15 @@ public final class PlayerQuestData {
             CompoundTag ananas = new CompoundTag();
             ananasFailed.forEach(uuid -> ananas.putBoolean(uuid.toString(), true));
             tag.put("AnanasFailed", ananas);
+
+            CompoundTag fortune = new CompoundTag();
+            fortuneCodes.forEach((uuid, fc) -> {
+                CompoundTag entry = new CompoundTag();
+                entry.putInt("Code", fc.code());
+                entry.putLong("Expire", fc.expireTick());
+                fortune.put(uuid.toString(), entry);
+            });
+            tag.put("FortuneCodes", fortune);
             return tag;
         }
     }

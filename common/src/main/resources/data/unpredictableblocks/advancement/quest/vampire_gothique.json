@@ -21,6 +21,11 @@
       "trigger": "minecraft:impossible"
     }
   },
+  "rewards": {
+    "loot": [
+      "unpredictableblocks:rewards/quest_vampire_gothique"
+    ]
+  },
   "requirements": [
     [
       "dracula_no_metal"

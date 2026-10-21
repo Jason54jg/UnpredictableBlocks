@@ -21,6 +21,11 @@
       "trigger": "minecraft:impossible"
     }
   },
+  "rewards": {
+    "loot": [
+      "unpredictableblocks:rewards/quest_multivers_sliders"
+    ]
+  },
   "requirements": [
     [
       "multivers_biomes"
