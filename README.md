@@ -6,7 +6,7 @@ Lucky Blocks chaotiques à thèmes, système de **chance (-100…+100)**, quête
 
 ## Fonctionnalités (v0.1.0-SNAPSHOT)
 
-- **24 Lucky Blocks** (`LuckyTheme`) — communs / rares / légendaires (60/30/10).
+- **32 Lucky Blocks** (`LuckyTheme`, thèmes 1–24 + 25–32) — communs / rares / légendaires.
 - **Luck Stat** + modificateurs craft ±10 (`luck_emerald_dust`, `luck_blaze_curse`).
 - **Spawn** : `config/unpredictableblocks.json`, hook Architectury `CHUNK_LOAD` + marqueurs par chunk.
 - **Événements** : loot tables + `ThemeEventEffects` + structures NBT (`StructurePlacer`).
@@ -29,7 +29,7 @@ pip install -r tools/requirements.txt
 python3 tools/generate_textures.py      # blocs 32×32 + icon 128×128
 python3 tools/generate_item_textures.py # objets 32×32
 python3 tools/upscale_textures.py       # relance les deux générateurs ci-dessus
-python3 tools/generate_structures.py    # 15 structures .nbt
+python3 tools/generate_structures.py    # structures .nbt (32 thèmes)
 ```
 
 Détails : `docs/textures/README.md`
@@ -37,7 +37,10 @@ Détails : `docs/textures/README.md`
 ## Documentation
 
 - Fiche génération exemple : `docs/GENERATION_BOULANGERIE.md`
-- Textures : `docs/textures/CATALOGUE.md`
+- Thèmes 1–24 : `docs/generation/THEMES_01_24.md`
+- Thèmes 25–32 : `docs/generation/THEMES_25_32.md`
+- Index génération : `docs/generation/README.md`
+- Textures 32×32 : `docs/textures/CATALOGUE.md`, `docs/textures/README.md`
 - Structures : `docs/structures/STRUCTURES.md`
 
 Mod ID : `unpredictableblocks` — nom affiché : **UnpredictableBlocks**.

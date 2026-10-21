@@ -113,6 +113,9 @@ def gen_bsod() -> Image.Image:
         d.rectangle((2, y, 13, y), fill=rgb("FFFFFF"))
     d.rectangle((5, 12, 6, 13), fill=rgb("FFFFFF"))
     d.rectangle((9, 12, 10, 13), fill=rgb("FFFFFF"))
+    d.raw.rectangle((13, 22, 14, 24), fill=rgb("FFFFFF"))
+    d.raw.rectangle((17, 24, 18, 26), fill=rgb("FFFFFF"))
+    d.raw.point((15, 26), fill=rgb("FFFFFF"))
     return img
 
 
@@ -123,6 +126,8 @@ def gen_volaille() -> Image.Image:
     d.rectangle((4, 2, 11, 3), fill=rgb("CC0000"))
     d.rectangle((7, 6, 9, 8), fill=rgb("FFCC00"))
     qmark(d, rgb("333333"))
+    for x in (6, 10, 20, 24):
+        d.raw.line((x, 18, x + 2, 22), fill=rgb("EEEEEE"))
     return img
 
 
@@ -133,6 +138,7 @@ def gen_impots() -> Image.Image:
     d.rectangle((0, 0, 15, 2), fill=rgb("FFFF00"))
     d.rectangle((3, 5, 8, 6), fill=rgb("CC0000"))
     d.rectangle((3, 8, 9, 9), fill=rgb("CC0000"))
+    d.raw.text((8, 20), "REJETE", fill=rgb("CC0000"))
     return img
 
 
@@ -149,6 +155,8 @@ def gen_streamer() -> Image.Image:
         d.line((0, y, 15, y), fill=c)
     d.rectangle((4, 6, 11, 9), fill=rgb("FFFF00"))
     d.polygon([(2, 2), (2, 6), (5, 4)], fill=rgb("FF0000"))
+    d.raw.text((10, 20), "LIKE", fill=rgb("FFFFFF"))
+    d.raw.polygon([(26, 8), (30, 12), (26, 16)], fill=rgb("FF0000"))
     return img
 
 
@@ -159,6 +167,8 @@ def gen_proprete() -> Image.Image:
     d.ellipse((2, 2, 5, 5), outline=rgb("FFFFFF"))
     d.ellipse((9, 4, 12, 7), outline=rgb("FFFFFF"))
     d.rectangle((11, 10, 14, 13), fill=rgb("FFD700"))
+    d.raw.ellipse((18, 8, 26, 16), outline=rgb("FFFFFF"))
+    d.raw.ellipse((6, 20, 14, 28), outline=rgb("FFFFFF"))
     return img
 
 
@@ -169,6 +179,9 @@ def gen_gravite_zero() -> Image.Image:
     for x, y in [(2, 2), (12, 3), (8, 11), (4, 9)]:
         d.point((x, y), fill=rgb("FFFFFF"))
     d.ellipse((6, 5, 10, 9), fill=rgb("9966FF"))
+    d.raw.ellipse((14, 14, 22, 22), outline=rgb("9966FF"))
+    for x, y in [(6, 6), (22, 8), (18, 24), (8, 26)]:
+        d.raw.point((x, y), fill=rgb("FFFFFF"))
     return img
 
 
@@ -179,6 +192,7 @@ def gen_fast_food() -> Image.Image:
     d.ellipse((4, 4, 11, 11), fill=rgb("CC3300"))
     d.ellipse((6, 6, 9, 9), fill=rgb("FFCC66"))
     qmark(d, rgb("FFFFFF"))
+    d.raw.ellipse((14, 14, 18, 18), fill=rgb("CC3300"))
     return img
 
 
@@ -189,6 +203,7 @@ def gen_cauchemar_matin() -> Image.Image:
     d.rectangle((4, 4, 11, 9), fill=rgb("CC0000"))
     d.rectangle((5, 6, 6, 7), fill=rgb("FFFF00"))
     d.rectangle((9, 6, 10, 7), fill=rgb("FFFF00"))
+    d.raw.line((12, 24, 20, 24), fill=rgb("FF0000"))
     return img
 
 
@@ -199,6 +214,7 @@ def gen_film_action() -> Image.Image:
     d.rectangle((2, 2, 13, 13), fill=rgb("FFFFFF"))
     d.rectangle((2, 7, 13, 8), fill=rgb("000000"))
     d.rectangle((7, 2, 8, 13), fill=rgb("000000"))
+    d.raw.rectangle((20, 20, 28, 26), fill=rgb("FFFF00"))
     return img
 
 
@@ -207,6 +223,7 @@ def gen_jdr_d20() -> Image.Image:
     d = draw(img)
     d.polygon([(8, 1), (14, 5), (12, 14), (4, 14), (2, 5)], fill=rgb("AA0000"))
     d.polygon([(8, 4), (11, 6), (10, 11), (6, 11), (5, 6)], fill=rgb("FF6666"))
+    d.raw.text((11, 20), "20", fill=rgb("FFFFFF"))
     return img
 
 
@@ -217,6 +234,7 @@ def gen_penurie_2020() -> Image.Image:
     d.rectangle((5, 2, 10, 4), fill=rgb("EEEEEE"))
     d.rectangle((5, 6, 10, 8), fill=rgb("EEEEEE"))
     d.rectangle((3, 1, 4, 14), fill=rgb("CCCCCC"))
+    d.raw.text((9, 18), "PQ", fill=rgb("888888"))
     return img
 
 
@@ -226,6 +244,7 @@ def gen_complot() -> Image.Image:
     d.rectangle((0, 0, 15, 15), fill=rgb("1A3D1A"))
     d.polygon([(8, 4), (12, 12), (4, 12)], outline=rgb("FFD700"))
     d.rectangle((3, 0, 12, 3), fill=rgb("C0C0C0"))
+    d.raw.ellipse((14, 14, 18, 18), fill=rgb("FFD700"))
     return img
 
 
@@ -250,6 +269,8 @@ def gen_disco_80() -> Image.Image:
     for i in range(4):
         d.rectangle((i * 4, 0, i * 4 + 3, 15), fill=colors[i])
     d.ellipse((5, 5, 10, 10), fill=rgb("CCCCCC"))
+    for i in range(4):
+        d.raw.line((6 + i * 6, 22, 8 + i * 6, 28), fill=rgb("FF00FF"))
     return img
 
 
@@ -260,6 +281,7 @@ def gen_plomberie() -> Image.Image:
     for y in range(0, 16, 4):
         d.rectangle((0, y, 15, y + 1), fill=rgb("AA0000"))
     d.rectangle((10, 8, 14, 10), fill=rgb("FFD700"))
+    d.raw.line((20, 20, 28, 28), fill=rgb("AA0000"), width=2)
     return img
 
 
@@ -268,6 +290,7 @@ def gen_fortune_cookie() -> Image.Image:
     d = draw(img)
     d.ellipse((2, 4, 13, 13), fill=rgb("E8C872"))
     d.rectangle((7, 2, 9, 8), fill=rgb("FFFFFF"))
+    d.raw.line((16, 8, 16, 14), fill=rgb("333333"))
     return img
 
 
@@ -276,6 +299,7 @@ def gen_camping() -> Image.Image:
     d = draw(img)
     d.polygon([(8, 2), (14, 14), (2, 14)], fill=rgb("556B2F"))
     d.rectangle((6, 12, 9, 14), fill=rgb("FF6600"))
+    d.raw.polygon([(16, 8), (26, 24), (6, 24)], fill=rgb("556B2F"))
     return img
 
 
@@ -286,6 +310,7 @@ def gen_gym_bro() -> Image.Image:
     d.rectangle((2, 6, 5, 9), fill=rgb("222222"))
     d.rectangle((10, 6, 13, 9), fill=rgb("222222"))
     d.rectangle((5, 7, 10, 8), fill=rgb("222222"))
+    d.raw.text((12, 22), "PR", fill=rgb("222222"))
     return img
 
 
@@ -296,6 +321,7 @@ def gen_art_moderne() -> Image.Image:
     d.rectangle((2, 3, 6, 7), fill=rgb("FF00FF"))
     d.rectangle((9, 2, 13, 6), fill=rgb("00FF00"))
     d.ellipse((4, 9, 11, 14), fill=rgb("00FFFF"))
+    d.raw.rectangle((20, 20, 28, 28), fill=rgb("FF00FF"))
     return img
 
 
@@ -307,6 +333,7 @@ def gen_magie_comptoir() -> Image.Image:
     for x, y in [(3, 3), (10, 4), (12, 8)]:
         d.point((x, y), fill=rgb("FFD700"))
     d.ellipse((6, 10, 9, 13), fill=rgb("FFFFFF"))
+    d.raw.ellipse((20, 20, 28, 28), fill=rgb("FFFFFF"))
     return img
 
 
@@ -317,6 +344,8 @@ def gen_casino() -> Image.Image:
     d.rectangle((3, 4, 12, 11), fill=rgb("FFD700"))
     d.rectangle((5, 6, 10, 7), fill=rgb("000000"))
     d.text((4, 5), "777", fill=rgb("FF0000"))
+    d.raw.ellipse((20, 20, 24, 24), fill=rgb("FFD700"))
+    d.raw.ellipse((24, 22, 28, 26), fill=rgb("FFD700"))
     return img
 
 
