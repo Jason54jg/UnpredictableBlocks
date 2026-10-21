@@ -1,6 +1,7 @@
 package com.jason54.unpredictableblocks.block;
 
 import com.jason54.unpredictableblocks.config.ModConfig;
+import com.jason54.unpredictableblocks.event.LuckyBreakFeedback;
 import com.jason54.unpredictableblocks.event.ThemeEventEffects;
 import com.jason54.unpredictableblocks.luck.LuckResolver;
 import com.jason54.unpredictableblocks.luck.LuckTier;
@@ -59,6 +60,7 @@ public final class LuckyBlockEventDispatcher {
         }
 
         PlayerQuestData.recordLuckOutcome(player, effective.tier());
+        LuckyBreakFeedback.play(level, player, origin, effective.tier());
 
         if (effective.tier() == LuckTier.LOW) {
             PlayerQuestData.setMissedReroll(player, theme);

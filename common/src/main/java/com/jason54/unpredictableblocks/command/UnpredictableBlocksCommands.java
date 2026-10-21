@@ -1,6 +1,7 @@
 package com.jason54.unpredictableblocks.command;
 
 import com.jason54.unpredictableblocks.UnpredictableBlocks;
+import com.jason54.unpredictableblocks.config.ModConfig;
 import com.jason54.unpredictableblocks.block.LuckyBlockEventDispatcher;
 import com.jason54.unpredictableblocks.block.entity.LuckyBlockEntity;
 import com.jason54.unpredictableblocks.luck.LuckResolver;
@@ -69,6 +70,15 @@ public final class UnpredictableBlocksCommands {
                                         player.getInventory().add(new net.minecraft.world.item.ItemStack(ModBlocks.get(theme)));
                                     }
                                     player.getInventory().add(new net.minecraft.world.item.ItemStack(ModItems.JOURNAL_QUETES.get()));
+                                    return 1;
+                                }))
+                        .then(Commands.literal("reload")
+                                .executes(ctx -> {
+                                    ModConfig.load();
+                                    ctx.getSource().sendSuccess(
+                                            () -> Component.literal("Config unpredictableblocks.json rechargée."),
+                                            true
+                                    );
                                     return 1;
                                 }))
         );
