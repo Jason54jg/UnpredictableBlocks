@@ -1,0 +1,31 @@
+{
+  "display": {
+    "icon": {
+      "id": "wtf_luckyblocks:lucky_invasion_memes"
+    },
+    "title": {
+      "translate": "advancements.wtf_luckyblocks.root.title",
+      "fallback": "WTF Lucky Blocks"
+    },
+    "description": {
+      "translate": "advancements.wtf_luckyblocks.root.description",
+      "fallback": "Chaos contr\u00f4l\u00e9."
+    },
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "find_any": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "wtf_luckyblocks:lucky_anachronisme"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "id": "wtf_luckyblocks:lucky_anachronisme"
+    },
+    "title": {
+      "translate": "advancements.wtf_luckyblocks.anachronisme.title",
+      "fallback": "Anomalie Temporelle"
+    },
+    "description": {
+      "translate": "advancements.wtf_luckyblocks.anachronisme.description",
+      "fallback": "Survivre \u00e0 la t\u00e9l\u00e9portation pr\u00e9historique"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "wtf_luckyblocks:root",
+  "criteria": {
+    "completed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "loot": [
+      "wtf_luckyblocks:rewards/quest_anachronisme"
+    ]
+  }
+}

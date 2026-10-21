@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "id": "wtf_luckyblocks:lucky_magie_comptoir"
+    },
+    "title": {
+      "translate": "advancements.wtf_luckyblocks.magie_comptoir.title",
+      "fallback": "Prestidigitateur"
+    },
+    "description": {
+      "translate": "advancements.wtf_luckyblocks.magie_comptoir.description",
+      "fallback": "Survivre au Killer Bunny"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "wtf_luckyblocks:root",
+  "criteria": {
+    "completed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "loot": [
+      "wtf_luckyblocks:rewards/quest_magie_comptoir"
+    ]
+  }
+}

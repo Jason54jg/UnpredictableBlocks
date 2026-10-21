@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "id": "wtf_luckyblocks:lucky_boulangerie"
+    },
+    "title": {
+      "translate": "advancements.wtf_luckyblocks.boulangerie.title",
+      "fallback": "Le Chef Manque d'Ingr\u00e9dients"
+    },
+    "description": {
+      "translate": "advancements.wtf_luckyblocks.boulangerie.description",
+      "fallback": "Vaincre les Pigeons G\u00e9ants et fournir 32 pains"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "wtf_luckyblocks:root",
+  "criteria": {
+    "completed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "loot": [
+      "wtf_luckyblocks:rewards/quest_boulangerie"
+    ]
+  }
+}

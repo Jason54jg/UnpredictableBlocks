@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "id": "wtf_luckyblocks:lucky_disco_80"
+    },
+    "title": {
+      "translate": "advancements.wtf_luckyblocks.disco_80.title",
+      "fallback": "King of Pop"
+    },
+    "description": {
+      "translate": "advancements.wtf_luckyblocks.disco_80.description",
+      "fallback": "Danser 20s sur la piste disco"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "wtf_luckyblocks:root",
+  "criteria": {
+    "completed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "loot": [
+      "wtf_luckyblocks:rewards/quest_disco_80"
+    ]
+  }
+}

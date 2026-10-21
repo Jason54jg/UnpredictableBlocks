@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "id": "wtf_luckyblocks:lucky_penurie_2020"
+    },
+    "title": {
+      "translate": "advancements.wtf_luckyblocks.penurie_2020.title",
+      "fallback": "Le Roi du Stock"
+    },
+    "description": {
+      "translate": "advancements.wtf_luckyblocks.penurie_2020.description",
+      "fallback": "64 Papier Toilette 4 \u00c9paisseurs"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "wtf_luckyblocks:root",
+  "criteria": {
+    "completed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "loot": [
+      "wtf_luckyblocks:rewards/quest_penurie_2020"
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "id": "wtf_luckyblocks:lucky_impots"
+    },
+    "title": {
+      "translate": "advancements.wtf_luckyblocks.impots.title",
+      "fallback": "D\u00e9claration de Revenus"
+    },
+    "description": {
+      "translate": "advancements.wtf_luckyblocks.impots.description",
+      "fallback": "Payer 16 \u00e9meraudes au Contr\u00f4leur Fiscal"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "wtf_luckyblocks:root",
+  "criteria": {
+    "completed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "loot": [
+      "wtf_luckyblocks:rewards/quest_impots"
+    ]
+  }
+}

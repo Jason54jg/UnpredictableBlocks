@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {"item": "minecraft:emerald"},
+    {"item": "minecraft:glowstone_dust"}
+  ],
+  "result": {
+    "id": "wtf_luckyblocks:luck_emerald_dust",
+    "count": 2
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "meta": {
+    "supportedVersions": "26.1.2,26.2,26.3",
+    "defaultBlockLuck": 0
+  },
+  "spawn": {
+    "attemptsPerChunk": 2,
+    "rarityWeights": {
+      "COMMON": 60,
+      "RARE": 30,
+      "LEGENDARY": 10
+    },
+    "dimensions": {
+      "overworld": 1.0,
+      "nether": 0.35,
+      "end": 0.15
+    }
+  },
+  "themes": {}
+}

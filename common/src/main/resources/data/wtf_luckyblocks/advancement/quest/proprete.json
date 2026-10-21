@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "id": "wtf_luckyblocks:lucky_proprete"
+    },
+    "title": {
+      "translate": "advancements.wtf_luckyblocks.proprete.title",
+      "fallback": "Grand M\u00e9nage de Printemps"
+    },
+    "description": {
+      "translate": "advancements.wtf_luckyblocks.proprete.description",
+      "fallback": "Nettoyer 50 mobs hostiles"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "wtf_luckyblocks:root",
+  "criteria": {
+    "completed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "loot": [
+      "wtf_luckyblocks:rewards/quest_proprete"
+    ]
+  }
+}

@@ -1,0 +1,31 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+license = "MIT"
+
+[[mods]]
+modId = "wtf_luckyblocks"
+version = "${version}"
+displayName = "WTF Lucky Blocks"
+authors = "Jason54"
+description = "Lucky Blocks chaotiques avec système de chance, quêtes et spawn naturel."
+
+[[dependencies.wtf_luckyblocks]]
+modId = "neoforge"
+type = "required"
+versionRange = "[26.1,26.4)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.wtf_luckyblocks]]
+modId = "minecraft"
+type = "required"
+versionRange = "[26.1.2,26.4)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.wtf_luckyblocks]]
+modId = "architectury"
+type = "required"
+versionRange = "[14.0,)"
+ordering = "AFTER"
+side = "BOTH"

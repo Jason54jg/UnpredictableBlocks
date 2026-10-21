@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "id": "wtf_luckyblocks:lucky_gravite_zero"
+    },
+    "title": {
+      "translate": "advancements.wtf_luckyblocks.gravite_zero.title",
+      "fallback": "Objectif Lune"
+    },
+    "description": {
+      "translate": "advancements.wtf_luckyblocks.gravite_zero.description",
+      "fallback": "Survivre 1 min en Marche sur la Lune"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "wtf_luckyblocks:root",
+  "criteria": {
+    "completed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "loot": [
+      "wtf_luckyblocks:rewards/quest_gravite_zero"
+    ]
+  }
+}

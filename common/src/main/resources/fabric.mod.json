@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "wtf_luckyblocks",
+  "version": "${version}",
+  "name": "WTF Lucky Blocks",
+  "description": "Lucky Blocks chaotiques avec système de chance, quêtes et spawn naturel.",
+  "authors": ["Jason54"],
+  "license": "MIT",
+  "icon": "assets/wtf_luckyblocks/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["com.jason54.wtfluckyblocks.fabric.WtfLuckyBlocksFabric"]
+  },
+  "depends": {
+    "fabricloader": ">=0.17.0",
+    "minecraft": "~26.1.2",
+    "java": ">=21",
+    "fabric-api": "*",
+    "architectury": "*"
+  }
+}

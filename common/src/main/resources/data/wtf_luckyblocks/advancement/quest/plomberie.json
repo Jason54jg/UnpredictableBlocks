@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "id": "wtf_luckyblocks:lucky_plomberie"
+    },
+    "title": {
+      "translate": "advancements.wtf_luckyblocks.plomberie.title",
+      "fallback": "Sauver le Royaume"
+    },
+    "description": {
+      "translate": "advancements.wtf_luckyblocks.plomberie.description",
+      "fallback": "Coffre du Ch\u00e2teau de Briques"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "wtf_luckyblocks:root",
+  "criteria": {
+    "completed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "loot": [
+      "wtf_luckyblocks:rewards/quest_plomberie"
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "id": "wtf_luckyblocks:lucky_lag_bug"
+    },
+    "title": {
+      "translate": "advancements.wtf_luckyblocks.lag_bug.title",
+      "fallback": "Matrix Breaker"
+    },
+    "description": {
+      "translate": "advancements.wtf_luckyblocks.lag_bug.description",
+      "fallback": "Traverser un Chunk Incomplet"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "wtf_luckyblocks:root",
+  "criteria": {
+    "completed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "loot": [
+      "wtf_luckyblocks:rewards/quest_lag_bug"
+    ]
+  }
+}
