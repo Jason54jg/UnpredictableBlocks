@@ -24,8 +24,7 @@ public final class QuestJournal {
                     PlayerLuckyBreakStats.breaks(player, theme)
             ));
         }
-        boolean casino = QuestRewards.isDone(player, "quest/casino");
-        NetworkManager.sendToPlayer(player, new OpenQuestJournalPayload(themes, casino));
+        NetworkManager.sendToPlayer(player, new OpenQuestJournalPayload(themes));
 
         QuestCollection.tryAwardCollector(player);
         CardCollection.tryAwardCardAlbum(player);

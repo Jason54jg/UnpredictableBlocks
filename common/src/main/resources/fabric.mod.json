@@ -16,6 +16,7 @@
     "minecraft": "${minecraft_dependency}",
     "java": ">=21",
     "fabric-api": "*",
-    "architectury": "*"
+    "architectury": "*",
+    "geckolib": "*"
   }
 }

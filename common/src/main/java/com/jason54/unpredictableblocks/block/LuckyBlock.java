@@ -2,6 +2,7 @@ package com.jason54.unpredictableblocks.block;
 
 import com.jason54.unpredictableblocks.UnpredictableBlocks;
 import com.jason54.unpredictableblocks.block.entity.LuckyBlockEntity;
+import com.jason54.unpredictableblocks.entity.LuckyRocketEntity;
 import com.jason54.unpredictableblocks.config.ModConfig;
 import com.jason54.unpredictableblocks.luck.LuckResolver;
 import com.jason54.unpredictableblocks.luck.LuckStat;
@@ -47,7 +48,8 @@ public class LuckyBlock extends Block implements EntityBlock {
 
     @Override
     public RenderShape getRenderShape(BlockState state) {
-        return RenderShape.MODEL;
+        // MC 26 : plus de ENTITYBLOCK_ANIMATED — INVISIBLE laisse le BER GeckoLib dessiner.
+        return RenderShape.INVISIBLE;
     }
 
     @Nullable
@@ -88,6 +90,8 @@ public class LuckyBlock extends Block implements EntityBlock {
                     );
                 }
             }
+            // Visuel : le bloc décolle en fusée à la place du bloc cassé.
+            LuckyRocketEntity.launch(serverLevel, pos, theme);
         }
         return super.playerWillDestroy(level, pos, state, player);
     }

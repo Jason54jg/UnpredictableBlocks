@@ -64,8 +64,7 @@ python3 tools/enrich_loot_tables.py   # uniquement les loot tables placeholder
 
 ```
 /unpredictableblocks event boulangerie high
-/unpredictableblocks casino
-/unpredictableblocks place casino 100
+/unpredictableblocks place boulangerie 100
 /unpredictableblocks givekit
 ```
 

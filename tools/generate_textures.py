@@ -336,18 +336,6 @@ def gen_magie_comptoir() -> Image.Image:
     return img
 
 
-def gen_casino() -> Image.Image:
-    img = base()
-    d = draw(img)
-    d.rectangle((0, 0, 15, 15), fill=rgb("880000"))
-    d.rectangle((3, 4, 12, 11), fill=rgb("FFD700"))
-    d.rectangle((5, 6, 10, 7), fill=rgb("000000"))
-    d.text((4, 5), "777", fill=rgb("FF0000"))
-    d.raw.ellipse((20, 20, 24, 24), fill=rgb("FFD700"))
-    d.raw.ellipse((24, 22, 28, 26), fill=rgb("FFD700"))
-    return img
-
-
 def gen_pause_cafe() -> Image.Image:
     img = base()
     d = draw(img)

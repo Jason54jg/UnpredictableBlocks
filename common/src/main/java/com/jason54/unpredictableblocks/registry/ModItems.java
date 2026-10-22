@@ -33,40 +33,34 @@ public final class ModItems {
     public static final RegistrySupplier<Item> BAGUETTE_MAGIQUE = ITEMS.register("baguette_magique", () ->
             new BaguetteMagiqueItem(props("baguette_magique"), stack -> {
                 ThemedGearHelper.name(stack, "La Baguette Magique");
-                ThemedGearHelper.lore(stack, "Knockback absurde.", "Du pain. Beaucoup de pain.");
                 ThemedGearHelper.enchant(stack, ThemedGearHelper.knockback(), 10);
             }));
 
     public static final RegistrySupplier<Item> CLE_USB_HACKER = ITEMS.register("cle_usb_hacker", () ->
             new CleUsbHackerItem(props("cle_usb_hacker"), stack -> {
                 ThemedGearHelper.name(stack, "Clé USB du Hacker");
-                ThemedGearHelper.lore(stack, "Clic droit : overclock 30s.");
             }));
 
     public static final RegistrySupplier<Item> MARTEAU_BONK = ITEMS.register("marteau_bonk", () ->
             new BonkHammerItem(props("marteau_bonk"), stack -> {
                 ThemedGearHelper.name(stack, "Marteau BONK");
-                ThemedGearHelper.lore(stack, "BONK!", "Quête : 50 coups.");
                 ThemedGearHelper.enchant(stack, ThemedGearHelper.knockback(), 5);
             }));
 
     public static final RegistrySupplier<Item> CASQUE_5G = ITEMS.register("casque_5g", () ->
             new Casque5GItem(props("casque_5g"), stack -> {
                 ThemedGearHelper.name(stack, "Casque 5G en Papier d'Aluminium");
-                ThemedGearHelper.lore(stack, "Immunité aux effets néfastes.");
                 ThemedGearHelper.enchant(stack, ThemedGearHelper.protection(), 4);
             }));
 
     public static final RegistrySupplier<Item> SHAKER_PROT = ITEMS.register("shaker_prot", () ->
             new ShakerProtItem(props("shaker_prot"), stack -> {
                 ThemedGearHelper.name(stack, "Shaker de Prot' Pur Sérotonine");
-                ThemedGearHelper.lore(stack, "Force III, Vitesse II, Faim II — 90s.");
             }));
 
     public static final RegistrySupplier<Item> CLE_MOLETTE_LEGENDAIRE = ITEMS.register("cle_molette_legendaire", () ->
             new CleMoletteItem(props("cle_molette_legendaire"), stack -> {
                 ThemedGearHelper.name(stack, "Clé à Molette Légendaire");
-                ThemedGearHelper.lore(stack, "Efficiency IV, Unbreaking III, Knockback II.");
                 ThemedGearHelper.enchant(stack, ThemedGearHelper.efficiency(), 4);
                 ThemedGearHelper.enchant(stack, ThemedGearHelper.unbreaking(), 3);
                 ThemedGearHelper.enchant(stack, ThemedGearHelper.knockback(), 2);
@@ -75,13 +69,11 @@ public final class ModItems {
     public static final RegistrySupplier<Item> LUCKY_MYSTERE = ITEMS.register("lucky_mystere", () ->
             new MysteryLuckyItem(props("lucky_mystere"), stack -> {
                 ThemedGearHelper.name(stack, "Lucky Block Mystère");
-                ThemedGearHelper.lore(stack, "Clic droit : 1 des 31 thèmes.", "Recharge 30s.");
             }));
 
     public static final RegistrySupplier<Item> JOURNAL_QUETES = ITEMS.register("journal_quetes", () ->
             new QuestJournalItem(props("journal_quetes"), stack -> {
                 ThemedGearHelper.name(stack, "Journal des Quêtes");
-                ThemedGearHelper.lore(stack, "Clic droit : ouvre le journal des quêtes.");
             }));
 
     public static final RegistrySupplier<Item> CARTE_COLLECTION = ITEMS.register("carte_collection", () ->

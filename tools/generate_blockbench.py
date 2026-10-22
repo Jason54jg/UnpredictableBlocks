@@ -180,7 +180,7 @@ class Theme:
     frames: int = 8
     frametime: int = 2
     interpolate: bool = False
-    geom: str = "none"  # none | d20 | casino | float | paper | bat
+    geom: str = "none"  # none | d20 | float | paper | bat
     length: float = 1.2
     draw: Callable[[Image.Image, int, int], None] = field(repr=False, default=lambda *_: None)
 
@@ -654,35 +654,6 @@ def draw_magie_comptoir(img: Image.Image, t: int, n: int) -> None:
             put(img, sx, sy, rgb("FFD700"))
 
 
-def draw_casino(img: Image.Image, t: int, n: int) -> None:
-    fill_rect(img, 2, 2, 29, 29, rgb("8B0000"))
-    # machine
-    fill_rect(img, 5, 6, 26, 24, rgb("FFD700"))
-    fill_rect(img, 7, 8, 24, 18, rgb("1A1A1A"))
-    # 3 reels
-    symbols = ["7", "C", "B"]  # 7, cherry, bar — drawn as patterns
-    for i in range(3):
-        rx = 8 + i * 6
-        sym = (t + i) % 3
-        fill_rect(img, rx, 9, rx + 4, 17, rgb("FAFAFA"))
-        if sym == 0:  # 7
-            fill_rect(img, rx + 1, 10, rx + 3, 11, rgb("C62828"))
-            fill_rect(img, rx + 2, 11, rx + 3, 15, rgb("C62828"))
-            fill_rect(img, rx + 1, 15, rx + 3, 16, rgb("C62828"))
-        elif sym == 1:  # cherry
-            ellipse_fill(img, rx + 2, 13, 2, 2, rgb("C62828"))
-            put(img, rx + 2, 11, rgb("2E7D32"))
-        else:  # bar
-            hline(img, rx + 1, rx + 3, 12, rgb("212121"))
-            hline(img, rx + 1, rx + 3, 14, rgb("212121"))
-    # jackpot flash
-    if t >= n - 2:
-        for y in (4, 26):
-            hline(img, 3, 28, y, rgb("FFEB3B"))
-        for x in (3, 28):
-            vline(img, x, 4, 27, rgb("FFEB3B"))
-
-
 def draw_invasion_memes(img: Image.Image, t: int, n: int) -> None:
     for y in range(2, 30):
         tt = (y + t * 2) % 28 / 27
@@ -920,19 +891,47 @@ def kf(channel: str, time: float, x, y, z, interp: str = "catmullrom") -> dict:
 
 
 def build_idle_anim(theme: Theme, groups: dict[str, str]) -> dict:
-    """Animation idle 6–12 keyframes, boucle seamless."""
-    length = theme.length
+    """Animation idle = envol flottant (boucle seamless), 8–10 keyframes."""
+    length = max(theme.length, 1.6)
     animators: dict = {}
 
-    # Subtle breathe on block (very slight) — keeps frame readable
+    # --- Envol sur root : decollage, derive, retour doux ---
+    root_uuid = groups["root"]
+    # fractions du temps -> (y, rot_x, rot_z, scale)
+    path = [
+        (0.00, 0.0, 0.0, 0.0, 1.00),
+        (0.12, 2.5, -6.0, 4.0, 1.04),   # push-off
+        (0.28, 7.0, 8.0, -6.0, 1.02),   # monte
+        (0.45, 12.0, -4.0, 10.0, 0.98), # sommet derive
+        (0.60, 14.0, 5.0, -4.0, 0.96),  # plane
+        (0.75, 10.0, -3.0, 6.0, 0.98),  # redescend un peu
+        (0.88, 4.0, 4.0, -3.0, 1.01),
+        (1.00, 0.0, 0.0, 0.0, 1.00),    # atterrit = seamless
+    ]
+    pos_kfs, rot_kfs, scl_kfs = [], [], []
+    for frac, y, rx, rz, s in path:
+        tm = round(length * frac, 4)
+        # leger drift X/Z pour "vent"
+        x = round(math.sin(frac * math.pi * 2) * 1.5, 3)
+        z = round(math.cos(frac * math.pi * 2) * 1.2, 3)
+        pos_kfs.append(kf("position", tm, x, y, z))
+        rot_kfs.append(kf("rotation", tm, rx, round(frac * 25, 2), rz))
+        scl_kfs.append(kf("scale", tm, s, s, s))
+    animators[root_uuid] = {
+        "name": "root",
+        "type": "bone",
+        "keyframes": pos_kfs + rot_kfs + scl_kfs,
+    }
+
+    # leger "souffle" sur block (squash au decollage)
     block_uuid = groups["block"]
-    times = [0.0, length * 0.25, length * 0.5, length * 0.75, length]
-    block_kfs = []
-    for i, tm in enumerate(times):
-        s = 1.0 if i % 2 == 0 else 1.015
-        block_kfs.append(kf("scale", tm, s, s, s))
-    # ensure seamless: last = first
-    block_kfs[-1] = kf("scale", length, 1.0, 1.0, 1.0)
+    block_kfs = [
+        kf("scale", 0.0, 1.0, 1.0, 1.0),
+        kf("scale", round(length * 0.12, 4), 1.06, 0.92, 1.06),
+        kf("scale", round(length * 0.28, 4), 0.98, 1.05, 0.98),
+        kf("scale", round(length * 0.6, 4), 1.0, 1.0, 1.0),
+        kf("scale", length, 1.0, 1.0, 1.0),
+    ]
     animators[block_uuid] = {"name": "block", "type": "bone", "keyframes": block_kfs}
 
     if theme.geom == "d20" and "emblem" in groups:
@@ -941,14 +940,6 @@ def build_idle_anim(theme: Theme, groups: dict[str, str]) -> dict:
             tm = length * i / 8
             ek.append(kf("rotation", tm, 0, i * 45, 12 * math.sin(i / 8 * math.pi * 2)))
         ek[-1] = kf("rotation", length, 0, 360, 0)
-        animators[groups["emblem"]] = {"name": "emblem", "type": "bone", "keyframes": ek}
-
-    elif theme.geom == "casino" and "emblem" in groups:
-        ek = []
-        for i in range(9):
-            tm = length * i / 8
-            ek.append(kf("position", tm, 0, (i % 2) * -0.4, 0))
-        ek[-1] = kf("position", length, 0, 0, 0)
         animators[groups["emblem"]] = {"name": "emblem", "type": "bone", "keyframes": ek}
 
     elif theme.geom == "float" and "emblem" in groups:
@@ -1004,7 +995,7 @@ def build_idle_anim(theme: Theme, groups: dict[str, str]) -> dict:
     }
 
 
-def build_bbmodel(theme: Theme, first_frame: Image.Image, sheet_b64: str | None = None) -> dict:
+def build_bbmodel(theme: Theme, sheet: Image.Image) -> dict:
     tex_uuid = uid()
     elem_uuid = uid()
     root_uuid = uid()
@@ -1099,7 +1090,9 @@ def build_bbmodel(theme: Theme, first_frame: Image.Image, sheet_b64: str | None 
     ]
 
     # Embed first frame for Blockbench editing; full sheet stays as external PNG
-    source = "data:image/png;base64," + png_b64(first_frame)
+    # Full spritesheet embedded so Blockbench can scrub frames;
+    # UV still maps the first 32x32 frame (resolution below).
+    source = "data:image/png;base64," + png_b64(sheet)
 
     textures = [
         {
@@ -1114,11 +1107,12 @@ def build_bbmodel(theme: Theme, first_frame: Image.Image, sheet_b64: str | None 
             "frame_time": theme.frametime,
             "frame_order_type": "loop",
             "frame_order": "",
+            "layers_enabled": False,
             "visible": True,
             "internal": True,
             "saved": True,
+            "relative_path": "./" + theme.tid + ".png",
             "uuid": tex_uuid,
-            "relative_path": f"./{theme.tid}.png",
             "source": source,
         }
     ]
@@ -1126,7 +1120,7 @@ def build_bbmodel(theme: Theme, first_frame: Image.Image, sheet_b64: str | None 
     return {
         "meta": {
             "format_version": "4.10",
-            "model_format": "java_block",
+            "model_format": "free",  # Generic: onglet Animate + Play (java_block n a pas Animate)
             "box_uv": False,
         },
         "name": theme.tid,
@@ -1168,7 +1162,7 @@ def generate_theme(theme: Theme) -> None:
     sheet.save(png_path)
     write_mcmeta(OUT / f"{theme.tid}.png.mcmeta", theme)
 
-    model = build_bbmodel(theme, frames[0])
+    model = build_bbmodel(theme, sheet)
     # annotate concept in a comment-like key Blockbench ignores gracefully via meta
     model["meta"]["unpredictableblocks_concept"] = theme.concept
     model["meta"]["unpredictableblocks_title"] = theme.title
@@ -1210,7 +1204,7 @@ def write_readme(themes: list[Theme]) -> None:
         "",
         "## Notes",
         "",
-        "- Priorité **animation texture** (`.mcmeta`) ; géométrie seulement pour D20 / casino / float / paper / bat.",
+        "- Priorité **animation texture** (`.mcmeta`) ; géométrie seulement pour D20 / float / paper / bat.",
         "- Groupes : `root` → `block` → (`emblem`, `fx`).",
         "- Style pixel art humoristique, cadre Lucky Block stable.",
         "",

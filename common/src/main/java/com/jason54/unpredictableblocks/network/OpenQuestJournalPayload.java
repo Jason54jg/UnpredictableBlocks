@@ -9,7 +9,7 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.Identifier;
 
 /** S2C : ouvre le journal des quetes cote client. */
-public record OpenQuestJournalPayload(List<QuestThemeProgress> themes, boolean casinoDone)
+public record OpenQuestJournalPayload(List<QuestThemeProgress> themes)
         implements CustomPacketPayload {
     public static final Type<OpenQuestJournalPayload> TYPE = new Type<>(
             Identifier.fromNamespaceAndPath(UnpredictableBlocks.MOD_ID, "open_quest_journal"));
@@ -18,8 +18,6 @@ public record OpenQuestJournalPayload(List<QuestThemeProgress> themes, boolean c
             StreamCodec.composite(
                     QuestThemeProgress.STREAM_CODEC.apply(ByteBufCodecs.list(64)),
                     OpenQuestJournalPayload::themes,
-                    ByteBufCodecs.BOOL,
-                    OpenQuestJournalPayload::casinoDone,
                     OpenQuestJournalPayload::new
             );
 

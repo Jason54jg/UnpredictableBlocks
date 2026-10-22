@@ -140,13 +140,7 @@ Légende tiers : **HIGH** ≈ chance +100, **NEUTRAL** ≈ 0, **LOW** ≈ −100
 - **Catalogue HIGH** : lapin extirpateur
 - **Legacy** : NEUTRAL rabbits ; LOW wolf
 
-## 23. Casino (`lucky_casino`) — Légendaire
-
-- **Structure** : `table_poker_vip` — **CasinoJackpot** au break
-- **Catalogue LOW** : banqueroute (cuir vert, XP reset)
-- **Legacy** : HIGH gems ; LOW strip currency
-
-## 24. Invasion de mèmes (`lucky_invasion_memes`) — Légendaire
+## 23. Invasion de mèmes (`lucky_invasion_memes`) — Légendaire
 
 - **Structure** : `sanctuaire_doge`
 - **32×32** : Doge/Pepe, trait Nyan, carré rose

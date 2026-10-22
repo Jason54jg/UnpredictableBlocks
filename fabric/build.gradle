@@ -7,6 +7,7 @@ def mcVersion = rootProject.findProperty('minecraft_version')?.toString() ?: '26
 def fabricApi = rootProject.findProperty('fabric_api_version')?.toString()
 def fabricLoader = rootProject.findProperty('fabric_loader_version')?.toString() ?: '0.17.2'
 def archVersion = rootProject.findProperty('architectury_version')?.toString() ?: '22.0.5'
+def geckolibVersion = rootProject.findProperty('geckolib_version')?.toString() ?: '5.5.2'
 
 base {
     archivesName = "${rootProject.archives_base_name}-fabric"
@@ -27,6 +28,15 @@ repositories {
     maven { url = 'https://maven.fabricmc.net/' }
     maven { url = 'https://maven.architectury.dev/' }
     mavenCentral()
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = 'GeckoLib'
+                url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+            }
+        }
+        filter { includeGroupAndSubgroups('com.geckolib') }
+    }
 }
 
 dependencies {
@@ -35,6 +45,7 @@ dependencies {
     implementation "net.fabricmc.fabric-api:fabric-api:${fabricApi}"
     // Runtime API (install separately in mods/ OR pulled as compile dep)
     implementation "dev.architectury:architectury-fabric:${archVersion}"
+    implementation "com.geckolib:geckolib-fabric-${mcVersion}:${geckolibVersion}"
     implementation project(':common')
 }
 

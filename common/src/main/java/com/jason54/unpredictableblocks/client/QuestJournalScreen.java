@@ -19,9 +19,14 @@ import net.minecraft.world.item.ItemStack;
 /** UI journal des quetes (liste scrollable). */
 public final class QuestJournalScreen extends Screen {
     private static final Component TITLE = Component.translatable("screen.unpredictableblocks.quest_journal");
+    private static final int COLOR_TITLE = 0xFFE0E0E0;
+    private static final int COLOR_DONE = 0xFF55FF55;
+    private static final int COLOR_PENDING = 0xFFAAAAAA;
+    private static final int COLOR_META = 0xFFC0C0C0;
+    private static final int COLOR_LEGEND = 0xFFA0A0A0;
 
     private final OpenQuestJournalPayload payload;
-    private final HeaderAndFooterLayout layout = new HeaderAndFooterLayout(this);
+    private final HeaderAndFooterLayout layout = new HeaderAndFooterLayout(this, 44, 36);
     private ThemeList list;
 
     public QuestJournalScreen(OpenQuestJournalPayload payload) {
@@ -39,17 +44,15 @@ public final class QuestJournalScreen extends Screen {
                 payload.cardCount(),
                 payload.masterCount()
         );
-        if (payload.casinoDone()) {
-            summary.append(Component.literal("  \u00a76\u2605 casino"));
-        }
 
-        layout.addTitleHeader(TITLE, font);
-        layout.addToHeader(new StringWidget(summary, font), settings -> settings.alignHorizontallyCenter());
+        LinearLayout header = layout.addToHeader(LinearLayout.vertical().spacing(4));
+        header.defaultCellSetting().alignHorizontallyCenter();
+        header.addChild(new StringWidget(TITLE, font));
+        header.addChild(new StringWidget(summary, font));
 
         list = layout.addToContents(new ThemeList(minecraft, payload));
 
-        LinearLayout footer = layout.addToFooter(LinearLayout.horizontal().spacing(8));
-        footer.addChild(Button.builder(CommonComponents.GUI_DONE, b -> onClose()).width(200).build());
+        layout.addToFooter(Button.builder(CommonComponents.GUI_DONE, b -> onClose()).width(200).build());
 
         layout.visitWidgets(this::addRenderableWidget);
         repositionElements();
@@ -70,8 +73,8 @@ public final class QuestJournalScreen extends Screen {
                 font,
                 Component.translatable("screen.unpredictableblocks.quest_journal.legend"),
                 width / 2,
-                height - 18,
-                0xA0A0A0
+                this.height - 12,
+                COLOR_LEGEND
         );
     }
 
@@ -94,7 +97,7 @@ public final class QuestJournalScreen extends Screen {
 
         @Override
         public int getRowWidth() {
-            return Math.min(340, width - 40);
+            return Math.min(360, width - 32);
         }
 
         final class Entry extends ObjectSelectionList.Entry<Entry> {
@@ -110,21 +113,30 @@ public final class QuestJournalScreen extends Screen {
                 int y = getContentY();
                 LuckyTheme theme = themeOf(progress.themeId());
                 if (theme != null) {
-                    g.item(new ItemStack(ModBlocks.get(theme)), x + 2, y + 4);
+                    g.item(new ItemStack(ModBlocks.get(theme)), x + 4, y + 6);
                 }
 
                 Component title = Component.translatable(
                         "advancements.unpredictableblocks." + progress.themeId() + ".title");
-                int titleColor = progress.questDone() ? 0x55FF55 : 0xE0E0E0;
-                g.text(font, title, x + 24, y + 2, titleColor, false);
+                int titleColor = progress.questDone() ? COLOR_DONE : COLOR_TITLE;
+                g.text(font, title, x + 28, y + 3, titleColor);
 
-                String marks = (progress.questDone() ? "\u00a7a\u2714" : "\u00a77\u25cb")
-                        + (progress.hasCard() ? " \u00a7b\u25c6" : " \u00a78\u25c7")
-                        + (progress.masterDone() ? " \u00a76\u2605" : " \u00a78\u2606")
-                        + " \u00a78\u00b7 "
-                        + Component.translatable(
-                                "screen.unpredictableblocks.quest_journal.breaks", progress.breaks()).getString();
-                g.text(font, marks, x + 24, y + 14, 0xA0A0A0, false);
+                Component marks = Component.empty()
+                        .append(progress.questDone()
+                                ? Component.translatable("screen.unpredictableblocks.quest_journal.mark_quest_done")
+                                : Component.translatable("screen.unpredictableblocks.quest_journal.mark_quest_pending"))
+                        .append("  ")
+                        .append(progress.hasCard()
+                                ? Component.translatable("screen.unpredictableblocks.quest_journal.mark_card_done")
+                                : Component.translatable("screen.unpredictableblocks.quest_journal.mark_card_pending"))
+                        .append("  ")
+                        .append(progress.masterDone()
+                                ? Component.translatable("screen.unpredictableblocks.quest_journal.mark_master_done")
+                                : Component.translatable("screen.unpredictableblocks.quest_journal.mark_master_pending"))
+                        .append("  ")
+                        .append(Component.translatable(
+                                "screen.unpredictableblocks.quest_journal.breaks", progress.breaks()));
+                g.text(font, marks, x + 28, y + 15, COLOR_META);
             }
 
             @Override

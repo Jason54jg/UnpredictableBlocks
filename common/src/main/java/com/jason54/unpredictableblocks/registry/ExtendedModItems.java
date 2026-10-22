@@ -25,7 +25,6 @@ public final class ExtendedModItems {
     public static Item espressoUltraDose(Item.Properties properties) {
         return new LoreItem(properties, stack -> {
             ThemedGearHelper.name(stack, "L'Espresso Ultra-Dosé");
-            ThemedGearHelper.lore(stack, "Hâte III, Vitesse III, Nausée I.");
         }) {
             @Override
             public InteractionResult use(Level level, Player player, InteractionHand hand) {
@@ -53,7 +52,6 @@ public final class ExtendedModItems {
     public static Item valisePerdue(Item.Properties properties) {
         return new LoreItem(properties, stack -> {
             ThemedGearHelper.name(stack, "La Valise Perdue");
-            ThemedGearHelper.lore(stack, "Shulker d'armures cuir multicolores.");
         }) {
             @Override
             public InteractionResult use(Level level, Player player, InteractionHand hand) {
@@ -75,7 +73,6 @@ public final class ExtendedModItems {
     public static Item trancheDebat(Item.Properties properties) {
         return new LoreItem(properties, stack -> {
             ThemedGearHelper.name(stack, "La Tranche du Débat");
-            ThemedGearHelper.lore(stack, "Ananas ? Sur la pizza ?");
         }) {
             @Override
             public InteractionResult use(Level level, Player player, InteractionHand hand) {
@@ -97,7 +94,6 @@ public final class ExtendedModItems {
     public static Item chronoWorldRecord(Item.Properties properties) {
         return new LoreItem(properties, stack -> {
             ThemedGearHelper.name(stack, "Le Chrono du World Record");
-            ThemedGearHelper.lore(stack, "Téléportation 15 blocs avant.");
         }) {
             @Override
             public InteractionResult use(Level level, Player player, InteractionHand hand) {
@@ -114,7 +110,6 @@ public final class ExtendedModItems {
     public static Item disqueDurCapitaine(Item.Properties properties) {
         return new LoreItem(properties, stack -> {
             ThemedGearHelper.name(stack, "Disque Dur du Capitaine");
-            ThemedGearHelper.lore(stack, "Livre de malédictions numériques.");
         }) {
             @Override
             public InteractionResult use(Level level, Player player, InteractionHand hand) {
@@ -134,7 +129,6 @@ public final class ExtendedModItems {
     public static Item popItSupreme(Item.Properties properties) {
         return new LoreItem(properties, stack -> {
             ThemedGearHelper.name(stack, "Le Pop-It Suprême");
-            ThemedGearHelper.lore(stack, "Anti-nausée, sons relaxants.");
         }) {
             @Override
             public InteractionResult use(Level level, Player player, InteractionHand hand) {
@@ -152,7 +146,6 @@ public final class ExtendedModItems {
     public static Item fioleSangNoble(Item.Properties properties) {
         return new LoreItem(properties, stack -> {
             ThemedGearHelper.name(stack, "Fiole de Sang Noble");
-            ThemedGearHelper.lore(stack, "Vol de vie, brûlure au soleil.");
         }) {
             @Override
             public InteractionResult use(Level level, Player player, InteractionHand hand) {
@@ -173,7 +166,6 @@ public final class ExtendedModItems {
     public static Item zapperDimensions(Item.Properties properties) {
         return new LoreItem(properties, stack -> {
             ThemedGearHelper.name(stack, "Zapper de Dimensions");
-            ThemedGearHelper.lore(stack, "Projette une entité visée.");
         }) {
             @Override
             public InteractionResult use(Level level, Player player, InteractionHand hand) {

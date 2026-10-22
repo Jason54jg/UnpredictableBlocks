@@ -1,58 +1,34 @@
-# Blockbench — UnpredictableBlocks (32 Lucky Blocks)
+# Lucky Blocks — Blockbench + GeckoLib
 
-Format : **Java Block** · Texture **32×32** (spritesheet vertical) · Cube **16×16×16**
+## Ce qui est genere
+| Fichier | Role |
+|---|---|
+| `geckolib/models/block/lucky_block.geo.json` | Bloc pose (cube seul, statique) |
+| `geckolib/models/entity/lucky_rocket.geo.json` | Fusee : `root` → `block` + `exhaust` → `flame`, `smoke1-3` |
+| `geckolib/animations/entity/lucky_rocket.animation.json` | `animation.lucky_rocket.launch` (2 s, hold) |
+| `textures/entity/lucky_rocket/lucky_<id>.png` | 32×48 : texture du bloc + bande fumee (gauche) / flamme (droite) |
+| `docs/blockbench/lucky_<id>.bbmodel` | Meme hierarchie + memes keyframes, pour previsualiser |
 
-## Ouvrir
+## Deroule in-game (cassage)
+1. Le joueur casse le Lucky Block → l'event part, et une entite `lucky_rocket` apparait a sa place.
+2. 0–0.5 s : tremblement + compression, fumee au sol.
+3. 0.5 s : son de fusee, flamme, l'entite accelere vers le haut en vrillant, trainee de particules.
+4. 2 s : nuage de fumee + etincelles, l'entite disparait.
 
-1. Installer [Blockbench](https://www.blockbench.net/)
-2. File → Open → `lucky_<id>.bbmodel`
-3. Animation panel → jouer **idle** (boucle)
-4. Les `.png` + `.png.mcmeta` sont à côté pour Minecraft (animation texture)
+## Blockbench
+- **Le plus simple** : Fichier → Ouvrir `lucky_<id>.bbmodel` → onglet **Animate** → **launch** → **Play**.
+- **Depuis les fichiers GeckoLib** : Fichier → Importer `lucky_rocket.geo.json`, puis onglet **Animate** →
+  Importer une animation → `lucky_rocket.animation.json` (la geo ne contient pas les anims).
 
-## Régénérer
+La montee elle-meme est faite en Java (l'entite bouge) : dans Blockbench le bloc vrille sur place.
+Le `.bbmodel` joue `launch` en boucle ; in-game elle est en `hold_on_last_frame` mais l'entite est retiree a 2 s.
+Si tu importes `lucky_rocket.animation.json` a la main, Blockbench la met en « hold » (arret a 2 s) :
+regle Loop Mode sur « Loop » dans les proprietes de l'anim pour l'apercu.
+Keyframes au format Bedrock `"t": [x, y, z]` : l'ancien format `{"vector": [...]}` s'importe a 0 dans Blockbench.
 
+## Modifier l'anim
+Ne pas exporter depuis Blockbench : edite `launch_keyframes()` / `ROCKET_BONES`
+dans `tools/sync_geckolib_models.py` puis :
 ```bash
-python tools/generate_blockbench.py
+python tools/sync_geckolib_models.py
 ```
-
-## Catalogue
-
-| # | Fichier | Thème | Concept idle | Géométrie |
-|---|---------|-------|--------------|-----------|
-| 01 | `lucky_anachronisme` | Anachronisme | Sablier bronze qui coule + pulse néon cyan | none |
-| 02 | `lucky_boulangerie` | Boulangerie Française | Baguette/croissant + vapeur montante | none |
-| 03 | `lucky_bsod` | BSOD | Sad face + scanlines + curseur blink | none |
-| 04 | `lucky_volaille` | Volaille Suprême | Poule + plume flottante + clignement | none |
-| 05 | `lucky_impots` | Administration & Impôts | Dossier + tampon qui tape | none |
-| 06 | `lucky_streamer` | Streamer / Clickbait | Caméra + LIVE blink + confettis | none |
-| 07 | `lucky_proprete` | Propreté Extrême | Éponge + bulles montantes + shine | none |
-| 08 | `lucky_gravite_zero` | Gravité Zéro | Astronaute float + étoiles | float |
-| 09 | `lucky_fast_food` | Fast-Food | Burger + vapeur + sesame sparkle | none |
-| 10 | `lucky_cauchemar_matin` | Cauchemar de Matinée | Réveil alarme shake + flash | none |
-| 11 | `lucky_film_action` | Film d'Action | Clap + sparks + boom pulse | none |
-| 12 | `lucky_jdr_d20` | JDR & D20 | D20 spin + glow crit | d20 |
-| 13 | `lucky_penurie_2020` | Pénurie de 2020 | PQ/caddie + étiquette prix flicker | none |
-| 14 | `lucky_complot` | Théorie du Complot | Pyramide œil cligne + static | none |
-| 15 | `lucky_lag_bug` | Lag & Bug | Missing cube + stutter tear UV | none |
-| 16 | `lucky_disco_80` | Soirée Disco 80's | Boule disco RGB + sparkle | none |
-| 17 | `lucky_plomberie` | Plomberie | Clé + drip gouttes | none |
-| 18 | `lucky_fortune_cookie` | Fortune Cookie | Papier sort/rentre | paper |
-| 19 | `lucky_camping` | Camping Catastrophe | Tente + flammes flicker | none |
-| 20 | `lucky_gym_bro` | Go Muscu | Haltère bounce + pulse | none |
-| 21 | `lucky_art_moderne` | Art Moderne | Formes qui morphent | none |
-| 22 | `lucky_magie_comptoir` | Magie de Comptoir | Chapeau + carte flip + étincelles | none |
-| 24 | `lucky_invasion_memes` | Invasion de Mèmes | Troll pixel bounce + pop zoom | none |
-| 25 | `lucky_pause_cafe` | Pause Café / Barista | Tasse + vapeur + ripple | none |
-| 26 | `lucky_retard_vol` | Retard de Vol / Aéroport | Panneau DELAYED blink | none |
-| 27 | `lucky_ananas_pizza` | Ananas sur la Pizza | Pizza + ananas bounce + shine | none |
-| 28 | `lucky_speedrunner` | Speedrunner Ultra-Tryhard | Timer ticks + speed lines | none |
-| 29 | `lucky_piraterie_torrent` | Piraterie & Torrent | Voile + barre download loop | none |
-| 30 | `lucky_asmr_fidget` | ASMR & Fidget Toy | Pop-it bubbles pop sequence | none |
-| 31 | `lucky_vampire_gothique` | Vampire & Gothique | Chauve-souris flap + drip sang | bat |
-| 32 | `lucky_multivers_sliders` | Multivers / Sliders | Portail ripples + color shift | none |
-
-## Notes
-
-- Priorité **animation texture** (`.mcmeta`) ; géométrie seulement pour D20 / casino / float / paper / bat.
-- Groupes : `root` → `block` → (`emblem`, `fx`).
-- Style pixel art humoristique, cadre Lucky Block stable.

@@ -6,6 +6,7 @@ plugins {
 def mcVersion = rootProject.findProperty('minecraft_version')?.toString() ?: '26.1.2'
 def mcDep = rootProject.findProperty('minecraft_dependency')?.toString() ?: "~${mcVersion}"
 def archVersion = rootProject.findProperty('architectury_version')?.toString() ?: '22.0.5'
+def fabricLoader = rootProject.findProperty('fabric_loader_version')?.toString() ?: '0.17.2'
 
 base {
     archivesName = "${rootProject.archives_base_name}-common"
@@ -17,16 +18,31 @@ loom {
     silentMojangMappingsLicense()
 }
 
+def geckolibVersion = rootProject.findProperty('geckolib_version')?.toString() ?: '5.5.2'
+
 repositories {
     maven { url = 'https://maven.architectury.dev/' }
     maven { url = 'https://maven.fabricmc.net/' }
     mavenCentral()
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = 'GeckoLib'
+                url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+            }
+        }
+        filter { includeGroupAndSubgroups('com.geckolib') }
+    }
 }
 
 dependencies {
     minecraft "com.mojang:minecraft:${mcVersion}"
     implementation "dev.architectury:architectury:${archVersion}"
     implementation "com.google.code.gson:gson:2.11.0"
+    // Annotations EnvType (Architectury EnvExecutor) — pas embarqué dans le jar common.
+    compileOnly "net.fabricmc:fabric-loader:${fabricLoader}"
+    // GeckoLib API (GeoBlockEntity) — runtime fourni par fabric/neoforge.
+    compileOnly "com.geckolib:geckolib-common-${mcVersion}:${geckolibVersion}"
 }
 
 processResources {

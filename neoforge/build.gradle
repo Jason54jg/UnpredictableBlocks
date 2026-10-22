@@ -6,6 +6,7 @@ plugins {
 def mcVersion = rootProject.findProperty('minecraft_version')?.toString() ?: '26.1.2'
 def neoVersion = rootProject.findProperty('neoforge_version')?.toString()
 def archVersion = rootProject.findProperty('architectury_version')?.toString() ?: '22.0.5'
+def geckolibVersion = rootProject.findProperty('geckolib_version')?.toString() ?: '5.5.2'
 
 base {
     archivesName = "${rootProject.archives_base_name}-neoforge"
@@ -17,10 +18,20 @@ repositories {
     maven { url = 'https://maven.architectury.dev/' }
     maven { url = 'https://maven.neoforged.net/releases/' }
     mavenCentral()
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = 'GeckoLib'
+                url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+            }
+        }
+        filter { includeGroupAndSubgroups('com.geckolib') }
+    }
 }
 
 dependencies {
     implementation "dev.architectury:architectury-neoforge:${archVersion}"
+    implementation "com.geckolib:geckolib-neoforge-${mcVersion}:${geckolibVersion}"
     implementation project(':common')
 }
 
