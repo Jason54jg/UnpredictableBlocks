@@ -8,8 +8,8 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.Identifier;
 
-/** S2C : ouvre le journal des quetes cote client. */
-public record OpenQuestJournalPayload(List<QuestThemeProgress> themes)
+/** S2C : ouvre le journal des quêtes côté client ; {@code suggestedThemeId} = prochaine quête conseillée ("" si tout est fait). */
+public record OpenQuestJournalPayload(List<QuestThemeProgress> themes, String suggestedThemeId)
         implements CustomPacketPayload {
     public static final Type<OpenQuestJournalPayload> TYPE = new Type<>(
             Identifier.fromNamespaceAndPath(UnpredictableBlocks.MOD_ID, "open_quest_journal"));
@@ -18,6 +18,8 @@ public record OpenQuestJournalPayload(List<QuestThemeProgress> themes)
             StreamCodec.composite(
                     QuestThemeProgress.STREAM_CODEC.apply(ByteBufCodecs.list(64)),
                     OpenQuestJournalPayload::themes,
+                    ByteBufCodecs.STRING_UTF8,
+                    OpenQuestJournalPayload::suggestedThemeId,
                     OpenQuestJournalPayload::new
             );
 

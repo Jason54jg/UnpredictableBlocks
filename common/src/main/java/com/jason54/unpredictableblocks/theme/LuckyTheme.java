@@ -37,7 +37,11 @@ public enum LuckyTheme {
     PIRATERIE_TORRENT("piraterie_torrent", LuckyRarity.RARE),
     ASMR_FIDGET("asmr_fidget", LuckyRarity.COMMON),
     VAMPIRE_GOTHIQUE("vampire_gothique", LuckyRarity.RARE),
-    MULTIVERS_SLIDERS("multivers_sliders", LuckyRarity.LEGENDARY);
+    MULTIVERS_SLIDERS("multivers_sliders", LuckyRarity.LEGENDARY),
+    GREVE_TRANSPORTS("greve_transports", LuckyRarity.COMMON),
+    METEO_FOLLE("meteo_folle", LuckyRarity.RARE),
+    CHAT_INTERNET("chat_internet", LuckyRarity.COMMON),
+    CRYPTO_BULLE("crypto_bulle", LuckyRarity.LEGENDARY);
 
     private final String id;
     private final LuckyRarity rarity;

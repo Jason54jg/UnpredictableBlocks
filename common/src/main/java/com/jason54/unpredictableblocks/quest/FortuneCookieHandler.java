@@ -17,7 +17,7 @@ public final class FortuneCookieHandler {
             String text = message.getString().trim();
             if (PlayerQuestData.tryClaimFortuneCode(player, text)) {
                 player.giveExperiencePoints(500);
-                QuestRewards.complete(player, "quest/fortune_cookie", "fortune_code");
+                Quests.complete(player, com.jason54.unpredictableblocks.theme.LuckyTheme.FORTUNE_COOKIE, "fortune_code");
                 player.sendSystemMessage(Component.literal("§aFortune validée — +500 XP !"));
             }
             return EventResult.pass();

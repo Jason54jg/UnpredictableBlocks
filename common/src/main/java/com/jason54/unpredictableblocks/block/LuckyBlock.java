@@ -11,6 +11,7 @@ import com.jason54.unpredictableblocks.quest.PlayerQuestData;
 import com.jason54.unpredictableblocks.luck.PlayerLuckStorage;
 import com.jason54.unpredictableblocks.registry.ModItems;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
+import com.jason54.unpredictableblocks.theme.LuckyVariant;
 import com.jason54.unpredictableblocks.util.ModMessages;
 import com.jason54.unpredictableblocks.world.ChunkLuckAura;
 import net.minecraft.world.InteractionHand;
@@ -62,9 +63,10 @@ public class LuckyBlock extends Block implements EntityBlock {
     public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         if (!level.isClientSide() && level instanceof ServerLevel serverLevel && player instanceof ServerPlayer serverPlayer) {
             BlockEntity be = level.getBlockEntity(pos);
+            LuckyVariant variant = be instanceof LuckyBlockEntity lbe ? lbe.getVariant() : LuckyVariant.NORMAL;
             if (be instanceof LuckyBlockEntity luckyBe) {
                 try {
-                    LuckStat blockLuck = new LuckStat(luckyBe.getLuck());
+                    LuckStat blockLuck = new LuckStat(luckyBe.getLuck()).add(variant.luckBonus());
                     LuckStat playerLuck = PlayerLuckStorage.getModifier(serverPlayer);
                     int aura = ChunkLuckAura.luckModifier(serverLevel, pos);
                     blockLuck = blockLuck.add(aura);
@@ -79,7 +81,7 @@ public class LuckyBlock extends Block implements EntityBlock {
                     if (PlayerQuestData.consumeComboPity(serverPlayer, blockTheme) && outcome.tier() == LuckTier.LOW) {
                         outcome = new LuckResolver.ResolvedOutcome(LuckTier.NEUTRAL, "neutral");
                     }
-                    LuckyBlockEventDispatcher.dispatch(serverLevel, serverPlayer, pos, blockTheme, outcome, effectiveLuck);
+                    LuckyBlockEventDispatcher.dispatch(serverLevel, serverPlayer, pos, blockTheme, outcome, effectiveLuck, variant);
                 } catch (Exception e) {
                     // Une exception ici empêche removeBlock côté GameMode → le Lucky reste planté.
                     UnpredictableBlocks.LOGGER.error(
@@ -91,7 +93,7 @@ public class LuckyBlock extends Block implements EntityBlock {
                 }
             }
             // Visuel : le bloc décolle en fusée à la place du bloc cassé.
-            LuckyRocketEntity.launch(serverLevel, pos, theme);
+            LuckyRocketEntity.launch(serverLevel, pos, theme, variant);
         }
         return super.playerWillDestroy(level, pos, state, player);
     }

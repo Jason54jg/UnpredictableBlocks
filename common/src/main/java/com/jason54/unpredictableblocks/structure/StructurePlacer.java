@@ -63,6 +63,10 @@ public final class StructurePlacer {
             case CAUCHEMAR_MATIN -> "manoir_gothique";
             case JDR_D20 -> "scene_spectacle";
             case LAG_BUG -> "stronghold_skip";
+            case GREVE_TRANSPORTS -> "tour_controle";
+            case METEO_FOLLE -> "campement_inonde";
+            case CHAT_INTERNET -> "sanctuaire_doge";
+            case CRYPTO_BULLE -> "bunker_zone51";
         };
     }
 }

@@ -20,42 +20,100 @@ import net.minecraft.world.level.levelgen.Heightmap;
 public final class LuckyBlockSpawnPlacement {
     private LuckyBlockSpawnPlacement() {}
 
+    /** Mode « Plat Lucky » : un emplacement de grille tous les 8 blocs. */
+    private static final int FLAT_GRID = 8;
+    private static final double FLAT_GRID_CHANCE = 0.6;
+    /** Mode « Lucky dense » : chance par essai ×4, essais ×2. */
+    private static final double DENSE_CHANCE_FACTOR = 4.0;
+
     public static void populateChunk(ServerLevel level, LevelChunk chunk) {
-        ModConfig.Spawn spawn = ModConfig.get().spawn();
+        LuckyWorldMode mode = LuckyWorldMode.of(level);
+        boolean overworld = level.dimension().equals(Level.OVERWORLD);
+        if (overworld && mode == LuckyWorldMode.SKYBLOCK) {
+            return; // Pas de sol : les Lucky Blocks viennent du générateur de l'île (LuckySkyblock)
+        }
         RandomSource random = level.getRandom();
-        for (int i = 0; i < spawn.attemptsPerChunk(); i++) {
-            if (random.nextFloat() > 0.65f) {
-                continue;
-            }
-            int localX = random.nextInt(16);
-            int localZ = random.nextInt(16);
-            int worldX = chunk.getPos().getMinBlockX() + localX;
-            int worldZ = chunk.getPos().getMinBlockZ() + localZ;
-            // WORLD_SURFACE = Y du plus haut bloc non-air ; on place dans l'air juste au-dessus.
-            int surfaceY = chunk.getHeight(Heightmap.Types.WORLD_SURFACE, localX, localZ);
-            if (surfaceY <= level.getMinY() || surfaceY >= level.getMaxY()) {
-                continue;
-            }
-            BlockPos ground = new BlockPos(worldX, surfaceY, worldZ);
-            BlockPos placePos = ground.above();
-            BlockState at = chunk.getBlockState(placePos);
-            BlockState below = chunk.getBlockState(ground);
-            // Sol solide au sens collision (herbe, terre, pierre…) — isSolidRender rate trop de sols.
-            if (!at.isAir() || !McAccess.blocksMotion(below)) {
-                continue;
-            }
-            LuckyTheme theme = pickTheme(random, level, placePos);
-            if (theme == null) {
-                continue;
-            }
-            BlockState state = ModBlocks.get(theme).defaultBlockState();
-            // NOTIFY_CLIENTS seulement : pas de maj voisins (= pas de getChunk pendant le placement).
-            if (level.setBlock(placePos, state, 2)) {
-                if (level.getBlockEntity(placePos) instanceof com.jason54.unpredictableblocks.block.entity.LuckyBlockEntity luckyBe) {
-                    luckyBe.setLuck(com.jason54.unpredictableblocks.config.ModConfig.get().meta().defaultBlockLuck());
+        if (overworld && mode == LuckyWorldMode.FLAT) {
+            for (int localX = FLAT_GRID / 2; localX < 16; localX += FLAT_GRID) {
+                for (int localZ = FLAT_GRID / 2; localZ < 16; localZ += FLAT_GRID) {
+                    if (random.nextDouble() < FLAT_GRID_CHANCE) {
+                        tryPlaceOnSurface(level, chunk, localX, localZ, random, 0.0);
+                    }
                 }
             }
+            return;
         }
+        ModConfig.Spawn spawn = ModConfig.get().spawn();
+        double chance = spawn.chancePerAttemptOrDefault();
+        int attempts = spawn.attemptsPerChunkOrDefault();
+        if (mode == LuckyWorldMode.DENSE) {
+            chance = Math.min(1.0, chance * DENSE_CHANCE_FACTOR);
+            attempts *= 2;
+        }
+        boolean dense = mode == LuckyWorldMode.DENSE;
+        for (int i = 0; i < attempts; i++) {
+            if (random.nextDouble() < chance) {
+                // Structures (socle / autel / sanctuaire) seulement dans l'overworld
+                tryPlaceOnSurface(level, chunk, random.nextInt(16), random.nextInt(16), random, overworld ? (dense ? -1.0 : 1.0) : 0.0);
+            }
+        }
+    }
+
+    /**
+     * @param shrineMode 0 = jamais de structure, 1 = chance normale, -1 = chance réduite (monde dense)
+     */
+    private static void tryPlaceOnSurface(ServerLevel level, LevelChunk chunk, int localX, int localZ, RandomSource random,
+                                          double shrineMode) {
+        int worldX = chunk.getPos().getMinBlockX() + localX;
+        int worldZ = chunk.getPos().getMinBlockZ() + localZ;
+        // Sol réel, feuillage ignoré : le Lucky Block se pose sous les arbres plutôt que sur leur cime.
+        int surfaceY = chunk.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, localX, localZ);
+        if (surfaceY <= level.getMinY() || surfaceY >= level.getMaxY()) {
+            return;
+        }
+        BlockPos ground = new BlockPos(worldX, surfaceY, worldZ);
+        BlockPos placePos = ground.above();
+        BlockState at = chunk.getBlockState(placePos);
+        BlockState below = chunk.getBlockState(ground);
+        // Sol solide au sens collision (herbe, terre, pierre…) — isSolidRender rate trop de sols.
+        if (!at.isAir() || !McAccess.blocksMotion(below)) {
+            return;
+        }
+        LuckyTheme theme = pickTheme(random, level, placePos);
+        if (theme == null) {
+            return;
+        }
+        com.jason54.unpredictableblocks.theme.LuckyVariant variant = com.jason54.unpredictableblocks.theme.LuckyVariant.rollNatural(random);
+        if (shrineMode != 0.0 && random.nextDouble() < LuckySpawnShrines.chance(theme.rarity(), shrineMode < 0)) {
+            BlockPos shrineTop = LuckySpawnShrines.build(level, chunk, ground, theme.rarity(), variant, random);
+            if (shrineTop != null) {
+                placePos = shrineTop;
+            }
+        }
+        place(level, placePos, theme, variant);
+    }
+
+    /** Pose un Lucky Block au thème tiré selon la config (rareté, biome, dimension). */
+    public static boolean placeRandom(ServerLevel level, BlockPos placePos, RandomSource random) {
+        LuckyTheme theme = pickTheme(random, level, placePos);
+        if (theme == null) {
+            return false;
+        }
+        return place(level, placePos, theme, com.jason54.unpredictableblocks.theme.LuckyVariant.rollNatural(random));
+    }
+
+    private static boolean place(ServerLevel level, BlockPos placePos, LuckyTheme theme,
+                                 com.jason54.unpredictableblocks.theme.LuckyVariant variant) {
+        BlockState state = ModBlocks.get(theme).defaultBlockState();
+        // NOTIFY_CLIENTS seulement : pas de maj voisins (= pas de getChunk pendant le placement).
+        if (!level.setBlock(placePos, state, 2)) {
+            return false;
+        }
+        if (level.getBlockEntity(placePos) instanceof com.jason54.unpredictableblocks.block.entity.LuckyBlockEntity luckyBe) {
+            luckyBe.setLuck(com.jason54.unpredictableblocks.config.ModConfig.get().meta().defaultBlockLuck());
+            luckyBe.setVariant(variant);
+        }
+        return true;
     }
 
     private static LuckyTheme pickTheme(RandomSource random, ServerLevel level, BlockPos pos) {

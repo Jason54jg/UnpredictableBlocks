@@ -17,7 +17,9 @@ public final class ModNetworking {
                         OpenQuestJournalPayload.TYPE,
                         OpenQuestJournalPayload.STREAM_CODEC));
 
-        NetworkManager.registerC2S(
+        // registerReceiver(c2s) existe dans Architectury 20.x (26.1.2) comme 21/22 ; registerC2S non.
+        NetworkManager.registerReceiver(
+                NetworkManager.c2s(),
                 RequestQuestJournalPayload.TYPE,
                 RequestQuestJournalPayload.STREAM_CODEC,
                 (payload, context) -> {

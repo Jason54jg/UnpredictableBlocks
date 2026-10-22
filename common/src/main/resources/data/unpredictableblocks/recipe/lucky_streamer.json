@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "BTB",
+    "GCG",
+    "BGB"
+  ],
+  "key": {
+    "G": "minecraft:gold_ingot",
+    "B": "minecraft:gold_block",
+    "T": "minecraft:spyglass",
+    "C": "unpredictableblocks:lucky_core"
+  },
+  "result": {
+    "id": "unpredictableblocks:lucky_streamer",
+    "count": 1
+  }
+}

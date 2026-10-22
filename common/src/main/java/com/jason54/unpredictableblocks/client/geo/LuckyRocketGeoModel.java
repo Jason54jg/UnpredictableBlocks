@@ -15,6 +15,7 @@ public final class LuckyRocketGeoModel extends DefaultedEntityGeoModel<LuckyRock
     @Override
     public void addAdditionalStateData(LuckyRocketEntity animatable, Object relatedObject, GeoRenderState renderState) {
         renderState.addGeckolibData(LuckyBlockGeoModel.THEME_ID, animatable.getTheme().id());
+        renderState.addGeckolibData(LuckyBlockGeoModel.VARIANT, animatable.getVariant().ordinal());
     }
 
     @Override

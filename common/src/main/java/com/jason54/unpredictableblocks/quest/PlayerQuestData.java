@@ -131,6 +131,15 @@ public final class PlayerQuestData {
         return set.size();
     }
 
+    /** Biomes distincts de la fenêtre multivers en cours (0 hors fenêtre). */
+    public static int multiversBiomeCount(ServerPlayer player) {
+        if (!multiversTracking(player)) {
+            return 0;
+        }
+        Set<String> set = root(player).multiversBiomes.get(player.getUUID());
+        return set == null ? 0 : set.size();
+    }
+
     public static void setAnanasQuestFailed(ServerPlayer player, boolean failed) {
         QuestSavedData data = root(player);
         if (failed) {

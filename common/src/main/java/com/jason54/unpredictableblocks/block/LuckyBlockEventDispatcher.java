@@ -7,6 +7,7 @@ import net.minecraft.world.phys.Vec3;
 import com.jason54.unpredictableblocks.config.ModConfig;
 import com.jason54.unpredictableblocks.util.ModMessages;
 import com.jason54.unpredictableblocks.event.LuckyBreakFeedback;
+import com.jason54.unpredictableblocks.event.LuckyVariations;
 import com.jason54.unpredictableblocks.event.ThemeEventEffects;
 import com.jason54.unpredictableblocks.item.CollectionCardItem;
 import com.jason54.unpredictableblocks.lucky.LootTablePaths;
@@ -20,6 +21,7 @@ import com.jason54.unpredictableblocks.quest.PlayerQuestData;
 import com.jason54.unpredictableblocks.structure.StructurePlacer;
 import com.jason54.unpredictableblocks.world.ChunkLuckAura;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
+import com.jason54.unpredictableblocks.theme.LuckyVariant;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
@@ -56,7 +58,19 @@ public final class LuckyBlockEventDispatcher {
             LuckResolver.ResolvedOutcome outcome,
             int effectiveLuck
     ) {
-        runDispatch(level, player, origin, theme, outcome, effectiveLuck);
+        dispatch(level, player, origin, theme, outcome, effectiveLuck, LuckyVariant.NORMAL);
+    }
+
+    public static void dispatch(
+            ServerLevel level,
+            ServerPlayer player,
+            BlockPos origin,
+            LuckyTheme theme,
+            LuckResolver.ResolvedOutcome outcome,
+            int effectiveLuck,
+            LuckyVariant variant
+    ) {
+        runDispatch(level, player, origin, theme, outcome, effectiveLuck, variant);
     }
 
     private static void runDispatch(
@@ -65,9 +79,13 @@ public final class LuckyBlockEventDispatcher {
             BlockPos origin,
             LuckyTheme theme,
             LuckResolver.ResolvedOutcome outcome,
-            int effectiveLuck
+            int effectiveLuck,
+            LuckyVariant variant
     ) {
         ChunkLuckAura.onLuckyBreak(level, origin, player);
+        if (variant != LuckyVariant.NORMAL) {
+            player.sendSystemMessage(ModMessages.msg("variant." + variant.name().toLowerCase(java.util.Locale.ROOT)));
+        }
 
         LuckResolver.ResolvedOutcome effective = outcome;
         if (theme == LuckyTheme.JDR_D20) {
@@ -107,12 +125,15 @@ public final class LuckyBlockEventDispatcher {
                 .create(LootContextParamSets.CHEST);
 
         var lootTable = level.getServer().reloadableRegistries().getLootTable(ResourceKey.create(Registries.LOOT_TABLE, table));
-        for (var stack : lootTable.getRandomItems(params)) {
-            McAccess.giveOrDrop(player, stack);
+        for (int roll = 0; roll < variant.lootRolls(); roll++) {
+            for (var stack : lootTable.getRandomItems(params)) {
+                McAccess.giveOrDrop(player, stack);
+            }
         }
 
         StructurePlacer.tryPlaceForTheme(level, origin, theme, effective.tier());
         ThemeEventEffects.apply(level, player, origin, theme, effective.tier());
+        LuckyVariations.roll(level, player, origin, theme, effective.tier(), variant.variationRolls(), variant.variationChance());
 
         PlayerLuckyBreakStats.onBreak(player, theme, effective.tier(), effectiveLuck);
         ThemeMasterProgress.check(player, theme);

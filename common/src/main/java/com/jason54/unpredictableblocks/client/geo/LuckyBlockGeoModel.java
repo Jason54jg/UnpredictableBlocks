@@ -10,6 +10,8 @@ import net.minecraft.resources.Identifier;
 /** Geo model unique : texture dynamiquement choisie selon le thème du Lucky Block. */
 public final class LuckyBlockGeoModel extends DefaultedBlockGeoModel<LuckyBlockEntity> {
     public static final DataTicket<String> THEME_ID = DataTicket.create("lucky_theme", String.class);
+    /** Ordinal de {@link com.jason54.unpredictableblocks.theme.LuckyVariant} (échelle du modèle). */
+    public static final DataTicket<Integer> VARIANT = DataTicket.create("lucky_variant", Integer.class);
 
     public LuckyBlockGeoModel() {
         super(Identifier.fromNamespaceAndPath(UnpredictableBlocks.MOD_ID, "lucky_block"));
@@ -18,6 +20,7 @@ public final class LuckyBlockGeoModel extends DefaultedBlockGeoModel<LuckyBlockE
     @Override
     public void addAdditionalStateData(LuckyBlockEntity animatable, Object relatedObject, GeoRenderState renderState) {
         renderState.addGeckolibData(THEME_ID, animatable.getTheme().id());
+        renderState.addGeckolibData(VARIANT, animatable.getVariant().ordinal());
     }
 
     @Override

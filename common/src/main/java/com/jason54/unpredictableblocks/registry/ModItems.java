@@ -29,6 +29,9 @@ public final class ModItems {
             () -> new UsableLuckItem(props("luck_emerald_dust"), +10));
     public static final RegistrySupplier<Item> LUCK_BLAZE_POWDER_CURSE = ITEMS.register("luck_blaze_curse",
             () -> new UsableLuckItem(props("luck_blaze_curse"), -10));
+    /** Ingrédient de craft de tous les Lucky Blocks (voir tools/generate_recipes.py). */
+    public static final RegistrySupplier<Item> LUCKY_CORE = ITEMS.register("lucky_core",
+            () -> new Item(props("lucky_core")));
 
     public static final RegistrySupplier<Item> BAGUETTE_MAGIQUE = ITEMS.register("baguette_magique", () ->
             new BaguetteMagiqueItem(props("baguette_magique"), stack -> {

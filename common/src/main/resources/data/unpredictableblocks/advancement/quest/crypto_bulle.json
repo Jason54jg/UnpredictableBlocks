@@ -1,0 +1,34 @@
+{
+  "display": {
+    "icon": {
+      "id": "unpredictableblocks:lucky_crypto_bulle"
+    },
+    "title": {
+      "translate": "advancements.unpredictableblocks.crypto_bulle.title",
+      "fallback": "HODL"
+    },
+    "description": {
+      "translate": "advancements.unpredictableblocks.crypto_bulle.description",
+      "fallback": "Avoir 64 émeraudes dans l'inventaire."
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "unpredictableblocks:root",
+  "criteria": {
+    "hodl": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "hodl"
+    ]
+  ],
+  "rewards": {
+    "loot": [
+      "unpredictableblocks:rewards/quest_crypto_bulle"
+    ]
+  }
+}

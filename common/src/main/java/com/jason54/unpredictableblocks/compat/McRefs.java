@@ -5,6 +5,8 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LightningBolt;
+import net.minecraft.world.entity.animal.feline.Cat;
 import net.minecraft.world.entity.animal.chicken.Chicken;
 import net.minecraft.world.entity.animal.cow.Cow;
 import net.minecraft.world.entity.animal.golem.IronGolem;
@@ -38,6 +40,8 @@ public final class McRefs {
     public static final EntityType<Silverfish> SILVERFISH = entity("silverfish");
     public static final EntityType<Cow> COW = entity("cow");
     public static final EntityType<Sheep> SHEEP = entity("sheep");
+    public static final EntityType<Cat> CAT = entity("cat");
+    public static final EntityType<LightningBolt> LIGHTNING_BOLT = entity("lightning_bolt");
     public static final Block WHITE_WOOL = block("white_wool");
     public static final Block WHITE_CONCRETE = block("white_concrete");
 

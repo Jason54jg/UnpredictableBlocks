@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "id": "unpredictableblocks:lucky_crypto_bulle"
+    },
+    "title": {
+      "translate": "advancements.unpredictableblocks.theme_master.crypto_bulle.title",
+      "fallback": "Theme master: crypto_bulle"
+    },
+    "description": {
+      "translate": "advancements.unpredictableblocks.theme_master.crypto_bulle.description",
+      "fallback": "Break 10 blocks and complete the theme quest."
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "unpredictableblocks:quest/crypto_bulle",
+  "criteria": {
+    "master": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "master"
+    ]
+  ]
+}

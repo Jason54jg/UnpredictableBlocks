@@ -4,7 +4,7 @@ import com.jason54.unpredictableblocks.compat.McRefs;
 
 import com.jason54.unpredictableblocks.luck.LuckTier;
 import com.jason54.unpredictableblocks.quest.PlayerQuestData;
-import com.jason54.unpredictableblocks.quest.QuestExtendedHandler;
+import com.jason54.unpredictableblocks.quest.QuestTriggers;
 import com.jason54.unpredictableblocks.quest.QuestNames;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -22,7 +22,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
-/** Thèmes 25–32 (directive §3). */
+/** Thèmes 25–36 (directive §3 + extension 33–36). */
 public final class ThemeNewEffects {
     private ThemeNewEffects() {}
 
@@ -42,6 +42,10 @@ public final class ThemeNewEffects {
             case ASMR_FIDGET -> asmr(level, player, tier);
             case VAMPIRE_GOTHIQUE -> vampire(player, tier);
             case MULTIVERS_SLIDERS -> multivers(level, player, origin, tier);
+            case GREVE_TRANSPORTS -> greve(level, player, origin, tier);
+            case METEO_FOLLE -> meteo(level, player, origin, tier);
+            case CHAT_INTERNET -> chats(level, player, origin, tier);
+            case CRYPTO_BULLE -> crypto(level, player, tier);
             default -> {}
         }
     }
@@ -75,7 +79,7 @@ public final class ThemeNewEffects {
 
     private static void ananasPizza(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
         if (tier == LuckTier.NEUTRAL) {
-            QuestExtendedHandler.onChefsSpawned(player);
+            QuestTriggers.onChefsSpawned(player);
             for (int i = 0; i < 10; i++) {
                 var chef = EntitySpawnHelper.create(McRefs.VILLAGER, level);
                 if (chef != null) {
@@ -154,6 +158,104 @@ public final class ThemeNewEffects {
                     .stream().filter(e -> e != player).findFirst();
             target.ifPresent(e -> e.teleportTo(e.getX(), e.getY() + 20, e.getZ()));
             player.sendSystemMessage(Component.literal("§bZapper : entité projetée ailleurs."));
+        }
+    }
+
+    private static void greve(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
+        if (tier == LuckTier.HIGH) {
+            player.getInventory().add(new ItemStack(Items.MINECART));
+            player.getInventory().add(new ItemStack(Items.RAIL, 32));
+            player.getInventory().add(new ItemStack(Items.POWERED_RAIL, 6));
+            player.sendSystemMessage(Component.literal("§aService minimum assuré : voici de quoi rouler toi-même."));
+        } else if (tier == LuckTier.NEUTRAL) {
+            for (int i = 0; i < 4; i++) {
+                var villager = EntitySpawnHelper.create(McRefs.VILLAGER, level);
+                if (villager != null) {
+                    villager.setPos(Vec3.atBottomCenterOf(origin).add(level.getRandom().nextDouble() * 4 - 2, 0, level.getRandom().nextDouble() * 4 - 2));
+                    villager.setCustomName(Component.literal("Manifestant"));
+                    level.addFreshEntity(villager);
+                }
+            }
+            player.sendSystemMessage(Component.literal("§eManifestation spontanée devant le Lucky Block !"));
+        } else {
+            player.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 20 * 60, 2));
+            player.sendSystemMessage(Component.literal("§cGrève générale : tu rentres à pied (et lentement)."));
+        }
+    }
+
+    private static void meteo(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
+        if (tier == LuckTier.HIGH) {
+            level.getServer().setWeatherParameters(20 * 600, 0, false, false);
+            player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 20 * 20, 1));
+            level.sendParticles(net.minecraft.core.particles.ParticleTypes.HAPPY_VILLAGER,
+                    origin.getX() + 0.5, origin.getY() + 2, origin.getZ() + 0.5, 40, 3, 1, 3, 0);
+            player.sendSystemMessage(Component.literal("§bGrand soleil pour 10 minutes !"));
+        } else if (tier == LuckTier.NEUTRAL) {
+            level.getServer().setWeatherParameters(0, 20 * 120, true, true);
+            player.sendSystemMessage(Component.literal("§7Orage soudain — rentre les poules."));
+        } else {
+            BlockPos strike = origin.offset(level.getRandom().nextInt(7) - 3, 0, level.getRandom().nextInt(7) - 3);
+            var bolt = EntitySpawnHelper.create(McRefs.LIGHTNING_BOLT, level);
+            if (bolt != null) {
+                bolt.setPos(Vec3.atBottomCenterOf(strike));
+                level.addFreshEntity(bolt);
+            }
+            player.sendSystemMessage(Component.literal("§eLa foudre tombe tout près…"));
+        }
+    }
+
+    private static void chats(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
+        if (tier == LuckTier.HIGH) {
+            var cat = EntitySpawnHelper.create(McRefs.CAT, level);
+            if (cat != null) {
+                cat.setPos(Vec3.atBottomCenterOf(origin));
+                cat.tame(player);
+                level.addFreshEntity(cat);
+            }
+            player.getInventory().add(new ItemStack(Items.COD, 8));
+            player.sendSystemMessage(Component.literal("§aUn chat t'a adopté. Il est à toi (ou l'inverse)."));
+        } else if (tier == LuckTier.NEUTRAL) {
+            for (int i = 0; i < 4; i++) {
+                var cat = EntitySpawnHelper.create(McRefs.CAT, level);
+                if (cat != null) {
+                    cat.setPos(Vec3.atBottomCenterOf(origin).add(level.getRandom().nextDouble() * 4 - 2, 0, level.getRandom().nextDouble() * 4 - 2));
+                    level.addFreshEntity(cat);
+                }
+            }
+            player.getInventory().add(new ItemStack(Items.STRING, 6));
+            player.sendSystemMessage(Component.literal("§eLes chats d'Internet débarquent. Apprivoise-les avec du poisson."));
+        } else {
+            com.jason54.unpredictableblocks.compat.McAccess.dropMainHand(player);
+            player.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 20 * 15, 1));
+            player.sendSystemMessage(Component.literal("§cLe chat a fait tomber ton objet de la table. Il ne regrette rien."));
+        }
+    }
+
+    private static void crypto(ServerLevel level, ServerPlayer player, LuckTier tier) {
+        if (tier == LuckTier.HIGH) {
+            player.getInventory().add(new ItemStack(Items.EMERALD, 16 + level.getRandom().nextInt(17)));
+            player.sendSystemMessage(Component.literal("§a+1000 % ! Ton portefeuille déborde d'émeraudes."));
+        } else if (tier == LuckTier.NEUTRAL) {
+            int emeralds = 0;
+            for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+                ItemStack stack = player.getInventory().getItem(i);
+                if (stack.is(Items.EMERALD)) {
+                    emeralds += stack.getCount();
+                }
+            }
+            player.getInventory().add(new ItemStack(Items.EMERALD, Math.max(1, emeralds / 4)));
+            player.sendSystemMessage(Component.literal("§eMarché stable… pour une fois. +25 % sur tes émeraudes."));
+        } else {
+            int lost = 0;
+            for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+                ItemStack stack = player.getInventory().getItem(i);
+                if (stack.is(Items.EMERALD) || stack.is(Items.GOLD_INGOT)) {
+                    int half = stack.getCount() / 2;
+                    stack.shrink(half);
+                    lost += half;
+                }
+            }
+            player.sendSystemMessage(Component.literal("§cKrach ! La moitié de tes émeraudes et lingots d'or s'évapore (" + lost + ")."));
         }
     }
 }

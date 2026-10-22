@@ -2,9 +2,9 @@ package com.jason54.unpredictableblocks.registry;
 
 import com.jason54.unpredictableblocks.item.LoreItem;
 import com.jason54.unpredictableblocks.item.ThemedGearHelper;
-import com.jason54.unpredictableblocks.quest.PlayerQuestData;
-import com.jason54.unpredictableblocks.quest.QuestExtendedHandler;
-import com.jason54.unpredictableblocks.quest.QuestRewards;
+import com.jason54.unpredictableblocks.quest.QuestTriggers;
+import com.jason54.unpredictableblocks.quest.Quests;
+import com.jason54.unpredictableblocks.theme.LuckyTheme;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -31,15 +31,12 @@ public final class ExtendedModItems {
                 if (!level.isClientSide() && player instanceof ServerPlayer sp) {
                     if (sp.getFoodData().getFoodLevel() <= 0) {
                         sp.sendSystemMessage(Component.literal("§cTrop affamé pour un espresso — quête annulée."));
-                        PlayerQuestData.resetCounter(sp, "espresso");
+                        Quests.reset(sp, LuckyTheme.PAUSE_CAFE, "five_espressos");
                     } else {
                         sp.addEffect(new MobEffectInstance(MobEffects.HASTE, 20 * 45, 2));
                         sp.addEffect(new MobEffectInstance(MobEffects.SPEED, 20 * 45, 2));
                         sp.addEffect(new MobEffectInstance(MobEffects.NAUSEA, 20 * 30, 0));
-                        int n = PlayerQuestData.incrementCounter(sp, "espresso");
-                        if (n >= 5 && sp.getFoodData().getFoodLevel() > 0) {
-                            QuestRewards.complete(sp, "quest/pause_cafe", "five_espressos");
-                        }
+                        Quests.increment(sp, LuckyTheme.PAUSE_CAFE, "five_espressos");
                     }
                     consumeOne(sp, hand);
                     return InteractionResult.SUCCESS;
@@ -58,10 +55,7 @@ public final class ExtendedModItems {
                 if (!level.isClientSide() && player instanceof ServerPlayer sp) {
                     sp.getInventory().add(new ItemStack(Items.SHULKER_BOX));
                     sp.getInventory().add(new ItemStack(Items.LEATHER_CHESTPLATE));
-                    int n = PlayerQuestData.incrementCounter(sp, "valise");
-                    if (n >= 3) {
-                        QuestRewards.complete(sp, "quest/retard_vol", "three_valises");
-                    }
+                    Quests.increment(sp, LuckyTheme.RETARD_VOL, "three_valises");
                     consumeOne(sp, hand);
                     return InteractionResult.SUCCESS;
                 }
@@ -77,7 +71,7 @@ public final class ExtendedModItems {
             @Override
             public InteractionResult use(Level level, Player player, InteractionHand hand) {
                 if (!level.isClientSide() && player instanceof ServerPlayer sp) {
-                    QuestExtendedHandler.onAnanasEaten(sp);
+                    QuestTriggers.onAnanasEaten(sp);
                     sp.getFoodData().eat(8, 0.8f);
                     level.getServer().getPlayerList().broadcastSystemMessage(
                             Component.literal("§e" + sp.getName().getString() + " tranche : l'ananas sur la pizza, oui ou non ?"),
@@ -117,7 +111,7 @@ public final class ExtendedModItems {
                     sp.getInventory().add(new ItemStack(Items.FILLED_MAP));
                     sp.getInventory().add(new ItemStack(Items.WRITABLE_BOOK));
                     sp.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 20 * 60, 0));
-                    QuestRewards.complete(sp, "quest/piraterie_torrent", "treasure_download");
+                    Quests.complete(sp, LuckyTheme.PIRATERIE_TORRENT, "treasure_download");
                     consumeOne(sp, hand);
                     return InteractionResult.SUCCESS;
                 }

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "GTG",
+    "GCG",
+    "GGG"
+  ],
+  "key": {
+    "G": "minecraft:gold_ingot",
+    "T": "minecraft:rabbit_foot",
+    "C": "unpredictableblocks:lucky_core"
+  },
+  "result": {
+    "id": "unpredictableblocks:lucky_magie_comptoir",
+    "count": 1
+  }
+}

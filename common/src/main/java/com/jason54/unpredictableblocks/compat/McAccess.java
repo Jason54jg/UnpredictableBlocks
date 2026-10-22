@@ -61,6 +61,23 @@ public final class McAccess {
         }
     }
 
+    /**
+     * Fait lâcher l'objet en main au joueur (éjecté devant lui, ramassable après 2 s) et vide la main.
+     * {@code Player.drop(ItemStack, boolean)} change de signature en 26.3 : on crée l'ItemEntity nous-mêmes.
+     */
+    public static void dropMainHand(Player player) {
+        ItemStack held = player.getMainHandItem();
+        if (held.isEmpty() || !(player.level() instanceof ServerLevel serverLevel)) {
+            return;
+        }
+        var item = new net.minecraft.world.entity.item.ItemEntity(
+                serverLevel, player.getX(), player.getEyeY() - 0.3, player.getZ(), held.copy());
+        item.setDeltaMovement(player.getLookAngle().scale(0.3));
+        item.setPickUpDelay(40);
+        serverLevel.addFreshEntity(item);
+        held.setCount(0);
+    }
+
     /** 26.1 / 26.2: {@code blocksMotion()}; 26.3: renommé {@code isSolid()}. */
     public static boolean blocksMotion(BlockState state) {
         try {

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 import sys
 import time
@@ -80,21 +81,51 @@ _cooldown_until = 0.0
 _argos_ready: set[str] = set()
 
 
+# Termes jamais traduits (noms propres du mod / du jeu)
+GLOSSARY = r"Lucky Blocks?|Lucky|Skyblock|BONK|HODL|BSOD|D20|Minecraft"
+TOKEN = re.compile(r"%(\d+\$)?[sdif]|§[0-9a-fk-or]|[★✔○·−×]|" + GLOSSARY)
+
+
 def protect(text: str) -> tuple[str, list[str]]:
+    """Remplace placeholders, codes couleur, symboles et glossaire par des marqueurs [[0]], [[1]]…"""
     placeholders: list[str] = []
 
     def repl(match: re.Match[str]) -> str:
         placeholders.append(match.group(0))
-        return f"__PH{len(placeholders) - 1}__"
+        marker = f"[[{len(placeholders) - 1}]]"
+        # Les mots du glossaire gardent leurs espaces (le traducteur les colle sinon aux voisins)
+        return f" {marker} " if match.group(0)[0].isalpha() else marker
 
-    protected = re.sub(r"%(\d+\$)?[sdif]", repl, text)
-    return protected, placeholders
+    return TOKEN.sub(repl, text), placeholders
 
 
 def restore(text: str, placeholders: list[str]) -> str:
-    for i, ph in enumerate(placeholders):
-        text = text.replace(f"__PH{i}__", ph)
-    return text
+    """Remet les marqueurs, même abîmés par le traducteur ([[ 0 ]], [0], __PH0__, PH 0…)."""
+    def repl(match: re.Match[str]) -> str:
+        i = int(match.group(1))
+        return placeholders[i] if i < len(placeholders) else match.group(0)
+
+    text = re.sub(r"\[\s*\[?\s*(\d+)\s*\]?\s*\]", repl, text)   # [[0]], [[ 0 ]], [0]
+    text = re.sub(r"_*\s*PH\s*(\d+)\s*_*", repl, text)           # ancien format __PH0__ abime
+    # Le traducteur colle souvent les termes du glossaire aux mots voisins : on remet l'espace
+    text = re.sub(rf"(?<=[^\W\d_])({GLOSSARY})", r" \1", text)
+    text = re.sub(rf"((?>{GLOSSARY}))(?=[^\W\d_])", r"\1 ", text)  # atomique : jamais « Lucky Block s »
+    return re.sub(r" {2,}", " ", text).strip()
+
+
+def is_valid(source: str, translated: str) -> bool:
+    """Traduction utilisable : memes placeholders / codes couleur, aucun crochet ou marqueur invente."""
+    if not tokens_match(source, translated):
+        return False
+    if re.search(r"[\[\]]", translated) and not re.search(r"[\[\]]", source):
+        return False
+    return not re.search(r"PH\s*\d|WEB", translated) or "WEB" in source
+
+
+def tokens_match(source: str, translated: str) -> bool:
+    """Memes placeholders / codes couleur dans la source et la traduction."""
+    pat = r"%(?:\d+\$)?[sdif]|§[0-9a-fk-or]"
+    return sorted(re.findall(pat, source)) == sorted(re.findall(pat, translated))
 
 
 def ensure_argos(to_code: str) -> None:
@@ -155,7 +186,16 @@ def translate_mymemory(text: str, target: str) -> str:
 
 
 def save(path: Path, data: dict[str, str]) -> None:
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    """Fichier temporaire + remplacement : Windows refuse parfois l'ouverture directe (Errno 22) si l'IDE lit le fichier."""
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    tmp.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    for attempt in range(10):
+        try:
+            os.replace(tmp, path)
+            return
+        except OSError:
+            time.sleep(0.3 * (attempt + 1))
+    raise OSError(f"Impossible de remplacer {path}")
 
 
 def main() -> None:
@@ -189,6 +229,8 @@ def main() -> None:
                 time.sleep(0.35)
             else:
                 out[key] = translate_argos(value, argos_code)
+            if not is_valid(value, out[key]):
+                out[key] = value  # traduction cassee : l'anglais vaut mieux qu'un texte illisible
             done = len(out)
             if done % 40 == 0 or (i + 1) == len(pending):
                 print(f"  {done}/{len(keys)}", flush=True)

@@ -2,6 +2,7 @@ package com.jason54.unpredictableblocks.world;
 
 import dev.architectury.event.events.common.ChunkEvent;
 import dev.architectury.event.events.common.LifecycleEvent;
+import dev.architectury.event.events.common.TickEvent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -17,21 +18,21 @@ import java.util.Set;
 /**
  * Enfile le peuplement hors de {@link ChunkEvent#LOAD} : un {@code setBlock}/{@code getBlockState}
  * pendant le LOAD provoque un deadlock (freeze sur « Selecting global world spawn… »).
- * Le drain ne démarre qu'après {@link LifecycleEvent#SERVER_STARTED}.
+ * Le drain ne démarre qu'après {@link LifecycleEvent#SERVER_STARTED} et tourne en fin de tick serveur :
+ * {@code server.execute} depuis le thread serveur s'exécute immédiatement (dans le LOAD), quand
+ * {@code getChunkNow} renvoie encore {@code null} — le chunk était alors abandonné sans peuplement.
  */
 public final class LuckyBlockSpawnHooks {
     private static final Queue<PendingChunk> PENDING = new ArrayDeque<>();
     private static final Set<Long> PENDING_KEYS = new HashSet<>();
-    private static final int PER_TICK_BUDGET = 8;
+    private static final int PER_TICK_BUDGET = 32;
     private static volatile boolean serverReady;
 
     private LuckyBlockSpawnHooks() {}
 
     public static void register() {
-        LifecycleEvent.SERVER_STARTED.register(server -> {
-            serverReady = true;
-            server.execute(() -> drainPending(server));
-        });
+        LifecycleEvent.SERVER_STARTED.register(server -> serverReady = true);
+        TickEvent.SERVER_POST.register(LuckyBlockSpawnHooks::drainPending);
         LifecycleEvent.SERVER_STOPPED.register(server -> {
             serverReady = false;
             synchronized (PENDING) {
@@ -50,15 +51,11 @@ public final class LuckyBlockSpawnHooks {
                 return;
             }
             long key = pendingKey(serverLevel.dimension(), chunkPos);
-            MinecraftServer server = serverLevel.getServer();
             synchronized (PENDING) {
                 if (!PENDING_KEYS.add(key)) {
                     return;
                 }
                 PENDING.add(new PendingChunk(serverLevel.dimension(), chunkPos.x(), chunkPos.z(), key));
-            }
-            if (serverReady) {
-                server.execute(() -> drainPending(server));
             }
         });
     }
@@ -82,13 +79,6 @@ public final class LuckyBlockSpawnHooks {
                     PENDING_KEYS.remove(next.key());
                 }
             }
-        }
-        boolean more;
-        synchronized (PENDING) {
-            more = !PENDING.isEmpty();
-        }
-        if (more) {
-            server.execute(() -> drainPending(server));
         }
     }
 

@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "id": "unpredictableblocks:lucky_chat_internet"
+    },
+    "title": {
+      "translate": "advancements.unpredictableblocks.theme_master.chat_internet.title",
+      "fallback": "Theme master: chat_internet"
+    },
+    "description": {
+      "translate": "advancements.unpredictableblocks.theme_master.chat_internet.description",
+      "fallback": "Break 10 blocks and complete the theme quest."
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "unpredictableblocks:quest/chat_internet",
+  "criteria": {
+    "master": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "master"
+    ]
+  ]
+}

@@ -5,6 +5,7 @@
   },
   "spawn": {
     "attemptsPerChunk": 2,
+    "chancePerAttempt": 0.15,
     "rarityWeights": {
       "COMMON": 60,
       "RARE": 30,

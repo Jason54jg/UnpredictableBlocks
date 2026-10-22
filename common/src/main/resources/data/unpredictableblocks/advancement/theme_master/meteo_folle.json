@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "id": "unpredictableblocks:lucky_meteo_folle"
+    },
+    "title": {
+      "translate": "advancements.unpredictableblocks.theme_master.meteo_folle.title",
+      "fallback": "Theme master: meteo_folle"
+    },
+    "description": {
+      "translate": "advancements.unpredictableblocks.theme_master.meteo_folle.description",
+      "fallback": "Break 10 blocks and complete the theme quest."
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "unpredictableblocks:quest/meteo_folle",
+  "criteria": {
+    "master": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "master"
+    ]
+  ]
+}
