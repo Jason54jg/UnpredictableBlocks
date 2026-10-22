@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Crafts — UnpredictableBlocks Wiki</title>
+  <meta name="description" content="Recettes de craft UnpredictableBlocks : noyau, poussières, Lucky Blocks." />
+  <link rel="icon" href="assets/branding/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Outfit:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/site.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/branding/logo.png" alt="" width="40" height="40" />
+        <span>UnpredictableBlocks</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+      <ul class="nav-links" id="nav">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="installer.html">Installer</a></li>
+        <li><a href="guide.html">Guide</a></li>
+        <li><a href="crafts.html" aria-current="page">Crafts</a></li>
+        <li><a href="themes.html">Thèmes</a></li>
+        <li><a href="mondes.html">Mondes</a></li>
+        <li><a href="commandes.html">Commandes</a></li>
+      </ul>
+      <button class="lang-toggle" type="button" data-lang-toggle>FR / EN</button>
+    </div>
+  </header>
+
+  <main>
+    <header class="page-hero">
+      <p class="eyebrow">Recipes</p>
+      <h1 data-lang-block="fr">Crafts</h1>
+      <h1 data-lang-block="en">Crafting</h1>
+      <p data-lang-block="fr">Noyau de chance, poussières ±10, puis Lucky Blocks selon la rareté. Les recettes se débloquent avec un lingot d'or.</p>
+      <p data-lang-block="en">Luck core, ±10 dusts, then Lucky Blocks by rarity. Recipes unlock when you pick up a gold ingot.</p>
+    </header>
+
+    <section class="section">
+      <div class="section-head reveal">
+        <h2 data-lang-block="fr">Consommables de chance</h2>
+        <h2 data-lang-block="en">Luck consumables</h2>
+      </div>
+      <div class="craft-list reveal">
+        <article class="craft-card">
+          <div class="craft-meta">luck_emerald_dust</div>
+          <h3 data-lang-block="fr">Poussière d'émeraude (+10)</h3>
+          <h3 data-lang-block="en">Emerald luck dust (+10)</h3>
+          <p class="craft-summary" data-lang-block="fr">Shapeless : émeraude + poussière de glowstone → <strong>2</strong></p>
+          <p class="craft-summary" data-lang-block="en">Shapeless: emerald + glowstone dust → <strong>2</strong></p>
+        </article>
+        <article class="craft-card">
+          <div class="craft-meta">luck_blaze_curse</div>
+          <h3 data-lang-block="fr">Malédiction Blaze (−10)</h3>
+          <h3 data-lang-block="en">Blaze curse (−10)</h3>
+          <p class="craft-summary" data-lang-block="fr">Shapeless : poudre de blaze + œil d'araignée fermenté → <strong>2</strong></p>
+          <p class="craft-summary" data-lang-block="en">Shapeless: blaze powder + fermented spider eye → <strong>2</strong></p>
+        </article>
+        <article class="craft-card">
+          <div class="craft-meta">lucky_core</div>
+          <h3 data-lang-block="fr">Noyau de chance</h3>
+          <h3 data-lang-block="en">Luck core</h3>
+          <div class="craft-grid" aria-hidden="true">
+            <div class="craft-row"><span class="cell">E</span><span class="cell">G</span><span class="cell">E</span></div>
+            <div class="craft-row"><span class="cell">G</span><span class="cell">D</span><span class="cell">G</span></div>
+            <div class="craft-row"><span class="cell">E</span><span class="cell">G</span><span class="cell">E</span></div>
+          </div>
+          <p class="craft-summary" data-lang-block="fr">E = poussière d'émeraude · G = lingot d'or · D = diamant</p>
+          <p class="craft-summary" data-lang-block="en">E = emerald dust · G = gold ingot · D = diamond</p>
+        </article>
+      </div>
+      <p class="note reveal" data-lang-block="fr"><strong>Pari Luck</strong> : sneak + poussière d'émeraude en main secondaire au cassage → <strong>+25</strong> luck effectif (consomme 1 poussière, configurable).</p>
+      <p class="note reveal" data-lang-block="en"><strong>Luck bet</strong>: sneak + emerald dust in off-hand on break → <strong>+25</strong> effective luck (consumes 1 dust, configurable).</p>
+    </section>
+
+    <section class="section">
+      <div class="section-head reveal">
+        <h2 data-lang-block="fr">Schémas par rareté</h2>
+        <h2 data-lang-block="en">Patterns by rarity</h2>
+      </div>
+      <div class="table-wrap reveal">
+        <table>
+          <thead>
+            <tr>
+              <th>Rarity</th>
+              <th>Pattern</th>
+              <th><span data-lang="fr">Coût</span><span data-lang="en">Cost</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span data-lang="fr">Commun</span><span data-lang="en">Common</span></td>
+              <td><code>GTG / GCG / GGG</code></td>
+              <td><span data-lang="fr">1 noyau + 6 or + 1 thème</span><span data-lang="en">1 core + 6 gold + 1 theme</span></td>
+            </tr>
+            <tr>
+              <td>Rare</td>
+              <td><code>BTB / GCG / BGB</code></td>
+              <td><span data-lang="fr">1 noyau + 4 blocs or + 2 lingots + 1 thème</span><span data-lang="en">1 core + 4 gold blocks + 2 ingots + 1 theme</span></td>
+            </tr>
+            <tr>
+              <td><span data-lang="fr">Légendaire</span><span data-lang="en">Legendary</span></td>
+              <td><code>BTB / CNC / BTB</code></td>
+              <td><span data-lang="fr">2 noyaux + 4 blocs or + 1 scrap + 2 thèmes</span><span data-lang="en">2 cores + 4 gold blocks + 1 scrap + 2 themes</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note reveal"><span data-lang="fr">Légende : T = objet du thème · C = noyau · G = lingot d'or · B = bloc d'or · N = débris de netherite</span><span data-lang="en">Key: T = theme item · C = core · G = gold ingot · B = gold block · N = netherite scrap</span></p>
+    </section>
+
+    <section class="section">
+      <div class="section-head reveal">
+        <h2 data-lang-block="fr">Toutes les recettes Lucky</h2>
+        <h2 data-lang-block="en">All Lucky recipes</h2>
+      </div>
+      <div class="theme-tools reveal">
+        <input id="theme-search" type="search" placeholder="Rechercher… / Search…" autocomplete="off" />
+        <select id="theme-rarity" aria-label="Rareté">
+          <option value="all">All</option>
+          <option value="common">Common</option>
+          <option value="rare">Rare</option>
+          <option value="legend">Legendary</option>
+        </select>
+      </div>
+      <div class="craft-tier-block reveal">
+        <h3><span data-lang="fr">Commun</span><span data-lang="en">Common</span></h3>
+        <div class="craft-list">
+        <article class="craft-card theme" data-rarity="common" data-search="boulangerie Boulangerie Bakery Pain Bread">
+          <div class="craft-meta">lucky_boulangerie · <span data-lang="fr">Commun</span><span data-lang="en">Common</span></div>
+          <h3><span data-lang="fr">Boulangerie</span><span data-lang="en">Bakery</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="T"><span data-lang="fr">Pain</span><span data-lang="en">Bread</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:bread</code> (Pain)</span><span data-lang="en">Theme item: <code>minecraft:bread</code> (Bread)</span></p>
+          <p class="craft-summary"><span data-lang="fr">1 noyau + 6 lingots d'or + objet thème</span><span data-lang="en">1 core + 6 gold ingots + theme item</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="common" data-search="volaille Volaille suprême Supreme poultry Plume Feather">
+          <div class="craft-meta">lucky_volaille · <span data-lang="fr">Commun</span><span data-lang="en">Common</span></div>
+          <h3><span data-lang="fr">Volaille suprême</span><span data-lang="en">Supreme poultry</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="T"><span data-lang="fr">Plume</span><span data-lang="en">Feather</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:feather</code> (Plume)</span><span data-lang="en">Theme item: <code>minecraft:feather</code> (Feather)</span></p>
+          <p class="craft-summary"><span data-lang="fr">1 noyau + 6 lingots d'or + objet thème</span><span data-lang="en">1 core + 6 gold ingots + theme item</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="common" data-search="proprete Propreté Cleanliness Éponge Sponge">
+          <div class="craft-meta">lucky_proprete · <span data-lang="fr">Commun</span><span data-lang="en">Common</span></div>
+          <h3><span data-lang="fr">Propreté</span><span data-lang="en">Cleanliness</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="T"><span data-lang="fr">Éponge</span><span data-lang="en">Sponge</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:sponge</code> (Éponge)</span><span data-lang="en">Theme item: <code>minecraft:sponge</code> (Sponge)</span></p>
+          <p class="craft-summary"><span data-lang="fr">1 noyau + 6 lingots d'or + objet thème</span><span data-lang="en">1 core + 6 gold ingots + theme item</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="common" data-search="fast_food Fast-Food Fast food Steak Steak">
+          <div class="craft-meta">lucky_fast_food · <span data-lang="fr">Commun</span><span data-lang="en">Common</span></div>
+          <h3><span data-lang="fr">Fast-Food</span><span data-lang="en">Fast food</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="T"><span data-lang="fr">Steak</span><span data-lang="en">Steak</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:cooked_beef</code> (Steak)</span><span data-lang="en">Theme item: <code>minecraft:cooked_beef</code> (Steak)</span></p>
+          <p class="craft-summary"><span data-lang="fr">1 noyau + 6 lingots d'or + objet thème</span><span data-lang="en">1 core + 6 gold ingots + theme item</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="common" data-search="penurie_2020 Pénurie 2020 2020 shortage Laine blanche White wool">
+          <div class="craft-meta">lucky_penurie_2020 · <span data-lang="fr">Commun</span><span data-lang="en">Common</span></div>
+          <h3><span data-lang="fr">Pénurie 2020</span><span data-lang="en">2020 shortage</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="T"><span data-lang="fr">Laine blan</span><span data-lang="en">White wool</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:white_wool</code> (Laine blanche)</span><span data-lang="en">Theme item: <code>minecraft:white_wool</code> (White wool)</span></p>
+          <p class="craft-summary"><span data-lang="fr">1 noyau + 6 lingots d'or + objet thème</span><span data-lang="en">1 core + 6 gold ingots + theme item</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="common" data-search="plomberie Plomberie Plumbing Seau Bucket">
+          <div class="craft-meta">lucky_plomberie · <span data-lang="fr">Commun</span><span data-lang="en">Common</span></div>
+          <h3><span data-lang="fr">Plomberie</span><span data-lang="en">Plumbing</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="T"><span data-lang="fr">Seau</span><span data-lang="en">Bucket</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:bucket</code> (Seau)</span><span data-lang="en">Theme item: <code>minecraft:bucket</code> (Bucket)</span></p>
+          <p class="craft-summary"><span data-lang="fr">1 noyau + 6 lingots d'or + objet thème</span><span data-lang="en">1 core + 6 gold ingots + theme item</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="common" data-search="camping Camping Camping Feu de camp Campfire">
+          <div class="craft-meta">lucky_camping · <span data-lang="fr">Commun</span><span data-lang="en">Common</span></div>
+          <h3><span data-lang="fr">Camping</span><span data-lang="en">Camping</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="T"><span data-lang="fr">Feu de cam</span><span data-lang="en">Campfire</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:campfire</code> (Feu de camp)</span><span data-lang="en">Theme item: <code>minecraft:campfire</code> (Campfire)</span></p>
+          <p class="craft-summary"><span data-lang="fr">1 noyau + 6 lingots d'or + objet thème</span><span data-lang="en">1 core + 6 gold ingots + theme item</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="common" data-search="magie_comptoir Magie de comptoir Countertop magic Patte de lapin Rabbit's foot">
+          <div class="craft-meta">lucky_magie_comptoir · <span data-lang="fr">Commun</span><span data-lang="en">Common</span></div>
+          <h3><span data-lang="fr">Magie de comptoir</span><span data-lang="en">Countertop magic</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="T"><span data-lang="fr">Patte de l</span><span data-lang="en">Rabbit's f</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:rabbit_foot</code> (Patte de lapin)</span><span data-lang="en">Theme item: <code>minecraft:rabbit_foot</code> (Rabbit's foot)</span></p>
+          <p class="craft-summary"><span data-lang="fr">1 noyau + 6 lingots d'or + objet thème</span><span data-lang="en">1 core + 6 gold ingots + theme item</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="common" data-search="pause_cafe Pause café Coffee break Fèves de cacao Cocoa beans">
+          <div class="craft-meta">lucky_pause_cafe · <span data-lang="fr">Commun</span><span data-lang="en">Common</span></div>
+          <h3><span data-lang="fr">Pause café</span><span data-lang="en">Coffee break</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="T"><span data-lang="fr">Fèves de c</span><span data-lang="en">Cocoa bean</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:cocoa_beans</code> (Fèves de cacao)</span><span data-lang="en">Theme item: <code>minecraft:cocoa_beans</code> (Cocoa beans)</span></p>
+          <p class="craft-summary"><span data-lang="fr">1 noyau + 6 lingots d'or + objet thème</span><span data-lang="en">1 core + 6 gold ingots + theme item</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="common" data-search="asmr_fidget ASMR & Fidget ASMR & Fidget Boule de slime Slimeball">
+          <div class="craft-meta">lucky_asmr_fidget · <span data-lang="fr">Commun</span><span data-lang="en">Common</span></div>
+          <h3><span data-lang="fr">ASMR & Fidget</span><span data-lang="en">ASMR & Fidget</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="T"><span data-lang="fr">Boule de s</span><span data-lang="en">Slimeball</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:slime_ball</code> (Boule de slime)</span><span data-lang="en">Theme item: <code>minecraft:slime_ball</code> (Slimeball)</span></p>
+          <p class="craft-summary"><span data-lang="fr">1 noyau + 6 lingots d'or + objet thème</span><span data-lang="en">1 core + 6 gold ingots + theme item</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="common" data-search="greve_transports Grève / transport Transport strike Rail Rail">
+          <div class="craft-meta">lucky_greve_transports · <span data-lang="fr">Commun</span><span data-lang="en">Common</span></div>
+          <h3><span data-lang="fr">Grève / transport</span><span data-lang="en">Transport strike</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="T"><span data-lang="fr">Rail</span><span data-lang="en">Rail</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:rail</code> (Rail)</span><span data-lang="en">Theme item: <code>minecraft:rail</code> (Rail)</span></p>
+          <p class="craft-summary"><span data-lang="fr">1 noyau + 6 lingots d'or + objet thème</span><span data-lang="en">1 core + 6 gold ingots + theme item</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="common" data-search="chat_internet Chats internet Internet cats Ficelle String">
+          <div class="craft-meta">lucky_chat_internet · <span data-lang="fr">Commun</span><span data-lang="en">Common</span></div>
+          <h3><span data-lang="fr">Chats internet</span><span data-lang="en">Internet cats</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="T"><span data-lang="fr">Ficelle</span><span data-lang="en">String</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:string</code> (Ficelle)</span><span data-lang="en">Theme item: <code>minecraft:string</code> (String)</span></p>
+          <p class="craft-summary"><span data-lang="fr">1 noyau + 6 lingots d'or + objet thème</span><span data-lang="en">1 core + 6 gold ingots + theme item</span></p>
+        </article>
+        </div>
+      </div>
+      <div class="craft-tier-block reveal">
+        <h3><span data-lang="fr">Rare</span><span data-lang="en">Rare</span></h3>
+        <div class="craft-list">
+        <article class="craft-card theme" data-rarity="rare" data-search="anachronisme Anachronisme Anachronism Horloge Clock">
+          <div class="craft-meta">lucky_anachronisme · <span data-lang="fr">Rare</span><span data-lang="en">Rare</span></div>
+          <h3><span data-lang="fr">Anachronisme</span><span data-lang="en">Anachronism</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="T"><span data-lang="fr">Horloge</span><span data-lang="en">Clock</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:clock</code> (Horloge)</span><span data-lang="en">Theme item: <code>minecraft:clock</code> (Clock)</span></p>
+          <p class="craft-summary"><span data-lang="fr">1 noyau + 4 blocs d'or + 2 lingots + objet thème</span><span data-lang="en">1 core + 4 gold blocks + 2 ingots + theme item</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="rare" data-search="impots Impôts Taxes Papier Paper">
+          <div class="craft-meta">lucky_impots · <span data-lang="fr">Rare</span><span data-lang="en">Rare</span></div>
+          <h3><span data-lang="fr">Impôts</span><span data-lang="en">Taxes</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="T"><span data-lang="fr">Papier</span><span data-lang="en">Paper</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:paper</code> (Papier)</span><span data-lang="en">Theme item: <code>minecraft:paper</code> (Paper)</span></p>
+          <p class="craft-summary"><span data-lang="fr">1 noyau + 4 blocs d'or + 2 lingots + objet thème</span><span data-lang="en">1 core + 4 gold blocks + 2 ingots + theme item</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="rare" data-search="streamer Streamer Streamer Longue-vue Spyglass">
+          <div class="craft-meta">lucky_streamer · <span data-lang="fr">Rare</span><span data-lang="en">Rare</span></div>
+          <h3><span data-lang="fr">Streamer</span><span data-lang="en">Streamer</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="T"><span data-lang="fr">Longue-vue</span><span data-lang="en">Spyglass</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:spyglass</code> (Longue-vue)</span><span data-lang="en">Theme item: <code>minecraft:spyglass</code> (Spyglass)</span></p>
+          <p class="craft-summary"><span data-lang="fr">1 noyau + 4 blocs d'or + 2 lingots + objet thème</span><span data-lang="en">1 core + 4 gold blocks + 2 ingots + theme item</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="rare" data-search="cauchemar_matin Cauchemar matinée Morning nightmare Lit blanc White bed">
+          <div class="craft-meta">lucky_cauchemar_matin · <span data-lang="fr">Rare</span><span data-lang="en">Rare</span></div>
+          <h3><span data-lang="fr">Cauchemar matinée</span><span data-lang="en">Morning nightmare</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="T"><span data-lang="fr">Lit blanc</span><span data-lang="en">White bed</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:white_bed</code> (Lit blanc)</span><span data-lang="en">Theme item: <code>minecraft:white_bed</code> (White bed)</span></p>
+          <p class="craft-summary"><span data-lang="fr">1 noyau + 4 blocs d'or + 2 lingots + objet thème</span><span data-lang="en">1 core + 4 gold blocks + 2 ingots + theme item</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="rare" data-search="film_action Film d'action Action movie TNT TNT">
+          <div class="craft-meta">lucky_film_action · <span data-lang="fr">Rare</span><span data-lang="en">Rare</span></div>
+          <h3><span data-lang="fr">Film d'action</span><span data-lang="en">Action movie</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="T"><span data-lang="fr">TNT</span><span data-lang="en">TNT</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:tnt</code> (TNT)</span><span data-lang="en">Theme item: <code>minecraft:tnt</code> (TNT)</span></p>
+          <p class="craft-summary"><span data-lang="fr">1 noyau + 4 blocs d'or + 2 lingots + objet thème</span><span data-lang="en">1 core + 4 gold blocks + 2 ingots + theme item</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="rare" data-search="jdr_d20 JDR & D20 TTRPG & D20 Livre et plume Book and quill">
+          <div class="craft-meta">lucky_jdr_d20 · <span data-lang="fr">Rare</span><span data-lang="en">Rare</span></div>
+          <h3><span data-lang="fr">JDR & D20</span><span data-lang="en">TTRPG & D20</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="T"><span data-lang="fr">Livre et p</span><span data-lang="en">Book and q</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:writable_book</code> (Livre et plume)</span><span data-lang="en">Theme item: <code>minecraft:writable_book</code> (Book and quill)</span></p>
+          <p class="craft-summary"><span data-lang="fr">1 noyau + 4 blocs d'or + 2 lingots + objet thème</span><span data-lang="en">1 core + 4 gold blocks + 2 ingots + theme item</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="rare" data-search="disco_80 Disco 80s Disco 80s Bloc musical Note block">
+          <div class="craft-meta">lucky_disco_80 · <span data-lang="fr">Rare</span><span data-lang="en">Rare</span></div>
+          <h3><span data-lang="fr">Disco 80s</span><span data-lang="en">Disco 80s</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="T"><span data-lang="fr">Bloc music</span><span data-lang="en">Note block</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:note_block</code> (Bloc musical)</span><span data-lang="en">Theme item: <code>minecraft:note_block</code> (Note block)</span></p>
+          <p class="craft-summary"><span data-lang="fr">1 noyau + 4 blocs d'or + 2 lingots + objet thème</span><span data-lang="en">1 core + 4 gold blocks + 2 ingots + theme item</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="rare" data-search="fortune_cookie Fortune cookie Fortune cookie Cookie Cookie">
+          <div class="craft-meta">lucky_fortune_cookie · <span data-lang="fr">Rare</span><span data-lang="en">Rare</span></div>
+          <h3><span data-lang="fr">Fortune cookie</span><span data-lang="en">Fortune cookie</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="T"><span data-lang="fr">Cookie</span><span data-lang="en">Cookie</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:cookie</code> (Cookie)</span><span data-lang="en">Theme item: <code>minecraft:cookie</code> (Cookie)</span></p>
+          <p class="craft-summary"><span data-lang="fr">1 noyau + 4 blocs d'or + 2 lingots + objet thème</span><span data-lang="en">1 core + 4 gold blocks + 2 ingots + theme item</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="rare" data-search="gym_bro Gym bro Gym bro Bloc de fer Iron block">
+          <div class="craft-meta">lucky_gym_bro · <span data-lang="fr">Rare</span><span data-lang="en">Rare</span></div>
+          <h3><span data-lang="fr">Gym bro</span><span data-lang="en">Gym bro</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="T"><span data-lang="fr">Bloc de fe</span><span data-lang="en">Iron block</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:iron_block</code> (Bloc de fer)</span><span data-lang="en">Theme item: <code>minecraft:iron_block</code> (Iron block)</span></p>
+          <p class="craft-summary"><span data-lang="fr">1 noyau + 4 blocs d'or + 2 lingots + objet thème</span><span data-lang="en">1 core + 4 gold blocks + 2 ingots + theme item</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="rare" data-search="art_moderne Art moderne Modern art Tableau Painting">
+          <div class="craft-meta">lucky_art_moderne · <span data-lang="fr">Rare</span><span data-lang="en">Rare</span></div>
+          <h3><span data-lang="fr">Art moderne</span><span data-lang="en">Modern art</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="T"><span data-lang="fr">Tableau</span><span data-lang="en">Painting</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:painting</code> (Tableau)</span><span data-lang="en">Theme item: <code>minecraft:painting</code> (Painting)</span></p>
+          <p class="craft-summary"><span data-lang="fr">1 noyau + 4 blocs d'or + 2 lingots + objet thème</span><span data-lang="en">1 core + 4 gold blocks + 2 ingots + theme item</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="rare" data-search="retard_vol Retard de vol Delayed flight Boussole Compass">
+          <div class="craft-meta">lucky_retard_vol · <span data-lang="fr">Rare</span><span data-lang="en">Rare</span></div>
+          <h3><span data-lang="fr">Retard de vol</span><span data-lang="en">Delayed flight</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="T"><span data-lang="fr">Boussole</span><span data-lang="en">Compass</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:compass</code> (Boussole)</span><span data-lang="en">Theme item: <code>minecraft:compass</code> (Compass)</span></p>
+          <p class="craft-summary"><span data-lang="fr">1 noyau + 4 blocs d'or + 2 lingots + objet thème</span><span data-lang="en">1 core + 4 gold blocks + 2 ingots + theme item</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="rare" data-search="ananas_pizza Ananas sur pizza Pineapple pizza Pomme de terre cuite Baked potato">
+          <div class="craft-meta">lucky_ananas_pizza · <span data-lang="fr">Rare</span><span data-lang="en">Rare</span></div>
+          <h3><span data-lang="fr">Ananas sur pizza</span><span data-lang="en">Pineapple pizza</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="T"><span data-lang="fr">Pomme de t</span><span data-lang="en">Baked pota</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:baked_potato</code> (Pomme de terre cuite)</span><span data-lang="en">Theme item: <code>minecraft:baked_potato</code> (Baked potato)</span></p>
+          <p class="craft-summary"><span data-lang="fr">1 noyau + 4 blocs d'or + 2 lingots + objet thème</span><span data-lang="en">1 core + 4 gold blocks + 2 ingots + theme item</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="rare" data-search="piraterie_torrent Piraterie & torrent Torrent piracy Carte Map">
+          <div class="craft-meta">lucky_piraterie_torrent · <span data-lang="fr">Rare</span><span data-lang="en">Rare</span></div>
+          <h3><span data-lang="fr">Piraterie & torrent</span><span data-lang="en">Torrent piracy</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="T"><span data-lang="fr">Carte</span><span data-lang="en">Map</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:map</code> (Carte)</span><span data-lang="en">Theme item: <code>minecraft:map</code> (Map)</span></p>
+          <p class="craft-summary"><span data-lang="fr">1 noyau + 4 blocs d'or + 2 lingots + objet thème</span><span data-lang="en">1 core + 4 gold blocks + 2 ingots + theme item</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="rare" data-search="vampire_gothique Vampire gothique Gothic vampire Obsidienne pleureuse Crying obsidian">
+          <div class="craft-meta">lucky_vampire_gothique · <span data-lang="fr">Rare</span><span data-lang="en">Rare</span></div>
+          <h3><span data-lang="fr">Vampire gothique</span><span data-lang="en">Gothic vampire</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="T"><span data-lang="fr">Obsidienne</span><span data-lang="en">Crying obs</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:crying_obsidian</code> (Obsidienne pleureuse)</span><span data-lang="en">Theme item: <code>minecraft:crying_obsidian</code> (Crying obsidian)</span></p>
+          <p class="craft-summary"><span data-lang="fr">1 noyau + 4 blocs d'or + 2 lingots + objet thème</span><span data-lang="en">1 core + 4 gold blocks + 2 ingots + theme item</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="rare" data-search="meteo_folle Météo folle Crazy weather Paratonnerre Lightning rod">
+          <div class="craft-meta">lucky_meteo_folle · <span data-lang="fr">Rare</span><span data-lang="en">Rare</span></div>
+          <h3><span data-lang="fr">Météo folle</span><span data-lang="en">Crazy weather</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="T"><span data-lang="fr">Paratonner</span><span data-lang="en">Lightning </span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div><div class="craft-row"><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span></div><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="G"><span data-lang="fr">Or×1</span><span data-lang="en">Gold</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:lightning_rod</code> (Paratonnerre)</span><span data-lang="en">Theme item: <code>minecraft:lightning_rod</code> (Lightning rod)</span></p>
+          <p class="craft-summary"><span data-lang="fr">1 noyau + 4 blocs d'or + 2 lingots + objet thème</span><span data-lang="en">1 core + 4 gold blocks + 2 ingots + theme item</span></p>
+        </article>
+        </div>
+      </div>
+      <div class="craft-tier-block reveal">
+        <h3><span data-lang="fr">Légendaire</span><span data-lang="en">Legendary</span></h3>
+        <div class="craft-list">
+        <article class="craft-card theme" data-rarity="legend" data-search="bsod BSOD BSOD Bloc de lapis Lapis block">
+          <div class="craft-meta">lucky_bsod · <span data-lang="fr">Légendaire</span><span data-lang="en">Legendary</span></div>
+          <h3><span data-lang="fr">BSOD</span><span data-lang="en">BSOD</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="T"><span data-lang="fr">Bloc de la</span><span data-lang="en">Lapis bloc</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div><div class="craft-row"><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="N"><span data-lang="fr">Scrap</span><span data-lang="en">Scrap</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span></div><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="T"><span data-lang="fr">Bloc de la</span><span data-lang="en">Lapis bloc</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:lapis_block</code> (Bloc de lapis)</span><span data-lang="en">Theme item: <code>minecraft:lapis_block</code> (Lapis block)</span></p>
+          <p class="craft-summary"><span data-lang="fr">2 noyaux + 4 blocs d'or + 1 debris netherite + 2 objets thème</span><span data-lang="en">2 cores + 4 gold blocks + 1 netherite scrap + 2 theme items</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="legend" data-search="gravite_zero Gravité zéro Zero gravity Membrane de phantom Phantom membrane">
+          <div class="craft-meta">lucky_gravite_zero · <span data-lang="fr">Légendaire</span><span data-lang="en">Legendary</span></div>
+          <h3><span data-lang="fr">Gravité zéro</span><span data-lang="en">Zero gravity</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="T"><span data-lang="fr">Membrane d</span><span data-lang="en">Phantom me</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div><div class="craft-row"><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="N"><span data-lang="fr">Scrap</span><span data-lang="en">Scrap</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span></div><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="T"><span data-lang="fr">Membrane d</span><span data-lang="en">Phantom me</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:phantom_membrane</code> (Membrane de phantom)</span><span data-lang="en">Theme item: <code>minecraft:phantom_membrane</code> (Phantom membrane)</span></p>
+          <p class="craft-summary"><span data-lang="fr">2 noyaux + 4 blocs d'or + 1 debris netherite + 2 objets thème</span><span data-lang="en">2 cores + 4 gold blocks + 1 netherite scrap + 2 theme items</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="legend" data-search="complot Complot Conspiracy Œil de l'Ender Eye of Ender">
+          <div class="craft-meta">lucky_complot · <span data-lang="fr">Légendaire</span><span data-lang="en">Legendary</span></div>
+          <h3><span data-lang="fr">Complot</span><span data-lang="en">Conspiracy</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="T"><span data-lang="fr">Œil de l'E</span><span data-lang="en">Eye of End</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div><div class="craft-row"><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="N"><span data-lang="fr">Scrap</span><span data-lang="en">Scrap</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span></div><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="T"><span data-lang="fr">Œil de l'E</span><span data-lang="en">Eye of End</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:ender_eye</code> (Œil de l'Ender)</span><span data-lang="en">Theme item: <code>minecraft:ender_eye</code> (Eye of Ender)</span></p>
+          <p class="craft-summary"><span data-lang="fr">2 noyaux + 4 blocs d'or + 1 debris netherite + 2 objets thème</span><span data-lang="en">2 cores + 4 gold blocks + 1 netherite scrap + 2 theme items</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="legend" data-search="lag_bug Lag & Bugs Lag & Bugs Répéteur Repeater">
+          <div class="craft-meta">lucky_lag_bug · <span data-lang="fr">Légendaire</span><span data-lang="en">Legendary</span></div>
+          <h3><span data-lang="fr">Lag & Bugs</span><span data-lang="en">Lag & Bugs</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="T"><span data-lang="fr">Répéteur</span><span data-lang="en">Repeater</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div><div class="craft-row"><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="N"><span data-lang="fr">Scrap</span><span data-lang="en">Scrap</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span></div><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="T"><span data-lang="fr">Répéteur</span><span data-lang="en">Repeater</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:repeater</code> (Répéteur)</span><span data-lang="en">Theme item: <code>minecraft:repeater</code> (Repeater)</span></p>
+          <p class="craft-summary"><span data-lang="fr">2 noyaux + 4 blocs d'or + 1 debris netherite + 2 objets thème</span><span data-lang="en">2 cores + 4 gold blocks + 1 netherite scrap + 2 theme items</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="legend" data-search="invasion_memes Invasion mèmes Meme invasion Corne de chèvre Goat horn">
+          <div class="craft-meta">lucky_invasion_memes · <span data-lang="fr">Légendaire</span><span data-lang="en">Legendary</span></div>
+          <h3><span data-lang="fr">Invasion mèmes</span><span data-lang="en">Meme invasion</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="T"><span data-lang="fr">Corne de c</span><span data-lang="en">Goat horn</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div><div class="craft-row"><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="N"><span data-lang="fr">Scrap</span><span data-lang="en">Scrap</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span></div><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="T"><span data-lang="fr">Corne de c</span><span data-lang="en">Goat horn</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:goat_horn</code> (Corne de chèvre)</span><span data-lang="en">Theme item: <code>minecraft:goat_horn</code> (Goat horn)</span></p>
+          <p class="craft-summary"><span data-lang="fr">2 noyaux + 4 blocs d'or + 1 debris netherite + 2 objets thème</span><span data-lang="en">2 cores + 4 gold blocks + 1 netherite scrap + 2 theme items</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="legend" data-search="speedrunner Speedrunner Speedrunner Bâton de Blaze Blaze rod">
+          <div class="craft-meta">lucky_speedrunner · <span data-lang="fr">Légendaire</span><span data-lang="en">Legendary</span></div>
+          <h3><span data-lang="fr">Speedrunner</span><span data-lang="en">Speedrunner</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="T"><span data-lang="fr">Bâton de B</span><span data-lang="en">Blaze rod</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div><div class="craft-row"><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="N"><span data-lang="fr">Scrap</span><span data-lang="en">Scrap</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span></div><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="T"><span data-lang="fr">Bâton de B</span><span data-lang="en">Blaze rod</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:blaze_rod</code> (Bâton de Blaze)</span><span data-lang="en">Theme item: <code>minecraft:blaze_rod</code> (Blaze rod)</span></p>
+          <p class="craft-summary"><span data-lang="fr">2 noyaux + 4 blocs d'or + 1 debris netherite + 2 objets thème</span><span data-lang="en">2 cores + 4 gold blocks + 1 netherite scrap + 2 theme items</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="legend" data-search="multivers_sliders Multivers sliders Multiverse sliders Chorus Chorus fruit">
+          <div class="craft-meta">lucky_multivers_sliders · <span data-lang="fr">Légendaire</span><span data-lang="en">Legendary</span></div>
+          <h3><span data-lang="fr">Multivers sliders</span><span data-lang="en">Multiverse sliders</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="T"><span data-lang="fr">Chorus</span><span data-lang="en">Chorus fru</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div><div class="craft-row"><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="N"><span data-lang="fr">Scrap</span><span data-lang="en">Scrap</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span></div><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="T"><span data-lang="fr">Chorus</span><span data-lang="en">Chorus fru</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:chorus_fruit</code> (Chorus)</span><span data-lang="en">Theme item: <code>minecraft:chorus_fruit</code> (Chorus fruit)</span></p>
+          <p class="craft-summary"><span data-lang="fr">2 noyaux + 4 blocs d'or + 1 debris netherite + 2 objets thème</span><span data-lang="en">2 cores + 4 gold blocks + 1 netherite scrap + 2 theme items</span></p>
+        </article>
+        <article class="craft-card theme" data-rarity="legend" data-search="crypto_bulle Crypto bulle Crypto bubble Bloc d'émeraude Emerald block">
+          <div class="craft-meta">lucky_crypto_bulle · <span data-lang="fr">Légendaire</span><span data-lang="en">Legendary</span></div>
+          <h3><span data-lang="fr">Crypto bulle</span><span data-lang="en">Crypto bubble</span></h3>
+          <div class="craft-grid" aria-hidden="true"><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="T"><span data-lang="fr">Bloc d'éme</span><span data-lang="en">Emerald bl</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div><div class="craft-row"><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span><span class="cell" title="N"><span data-lang="fr">Scrap</span><span data-lang="en">Scrap</span></span><span class="cell" title="C"><span data-lang="fr">Noyau</span><span data-lang="en">Core</span></span></div><div class="craft-row"><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span><span class="cell" title="T"><span data-lang="fr">Bloc d'éme</span><span data-lang="en">Emerald bl</span></span><span class="cell" title="B"><span data-lang="fr">Or bloc</span><span data-lang="en">G-block</span></span></div></div>
+          <p class="craft-summary"><span data-lang="fr">Objet thème : <code>minecraft:emerald_block</code> (Bloc d'émeraude)</span><span data-lang="en">Theme item: <code>minecraft:emerald_block</code> (Emerald block)</span></p>
+          <p class="craft-summary"><span data-lang="fr">2 noyaux + 4 blocs d'or + 1 debris netherite + 2 objets thème</span><span data-lang="en">2 cores + 4 gold blocks + 1 netherite scrap + 2 theme items</span></p>
+        </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>UnpredictableBlocks Wiki</p>
+      <div class="footer-links">
+        <a href="guide.html">Guide</a>
+        <a href="themes.html">Thèmes</a>
+      </div>
+    </div>
+  </footer>
+  <script src="assets/js/site.js"></script>
+</body>
+</html>

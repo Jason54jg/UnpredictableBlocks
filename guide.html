@@ -24,6 +24,7 @@
         <li><a href="installer.html">Installer</a></li>
         <li><a href="guide.html" aria-current="page">Guide</a></li>
         <li><a href="themes.html">Thèmes</a></li>
+        <li><a href="crafts.html">Crafts</a></li>
         <li><a href="mondes.html">Mondes</a></li>
         <li><a href="commandes.html">Commandes</a></li>
       </ul>
@@ -104,8 +105,8 @@
             </tr>
             <tr>
               <td>Pari Luck / Luck bet</td>
-              <td data-lang-block="fr">Sneak + poussière en main secondaire au cassage</td>
-              <td data-lang-block="en">Sneak + dust in off-hand on break</td>
+              <td data-lang-block="fr">Sneak + poussière en main secondaire → +25 luck effectif</td>
+              <td data-lang-block="en">Sneak + dust in off-hand → +25 effective luck</td>
             </tr>
             <tr>
               <td>Aura de chunk</td>
@@ -117,6 +118,116 @@
       </div>
       <p class="note reveal" data-lang-block="fr">Exception volontaire : l’item <strong>Lucky mystère</strong> tire un thème au hasard parmi les thèmes du mod.</p>
       <p class="note reveal" data-lang-block="en">Voluntary exception: the <strong>Mystery Lucky</strong> item rolls a random theme from the mod.</p>
+    </section>
+
+
+    <section class="section">
+      <div class="section-head reveal">
+        <h2 data-lang-block="fr">Pourcentages HIGH / NEUTRAL / LOW</h2>
+        <h2 data-lang-block="en">HIGH / NEUTRAL / LOW percentages</h2>
+        <p data-lang-block="fr">Luck effective = luck du bloc + luck du joueur (−100…+100). Tirage pondéré dans <code>LuckResolver</code>.</p>
+        <p data-lang-block="en">Effective luck = block luck + player luck (−100…+100). Weighted roll in <code>LuckResolver</code>.</p>
+      </div>
+      <p class="formula reveal">high = (L+100)/200 · low = (100−L)/200 · neutral = 1 − |(L+100)/200| · puis normalisation</p>
+      <div class="pct-legend reveal">
+        <span><i class="pct-high"></i>HIGH</span>
+        <span><i class="pct-neutral"></i>NEUTRAL</span>
+        <span><i class="pct-low"></i>LOW</span>
+      </div>
+      <div class="pct-bars reveal">
+      <div class="pct-row">
+        <div class="pct-label">-100</div>
+        <div class="pct-track" title="HIGH 0.0% · NEUTRAL 50.0% · LOW 50.0%">
+          <div class="pct-high" style="width:0.00%"></div>
+          <div class="pct-neutral" style="width:50.00%"></div>
+          <div class="pct-low" style="width:50.00%"></div>
+        </div>
+      </div>
+      <div class="pct-row">
+        <div class="pct-label">-75</div>
+        <div class="pct-track" title="HIGH 6.7% · NEUTRAL 46.7% · LOW 46.7%">
+          <div class="pct-high" style="width:6.67%"></div>
+          <div class="pct-neutral" style="width:46.67%"></div>
+          <div class="pct-low" style="width:46.67%"></div>
+        </div>
+      </div>
+      <div class="pct-row">
+        <div class="pct-label">-50</div>
+        <div class="pct-track" title="HIGH 14.3% · NEUTRAL 42.9% · LOW 42.9%">
+          <div class="pct-high" style="width:14.29%"></div>
+          <div class="pct-neutral" style="width:42.86%"></div>
+          <div class="pct-low" style="width:42.86%"></div>
+        </div>
+      </div>
+      <div class="pct-row">
+        <div class="pct-label">-25</div>
+        <div class="pct-track" title="HIGH 23.1% · NEUTRAL 38.5% · LOW 38.5%">
+          <div class="pct-high" style="width:23.08%"></div>
+          <div class="pct-neutral" style="width:38.46%"></div>
+          <div class="pct-low" style="width:38.46%"></div>
+        </div>
+      </div>
+      <div class="pct-row">
+        <div class="pct-label">0</div>
+        <div class="pct-track" title="HIGH 33.3% · NEUTRAL 33.3% · LOW 33.3%">
+          <div class="pct-high" style="width:33.33%"></div>
+          <div class="pct-neutral" style="width:33.33%"></div>
+          <div class="pct-low" style="width:33.33%"></div>
+        </div>
+      </div>
+      <div class="pct-row">
+        <div class="pct-label">+25</div>
+        <div class="pct-track" title="HIGH 45.5% · NEUTRAL 27.3% · LOW 27.3%">
+          <div class="pct-high" style="width:45.45%"></div>
+          <div class="pct-neutral" style="width:27.27%"></div>
+          <div class="pct-low" style="width:27.27%"></div>
+        </div>
+      </div>
+      <div class="pct-row">
+        <div class="pct-label">+50</div>
+        <div class="pct-track" title="HIGH 60.0% · NEUTRAL 20.0% · LOW 20.0%">
+          <div class="pct-high" style="width:60.00%"></div>
+          <div class="pct-neutral" style="width:20.00%"></div>
+          <div class="pct-low" style="width:20.00%"></div>
+        </div>
+      </div>
+      <div class="pct-row">
+        <div class="pct-label">+75</div>
+        <div class="pct-track" title="HIGH 77.8% · NEUTRAL 11.1% · LOW 11.1%">
+          <div class="pct-high" style="width:77.78%"></div>
+          <div class="pct-neutral" style="width:11.11%"></div>
+          <div class="pct-low" style="width:11.11%"></div>
+        </div>
+      </div>
+      <div class="pct-row">
+        <div class="pct-label">+100</div>
+        <div class="pct-track" title="HIGH 100.0% · NEUTRAL 0.0% · LOW 0.0%">
+          <div class="pct-high" style="width:100.00%"></div>
+          <div class="pct-neutral" style="width:0.00%"></div>
+          <div class="pct-low" style="width:0.00%"></div>
+        </div>
+      </div>
+      </div>
+      <div class="table-wrap reveal">
+        <table>
+          <thead>
+            <tr><th>Luck</th><th>HIGH</th><th>NEUTRAL</th><th>LOW</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>-100</code></td><td>0.0%</td><td>50.0%</td><td>50.0%</td></tr>
+            <tr><td><code>-75</code></td><td>6.7%</td><td>46.7%</td><td>46.7%</td></tr>
+            <tr><td><code>-50</code></td><td>14.3%</td><td>42.9%</td><td>42.9%</td></tr>
+            <tr><td><code>-25</code></td><td>23.1%</td><td>38.5%</td><td>38.5%</td></tr>
+            <tr><td><code>0</code></td><td>33.3%</td><td>33.3%</td><td>33.3%</td></tr>
+            <tr><td><code>+25</code></td><td>45.5%</td><td>27.3%</td><td>27.3%</td></tr>
+            <tr><td><code>+50</code></td><td>60.0%</td><td>20.0%</td><td>20.0%</td></tr>
+            <tr><td><code>+75</code></td><td>77.8%</td><td>11.1%</td><td>11.1%</td></tr>
+            <tr><td><code>+100</code></td><td>100.0%</td><td>0.0%</td><td>0.0%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note reveal" data-lang-block="fr">À <strong>+100</strong> : 100 % HIGH. À <strong>−100</strong> : 50 % LOW / 50 % NEUTRAL (pas 100 % LOW — asymétrie du code). Drop de carte sur HIGH : <strong>12 %</strong> par défaut. Pari Luck : <strong>+25</strong>.</p>
+      <p class="note reveal" data-lang-block="en">At <strong>+100</strong>: 100% HIGH. At <strong>−100</strong>: 50% LOW / 50% NEUTRAL (not 100% LOW — code asymmetry). Card drop on HIGH: <strong>12%</strong> default. Luck bet: <strong>+25</strong>.</p>
     </section>
 
     <section class="section">
