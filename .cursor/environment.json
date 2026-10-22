@@ -1,7 +1,0 @@
-{
-  "install": "sudo apt-get update -qq && sudo apt-get install -y -qq openjdk-25-jdk-headless python3-pip && pip install -r tools/requirements.txt",
-  "build": {
-    "dockerfile": "Dockerfile",
-    "context": "."
-  }
-}

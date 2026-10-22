@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "unpredictableblocks:block/lucky_vampire_gothique"
-  }
-}

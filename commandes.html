@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Commandes — UnpredictableBlocks Wiki</title>
+  <meta name="description" content="Commandes admin et world profile UnpredictableBlocks." />
+  <link rel="icon" href="assets/branding/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Outfit:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/site.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/branding/logo.png" alt="" width="40" height="40" />
+        <span>UnpredictableBlocks</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+      <ul class="nav-links" id="nav">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="installer.html">Installer</a></li>
+        <li><a href="guide.html">Guide</a></li>
+        <li><a href="themes.html">Thèmes</a></li>
+        <li><a href="mondes.html">Mondes</a></li>
+        <li><a href="commandes.html" aria-current="page">Commandes</a></li>
+      </ul>
+      <button class="lang-toggle" type="button" data-lang-toggle>FR / EN</button>
+    </div>
+  </header>
+
+  <main>
+    <header class="page-hero">
+      <p class="eyebrow">Ops</p>
+      <h1 data-lang-block="fr">Commandes</h1>
+      <h1 data-lang-block="en">Commands</h1>
+      <p data-lang-block="fr">La plupart nécessitent le niveau op. Utile pour debug, démos et setup de serveur.</p>
+      <p data-lang-block="en">Most need op level. Handy for debug, demos, and server setup.</p>
+    </header>
+
+    <section class="section">
+      <div class="section-head reveal">
+        <h2><code>/unpredictableblocks</code></h2>
+      </div>
+      <pre class="reveal"><code>/unpredictableblocks place &lt;theme&gt; [luck]
+/unpredictableblocks event &lt;theme&gt; &lt;HIGH|NEUTRAL|LOW&gt;
+/unpredictableblocks givekit
+/unpredictableblocks reload
+/unpredictableblocks gameplay
+/unpredictableblocks stats [theme]</code></pre>
+    </section>
+
+    <section class="section">
+      <div class="section-head reveal">
+        <h2 data-lang-block="fr">Profil monde</h2>
+        <h2 data-lang-block="en">World profile</h2>
+        <p data-lang-block="fr">Sous-commandes <code>world</code> — aussi accessibles via le menu UB World profile.</p>
+        <p data-lang-block="en"><code>world</code> subcommands — also available via the UB World profile menu.</p>
+      </div>
+      <pre class="reveal"><code>world next | setup | preset | options | vote | start | rebuild | show | menu</code></pre>
+      <p class="note reveal" data-lang-block="fr"><code>world rebuild</code> régénère l’arène avec les options actuelles.</p>
+      <p class="note reveal" data-lang-block="en"><code>world rebuild</code> regenerates the arena with the current options.</p>
+    </section>
+
+    <section class="section">
+      <div class="section-head reveal">
+        <h2 data-lang-block="fr">Config</h2>
+        <h2 data-lang-block="en">Config</h2>
+      </div>
+      <p class="reveal" data-lang-block="fr">Fichier : <code>config/unpredictableblocks.json</code> (spawn, pondérations, gameplay). Les thèmes restent actifs en jeu ; la config ajuste surtout le spawn.</p>
+      <p class="reveal" data-lang-block="en">File: <code>config/unpredictableblocks.json</code> (spawn, weights, gameplay). Themes stay active in-game; config mostly tunes spawn.</p>
+      <pre class="reveal" style="margin-top:1rem"><code>/unpredictableblocks reload</code></pre>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>UnpredictableBlocks Wiki</p>
+      <div class="footer-links">
+        <a href="mondes.html">Mondes</a>
+        <a href="https://github.com/Jason54jg/UnpredictableBlocks">GitHub</a>
+      </div>
+    </div>
+  </footer>
+  <script src="assets/js/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Installer — UnpredictableBlocks Wiki</title>
+  <meta name="description" content="Installer UnpredictableBlocks sur Fabric ou NeoForge pour Minecraft 26.1–26.3." />
+  <link rel="icon" href="assets/branding/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Outfit:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/site.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/branding/logo.png" alt="" width="40" height="40" />
+        <span>UnpredictableBlocks</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+      <ul class="nav-links" id="nav">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="installer.html" aria-current="page">Installer</a></li>
+        <li><a href="guide.html">Guide</a></li>
+        <li><a href="themes.html">Thèmes</a></li>
+        <li><a href="mondes.html">Mondes</a></li>
+        <li><a href="commandes.html">Commandes</a></li>
+      </ul>
+      <button class="lang-toggle" type="button" data-lang-toggle>FR / EN</button>
+    </div>
+  </header>
+
+  <main>
+    <header class="page-hero">
+      <p class="eyebrow">Setup</p>
+      <h1 data-lang-block="fr">Installer le mod</h1>
+      <h1 data-lang-block="en">Install the mod</h1>
+      <p data-lang-block="fr">Client et serveur doivent tous les deux avoir le mod en multijoueur. Prends le jar qui correspond à ta version Minecraft.</p>
+      <p data-lang-block="en">Client and server both need the mod for multiplayer. Grab the jar that matches your Minecraft version.</p>
+    </header>
+
+    <section class="section">
+      <div class="section-head reveal">
+        <h2 data-lang-block="fr">Versions & loaders</h2>
+        <h2 data-lang-block="en">Versions & loaders</h2>
+      </div>
+      <div class="table-wrap reveal">
+        <table>
+          <thead>
+            <tr>
+              <th>Minecraft</th>
+              <th>Loaders</th>
+              <th data-lang-block="fr">Dépendances</th>
+              <th data-lang-block="en">Dependencies</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>26.1.2 → 26.3</td>
+              <td>Fabric · NeoForge</td>
+              <td colspan="1">
+                <span data-lang-block="fr">Fabric : Fabric API + GeckoLib + Architectury API<br />NeoForge : GeckoLib + Architectury API</span>
+                <span data-lang-block="en">Fabric: Fabric API + GeckoLib + Architectury API<br />NeoForge: GeckoLib + Architectury API</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note reveal">
+        <strong>JDK 25</strong>
+        <span data-lang="fr"> requis pour builder depuis les sources.</span>
+        <span data-lang="en"> required to build from source.</span>
+      </p>
+    </section>
+
+    <section class="section">
+      <div class="section-head reveal">
+        <h2 data-lang-block="fr">Étapes rapides</h2>
+        <h2 data-lang-block="en">Quick steps</h2>
+      </div>
+      <ol class="steps reveal">
+        <li>
+          <div>
+            <h3 data-lang-block="fr">Installer le loader</h3>
+            <h3 data-lang-block="en">Install the loader</h3>
+            <p data-lang-block="fr">Fabric ou NeoForge pour ta version Minecraft 26.x.</p>
+            <p data-lang-block="en">Fabric or NeoForge for your Minecraft 26.x version.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3 data-lang-block="fr">Ajouter les dépendances</h3>
+            <h3 data-lang-block="en">Add dependencies</h3>
+            <p data-lang-block="fr">GeckoLib (obligatoire). Sur Fabric : Fabric API. Architectury selon la page de version.</p>
+            <p data-lang-block="en">GeckoLib (required). On Fabric: Fabric API. Architectury as listed on the version page.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3 data-lang-block="fr">Déposer le jar</h3>
+            <h3 data-lang-block="en">Drop the jar</h3>
+            <p data-lang-block="fr">Place <code>unpredictableblocks-…jar</code> dans le dossier <code>mods/</code>, puis lance le jeu.</p>
+            <p data-lang-block="en">Put <code>unpredictableblocks-…jar</code> in the <code>mods/</code> folder, then launch.</p>
+          </div>
+        </li>
+      </ol>
+      <div class="cta-row reveal" style="margin-top:1.75rem">
+        <a class="btn btn-primary" href="https://github.com/Jason54jg/UnpredictableBlocks/releases">GitHub Releases</a>
+        <a class="btn btn-ghost" href="https://github.com/Jason54jg/UnpredictableBlocks">Repository</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head reveal">
+        <h2 data-lang-block="fr">Avant de jouer</h2>
+        <h2 data-lang-block="en">Before you play</h2>
+      </div>
+      <ul class="reveal" style="color:var(--muted); max-width:40rem">
+        <li data-lang-block="fr">Les événements peuvent blesser, spawner des hostiles, poser des blocs ou provoquer de petites explosions.</li>
+        <li data-lang-block="en">Events can damage you, spawn hostiles, place blocks, or cause small explosions.</li>
+        <li data-lang-block="fr">Version early (<code>0.1.x</code>) : l’équilibrage évolue.</li>
+        <li data-lang-block="en">Early (<code>0.1.x</code>): balance will keep shifting.</li>
+        <li data-lang-block="fr">Config : <code>config/unpredictableblocks.json</code> — reload op avec <code>/unpredictableblocks reload</code>.</li>
+        <li data-lang-block="en">Config: <code>config/unpredictableblocks.json</code> — op reload via <code>/unpredictableblocks reload</code>.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>UnpredictableBlocks Wiki</p>
+      <div class="footer-links">
+        <a href="guide.html">Guide</a>
+        <a href="https://github.com/Jason54jg/UnpredictableBlocks">GitHub</a>
+      </div>
+    </div>
+  </footer>
+  <script src="assets/js/site.js"></script>
+</body>
+</html>

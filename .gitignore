@@ -1,9 +1,0 @@
-.gradle/
-build/
-run/
-out/
-.idea/
-*.iml
-*.log
-stonecutter-cache/
-tools/__pycache__/

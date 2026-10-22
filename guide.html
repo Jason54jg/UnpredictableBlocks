@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Guide — UnpredictableBlocks Wiki</title>
+  <meta name="description" content="Comment jouer à UnpredictableBlocks : chance, cassage, quêtes, pari Luck." />
+  <link rel="icon" href="assets/branding/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Outfit:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/site.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/branding/logo.png" alt="" width="40" height="40" />
+        <span>UnpredictableBlocks</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+      <ul class="nav-links" id="nav">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="installer.html">Installer</a></li>
+        <li><a href="guide.html" aria-current="page">Guide</a></li>
+        <li><a href="themes.html">Thèmes</a></li>
+        <li><a href="mondes.html">Mondes</a></li>
+        <li><a href="commandes.html">Commandes</a></li>
+      </ul>
+      <button class="lang-toggle" type="button" data-lang-toggle>FR / EN</button>
+    </div>
+  </header>
+
+  <main>
+    <header class="page-hero">
+      <p class="eyebrow">Gameplay</p>
+      <h1 data-lang-block="fr">Comment jouer</h1>
+      <h1 data-lang-block="en">How to play</h1>
+      <p data-lang-block="fr">Un thème = une identité fixe. Ce qui change au cassage, c’est le palier de chance.</p>
+      <p data-lang-block="en">One theme = one fixed identity. What changes on break is the luck tier.</p>
+    </header>
+
+    <section class="section">
+      <ol class="steps reveal">
+        <li>
+          <div>
+            <h3 data-lang-block="fr">Trouve un Lucky Block</h3>
+            <h3 data-lang-block="en">Find a Lucky Block</h3>
+            <p data-lang-block="fr">Spawn naturel, craft, créatif, commandes, ou presets monde (Dense / Flat / Skyblock).</p>
+            <p data-lang-block="en">Natural spawn, craft, creative, commands, or world presets (Dense / Flat / Skyblock).</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3 data-lang-block="fr">Regarde ta Chance</h3>
+            <h3 data-lang-block="en">Check your Luck</h3>
+            <p data-lang-block="fr">Le HUD sur la barre d’action affiche ta luck (−100…+100). Plus elle est haute, plus le tier HIGH est probable.</p>
+            <p data-lang-block="en">The action-bar HUD shows luck (−100…+100). Higher luck means more HIGH tiers.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3 data-lang-block="fr">Casse le bloc</h3>
+            <h3 data-lang-block="en">Break the block</h3>
+            <p data-lang-block="fr">Loot, structure, effets, mob custom… Survive, ramasse, combats ou discute.</p>
+            <p data-lang-block="en">Loot, structure, effects, custom mob… Survive, loot, fight, or talk.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3 data-lang-block="fr">Ouvre le Journal</h3>
+            <h3 data-lang-block="en">Open the Journal</h3>
+            <p data-lang-block="fr">Item Journal des quêtes (aussi bouton inventaire). Termine l’objectif du thème pour cartes, titres et paliers 8 / 16 / 24 / tous.</p>
+            <p data-lang-block="en">Quest Journal item (also an inventory button). Finish the theme objective for cards, titles, and milestones 8 / 16 / 24 / all.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="section">
+      <div class="section-head reveal">
+        <h2 data-lang-block="fr">Booster (ou saboter) la chance</h2>
+        <h2 data-lang-block="en">Boost (or ruin) your luck</h2>
+      </div>
+      <div class="table-wrap reveal">
+        <table>
+          <thead>
+            <tr>
+              <th>ID / outil</th>
+              <th data-lang-block="fr">Effet</th>
+              <th data-lang-block="en">Effect</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>luck_emerald_dust</code></td>
+              <td data-lang-block="fr">+10 chance</td>
+              <td data-lang-block="en">+10 luck</td>
+            </tr>
+            <tr>
+              <td><code>luck_blaze_curse</code></td>
+              <td data-lang-block="fr">−10 chance</td>
+              <td data-lang-block="en">−10 luck</td>
+            </tr>
+            <tr>
+              <td>Pari Luck / Luck bet</td>
+              <td data-lang-block="fr">Sneak + poussière en main secondaire au cassage</td>
+              <td data-lang-block="en">Sneak + dust in off-hand on break</td>
+            </tr>
+            <tr>
+              <td>Aura de chunk</td>
+              <td data-lang-block="fr">Pousse brièvement la luck après exploration</td>
+              <td data-lang-block="en">Briefly pushes luck after exploring</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note reveal" data-lang-block="fr">Exception volontaire : l’item <strong>Lucky mystère</strong> tire un thème au hasard parmi les thèmes du mod.</p>
+      <p class="note reveal" data-lang-block="en">Voluntary exception: the <strong>Mystery Lucky</strong> item rolls a random theme from the mod.</p>
+    </section>
+
+    <section class="section">
+      <div class="split reveal">
+        <div class="split-copy">
+          <h2 data-lang-block="fr">Tiers de cassage</h2>
+          <h2 data-lang-block="en">Break tiers</h2>
+          <ul>
+            <li><strong>HIGH</strong> — <span data-lang="fr">généreux (loot, buffs, structures)</span><span data-lang="en">generous (loot, buffs, structures)</span></li>
+            <li><strong>NEUTRAL</strong> — <span data-lang="fr">mixte / sketch comique</span><span data-lang="en">mixed / comedy sketch</span></li>
+            <li><strong>LOW</strong> — <span data-lang="fr">personnel (pièges, hostiles, malus)</span><span data-lang="en">personal (traps, hostiles, debuffs)</span></li>
+          </ul>
+        </div>
+        <div class="split-visual">
+          <img src="assets/branding/banner-cinematic.jpg" alt="Bannière UnpredictableBlocks" />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>UnpredictableBlocks Wiki</p>
+      <div class="footer-links">
+        <a href="themes.html">Thèmes</a>
+        <a href="mondes.html">Mondes</a>
+      </div>
+    </div>
+  </footer>
+  <script src="assets/js/site.js"></script>
+</body>
+</html>
