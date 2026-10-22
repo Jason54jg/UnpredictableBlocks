@@ -56,17 +56,17 @@ public final class ModeGameplayHandler {
             return;
         }
         ServerLevel overworld = ServerLevels.server(sp).overworld();
-        WorldModProfile.WorldProfileData profile = WorldModProfile.get(overworld);
-        if (!profile.configured()) {
-            return;
-        }
+        // Différé d'1 tick : chunks prêts, pas de freeze pendant le load NeoForge.
         ServerLevels.server(sp).execute(() -> {
             if (sp.isRemoved()) {
                 return;
             }
+            WorldModProfile.ensureWorldReady(overworld);
             WorldModProfile.WorldProfileData p = WorldModProfile.get(overworld);
+            if (!p.configured()) {
+                return;
+            }
             if (WorldProfileApplier.isArenaMode(p)
-                    && ParcoursWorldState.get(overworld).sessionOpen()
                     && ((p.mode() == WorldPlayMode.PARCOURS && p.parcoursBuilt())
                     || (p.mode() == WorldPlayMode.ONEBLOCK && p.oneBlockBuilt()))) {
                 onSessionStart(sp, p);

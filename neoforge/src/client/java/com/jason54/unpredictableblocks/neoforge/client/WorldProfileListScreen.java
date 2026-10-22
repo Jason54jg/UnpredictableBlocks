@@ -53,9 +53,14 @@ public class WorldProfileListScreen extends Screen {
             }
             WorldProfileMenuCatalog.Entry entry = entries.get(idx);
             int y = top + i * row;
-            addRenderableWidget(Button.builder(Component.literal(entry.label()), b ->
-                    NextWorldProfileStorage.save(entry.pending())
-            ).bounds(x, y, w, 20).build());
+            addRenderableWidget(Button.builder(Component.literal(entry.label()), b -> {
+                NextWorldProfileStorage.save(entry.pending());
+                if (minecraft != null) {
+                    // Remonte au TitleScreen (parent de WorldProfileCreateScreen).
+                    Screen root = parent instanceof WorldProfileCreateScreen create ? create.parentScreen() : parent;
+                    minecraft.setScreenAndShow(root);
+                }
+            }).bounds(x, y, w, 20).build());
         }
 
         addRenderableWidget(Button.builder(Component.literal("Back"), b -> {

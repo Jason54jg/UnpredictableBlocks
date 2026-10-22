@@ -28,9 +28,11 @@ public final class WorldSetupHandler {
                 return;
             }
             ServerLevel overworld = ServerLevels.server(sp).overworld();
+            // Si le pending a été raté au SERVER_STARTED, réessaie avant le menu.
+            WorldModProfile.bootstrapOverworld(overworld);
             WorldModProfile.WorldProfileData profile = WorldModProfile.get(overworld);
             if (profile.configured()) {
-                // Téléport arène géré par ModeGameplayHandler.onJoin.
+                // Construction arène + téléport : ModeGameplayHandler.onJoin.
                 return;
             }
             if (!canConfigure(sp)) {

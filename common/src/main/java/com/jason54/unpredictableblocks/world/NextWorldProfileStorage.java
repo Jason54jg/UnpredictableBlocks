@@ -53,18 +53,17 @@ public final class NextWorldProfileStorage {
 
     /** Lit et supprime le fichier (usage unique à la création du monde). */
     public static Optional<Pending> consume() {
-        Path path = PlatformConfigPaths.configFile(FILE);
-        if (!Files.exists(path)) {
-            return Optional.empty();
-        }
+        Optional<Pending> pending = peek();
+        clear();
+        return pending;
+    }
+
+    /** Supprime le pending après application réussie. */
+    public static void clear() {
         try {
-            String json = Files.readString(path);
-            FileDto dto = GSON.fromJson(json, FileDto.class);
-            Files.deleteIfExists(path);
-            return fromDto(dto);
+            Files.deleteIfExists(PlatformConfigPaths.configFile(FILE));
         } catch (IOException e) {
-            UnpredictableBlocks.LOGGER.warn("Lecture next_world_profile.json impossible", e);
-            return Optional.empty();
+            UnpredictableBlocks.LOGGER.warn("Suppression next_world_profile.json impossible", e);
         }
     }
 

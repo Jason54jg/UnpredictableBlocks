@@ -107,20 +107,15 @@ public final class WorldProfileApplier {
     }
 
     private static void applyWorldSpawn(ServerLevel level, WorldModProfile.WorldProfileData profile, BlockPos origin) {
-        if (isArenaMode(profile)) {
-            BlockPos spawn = profile.mode() == WorldPlayMode.PARCOURS
-                    ? ParcoursArenaBuilder.laneSpawnPos(origin, 0, Math.max(1, profile.oneBlockPlayers()))
-                    : OneBlockArenaBuilder.spawnPos(origin);
-            clearStandSpace(level, spawn);
-            level.setRespawnData(LevelData.RespawnData.of(Level.OVERWORLD, spawn, 0.0F, 0.0F));
+        if (!isArenaMode(profile)) {
+            // Maps normales : SafeSpawn au join seulement (évite freeze NeoForge au boot).
             return;
         }
-        // Maps normales : corrige le spawn vanilla s'il est dans la terre / une grotte.
-        BlockPos shared = level.getRespawnData().pos();
-        BlockPos safe = SafeSpawn.findNear(level, shared);
-        if (!safe.equals(shared)) {
-            level.setRespawnData(LevelData.RespawnData.of(Level.OVERWORLD, safe, 0.0F, 0.0F));
-        }
+        BlockPos spawn = profile.mode() == WorldPlayMode.PARCOURS
+                ? ParcoursArenaBuilder.laneSpawnPos(origin, 0, Math.max(1, profile.oneBlockPlayers()))
+                : OneBlockArenaBuilder.spawnPos(origin);
+        clearStandSpace(level, spawn);
+        level.setRespawnData(LevelData.RespawnData.of(Level.OVERWORLD, spawn, 0.0F, 0.0F));
     }
 
     private static void applyWorldBorder(ServerLevel level, WorldModProfile.WorldProfileData profile, BlockPos center) {

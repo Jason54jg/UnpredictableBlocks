@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.Vec3;
 
-/** Spawn / respawn hors sol (maps normales) et validation pied+tete. */
+/** Spawn / respawn hors sol (maps normales et variations pieds). */
 public final class SafeSpawn {
     private SafeSpawn() {}
 
@@ -70,7 +70,7 @@ public final class SafeSpawn {
         return best;
     }
 
-    /** Si le joueur est enterre (map normale), le remonte a la surface. */
+    /** Si le joueur est enterré (map normale), le remonte à la surface. */
     public static void rescueIfBuried(ServerPlayer player) {
         if (!(player.level() instanceof ServerLevel level)) {
             return;

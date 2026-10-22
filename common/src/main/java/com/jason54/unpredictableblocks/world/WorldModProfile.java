@@ -23,6 +23,10 @@ public final class WorldModProfile {
         return level.getDataStorage().computeIfAbsent(WorldProfileData.TYPE);
     }
 
+    /**
+     * Applique le profil « next world » sans construire l'arène (trop lourd au boot NeoForge).
+     * La construction se fait au 1er join via {@link #ensureWorldReady}.
+     */
     public static void bootstrapOverworld(ServerLevel level) {
         if (!level.dimension().equals(Level.OVERWORLD)) {
             return;
@@ -31,19 +35,56 @@ public final class WorldModProfile {
         if (data.configured()) {
             return;
         }
-        boolean autoApply = false;
-        var pending = NextWorldProfileStorage.consume();
+        var pending = NextWorldProfileStorage.peek();
         if (pending.isPresent()) {
             applyPending(data, pending.get());
-            autoApply = true;
-        } else if (isFlatLike(level)) {
-            inferFromLevel(level, data);
-            autoApply = true;
-        }
-        if (autoApply) {
-            WorldProfileApplier.apply(level, data);
             data.setConfigured(true);
             data.setDirty();
+            NextWorldProfileStorage.clear();
+            UnpredictableBlocks.LOGGER.info(
+                    "Profil monde en attente appliqué : {} ({} joueurs) — arène au 1er join",
+                    data.mode().id(),
+                    data.oneBlockPlayers()
+            );
+            return;
+        }
+        if (isFlatLike(level)) {
+            inferFromLevel(level, data);
+            data.setConfigured(true);
+            data.setDirty();
+            UnpredictableBlocks.LOGGER.info("Profil monde inféré (flat) : {}", data.mode().id());
+        }
+    }
+
+    /**
+     * Construit OneBlock/Parcours si besoin, corrige le spawn, ouvre la session.
+     * À appeler quand un joueur est prêt (chunks chargés).
+     */
+    public static void ensureWorldReady(ServerLevel level) {
+        if (!level.dimension().equals(Level.OVERWORLD)) {
+            return;
+        }
+        WorldProfileData data = get(level);
+        if (!data.configured()) {
+            // Dernière chance : pending encore présent (bootstrap raté).
+            bootstrapOverworld(level);
+            data = get(level);
+            if (!data.configured()) {
+                return;
+            }
+        }
+        if (WorldProfileApplier.isArenaMode(data)) {
+            try {
+                WorldProfileApplier.apply(level, data);
+                UnpredictableBlocks.LOGGER.info(
+                        "Arène {} prête (built oneblock={} parcours={})",
+                        data.mode().id(),
+                        data.oneBlockBuilt(),
+                        data.parcoursBuilt()
+                );
+            } catch (Exception e) {
+                UnpredictableBlocks.LOGGER.error("Construction arène {} échouée", data.mode().id(), e);
+            }
         }
     }
 
@@ -223,40 +264,28 @@ public final class WorldModProfile {
         private static WorldProfileData fromTag(CompoundTag tag) {
             WorldProfileData data = new WorldProfileData();
             data.configured = tag.getBooleanOr("Configured", false);
-            WorldPlayMode.parse(tag.getStringOr("Mode", "normal")).ifPresent(data::setMode);
+            data.mode = WorldPlayMode.parse(tag.getStringOr("Mode", "normal")).orElse(WorldPlayMode.NORMAL);
             data.oneBlockPlayers = tag.getIntOr("OneBlockPlayers", 1);
             data.spawnMultiplier = tag.getDoubleOr("SpawnMultiplier", 1.0);
             data.defaultBlockLuck = tag.getIntOr("DefaultBlockLuck", 0);
             data.naturalSpawn = tag.getBooleanOr("NaturalSpawn", true);
             data.oneBlockBuilt = tag.getBooleanOr("OneBlockBuilt", false);
             data.parcoursBuilt = tag.getBooleanOr("ParcoursBuilt", false);
-            data.modeSettings = readSettings(tag, data.mode);
-            return data;
-        }
-
-        private static WorldModeSettings readSettings(CompoundTag tag, WorldPlayMode mode) {
-            if (!tag.contains("PathScale")) {
-                return WorldModeSettings.defaults(mode);
-            }
-            WorldModeSettings.PathScale scale = WorldModeSettings.parsePathScale(tag.getStringOr("PathScale", "standard"))
-                    .orElse(WorldModeSettings.PathScale.STANDARD);
-            WorldModeSettings.LuckyDensity density = WorldModeSettings.parseDensity(tag.getStringOr("LuckyDensity", "normal"))
-                    .orElse(WorldModeSettings.LuckyDensity.NORMAL);
-            WorldModeSettings.ParcoursLayout layout = WorldModeSettings.parseLayout(tag.getStringOr("ParcoursLayout", "lanes"))
-                    .orElse(WorldModeSettings.ParcoursLayout.LANES);
-            WorldModeSettings.ParcoursRules rules = WorldModeSettings.parseRules(tag.getStringOr("ParcoursRules", "standard"))
-                    .orElse(WorldModeSettings.ParcoursRules.STANDARD);
-            WorldModeSettings.ArenaDecor decor = WorldModeSettings.parseDecor(tag.getStringOr("ArenaDecor", "void"))
-                    .orElse(WorldModeSettings.ArenaDecor.VOID);
-            return new WorldModeSettings(
-                    scale,
-                    density,
-                    layout,
-                    rules,
-                    decor,
+            data.modeSettings = new WorldModeSettings(
+                    WorldModeSettings.parsePathScale(tag.getStringOr("PathScale", "STANDARD"))
+                            .orElse(WorldModeSettings.PathScale.STANDARD),
+                    WorldModeSettings.parseDensity(tag.getStringOr("LuckyDensity", "NORMAL"))
+                            .orElse(WorldModeSettings.LuckyDensity.NORMAL),
+                    WorldModeSettings.parseLayout(tag.getStringOr("ParcoursLayout", "LANES"))
+                            .orElse(WorldModeSettings.ParcoursLayout.LANES),
+                    WorldModeSettings.parseRules(tag.getStringOr("ParcoursRules", "STANDARD"))
+                            .orElse(WorldModeSettings.ParcoursRules.STANDARD),
+                    WorldModeSettings.parseDecor(tag.getStringOr("ArenaDecor", "VOID"))
+                            .orElse(WorldModeSettings.ArenaDecor.VOID),
                     tag.getBooleanOr("DailySeed", false),
-                    tag.getBooleanOr("OneBlockEvolution", mode == WorldPlayMode.ONEBLOCK)
+                    tag.getBooleanOr("OneBlockEvolution", data.mode == WorldPlayMode.ONEBLOCK)
             );
+            return data;
         }
 
         private CompoundTag toTag() {

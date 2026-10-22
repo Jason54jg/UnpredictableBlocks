@@ -16,6 +16,11 @@ public class WorldProfileCreateScreen extends Screen {
         this.parent = parent;
     }
 
+    /** Exposé pour que la liste remonte au TitleScreen après un pick. */
+    Screen parentScreen() {
+        return parent;
+    }
+
     @Override
     protected void init() {
         int y = 36;
@@ -60,6 +65,9 @@ public class WorldProfileCreateScreen extends Screen {
 
     private void pick(WorldPlayMode mode, int players) {
         NextWorldProfileStorage.save(new NextWorldProfileStorage.Pending(mode, players));
+        if (minecraft != null) {
+            minecraft.setScreenAndShow(parent);
+        }
     }
 
     @Override
