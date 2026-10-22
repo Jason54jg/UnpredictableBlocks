@@ -12,14 +12,14 @@ Lucky Blocks chaotiques à thèmes, système de **chance (-100…+100)**, quête
 
 ## Fonctionnalités (v0.1.0-SNAPSHOT)
 
-- **32 Lucky Blocks** (`LuckyTheme`, thèmes 1–24 + 25–32) — communs / rares / légendaires. **Chaque bloc a sa spécification fixe** (texture, loot, structure, quête, effets) ; l’aléatoire porte sur le **tier** (HIGH / NEUTRAL / LOW) via la luck, pas sur le changement de thème au cassage. Exception volontaire : l’item **Lucky mystère** (tirage parmi les 32).
+- **31 Lucky Blocks** (`LuckyTheme`) — communs / rares / légendaires. **Chaque bloc a sa spécification fixe** (texture, loot, structure, quête, effets) ; l’aléatoire porte sur le **tier** (HIGH / NEUTRAL / LOW) via la luck, pas sur le changement de thème au cassage. Exception volontaire : l’item **Lucky mystère** (tirage parmi les 31).
 - **Luck Stat** + modificateurs craft ±10 (`luck_emerald_dust`, `luck_blaze_curse`).
 - **Spawn** : `config/unpredictableblocks.json`, hook Architectury `CHUNK_LOAD` + marqueurs par chunk.
 - **Événements** : loot tables + `ThemeEventEffects` + structures NBT (`StructurePlacer`).
 - **Quêtes** : advancements sous `data/unpredictableblocks/advancement/quest/` + **Journal des quêtes** (item).
-- **HUD Luck** (barre d’action) ; config optionnelle `unpredictableblocks.json` (**spawn** / pondérations uniquement — les **32 thèmes** restent toujours actifs en jeu).
-- **Paliers quêtes** 8/16/24, **Lucky mystère**, **aura de chunk**, **pari Luck** (sneak + poussière d’émeraude en off-hand au cassage).
-- **Langues** (30 locales, 246 clés chacune) : `en_us`, `en_gb`, `fr_fr`, `de_de`, `es_es`, `es_mx`, `pt_br`, `it_it`, `nl_nl`, `pl_pl`, `ru_ru`, `uk_ua`, `cs_cz`, `sv_se`, `da_dk`, `nb_no`, `fi_fi`, `hu_hu`, `tr_tr`, `ja_jp`, `ko_kr`, `zh_cn`, `zh_tw`, `vi_vn`, `id_id`, `th_th`, `ro_ro`, `el_gr`, `he_il`, `ar_sa` — messages via `message.unpredictableblocks.*`. Régénération : `python3 tools/generate_lang_files.py`.
+- **HUD Luck** (barre d’action) ; config optionnelle `unpredictableblocks.json` (**spawn** / pondérations uniquement — les **31 thèmes** restent toujours actifs en jeu).
+- **Paliers quêtes** 8/16/24/(tous), **Lucky mystère**, **aura de chunk**, **pari Luck** (sneak + poussière d’émeraude en off-hand au cassage).
+- **Langues** (30 locales) : `en_us`, `en_gb`, `fr_fr`, `de_de`, `es_es`, `es_mx`, `pt_br`, `it_it`, `nl_nl`, `pl_pl`, `ru_ru`, `uk_ua`, `cs_cz`, `sv_se`, `da_dk`, `nb_no`, `fi_fi`, `hu_hu`, `tr_tr`, `ja_jp`, `ko_kr`, `zh_cn`, `zh_tw`, `vi_vn`, `id_id`, `th_th`, `ro_ro`, `el_gr`, `he_il`, `ar_sa` — messages via `message.unpredictableblocks.*`. Régénération : `python3 tools/generate_lang_files.py`.
 
 ## Build
 
@@ -38,7 +38,7 @@ pip install -r tools/requirements.txt
 python3 tools/generate_textures.py      # blocs 32×32 + icon 128×128
 python3 tools/generate_item_textures.py # objets 32×32
 python3 tools/upscale_textures.py       # relance les deux générateurs ci-dessus
-python3 tools/generate_structures.py    # structures .nbt (32 thèmes)
+python3 tools/generate_structures.py    # structures .nbt (31 thèmes)
 ```
 
 Détails : `docs/textures/README.md`

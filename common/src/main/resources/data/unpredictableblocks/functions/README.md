@@ -7,4 +7,4 @@ Préférez les commandes ops :
 - `/unpredictableblocks place <theme> [luck]` — pose un bloc test
 - `/unpredictableblocks reload` — recharge `unpredictableblocks.json` (spawn, HUD Luck, aura chunk)
 
-Thèmes : `boulangerie`, `casino`, `invasion_memes`, etc. (voir `LuckyTheme`).
+Thèmes : `boulangerie`, `invasion_memes`, etc. (voir `LuckyTheme`).

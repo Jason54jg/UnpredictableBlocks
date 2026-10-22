@@ -52,7 +52,6 @@ public final class ThemeCatalogEffects {
             case GYM_BRO -> tier == LuckTier.LOW;
             case ART_MODERNE -> tier == LuckTier.NEUTRAL;
             case MAGIE_COMPTOIR -> tier == LuckTier.HIGH;
-            case CASINO -> tier == LuckTier.LOW;
             case INVASION_MEMES -> tier == LuckTier.NEUTRAL;
             default -> false;
         };
@@ -88,7 +87,6 @@ public final class ThemeCatalogEffects {
             case GYM_BRO -> gymBro(player, tier);
             case ART_MODERNE -> artModerne(level, origin, tier);
             case MAGIE_COMPTOIR -> magie(level, origin, tier);
-            case CASINO -> casino(player, tier);
             case INVASION_MEMES -> memes(player, tier);
             default -> {}
         }
@@ -337,18 +335,6 @@ public final class ThemeCatalogEffects {
             rabbit.setCustomName(Component.literal("Lapin Extirpateur"));
             level.addFreshEntity(rabbit);
         }
-    }
-
-    private static void casino(ServerPlayer player, LuckTier tier) {
-        if (tier != LuckTier.LOW) {
-            return;
-        }
-        player.setExperienceLevels(0);
-        player.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.LEATHER_HELMET));
-        player.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Items.LEATHER_CHESTPLATE));
-        player.setItemSlot(EquipmentSlot.LEGS, new ItemStack(Items.LEATHER_LEGGINGS));
-        player.setItemSlot(EquipmentSlot.FEET, new ItemStack(Items.LEATHER_BOOTS));
-        player.sendSystemMessage(Component.literal("§2Banqueroute — armure cuir vert, XP reset."));
     }
 
     private static void memes(ServerPlayer player, LuckTier tier) {

@@ -30,7 +30,6 @@ THEMES: list[tuple[int, str, str, str]] = [
     (20, "gym_bro", "Go muscu", "THEMES_01_24.md#20-go-muscu-lucky_gym_bro--rare"),
     (21, "art_moderne", "Art moderne", "THEMES_01_24.md#21-art-moderne-lucky_art_moderne--rare"),
     (22, "magie_comptoir", "Magie de comptoir", "THEMES_01_24.md#22-magie-de-comptoir-lucky_magie_comptoir--commun"),
-    (23, "casino", "Casino & jackpot", "THEMES_01_24.md#23-casino-lucky_casino--légendaire"),
     (24, "invasion_memes", "Invasion de mèmes", "THEMES_01_24.md#24-invasion-de-mèmes-lucky_invasion_memes--légendaire"),
     (25, "pause_cafe", "Pause café / barista", "THEMES_25_32.md#25-pause-café--barista-lucky_pause_cafe"),
     (26, "retard_vol", "Retard de vol", "THEMES_25_32.md#26-retard-de-vol--aéroport-lucky_retard_vol"),

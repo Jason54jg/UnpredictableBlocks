@@ -6,8 +6,6 @@ import com.jason54.unpredictableblocks.block.LuckyBlockEventDispatcher;
 import com.jason54.unpredictableblocks.block.entity.LuckyBlockEntity;
 import com.jason54.unpredictableblocks.luck.LuckResolver;
 import com.jason54.unpredictableblocks.luck.LuckTier;
-import com.jason54.unpredictableblocks.quest.CasinoJackpot;
-import com.jason54.unpredictableblocks.quest.PlayerQuestData;
 import com.jason54.unpredictableblocks.registry.ModBlocks;
 import com.jason54.unpredictableblocks.registry.ModItems;
 import com.jason54.unpredictableblocks.lucky.PlayerLuckyBreakStats;
@@ -21,7 +19,6 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.server.permissions.Permissions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -55,12 +52,6 @@ public final class UnpredictableBlocksCommands {
                                                     );
                                                     return 1;
                                                 }))))
-                        .then(Commands.literal("casino")
-                                .executes(ctx -> {
-                                    ServerPlayer player = ctx.getSource().getPlayerOrException();
-                                    CasinoJackpot.spin(ServerLevels.of(player), player, player.getRandom());
-                                    return 1;
-                                }))
                         .then(Commands.literal("place")
                                 .then(Commands.argument("theme", StringArgumentType.word())
                                         .executes(ctx -> place(ctx.getSource(), resolveTheme(StringArgumentType.getString(ctx, "theme")), 0))
@@ -109,8 +100,7 @@ public final class UnpredictableBlocksCommands {
                                     ctx.getSource().sendSuccess(() -> ModMessages.msg(
                                             "command.gameplay_line3",
                                             g.malusStreakLengthOrDefault(),
-                                            g.malusStreakLuckBonusOrDefault(),
-                                            g.missedRerollTicksOrDefault() / 20
+                                            g.malusStreakLuckBonusOrDefault()
                                     ), false);
                                     ctx.getSource().sendSuccess(() -> ModMessages.msg(
                                             "command.gameplay_line4",
@@ -128,30 +118,6 @@ public final class UnpredictableBlocksCommands {
                                                 ctx.getSource(),
                                                 resolveTheme(StringArgumentType.getString(ctx, "theme"))
                                         ))))
-                        .then(Commands.literal("transfer")
-                                .then(Commands.argument("target", EntityArgument.player())
-                                        .executes(ctx -> {
-                                            ServerPlayer from = ctx.getSource().getPlayerOrException();
-                                            ServerPlayer to = EntityArgument.getPlayer(ctx, "target");
-                                            if (from.getUUID().equals(to.getUUID())) {
-                                                ctx.getSource().sendFailure(ModMessages.msg("command.invalid_target"));
-                                                return 0;
-                                            }
-                                            if (!PlayerQuestData.hasMissedReroll(from)) {
-                                                ctx.getSource().sendFailure(ModMessages.msg("command.transfer_none"));
-                                                return 0;
-                                            }
-                                            if (PlayerQuestData.transferMissedReroll(from, to)) {
-                                                ctx.getSource().sendSuccess(
-                                                        () -> ModMessages.msg("command.transfer_ok", to.getGameProfile().name()),
-                                                        true
-                                                );
-                                                to.sendSystemMessage(ModMessages.msg("vip_transfer_to", from.getGameProfile().name()));
-                                                return 1;
-                                            }
-                                            ctx.getSource().sendFailure(ModMessages.msg("command.transfer_fail"));
-                                            return 0;
-                                        })))
         );
     }
 
@@ -180,9 +146,6 @@ public final class UnpredictableBlocksCommands {
         source.sendSuccess(() -> ModMessages.msg("command.stats_header"), false);
         for (LuckyTheme theme : LuckyTheme.values()) {
             source.sendSuccess(() -> statLine(player, theme), false);
-        }
-        if (PlayerQuestData.hasMissedReroll(player)) {
-            source.sendSuccess(() -> ModMessages.msg("command.vip_pending"), false);
         }
         return 1;
     }

@@ -1,5 +1,6 @@
 package com.jason54.unpredictableblocks.world;
 
+import com.jason54.unpredictableblocks.compat.McAccess;
 import com.jason54.unpredictableblocks.config.ModConfig;
 import com.jason54.unpredictableblocks.registry.ModBlocks;
 import com.jason54.unpredictableblocks.theme.LuckyRarity;
@@ -30,26 +31,27 @@ public final class LuckyBlockSpawnPlacement {
             int localZ = random.nextInt(16);
             int worldX = chunk.getPos().getMinBlockX() + localX;
             int worldZ = chunk.getPos().getMinBlockZ() + localZ;
-            // WORLD_SURFACE (pas WG) : maintenu après génération ; WG peut rester à 0 / obsolète.
+            // WORLD_SURFACE = Y du plus haut bloc non-air ; on place dans l'air juste au-dessus.
             int surfaceY = chunk.getHeight(Heightmap.Types.WORLD_SURFACE, localX, localZ);
-            if (surfaceY <= level.getMinY()) {
+            if (surfaceY <= level.getMinY() || surfaceY >= level.getMaxY()) {
                 continue;
             }
-            BlockPos surface = new BlockPos(worldX, surfaceY, worldZ);
-            LuckyTheme theme = pickTheme(random, level, surface);
-            if (theme == null) {
-                continue;
-            }
-            BlockState at = chunk.getBlockState(surface);
-            BlockState below = chunk.getBlockState(surface.below());
+            BlockPos ground = new BlockPos(worldX, surfaceY, worldZ);
+            BlockPos placePos = ground.above();
+            BlockState at = chunk.getBlockState(placePos);
+            BlockState below = chunk.getBlockState(ground);
             // Sol solide au sens collision (herbe, terre, pierre…) — isSolidRender rate trop de sols.
-            if (!at.isAir() || !below.blocksMotion()) {
+            if (!at.isAir() || !McAccess.blocksMotion(below)) {
+                continue;
+            }
+            LuckyTheme theme = pickTheme(random, level, placePos);
+            if (theme == null) {
                 continue;
             }
             BlockState state = ModBlocks.get(theme).defaultBlockState();
             // NOTIFY_CLIENTS seulement : pas de maj voisins (= pas de getChunk pendant le placement).
-            if (level.setBlock(surface, state, 2)) {
-                if (level.getBlockEntity(surface) instanceof com.jason54.unpredictableblocks.block.entity.LuckyBlockEntity luckyBe) {
+            if (level.setBlock(placePos, state, 2)) {
+                if (level.getBlockEntity(placePos) instanceof com.jason54.unpredictableblocks.block.entity.LuckyBlockEntity luckyBe) {
                     luckyBe.setLuck(com.jason54.unpredictableblocks.config.ModConfig.get().meta().defaultBlockLuck());
                 }
             }

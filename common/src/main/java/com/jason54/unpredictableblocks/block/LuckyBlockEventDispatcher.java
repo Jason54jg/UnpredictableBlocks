@@ -15,7 +15,6 @@ import com.jason54.unpredictableblocks.luck.LuckTier;
 import com.jason54.unpredictableblocks.lucky.PlayerLuckyBreakStats;
 import com.jason54.unpredictableblocks.quest.CardCollection;
 import com.jason54.unpredictableblocks.quest.ThemeMasterProgress;
-import com.jason54.unpredictableblocks.quest.CasinoJackpot;
 import com.jason54.unpredictableblocks.quest.JdrDiceRoll;
 import com.jason54.unpredictableblocks.quest.PlayerQuestData;
 import com.jason54.unpredictableblocks.structure.StructurePlacer;
@@ -76,10 +75,6 @@ public final class LuckyBlockEventDispatcher {
             effective = new LuckResolver.ResolvedOutcome(d20, suffixFor(d20));
         }
 
-        if (theme == LuckyTheme.CASINO) {
-            CasinoJackpot.spin(level, player, level.getRandom());
-        }
-
         if (theme == LuckyTheme.SPEEDRUNNER) {
             PlayerQuestData.startSpeedrun(player);
             player.sendSystemMessage(ModMessages.msg("speedrun_start"));
@@ -92,12 +87,6 @@ public final class LuckyBlockEventDispatcher {
 
         PlayerQuestData.recordLuckOutcome(player, effective.tier());
         LuckyBreakFeedback.play(level, player, origin, effective.tier());
-
-        if (effective.tier() == LuckTier.LOW) {
-            PlayerQuestData.setMissedReroll(player, theme);
-            long vipSeconds = ModConfig.gameplay().missedRerollTicksOrDefault() / 20L;
-            player.sendSystemMessage(ModMessages.msg("malus_vip", theme.id(), vipSeconds));
-        }
 
         float cardChance = (float) ModConfig.gameplay().cardDropOnHighOrDefault();
         if (effective.tier() == LuckTier.HIGH && cardChance > 0f && level.getRandom().nextFloat() < cardChance) {

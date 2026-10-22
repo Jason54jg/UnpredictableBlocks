@@ -9,7 +9,7 @@
     },
     "description": {
       "translate": "advancements.unpredictableblocks.collector.description",
-      "fallback": "Posséder les 32 Lucky Blocks en items."
+      "fallback": "Posséder les 31 Lucky Blocks en items."
     },
     "frame": "challenge",
     "show_toast": true,

@@ -41,7 +41,6 @@ python tools/generate_blockbench.py
 | 20 | `lucky_gym_bro` | Go Muscu | Haltère bounce + pulse | none |
 | 21 | `lucky_art_moderne` | Art Moderne | Formes qui morphent | none |
 | 22 | `lucky_magie_comptoir` | Magie de Comptoir | Chapeau + carte flip + étincelles | none |
-| 23 | `lucky_casino` | Casino & Jackpot | Rouleaux slots + flash jackpot | casino |
 | 24 | `lucky_invasion_memes` | Invasion de Mèmes | Troll pixel bounce + pop zoom | none |
 | 25 | `lucky_pause_cafe` | Pause Café / Barista | Tasse + vapeur + ripple | none |
 | 26 | `lucky_retard_vol` | Retard de Vol / Aéroport | Panneau DELAYED blink | none |

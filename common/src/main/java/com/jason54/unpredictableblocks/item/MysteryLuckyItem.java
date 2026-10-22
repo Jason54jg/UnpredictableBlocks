@@ -14,7 +14,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-/** Clic droit : événement Lucky aléatoire parmi les 32 thèmes. */
+/** Clic droit : événement Lucky aléatoire parmi les 31 thèmes. */
 public class MysteryLuckyItem extends LoreItem {
     public MysteryLuckyItem(Properties properties, java.util.function.Consumer<ItemStack> setup) {
         super(properties, setup);

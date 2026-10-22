@@ -1,5 +1,6 @@
 package com.jason54.unpredictableblocks;
 
+import com.jason54.unpredictableblocks.client.UnpredictableBlocksClient;
 import com.jason54.unpredictableblocks.config.ModConfig;
 import com.jason54.unpredictableblocks.registry.ModAdvancements;
 import com.jason54.unpredictableblocks.registry.ModBlockEntities;
@@ -12,10 +13,13 @@ import com.jason54.unpredictableblocks.command.CommandRegistration;
 import com.jason54.unpredictableblocks.event.GearEffectHandler;
 import com.jason54.unpredictableblocks.event.LuckyBlockAmbientHandler;
 import com.jason54.unpredictableblocks.event.LuckHudHandler;
+import com.jason54.unpredictableblocks.network.ModNetworking;
 import com.jason54.unpredictableblocks.quest.FortuneCookieHandler;
 import com.jason54.unpredictableblocks.quest.QuestEventHandler;
 import com.jason54.unpredictableblocks.quest.QuestExtendedHandler;
 import com.jason54.unpredictableblocks.world.LuckyBlockSpawnHooks;
+import dev.architectury.utils.Env;
+import dev.architectury.utils.EnvExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,6 +34,7 @@ public final class UnpredictableBlocks {
         ModSounds.register();
         ModCreativeTabs.register();
         ModItems.register();
+        ModNetworking.register();
         ModLoot.register();
         ModAdvancements.register();
         LuckyBlockSpawnHooks.register();
@@ -40,6 +45,7 @@ public final class UnpredictableBlocks {
         LuckHudHandler.register();
         LuckyBlockAmbientHandler.register();
         CommandRegistration.register();
+        EnvExecutor.runInEnv(Env.CLIENT, () -> UnpredictableBlocksClient::init);
         LOGGER.info("UnpredictableBlocks initialisé (MC {}+)", ModConfig.get().meta().supportedVersions());
     }
 }

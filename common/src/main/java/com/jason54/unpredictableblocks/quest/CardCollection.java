@@ -6,7 +6,7 @@ import com.jason54.unpredictableblocks.theme.LuckyTheme;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 
-/** Advancement « album de cartes » : une carte par thème (32). */
+/** Advancement « album de cartes » : une carte par thème (31). */
 public final class CardCollection {
     private CardCollection() {}
 

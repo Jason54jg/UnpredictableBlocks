@@ -7,7 +7,7 @@
     },
     "description": {
       "translate": "advancements.unpredictableblocks.card_collector.description",
-      "fallback": "Collect one collection card for each of the 32 themes."
+      "fallback": "Collect one collection card for each of the 31 themes."
     },
     "frame": "challenge",
     "show_toast": true,

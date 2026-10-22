@@ -6,7 +6,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
-/** Advancement « collectionneur » : posséder les 32 Lucky Blocks (items). */
+/** Advancement « collectionneur » : posséder les 31 Lucky Blocks (items). */
 public final class QuestCollection {
     private QuestCollection() {}
 

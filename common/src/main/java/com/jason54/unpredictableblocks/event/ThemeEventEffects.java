@@ -73,7 +73,6 @@ public final class ThemeEventEffects {
             case GYM_BRO -> applyGymBro(level, player, tier);
             case ART_MODERNE -> applyArtModerne(level, origin, tier);
             case MAGIE_COMPTOIR -> applyMagie(level, origin, tier);
-            case CASINO -> applyCasino(level, player, tier);
             case INVASION_MEMES -> applyMemes(level, player, tier);
             default -> {}
         }
@@ -356,15 +355,6 @@ public final class ThemeEventEffects {
         }
     }
 
-    private static void applyCasino(ServerLevel level, ServerPlayer player, LuckTier tier) {
-        if (tier == LuckTier.HIGH) {
-            player.getInventory().add(new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.EMERALD, 32));
-            player.getInventory().add(new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.DIAMOND, 16));
-        } else if (tier == LuckTier.LOW) {
-            stripCurrency(player);
-        }
-    }
-
     private static void applyMemes(ServerLevel level, ServerPlayer player, LuckTier tier) {
         if (tier == LuckTier.HIGH) {
             player.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 20 * 20, 0));
@@ -439,15 +429,6 @@ public final class ThemeEventEffects {
             var random = level.getRandom();
             entity.setPos(Vec3.atBottomCenterOf(origin).add(random.nextDouble() * 4 - 2, 0, random.nextDouble() * 4 - 2));
             level.addFreshEntity(entity);
-        }
-    }
-
-    private static void stripCurrency(ServerPlayer player) {
-        for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
-            var stack = player.getInventory().getItem(i);
-            if (stack.is(net.minecraft.world.item.Items.GOLD_INGOT) || stack.is(net.minecraft.world.item.Items.EMERALD)) {
-                player.getInventory().setItem(i, net.minecraft.world.item.ItemStack.EMPTY);
-            }
         }
     }
 

@@ -1,6 +1,6 @@
 {
   "display": {
-    "icon": { "id": "unpredictableblocks:jeton_or_vip" },
+    "icon": { "id": "unpredictableblocks:lucky_mystere" },
     "title": {
       "translate": "advancements.unpredictableblocks.milestone.quest_16.title",
       "fallback": "Expert Absurde"

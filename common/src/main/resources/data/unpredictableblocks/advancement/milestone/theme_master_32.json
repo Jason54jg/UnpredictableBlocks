@@ -7,7 +7,7 @@
     },
     "description": {
       "translate": "advancements.unpredictableblocks.milestone.theme_master_32.description",
-      "fallback": "Devenir maître de chacun des 32 thèmes Lucky."
+      "fallback": "Devenir maître de chacun des 31 thèmes Lucky."
     },
     "frame": "challenge",
     "show_toast": true,

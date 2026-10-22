@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Génère les 32 Lucky Blocks prêts Blockbench (Java Block).
+Génère les 31 Lucky Blocks prêts Blockbench (Java Block).
 
 Livrables dans docs/blockbench/ :
   lucky_<id>.bbmodel
@@ -9,7 +9,7 @@ Livrables dans docs/blockbench/ :
 
 Usage:
   python tools/generate_blockbench.py
-  python tools/generate_blockbench.py anachronisme casino
+  python tools/generate_blockbench.py anachronisme boulangerie
 """
 from __future__ import annotations
 
@@ -881,7 +881,6 @@ THEMES: list[Theme] = [
     Theme("lucky_gym_bro", "Go Muscu", "Haltère bounce + pulse", "C62828", "B0BEC5", "212121", geom="none", draw=draw_gym_bro),
     Theme("lucky_art_moderne", "Art Moderne", "Formes qui morphent", "212121", "FFFFFF", "FAFAFA", frames=8, draw=draw_art_moderne),
     Theme("lucky_magie_comptoir", "Magie de Comptoir", "Chapeau + carte flip + étincelles", "0A0A20", "FFD700", "1A0033", draw=draw_magie_comptoir),
-    Theme("lucky_casino", "Casino & Jackpot", "Rouleaux slots + flash jackpot", "8B0000", "FFD700", "8B0000", geom="casino", length=1.6, frames=12, draw=draw_casino),
     Theme("lucky_invasion_memes", "Invasion de Mèmes", "Troll pixel bounce + pop zoom", "FF00AA", "00E5FF", "FF00AA", draw=draw_invasion_memes),
     Theme("lucky_pause_cafe", "Pause Café / Barista", "Tasse + vapeur + ripple", "3E2723", "D7CCC8", "5D4037", draw=draw_pause_cafe),
     Theme("lucky_retard_vol", "Retard de Vol / Aéroport", "Panneau DELAYED blink", "0277BD", "FF6D00", "0277BD", frames=6, frametime=3, draw=draw_retard_vol),

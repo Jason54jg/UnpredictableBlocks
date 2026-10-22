@@ -151,10 +151,6 @@ THEME_ENTRIES: dict[str, dict[str, list[dict]]] = {
         "neutral": [pool(1, [entry_item("minecraft:glass_bottle", 2, count_min=8, count_max=16), entry_item("minecraft:nether_wart", 2, count_min=4, count_max=8)])],
         "low": [pool(1, [entry_item("minecraft:spider_eye", 2, count_min=2, count_max=4), luck_dust(False)])],
     },
-    "casino": {
-        "low": [pool(1, [entry_item("minecraft:gold_nugget", 2, count_min=16, count_max=32), luck_dust(False)])],
-        "neutral": [pool(2, [entry_item("minecraft:emerald", 2, count_min=2, count_max=4), entry_item("minecraft:paper", 1, count_min=4, count_max=8)])],
-    },
     "invasion_memes": {
         "low": [pool(1, [entry_item(f"{NS}:marteau_bonk", 1), luck_dust(False)])],
         "neutral": [pool(1, [entry_item("minecraft:slime_ball", 2, count_min=8, count_max=16), entry_item("minecraft:egg", 2, count_min=8, count_max=16)])],

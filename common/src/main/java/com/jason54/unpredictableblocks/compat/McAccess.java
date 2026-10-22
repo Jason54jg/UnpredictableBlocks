@@ -60,4 +60,19 @@ public final class McAccess {
             serverLevel.addFreshEntity(item);
         }
     }
+
+    /** 26.1 / 26.2: {@code blocksMotion()}; 26.3: renommé {@code isSolid()}. */
+    public static boolean blocksMotion(BlockState state) {
+        try {
+            Method m = BlockState.class.getMethod("blocksMotion");
+            return (boolean) m.invoke(state);
+        } catch (ReflectiveOperationException ignored) {
+            try {
+                Method m = BlockState.class.getMethod("isSolid");
+                return (boolean) m.invoke(state);
+            } catch (ReflectiveOperationException e) {
+                throw new IllegalStateException("No blocksMotion/isSolid API", e);
+            }
+        }
+    }
 }

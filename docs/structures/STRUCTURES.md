@@ -22,7 +22,6 @@ Sortie : `common/src/main/resources/data/unpredictableblocks/structures/<id>.nbt
 | `sanctuaire_doge` | Mèmes | Statue béton Doge |
 | `pyramide_piège` | Anachronisme | Piège TNT / sable |
 | `scene_spectacle` | Magie comptoir | Rideaux rouges |
-| `table_poker_vip` | Casino | Laine verte, sièges cuir |
 | `campement_inonde` | Camping | Tente + eau |
 | `salle_gym` | Gym Bro | Banc fer/granite |
 | `autel_mochi` | Fortune cookie | Rose/blanc |

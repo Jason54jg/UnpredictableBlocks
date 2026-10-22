@@ -5,6 +5,7 @@ import com.jason54.unpredictableblocks.theme.LuckyTheme;
 import dev.architectury.registry.CreativeTabRegistry;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -20,11 +21,18 @@ public final class ModCreativeTabs {
     private static final DeferredRegister<CreativeModeTab> TABS =
             DeferredRegister.create(UnpredictableBlocks.MOD_ID, Registries.CREATIVE_MODE_TAB);
 
-    /** Contenu via {@code Item.Properties.arch$tab(MAIN_KEY)} dans {@link ModItems}. */
     public static final RegistrySupplier<CreativeModeTab> MAIN = TABS.register("main", () ->
-            CreativeTabRegistry.create(
-                    Component.translatable("itemGroup.unpredictableblocks.main"),
-                    () -> new ItemStack(ModBlocks.get(LuckyTheme.INVASION_MEMES))));
+            CreativeTabRegistry.create(builder -> {
+                builder.title(Component.translatable("itemGroup.unpredictableblocks.main"));
+                builder.icon(() -> new ItemStack(ModBlocks.get(LuckyTheme.INVASION_MEMES)));
+                builder.displayItems((params, output) -> {
+                    for (var entry : BuiltInRegistries.ITEM.entrySet()) {
+                        if (UnpredictableBlocks.MOD_ID.equals(entry.getKey().identifier().getNamespace())) {
+                            output.accept(entry.getValue());
+                        }
+                    }
+                });
+            }));
 
     private ModCreativeTabs() {}
 

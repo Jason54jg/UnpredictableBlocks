@@ -7,7 +7,6 @@ import com.jason54.unpredictableblocks.item.BonkHammerItem;
 import com.jason54.unpredictableblocks.item.Casque5GItem;
 import com.jason54.unpredictableblocks.item.CleMoletteItem;
 import com.jason54.unpredictableblocks.item.CleUsbHackerItem;
-import com.jason54.unpredictableblocks.item.JetonVipItem;
 import com.jason54.unpredictableblocks.item.ShakerProtItem;
 import com.jason54.unpredictableblocks.item.LuckyBlockItem;
 import com.jason54.unpredictableblocks.item.MysteryLuckyItem;
@@ -76,19 +75,13 @@ public final class ModItems {
     public static final RegistrySupplier<Item> LUCKY_MYSTERE = ITEMS.register("lucky_mystere", () ->
             new MysteryLuckyItem(props("lucky_mystere"), stack -> {
                 ThemedGearHelper.name(stack, "Lucky Block Mystère");
-                ThemedGearHelper.lore(stack, "Clic droit : 1 des 32 thèmes.", "Recharge 30s.");
+                ThemedGearHelper.lore(stack, "Clic droit : 1 des 31 thèmes.", "Recharge 30s.");
             }));
 
     public static final RegistrySupplier<Item> JOURNAL_QUETES = ITEMS.register("journal_quetes", () ->
             new QuestJournalItem(props("journal_quetes"), stack -> {
                 ThemedGearHelper.name(stack, "Journal des Quêtes");
-                ThemedGearHelper.lore(stack, "Clic droit : progression 32 thèmes.");
-            }));
-
-    public static final RegistrySupplier<Item> JETON_VIP = ITEMS.register("jeton_or_vip", () ->
-            new JetonVipItem(props("jeton_or_vip"), stack -> {
-                ThemedGearHelper.name(stack, "Jeton d'Or V.I.P.");
-                ThemedGearHelper.lore(stack, "Relance le dernier malus en HIGH.", "Accroupi + clic sur un joueur : transfert malus.");
+                ThemedGearHelper.lore(stack, "Clic droit : ouvre le journal des quêtes.");
             }));
 
     public static final RegistrySupplier<Item> CARTE_COLLECTION = ITEMS.register("carte_collection", () ->
@@ -117,8 +110,7 @@ public final class ModItems {
         return new Item.Properties()
                 .setId(ResourceKey.create(
                         Registries.ITEM,
-                        Identifier.fromNamespaceAndPath(UnpredictableBlocks.MOD_ID, path)))
-                .arch$tab(ModCreativeTabs.MAIN_KEY);
+                        Identifier.fromNamespaceAndPath(UnpredictableBlocks.MOD_ID, path)));
     }
 
     public static void register() {
