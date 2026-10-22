@@ -597,5 +597,9 @@
   "quest.unpredictableblocks.chat_internet.tame_cats": "Kesy 3 kissaa",
   "quest.unpredictableblocks.chat_internet.hint": "Kissat vaeltavat kylissä: lähestyvät hitaasti pitäen raakaa kalaa.",
   "quest.unpredictableblocks.crypto_bulle.hodl": "Pidä 64 smaragdia",
-  "quest.unpredictableblocks.crypto_bulle.hint": "Vaihda kyläläisten kanssa äläkä myy kolarissa!"
+  "quest.unpredictableblocks.crypto_bulle.hint": "Vaihda kyläläisten kanssa äläkä myy kolarissa!",
+  "gamerule.unpredictableblocks.lucky_density": "Lucky Block tiheys (%)",
+  "gamerule.unpredictableblocks.lucky_density.description": "Luonnollinen Lucky Blocks määrä: 0 = ei mitään, 100 = normaali, 1000 = kymmenen kertaa enemmän.",
+  "gamerule.unpredictableblocks.lucky_shrines": "Shrines noin Lucky Blocks",
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Pedestalit, alttarit ja pyhäköt luonnon ympärillä Lucky Blocks ."
 }

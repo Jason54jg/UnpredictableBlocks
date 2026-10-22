@@ -597,5 +597,9 @@
   "quest.unpredictableblocks.chat_internet.tame_cats": "三只貓",
   "quest.unpredictableblocks.chat_internet.hint": "貓在村莊漫步 慢慢地抓住生魚",
   "quest.unpredictableblocks.crypto_bulle.hodl": "按住64顆翡翠",
-  "quest.unpredictableblocks.crypto_bulle.hint": "和村民交易,不要在空難中賣掉!"
+  "quest.unpredictableblocks.crypto_bulle.hint": "和村民交易,不要在空難中賣掉!",
+  "gamerule.unpredictableblocks.lucky_density": "Lucky Block 密度(%)",
+  "gamerule.unpredictableblocks.lucky_density.description": "自然 Lucky Blocks 量:0=0,100=正常,1000=10倍。",
+  "gamerule.unpredictableblocks.lucky_shrines": "Lucky Blocks",
+  "gamerule.unpredictableblocks.lucky_shrines.description": "自然界的祭台、祭壇和聖物 Lucky Blocks。"
 }

@@ -597,5 +597,9 @@
   "quest.unpredictableblocks.chat_internet.tame_cats": "Tame 3 katter",
   "quest.unpredictableblocks.chat_internet.hint": "Katter roam byar: närma sig långsamt håller rå fisk.",
   "quest.unpredictableblocks.crypto_bulle.hodl": "Håll 64 smaragder",
-  "quest.unpredictableblocks.crypto_bulle.hint": "Handla med bybor och sälj inte under en krasch!"
+  "quest.unpredictableblocks.crypto_bulle.hint": "Handla med bybor och sälj inte under en krasch!",
+  "gamerule.unpredictableblocks.lucky_density": "Lucky Block densitet (%)",
+  "gamerule.unpredictableblocks.lucky_density.description": "Naturligt Lucky Blocks belopp: 0 = ingen, 100 = normal, 1000 = tio gånger mer.",
+  "gamerule.unpredictableblocks.lucky_shrines": "Shrines runt Lucky Blocks",
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Pedestaler, altare och helgedomar runt naturliga Lucky Blocks"
 }

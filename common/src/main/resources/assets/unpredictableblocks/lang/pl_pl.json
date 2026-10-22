@@ -597,5 +597,9 @@
   "quest.unpredictableblocks.chat_internet.tame_cats": "Tame 3 koty",
   "quest.unpredictableblocks.chat_internet.hint": "Koty wędrują po wioskach: zbliżają się powoli trzymając surowe ryby.",
   "quest.unpredictableblocks.crypto_bulle.hodl": "Przytrzymaj 64 szmaragdy",
-  "quest.unpredictableblocks.crypto_bulle.hint": "Handlować z wieśniakami i nie sprzedawać podczas katastrofy!"
+  "quest.unpredictableblocks.crypto_bulle.hint": "Handlować z wieśniakami i nie sprzedawać podczas katastrofy!",
+  "gamerule.unpredictableblocks.lucky_density": "Lucky Block Gęstość (%)",
+  "gamerule.unpredictableblocks.lucky_density.description": "Naturalne Lucky Blocks kwota: 0 = brak, 100 = normalne, 1000 = dziesięć razy więcej.",
+  "gamerule.unpredictableblocks.lucky_shrines": "Zasłony wokół Lucky Blocks",
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Piesze, ołtarze i sanktuaria wokół natury Lucky Blocks."
 }

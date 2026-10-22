@@ -597,5 +597,9 @@
   "quest.unpredictableblocks.chat_internet.tame_cats": "Tame 3 gatti",
   "quest.unpredictableblocks.chat_internet.hint": "Cats roam villaggi: avvicinarsi lentamente tenendo pesce crudo.",
   "quest.unpredictableblocks.crypto_bulle.hodl": "Tenere 64 smeraldi",
-  "quest.unpredictableblocks.crypto_bulle.hint": "Scambiare con gli abitanti del villaggio e non vendere durante un incidente!"
+  "quest.unpredictableblocks.crypto_bulle.hint": "Scambiare con gli abitanti del villaggio e non vendere durante un incidente!",
+  "gamerule.unpredictableblocks.lucky_density": "Lucky Block densità (%)",
+  "gamerule.unpredictableblocks.lucky_density.description": "Natural Lucky Blocks importo: 0 = nessuno, 100 = normale, 1000 = dieci volte di più.",
+  "gamerule.unpredictableblocks.lucky_shrines": "Lucky Blocks",
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Pedestali, altari e santuari intorno naturale Lucky Blocks ."
 }

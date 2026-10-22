@@ -597,5 +597,9 @@
   "quest.unpredictableblocks.chat_internet.tame_cats": "Tame 3 kočky",
   "quest.unpredictableblocks.chat_internet.hint": "Kočky se toulají po vesnicích: pomalu se přibližují k syrovým rybám.",
   "quest.unpredictableblocks.crypto_bulle.hodl": "Držet 64 smaragdů",
-  "quest.unpredictableblocks.crypto_bulle.hint": "Obchod s vesničany a neprodávat během havárie!"
+  "quest.unpredictableblocks.crypto_bulle.hint": "Obchod s vesničany a neprodávat během havárie!",
+  "gamerule.unpredictableblocks.lucky_density": "Lucky Block density (%)",
+  "gamerule.unpredictableblocks.lucky_density.description": "Přirozený objem Lucky Blocks: 0 = žádný, 100 = normální, 1000 = desetkrát více.",
+  "gamerule.unpredictableblocks.lucky_shrines": "Svršky kolem Lucky Blocks",
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Podstavce, oltáře a svatyně kolem přírodních Lucky Blocks."
 }

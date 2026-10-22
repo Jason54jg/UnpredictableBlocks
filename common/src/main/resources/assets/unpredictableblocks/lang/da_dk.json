@@ -597,5 +597,9 @@
   "quest.unpredictableblocks.chat_internet.tame_cats": "Tamme 3 katte",
   "quest.unpredictableblocks.chat_internet.hint": "Katte strejfe landsbyer: nærmer sig langsomt holde rå fisk.",
   "quest.unpredictableblocks.crypto_bulle.hodl": "Hold 64 smaragder",
-  "quest.unpredictableblocks.crypto_bulle.hint": "Handel med landsbyboere og ikke sælge under et styrt!"
+  "quest.unpredictableblocks.crypto_bulle.hint": "Handel med landsbyboere og ikke sælge under et styrt!",
+  "gamerule.unpredictableblocks.lucky_density": "Lucky Block densitet (%)",
+  "gamerule.unpredictableblocks.lucky_density.description": "Naturlig Lucky Blocks beløb: 0 = ingen, 100 = normal, 1000 = ti gange mere.",
+  "gamerule.unpredictableblocks.lucky_shrines": "Spejle omkring Lucky Blocks",
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Pedestals, altre og helligdomme omkring naturlige Lucky Blocks."
 }

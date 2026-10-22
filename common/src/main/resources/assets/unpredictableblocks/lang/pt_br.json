@@ -597,5 +597,9 @@
   "quest.unpredictableblocks.chat_internet.tame_cats": "Tame 3 gatos.",
   "quest.unpredictableblocks.chat_internet.hint": "Gatos vagam por aldeias, se aproximam lentamente segurando peixes crus.",
   "quest.unpredictableblocks.crypto_bulle.hodl": "Segure 64 esmeraldas.",
-  "quest.unpredictableblocks.crypto_bulle.hint": "Troque com os aldeões e não venda durante um acidente!"
+  "quest.unpredictableblocks.crypto_bulle.hint": "Troque com os aldeões e não venda durante um acidente!",
+  "gamerule.unpredictableblocks.lucky_density": "Lucky Block densidade (%)",
+  "gamerule.unpredictableblocks.lucky_density.description": "Quantidade natural: 0 = nenhum, 100 = normal, 1000 = dez vezes mais.",
+  "gamerule.unpredictableblocks.lucky_shrines": "Santuários ao redor",
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Pedestais, altares e santuários naturais."
 }

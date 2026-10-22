@@ -597,5 +597,9 @@
   "quest.unpredictableblocks.chat_internet.tame_cats": "Tame 3 mèo",
   "quest.unpredictableblocks.chat_internet.hint": "Mèo đi lang thang làng: tiếp cận từ từ giữ cá sống.",
   "quest.unpredictableblocks.crypto_bulle.hodl": "Giữ 64 viên ngọc",
-  "quest.unpredictableblocks.crypto_bulle.hint": "Trao đổi với dân làng và không bán trong một vụ tai nạn!"
+  "quest.unpredictableblocks.crypto_bulle.hint": "Trao đổi với dân làng và không bán trong một vụ tai nạn!",
+  "gamerule.unpredictableblocks.lucky_density": "Lucky Block mật độ (%)",
+  "gamerule.unpredictableblocks.lucky_density.description": "Số lượng tự nhiên Lucky Blocks: 0 = không, 100 = bình thường, 1000 = 10 lần nhiều hơn.",
+  "gamerule.unpredictableblocks.lucky_shrines": "Hạt chung quanh Lucky Blocks",
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Các nhà thổ, bàn thờ và nơi thánh xung quanh Lucky Blocks."
 }

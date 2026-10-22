@@ -597,5 +597,9 @@
   "quest.unpredictableblocks.chat_internet.tame_cats": "Tame 3 коти",
   "quest.unpredictableblocks.chat_internet.hint": "Кітові сілові: підхід повільно тримає сиру рибу.",
   "quest.unpredictableblocks.crypto_bulle.hodl": "Утримувачі 64",
-  "quest.unpredictableblocks.crypto_bulle.hint": "Торгівля сілами та не продаються під час аварії!"
+  "quest.unpredictableblocks.crypto_bulle.hint": "Торгівля сілами та не продаються під час аварії!",
+  "gamerule.unpredictableblocks.lucky_density": "Lucky Block щільність (%)",
+  "gamerule.unpredictableblocks.lucky_density.description": "Природні Lucky Blocks кількість: 0 = немає, 100 = нормальний, 1000 = десять разів більше.",
+  "gamerule.unpredictableblocks.lucky_shrines": "Шини Lucky Blocks",
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Педести, альтари та санцуари навколо природного Lucky Blocks ."
 }

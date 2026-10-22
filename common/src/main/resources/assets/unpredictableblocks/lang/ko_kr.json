@@ -597,5 +597,9 @@
   "quest.unpredictableblocks.chat_internet.tame_cats": "Tame 3 고양이",
   "quest.unpredictableblocks.chat_internet.hint": "고양이 roam 마을 : 천천히 익은 물고기를 들고 접근하십시오.",
   "quest.unpredictableblocks.crypto_bulle.hodl": "64 에메랄드를 잡아",
-  "quest.unpredictableblocks.crypto_bulle.hint": "마을과 무역은 충돌 중에 판매하지 않습니다!"
+  "quest.unpredictableblocks.crypto_bulle.hint": "마을과 무역은 충돌 중에 판매하지 않습니다!",
+  "gamerule.unpredictableblocks.lucky_density": "Lucky Block 밀도 (%)",
+  "gamerule.unpredictableblocks.lucky_density.description": "자연 Lucky Blocks 금액: 0 = 없음, 100 = 정상, 1000 = 10 배 더.",
+  "gamerule.unpredictableblocks.lucky_shrines": "Lucky Blocks 주변의 신사",
+  "gamerule.unpredictableblocks.lucky_shrines.description": "자연적인 Lucky Blocks 의 주위에 pedestals, altars 및 sanctuaries."
 }

@@ -597,5 +597,9 @@
   "quest.unpredictableblocks.chat_internet.tame_cats": "Zähmt 3 Katzen",
   "quest.unpredictableblocks.chat_internet.hint": "Katzen durchstreifen Dörfer: Ansatz langsam halten rohen Fisch.",
   "quest.unpredictableblocks.crypto_bulle.hodl": "Halten Sie 64 Smaragde",
-  "quest.unpredictableblocks.crypto_bulle.hint": "Handel mit Dorfbewohnern und verkaufe nicht während eines Crashs!"
+  "quest.unpredictableblocks.crypto_bulle.hint": "Handel mit Dorfbewohnern und verkaufe nicht während eines Crashs!",
+  "gamerule.unpredictableblocks.lucky_density": "Lucky Block Dichte (%)",
+  "gamerule.unpredictableblocks.lucky_density.description": "Natürliche (0) Menge: 0 = keine, 100 = normal, 1000 = zehnmal mehr.",
+  "gamerule.unpredictableblocks.lucky_shrines": "Schreine rund um Lucky Blocks",
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Sockel, Altäre und Heiligtümer rund um die Natur."
 }

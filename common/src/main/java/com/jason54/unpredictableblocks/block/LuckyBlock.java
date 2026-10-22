@@ -64,6 +64,7 @@ public class LuckyBlock extends Block implements EntityBlock {
         if (!level.isClientSide() && level instanceof ServerLevel serverLevel && player instanceof ServerPlayer serverPlayer) {
             BlockEntity be = level.getBlockEntity(pos);
             LuckyVariant variant = be instanceof LuckyBlockEntity lbe ? lbe.getVariant() : LuckyVariant.NORMAL;
+            Runnable events = null;
             if (be instanceof LuckyBlockEntity luckyBe) {
                 try {
                     LuckStat blockLuck = new LuckStat(luckyBe.getLuck()).add(variant.luckBonus());
@@ -81,21 +82,36 @@ public class LuckyBlock extends Block implements EntityBlock {
                     if (PlayerQuestData.consumeComboPity(serverPlayer, blockTheme) && outcome.tier() == LuckTier.LOW) {
                         outcome = new LuckResolver.ResolvedOutcome(LuckTier.NEUTRAL, "neutral");
                     }
-                    LuckyBlockEventDispatcher.dispatch(serverLevel, serverPlayer, pos, blockTheme, outcome, effectiveLuck, variant);
+                    LuckResolver.ResolvedOutcome finalOutcome = outcome;
+                    BlockPos origin = pos.immutable();
+                    events = () -> dispatchSafely(serverLevel, serverPlayer, origin, blockTheme, finalOutcome, effectiveLuck, variant);
                 } catch (Exception e) {
                     // Une exception ici empêche removeBlock côté GameMode → le Lucky reste planté.
                     UnpredictableBlocks.LOGGER.error(
-                            "Échec dispatch Lucky Block {} à {} — le bloc sera quand même retiré",
+                            "Échec du tirage Lucky Block {} à {} — le bloc sera quand même retiré",
                             theme.id(),
                             pos,
                             e
                     );
                 }
             }
-            // Visuel : le bloc décolle en fusée à la place du bloc cassé.
-            LuckyRocketEntity.launch(serverLevel, pos, theme, variant);
+            // Visuel d'abord : butin, effets et structures arrivent à la fin de l'animation,
+            // sinon une structure posée sur place ou une téléportation masque l'envol.
+            LuckyRocketEntity.launch(serverLevel, pos, theme, variant, events);
         }
         return super.playerWillDestroy(level, pos, state, player);
+    }
+
+    private void dispatchSafely(ServerLevel level, ServerPlayer player, BlockPos pos, LuckyTheme blockTheme,
+                                LuckResolver.ResolvedOutcome outcome, int effectiveLuck, LuckyVariant variant) {
+        if (player.hasDisconnected()) {
+            return;
+        }
+        try {
+            LuckyBlockEventDispatcher.dispatch(level, player, pos, blockTheme, outcome, effectiveLuck, variant);
+        } catch (Exception e) {
+            UnpredictableBlocks.LOGGER.error("Échec dispatch Lucky Block {} à {}", blockTheme.id(), pos, e);
+        }
     }
 
     /** Sneak + poussière d'émeraude en main secondaire : +25 luck effectif (1 consommée). */

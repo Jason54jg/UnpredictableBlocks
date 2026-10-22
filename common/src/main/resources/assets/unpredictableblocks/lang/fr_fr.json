@@ -597,5 +597,9 @@
   "quest.unpredictableblocks.chat_internet.tame_cats": "Apprivoiser 3 chats",
   "quest.unpredictableblocks.chat_internet.hint": "Les chats errent dans les villages : approche-toi doucement avec du poisson cru.",
   "quest.unpredictableblocks.crypto_bulle.hodl": "Avoir 64 émeraudes dans l'inventaire",
-  "quest.unpredictableblocks.crypto_bulle.hint": "Commerce avec les villageois et ne vends rien pendant un krach !"
+  "quest.unpredictableblocks.crypto_bulle.hint": "Commerce avec les villageois et ne vends rien pendant un krach !",
+  "gamerule.unpredictableblocks.lucky_density": "Densité des Lucky Blocks (%)",
+  "gamerule.unpredictableblocks.lucky_density.description": "Quantité de Lucky Blocks naturels : 0 = aucun, 100 = normal, 1000 = dix fois plus.",
+  "gamerule.unpredictableblocks.lucky_shrines": "Structures autour des Lucky Blocks",
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Socles, autels et sanctuaires autour des Lucky Blocks naturels."
 }

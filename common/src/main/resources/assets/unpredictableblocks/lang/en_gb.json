@@ -597,5 +597,9 @@
   "quest.unpredictableblocks.chat_internet.tame_cats": "Tame 3 cats",
   "quest.unpredictableblocks.chat_internet.hint": "Cats roam villages: approach slowly holding raw fish.",
   "quest.unpredictableblocks.crypto_bulle.hodl": "Hold 64 emeralds",
-  "quest.unpredictableblocks.crypto_bulle.hint": "Trade with villagers and don't sell during a crash!"
+  "quest.unpredictableblocks.crypto_bulle.hint": "Trade with villagers and don't sell during a crash!",
+  "gamerule.unpredictableblocks.lucky_density": "Lucky Block density (%)",
+  "gamerule.unpredictableblocks.lucky_density.description": "Natural Lucky Blocks amount: 0 = none, 100 = normal, 1000 = ten times more.",
+  "gamerule.unpredictableblocks.lucky_shrines": "Shrines around Lucky Blocks",
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Pedestals, altars and sanctuaries around natural Lucky Blocks."
 }

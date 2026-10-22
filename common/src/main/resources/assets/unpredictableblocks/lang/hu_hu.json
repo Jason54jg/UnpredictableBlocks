@@ -597,5 +597,9 @@
   "quest.unpredictableblocks.chat_internet.tame_cats": "Tame 3 macskák",
   "quest.unpredictableblocks.chat_internet.hint": "Macskák roam falvak: megközelíteni lassan tartó nyers hal.",
   "quest.unpredictableblocks.crypto_bulle.hodl": "Tartsa a 64 smaragdot",
-  "quest.unpredictableblocks.crypto_bulle.hint": "Cseréljetek falusiakkal, és ne áruljatok balesetben!"
+  "quest.unpredictableblocks.crypto_bulle.hint": "Cseréljetek falusiakkal, és ne áruljatok balesetben!",
+  "gamerule.unpredictableblocks.lucky_density": "Lucky Block sűrűség (%)",
+  "gamerule.unpredictableblocks.lucky_density.description": "Természetes Lucky Blocks összeg: 0 = semmi, 100 = normális, 1000 = tízszer több.",
+  "gamerule.unpredictableblocks.lucky_shrines": "Rák körül Lucky Blocks",
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Gyalogok, oltárok és szenthelyek a természetes Lucky Blocks körül."
 }

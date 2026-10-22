@@ -597,5 +597,9 @@
   "quest.unpredictableblocks.chat_internet.tame_cats": "Tame 3 γάτες",
   "quest.unpredictableblocks.chat_internet.hint": "Οι γάτες περιφέρονται στα χωριά: προσέγγιση αργά κρατώντας ωμό ψάρι.",
   "quest.unpredictableblocks.crypto_bulle.hodl": "Κράτα 64 σμαράγδια.",
-  "quest.unpredictableblocks.crypto_bulle.hint": "Ανταλλάξτε με χωρικούς και μην πουλάτε κατά τη διάρκεια μιας συντριβής!"
+  "quest.unpredictableblocks.crypto_bulle.hint": "Ανταλλάξτε με χωρικούς και μην πουλάτε κατά τη διάρκεια μιας συντριβής!",
+  "gamerule.unpredictableblocks.lucky_density": "Lucky Block πυκνότητα (%)",
+  "gamerule.unpredictableblocks.lucky_density.description": "Φυσικό Lucky Blocks ποσό: 0 = κανένα, 100 = κανονικό, 1000 = δέκα φορές περισσότερο.",
+  "gamerule.unpredictableblocks.lucky_shrines": "Περικλίσεις Lucky Blocks",
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Αιδεσιμώτατα, βωμοί και ιερά γύρω από φυσικά Lucky Blocks."
 }

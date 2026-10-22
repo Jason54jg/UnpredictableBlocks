@@ -597,5 +597,9 @@
   "quest.unpredictableblocks.chat_internet.tame_cats": "Тэм 3 кошки",
   "quest.unpredictableblocks.chat_internet.hint": "Кошки бродят по деревням: приближаются, медленно держа сырую рыбу.",
   "quest.unpredictableblocks.crypto_bulle.hodl": "Держите 64 изумруда",
-  "quest.unpredictableblocks.crypto_bulle.hint": "Торгуйте с жителями деревни и не продавайте во время аварии!"
+  "quest.unpredictableblocks.crypto_bulle.hint": "Торгуйте с жителями деревни и не продавайте во время аварии!",
+  "gamerule.unpredictableblocks.lucky_density": "Lucky Block Плотность (%)",
+  "gamerule.unpredictableblocks.lucky_density.description": "Естественная величина: 0 = нет, 100 = нормально, 1000 = в десять раз больше.",
+  "gamerule.unpredictableblocks.lucky_shrines": "Усыпальница вокруг Lucky Blocks",
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Пешеходы, алтари и святилища вокруг природы Lucky Blocks."
 }

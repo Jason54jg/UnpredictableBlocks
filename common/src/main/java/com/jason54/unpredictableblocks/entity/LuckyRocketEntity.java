@@ -49,6 +49,8 @@ public class LuckyRocketEntity extends Entity implements GeoEntity {
     private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
     /** Point de départ (position de spawn), pour une trajectoire identique serveur/client. */
     private Vec3 origin;
+    /** Serveur : événements du cassage (butin, effets, structures), lancés à la fin de l'animation. */
+    private Runnable onFinish;
 
     public LuckyRocketEntity(EntityType<? extends LuckyRocketEntity> type, Level level) {
         super(type, level);
@@ -57,13 +59,34 @@ public class LuckyRocketEntity extends Entity implements GeoEntity {
     }
 
     /** Remplace le bloc cassé : même position, même thème. */
-    public static void launch(ServerLevel level, BlockPos pos, LuckyTheme theme, LuckyVariant variant) {
+    public static void launch(ServerLevel level, BlockPos pos, LuckyTheme theme, LuckyVariant variant, Runnable onFinish) {
         LuckyRocketEntity rocket = new LuckyRocketEntity(ModEntities.LUCKY_ROCKET.get(), level);
+        rocket.onFinish = onFinish;
         rocket.setPos(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
         rocket.entityData.set(THEME, theme.id());
         rocket.entityData.set(VARIANT, variant.ordinal());
         rocket.entityData.set(ANIMATION, BreakAnimation.roll(level.getRandom()).ordinal());
-        level.addFreshEntity(rocket);
+        if (!level.addFreshEntity(rocket)) {
+            rocket.finish();
+        }
+    }
+
+    /** Lance une seule fois les événements du cassage. */
+    private void finish() {
+        Runnable events = onFinish;
+        onFinish = null;
+        if (events != null) {
+            events.run();
+        }
+    }
+
+    @Override
+    public void remove(RemovalReason reason) {
+        // Chunk déchargé / monde fermé avant la fin de l'animation : les récompenses ne sont pas perdues
+        if (!level().isClientSide()) {
+            finish();
+        }
+        super.remove(reason);
     }
 
     public LuckyTheme getTheme() {

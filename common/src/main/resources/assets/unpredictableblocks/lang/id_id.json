@@ -597,5 +597,9 @@
   "quest.unpredictableblocks.chat_internet.tame_cats": "Time 3 kucing",
   "quest.unpredictableblocks.chat_internet.hint": "Kucing berkeliaran desa: pendekatan perlahan-lahan memegang ikan mentah.",
   "quest.unpredictableblocks.crypto_bulle.hodl": "Tahan 64 zamrud",
-  "quest.unpredictableblocks.crypto_bulle.hint": "Berdagang dengan penduduk desa dan tidak menjual selama kecelakaan!"
+  "quest.unpredictableblocks.crypto_bulle.hint": "Berdagang dengan penduduk desa dan tidak menjual selama kecelakaan!",
+  "gamerule.unpredictableblocks.lucky_density": "Lucky Block kepadatan (%)",
+  "gamerule.unpredictableblocks.lucky_density.description": "Jumlah natural Lucky Blocks: 0 = none, 100 = normal, 1000 = sepuluh kali lebih.",
+  "gamerule.unpredictableblocks.lucky_shrines": "Shrines sekitar Lucky Blocks",
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Para pedagang, altar dan tempat-tempat suci di sekitar alam."
 }

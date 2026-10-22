@@ -597,5 +597,9 @@
   "quest.unpredictableblocks.chat_internet.tame_cats": "Tame 3 katten",
   "quest.unpredictableblocks.chat_internet.hint": "Katten zwerven dorpen: naderen langzaam met rauwe vis.",
   "quest.unpredictableblocks.crypto_bulle.hodl": "Stop 64 smaragden",
-  "quest.unpredictableblocks.crypto_bulle.hint": "Handel met dorpelingen en verkoop niet tijdens een crash!"
+  "quest.unpredictableblocks.crypto_bulle.hint": "Handel met dorpelingen en verkoop niet tijdens een crash!",
+  "gamerule.unpredictableblocks.lucky_density": "Lucky Block dichtheid (%)",
+  "gamerule.unpredictableblocks.lucky_density.description": "Natuurlijke hoeveelheid Lucky Blocks: 0 = geen, 100 = normaal, 1000 = tien keer meer.",
+  "gamerule.unpredictableblocks.lucky_shrines": "Heiligdommen rond Lucky Blocks",
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Pedestalen, altaren en heiligdommen rond natuurlijke Lucky Blocks ."
 }

@@ -597,5 +597,9 @@
   "quest.unpredictableblocks.chat_internet.tame_cats": "3只猫",
   "quest.unpredictableblocks.chat_internet.hint": "猫游村:慢慢抱生鱼.",
   "quest.unpredictableblocks.crypto_bulle.hodl": "拿着64颗翡翠",
-  "quest.unpredictableblocks.crypto_bulle.hint": "与村民交易,坠机时不要卖!"
+  "quest.unpredictableblocks.crypto_bulle.hint": "与村民交易,坠机时不要卖!",
+  "gamerule.unpredictableblocks.lucky_density": "Lucky Block 密度(%)",
+  "gamerule.unpredictableblocks.lucky_density.description": "天然 Lucky Blocks 量:0=无,100=正常,1000=10倍以上.",
+  "gamerule.unpredictableblocks.lucky_shrines": "围绕 Lucky Blocks",
+  "gamerule.unpredictableblocks.lucky_shrines.description": "围绕自然 Lucky Blocks 而立坛,坛及圣."
 }

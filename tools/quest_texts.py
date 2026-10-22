@@ -171,6 +171,19 @@ MESSAGES = {
 }
 
 
+# Cles completes (regles de jeu…) : cle -> (FR, EN)
+EXTRA = {
+    "gamerule.unpredictableblocks.lucky_density": ("Densité des Lucky Blocks (%)", "Lucky Block density (%)"),
+    "gamerule.unpredictableblocks.lucky_density.description": (
+        "Quantité de Lucky Blocks naturels : 0 = aucun, 100 = normal, 1000 = dix fois plus.",
+        "Natural Lucky Blocks amount: 0 = none, 100 = normal, 1000 = ten times more."),
+    "gamerule.unpredictableblocks.lucky_shrines": ("Structures autour des Lucky Blocks", "Shrines around Lucky Blocks"),
+    "gamerule.unpredictableblocks.lucky_shrines.description": (
+        "Socles, autels et sanctuaires autour des Lucky Blocks naturels.",
+        "Pedestals, altars and sanctuaries around natural Lucky Blocks."),
+}
+
+
 def write_atomic(path: Path, text: str) -> None:
     """Ecrit via un fichier temporaire + remplacement : Windows refuse parfois l'ouverture directe (Errno 22) si l'IDE lit le fichier."""
     tmp = path.with_suffix(path.suffix + ".tmp")
@@ -191,6 +204,8 @@ def main() -> None:
         data = json.loads(path.read_text(encoding="utf-8"))
         for key, (fr, en) in MESSAGES.items():
             data[f"message.unpredictableblocks.{key}"] = fr if lang == "fr" else en
+        for key, (fr, en) in EXTRA.items():
+            data[key] = fr if lang == "fr" else en
         for theme, (steps, hint_fr, hint_en) in QUESTS.items():
             for criterion, fr, en in steps:
                 data[f"quest.unpredictableblocks.{theme}.{criterion}"] = fr if lang == "fr" else en

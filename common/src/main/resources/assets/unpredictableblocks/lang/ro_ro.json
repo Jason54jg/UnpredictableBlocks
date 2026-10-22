@@ -597,5 +597,9 @@
   "quest.unpredictableblocks.chat_internet.tame_cats": "Tame 3 pisici",
   "quest.unpredictableblocks.chat_internet.hint": "Pisicile hoinăresc prin sate: se apropie încet, ţinând peşte crud.",
   "quest.unpredictableblocks.crypto_bulle.hodl": "Ţine 64 de smaralde.",
-  "quest.unpredictableblocks.crypto_bulle.hint": "Trade cu sătenii și nu vinde în timpul unui accident!"
+  "quest.unpredictableblocks.crypto_bulle.hint": "Trade cu sătenii și nu vinde în timpul unui accident!",
+  "gamerule.unpredictableblocks.lucky_density": "Lucky Block densitate (%)",
+  "gamerule.unpredictableblocks.lucky_density.description": "Valoarea naturală Lucky Blocks: 0 = zero, 100 = normală, 1000 = de zece ori mai mult.",
+  "gamerule.unpredictableblocks.lucky_shrines": "Shrines around Lucky Blocks",
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Piedestaluri, altare și sanctuare în jurul naturii Lucky Blocks ."
 }

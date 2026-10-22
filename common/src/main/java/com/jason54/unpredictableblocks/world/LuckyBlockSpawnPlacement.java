@@ -3,6 +3,7 @@ package com.jason54.unpredictableblocks.world;
 import com.jason54.unpredictableblocks.compat.McAccess;
 import com.jason54.unpredictableblocks.config.ModConfig;
 import com.jason54.unpredictableblocks.registry.ModBlocks;
+import com.jason54.unpredictableblocks.registry.ModGameRules;
 import com.jason54.unpredictableblocks.theme.LuckyRarity;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
 import net.minecraft.core.BlockPos;
@@ -33,10 +34,14 @@ public final class LuckyBlockSpawnPlacement {
             return; // Pas de sol : les Lucky Blocks viennent du générateur de l'île (LuckySkyblock)
         }
         RandomSource random = level.getRandom();
+        double density = ModGameRules.density(level);
+        if (density <= 0) {
+            return;
+        }
         if (overworld && mode == LuckyWorldMode.FLAT) {
             for (int localX = FLAT_GRID / 2; localX < 16; localX += FLAT_GRID) {
                 for (int localZ = FLAT_GRID / 2; localZ < 16; localZ += FLAT_GRID) {
-                    if (random.nextDouble() < FLAT_GRID_CHANCE) {
+                    if (random.nextDouble() < FLAT_GRID_CHANCE * density) {
                         tryPlaceOnSurface(level, chunk, localX, localZ, random, 0.0);
                     }
                 }
@@ -50,11 +55,16 @@ public final class LuckyBlockSpawnPlacement {
             chance = Math.min(1.0, chance * DENSE_CHANCE_FACTOR);
             attempts *= 2;
         }
+        // Règle de jeu lucky_density : au-delà de ×1 on ajoute des essais, en dessous on baisse la chance
+        int extraAttempts = (int) Math.ceil(density);
+        attempts *= extraAttempts;
+        chance = Math.min(1.0, chance * density / extraAttempts);
         boolean dense = mode == LuckyWorldMode.DENSE;
+        boolean shrines = overworld && ModGameRules.shrines(level);
         for (int i = 0; i < attempts; i++) {
             if (random.nextDouble() < chance) {
                 // Structures (socle / autel / sanctuaire) seulement dans l'overworld
-                tryPlaceOnSurface(level, chunk, random.nextInt(16), random.nextInt(16), random, overworld ? (dense ? -1.0 : 1.0) : 0.0);
+                tryPlaceOnSurface(level, chunk, random.nextInt(16), random.nextInt(16), random, shrines ? (dense ? -1.0 : 1.0) : 0.0);
             }
         }
     }

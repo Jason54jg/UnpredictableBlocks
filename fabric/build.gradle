@@ -4,7 +4,7 @@ plugins {
 }
 
 def mcVersion = rootProject.findProperty('minecraft_version')?.toString() ?: '26.1.2'
-def fabricApi = rootProject.findProperty('fabric_api_version')?.toString()
+def fabricApiVersion = rootProject.findProperty('fabric_api_version')?.toString()
 def fabricLoader = rootProject.findProperty('fabric_loader_version')?.toString() ?: '0.17.2'
 def archVersion = rootProject.findProperty('architectury_version')?.toString() ?: '22.0.5'
 def geckolibVersion = rootProject.findProperty('geckolib_version')?.toString() ?: '5.5.2'
@@ -24,8 +24,24 @@ loom {
     silentMojangMappingsLicense()
 }
 
+// Tests client automatiques (src/gametest) : ./gradlew :fabric:runClientGameTest
+// Le jeu crée un monde, exécute les scénarios et enregistre des captures dans run/clientGameTest/screenshots.
+fabricApi {
+    configureTests {
+        createSourceSet = true
+        modId = "unpredictableblocks-gametest"
+        enableGameTests = false
+        enableClientGameTests = true
+        eula = true
+    }
+}
+
 repositories {
     maven { url = 'https://maven.fabricmc.net/' }
+    exclusiveContent {
+        forRepository { maven { name = 'Modrinth'; url = 'https://api.modrinth.com/maven' } }
+        filter { includeGroup('maven.modrinth') }
+    }
     maven { url = 'https://maven.architectury.dev/' }
     mavenCentral()
     exclusiveContent {
@@ -42,11 +58,17 @@ repositories {
 dependencies {
     minecraft "com.mojang:minecraft:${mcVersion}"
     implementation "net.fabricmc:fabric-loader:${fabricLoader}"
-    implementation "net.fabricmc.fabric-api:fabric-api:${fabricApi}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${fabricApiVersion}"
     // Runtime API (install separately in mods/ OR pulled as compile dep)
     implementation "dev.architectury:architectury-fabric:${archVersion}"
     implementation "com.geckolib:geckolib-fabric-${mcVersion}:${geckolibVersion}"
     implementation project(':common')
+
+    // Tests client avec Sodium (compatibilité rendu) : ./gradlew :fabric:runClientGameTest -Ptest_sodium=mc26.2-0.9.2-fabric
+    def testSodium = rootProject.findProperty('test_sodium')?.toString()
+    if (testSodium) {
+        gametestRuntimeOnly "maven.modrinth:sodium:${testSodium}"
+    }
 }
 
 // Bundle common classes + resources (fabric.mod.json, assets, data) into the distributable jar.

@@ -597,5 +597,9 @@
   "quest.unpredictableblocks.chat_internet.tame_cats": "แมว ชนิด ที่ 3",
   "quest.unpredictableblocks.chat_internet.hint": "แมว ท่อง หมู่ บ้าน: การ จับ ปลา ดิบ ช้า ๆ.",
   "quest.unpredictableblocks.crypto_bulle.hodl": "จับมรกต 64 ตัว",
-  "quest.unpredictableblocks.crypto_bulle.hint": "ค้าขายกับชาวบ้านและไม่ต้องขายในระหว่างการชน!"
+  "quest.unpredictableblocks.crypto_bulle.hint": "ค้าขายกับชาวบ้านและไม่ต้องขายในระหว่างการชน!",
+  "gamerule.unpredictableblocks.lucky_density": "Lucky Block ความหนาแน่น (%)",
+  "gamerule.unpredictableblocks.lucky_density.description": "จํานวน Lucky Blocks: 0 = ไม่มี, 100 = ปกติ, 1000 = 10 เท่า.",
+  "gamerule.unpredictableblocks.lucky_shrines": "sines รอบ Lucky Blocks",
+  "gamerule.unpredictableblocks.lucky_shrines.description": "วัด แท่นบูชา และสถานที่ศักดิ์สิทธิ์ รอบๆธรรมชาติ Lucky Blocks."
 }

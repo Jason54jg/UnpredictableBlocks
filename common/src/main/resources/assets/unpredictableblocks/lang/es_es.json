@@ -597,5 +597,9 @@
   "quest.unpredictableblocks.chat_internet.tame_cats": "Tame 3 gatos",
   "quest.unpredictableblocks.chat_internet.hint": "Los gatos vagan aldeas: acercarse lentamente sosteniendo pescado crudo.",
   "quest.unpredictableblocks.crypto_bulle.hodl": "Mantener 64 esmeraldas",
-  "quest.unpredictableblocks.crypto_bulle.hint": "¡Comer con aldeanos y no vender durante un accidente!"
+  "quest.unpredictableblocks.crypto_bulle.hint": "¡Comer con aldeanos y no vender durante un accidente!",
+  "gamerule.unpredictableblocks.lucky_density": "Lucky Block densidad (%)",
+  "gamerule.unpredictableblocks.lucky_density.description": "Cantidad natural Lucky Blocks: 0 = ninguno, 100 = normal, 1000 = diez veces más.",
+  "gamerule.unpredictableblocks.lucky_shrines": "Santuarios alrededor Lucky Blocks",
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Pedestales, altares y santuarios alrededor natural Lucky Blocks."
 }

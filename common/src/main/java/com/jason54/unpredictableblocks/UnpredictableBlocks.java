@@ -6,6 +6,7 @@ import com.jason54.unpredictableblocks.registry.ModAdvancements;
 import com.jason54.unpredictableblocks.registry.ModBlockEntities;
 import com.jason54.unpredictableblocks.registry.ModBlocks;
 import com.jason54.unpredictableblocks.registry.ModEntities;
+import com.jason54.unpredictableblocks.registry.ModGameRules;
 import com.jason54.unpredictableblocks.registry.ModItems;
 import com.jason54.unpredictableblocks.registry.ModLoot;
 import com.jason54.unpredictableblocks.registry.ModCreativeTabs;
@@ -33,6 +34,7 @@ public final class UnpredictableBlocks {
         ModBlocks.register();
         ModBlockEntities.register();
         ModEntities.register();
+        ModGameRules.register();
         ModSounds.register();
         ModCreativeTabs.register();
         ModItems.register();

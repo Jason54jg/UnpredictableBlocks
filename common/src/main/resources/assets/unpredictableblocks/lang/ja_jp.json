@@ -597,5 +597,9 @@
   "quest.unpredictableblocks.chat_internet.tame_cats": "タメ3猫",
   "quest.unpredictableblocks.chat_internet.hint": "猫のローム村:生の魚をゆっくりと握るアプローチ。",
   "quest.unpredictableblocks.crypto_bulle.hodl": "64 エメラルドを握って下さい",
-  "quest.unpredictableblocks.crypto_bulle.hint": "村人と取引し、クラッシュ中に販売しないでください!"
+  "quest.unpredictableblocks.crypto_bulle.hint": "村人と取引し、クラッシュ中に販売しないでください!",
+  "gamerule.unpredictableblocks.lucky_density": "Lucky Block density (%)",
+  "gamerule.unpredictableblocks.lucky_density.description": "Natural Lucky Blocks amount: 0 = none, 100 = normal, 1000 = ten times more.",
+  "gamerule.unpredictableblocks.lucky_shrines": "周辺神社 Lucky Blocks",
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Pedestals, altars and sanctuaries around natural Lucky Blocks."
 }

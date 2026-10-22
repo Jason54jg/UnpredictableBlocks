@@ -597,5 +597,9 @@
   "quest.unpredictableblocks.chat_internet.tame_cats": "Tame 3 kedi",
   "quest.unpredictableblocks.chat_internet.hint": "Kediler roam köyleri: yavaşça çiğ balık tutuyor.",
   "quest.unpredictableblocks.crypto_bulle.hodl": "64 emerald tutmak",
-  "quest.unpredictableblocks.crypto_bulle.hint": "Köylülerle ticaret ve bir kaza sırasında satma!"
+  "quest.unpredictableblocks.crypto_bulle.hint": "Köylülerle ticaret ve bir kaza sırasında satma!",
+  "gamerule.unpredictableblocks.lucky_density": "0)",
+  "gamerule.unpredictableblocks.lucky_density.description": "Doğal 0 = Hayır, 100 = normal, 1000 = on kat daha fazla.",
+  "gamerule.unpredictableblocks.lucky_shrines": "Shrines yaklaşık 0 )",
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Pedestals, sunars and sanctuaries around naturalur0)."
 }
