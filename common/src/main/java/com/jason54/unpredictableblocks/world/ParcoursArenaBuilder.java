@@ -203,7 +203,7 @@ public final class ParcoursArenaBuilder {
                 level.setBlock(p, dx == 1 && dz == 0 ? Blocks.GOLD_BLOCK.defaultBlockState() : path, 3);
             }
         }
-        placeLucky(level, finish.offset(1, 1, 0), LuckyTheme.CASINO, luck + 5, random, settings);
+        placeLucky(level, finish.offset(1, 1, 0), LuckyTheme.JDR_D20, luck + 5, random, settings);
         placeLucky(level, finish.offset(1, 1, 1), LuckyTheme.SPEEDRUNNER, luck + 5, random, settings);
 
         BlockPos startPad = laneOrigin.offset(-1, -1, -pathHalfWidth);

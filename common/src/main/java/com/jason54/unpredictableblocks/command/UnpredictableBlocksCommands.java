@@ -1,4 +1,4 @@
-﻿package com.jason54.unpredictableblocks.command;
+package com.jason54.unpredictableblocks.command;
 
 import com.jason54.unpredictableblocks.UnpredictableBlocks;
 import com.jason54.unpredictableblocks.config.ModConfig;
