@@ -61,7 +61,7 @@ public class WorldProfileListScreen extends Screen {
 
         addRenderableWidget(Button.builder(Component.literal("Back"), b -> {
             if (minecraft != null) {
-                minecraft.setScreen(parent);
+                minecraft.setScreenAndShow(parent);
             }
         }).bounds(x, height - 28, w, 20).build());
     }
@@ -69,7 +69,7 @@ public class WorldProfileListScreen extends Screen {
     @Override
     public void onClose() {
         if (minecraft != null) {
-            minecraft.setScreen(parent);
+            minecraft.setScreenAndShow(parent);
         }
     }
 

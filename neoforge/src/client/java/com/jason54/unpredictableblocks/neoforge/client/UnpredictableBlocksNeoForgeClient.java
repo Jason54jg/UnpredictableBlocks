@@ -1,10 +1,10 @@
 package com.jason54.unpredictableblocks.neoforge.client;
 
 import com.jason54.unpredictableblocks.UnpredictableBlocks;
+import com.jason54.unpredictableblocks.client.TitleScreenButtonLayout;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.TitleScreen;
-import net.minecraft.network.chat.Component;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -19,11 +19,14 @@ public final class UnpredictableBlocksNeoForgeClient {
         if (!(event.getScreen() instanceof TitleScreen title)) {
             return;
         }
-        int left = title.width / 2 - 100;
-        int top = title.height / 4 + 48 + 72 + 12;
+        if (TitleScreenButtonLayout.alreadyPresent(event.getListenersList())) {
+            return;
+        }
+        int left = TitleScreenButtonLayout.left(title.width);
+        int top = TitleScreenButtonLayout.topBelowExisting(title.width, title.height, event.getListenersList());
         event.addListener(Button.builder(
-                Component.literal("UB World profile"),
-                b -> Minecraft.getInstance().setScreen(new WorldProfileCreateScreen(title))
-        ).bounds(left, top, 200, 20).build());
+                TitleScreenButtonLayout.LABEL,
+                b -> Minecraft.getInstance().setScreenAndShow(new WorldProfileCreateScreen(title))
+        ).bounds(left, top, TitleScreenButtonLayout.BUTTON_WIDTH, TitleScreenButtonLayout.BUTTON_HEIGHT).build());
     }
 }

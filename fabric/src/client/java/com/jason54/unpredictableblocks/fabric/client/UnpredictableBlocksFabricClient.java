@@ -1,11 +1,11 @@
 package com.jason54.unpredictableblocks.fabric.client;
 
+import com.jason54.unpredictableblocks.client.TitleScreenButtonLayout;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
-import net.minecraft.network.chat.Component;
 
 import java.lang.reflect.Method;
 
@@ -16,12 +16,15 @@ public final class UnpredictableBlocksFabricClient implements ClientModInitializ
             if (!(screen instanceof TitleScreen title)) {
                 return;
             }
-            int left = scaledWidth / 2 - 100;
-            int top = scaledHeight / 4 + 48 + 72 + 12;
+            if (TitleScreenButtonLayout.alreadyPresent(screen.children())) {
+                return;
+            }
+            int left = TitleScreenButtonLayout.left(scaledWidth);
+            int top = TitleScreenButtonLayout.topBelowExisting(scaledWidth, scaledHeight, screen.children());
             Button button = Button.builder(
-                    Component.literal("UB World profile"),
-                    b -> client.setScreen(new WorldProfileCreateScreen(title))
-            ).bounds(left, top, 200, 20).build();
+                    TitleScreenButtonLayout.LABEL,
+                    b -> client.setScreenAndShow(new WorldProfileCreateScreen(title))
+            ).bounds(left, top, TitleScreenButtonLayout.BUTTON_WIDTH, TitleScreenButtonLayout.BUTTON_HEIGHT).build();
             addRenderableWidget(screen, button);
         });
     }

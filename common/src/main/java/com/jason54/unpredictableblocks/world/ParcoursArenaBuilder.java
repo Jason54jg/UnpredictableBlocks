@@ -1,6 +1,7 @@
 package com.jason54.unpredictableblocks.world;
 
 import com.jason54.unpredictableblocks.block.entity.LuckyBlockEntity;
+import com.jason54.unpredictableblocks.compat.McRefs;
 import com.jason54.unpredictableblocks.registry.ModBlocks;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
 import net.minecraft.core.BlockPos;
@@ -154,7 +155,7 @@ public final class ParcoursArenaBuilder {
         int pathLength = settings.pathLengthBlocks();
         int luckyInterval = settings.luckyStepInterval();
         BlockState path = Blocks.STONE_BRICKS.defaultBlockState();
-        BlockState accent = Blocks.LIGHT_GRAY_CONCRETE.defaultBlockState();
+        BlockState accent = McRefs.LIGHT_GRAY_CONCRETE.defaultBlockState();
         BlockState rail = Blocks.OAK_FENCE.defaultBlockState();
         BlockState lowRail = Blocks.COBBLESTONE_WALL.defaultBlockState();
         int luck = profile.defaultBlockLuck();
@@ -277,10 +278,10 @@ public final class ParcoursArenaBuilder {
     private static BlockState rouletteMarker(LuckyTheme theme) {
         int idx = theme.ordinal() % 16;
         return switch (idx % 4) {
-            case 0 -> Blocks.RED_WOOL.defaultBlockState();
-            case 1 -> Blocks.BLUE_WOOL.defaultBlockState();
-            case 2 -> Blocks.YELLOW_WOOL.defaultBlockState();
-            default -> Blocks.LIME_WOOL.defaultBlockState();
+            case 0 -> McRefs.RED_WOOL.defaultBlockState();
+            case 1 -> McRefs.BLUE_WOOL.defaultBlockState();
+            case 2 -> McRefs.YELLOW_WOOL.defaultBlockState();
+            default -> McRefs.LIME_WOOL.defaultBlockState();
         };
     }
 

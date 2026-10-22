@@ -43,7 +43,12 @@ public final class McRefs {
     public static final EntityType<Cat> CAT = entity("cat");
     public static final EntityType<LightningBolt> LIGHTNING_BOLT = entity("lightning_bolt");
     public static final Block WHITE_WOOL = block("white_wool");
+    public static final Block RED_WOOL = block("red_wool");
+    public static final Block BLUE_WOOL = block("blue_wool");
+    public static final Block YELLOW_WOOL = block("yellow_wool");
+    public static final Block LIME_WOOL = block("lime_wool");
     public static final Block WHITE_CONCRETE = block("white_concrete");
+    public static final Block LIGHT_GRAY_CONCRETE = block("light_gray_concrete");
 
     @SuppressWarnings("unchecked")
     private static <T extends Entity> EntityType<T> entity(String path) {

@@ -49,7 +49,7 @@ public class WorldProfileCreateScreen extends Screen {
 
     private void openList(Component title, java.util.List<WorldProfileMenuCatalog.Entry> entries) {
         if (minecraft != null) {
-            minecraft.setScreen(new WorldProfileListScreen(
+            minecraft.setScreenAndShow(new WorldProfileListScreen(
                     this,
                     title,
                     Component.literal("Click to queue — then Create World"),
@@ -65,7 +65,7 @@ public class WorldProfileCreateScreen extends Screen {
     @Override
     public void onClose() {
         if (minecraft != null) {
-            minecraft.setScreen(parent);
+            minecraft.setScreenAndShow(parent);
         }
     }
 
