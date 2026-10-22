@@ -36,10 +36,17 @@ public final class ModeGameplayHandler {
                 player.setGameMode(GameType.SPECTATOR);
                 player.sendSystemMessage(ModMessages.msg("world.spectator_until_start"));
             } else {
-                WorldSetupHandler.sendToParcoursLane(player, profile);
+                WorldProfileApplier.teleportToArena(player, profile);
+                int lanes = Math.clamp(profile.oneBlockPlayers(), 1, 4);
+                int lane = ParcoursArenaBuilder.laneForPlayer(player.getUUID(), lanes);
+                player.sendSystemMessage(ModMessages.msg("world.parcours_lane", lane + 1, lanes));
                 resetRun(player);
                 startRaceIfNeeded(player, profile);
             }
+            return;
+        }
+        if (profile.mode() == WorldPlayMode.ONEBLOCK && profile.oneBlockBuilt()) {
+            WorldProfileApplier.teleportToArena(player, profile);
         }
     }
 
@@ -49,10 +56,21 @@ public final class ModeGameplayHandler {
         }
         ServerLevel overworld = ServerLevels.server(sp).overworld();
         WorldModProfile.WorldProfileData profile = WorldModProfile.get(overworld);
-        if (!profile.configured() || !ParcoursWorldState.get(overworld).sessionOpen()) {
+        if (!profile.configured()) {
             return;
         }
-        onSessionStart(sp, profile);
+        boolean arenaReady = (profile.mode() == WorldPlayMode.PARCOURS && profile.parcoursBuilt())
+                || (profile.mode() == WorldPlayMode.ONEBLOCK && profile.oneBlockBuilt());
+        if (!arenaReady || !ParcoursWorldState.get(overworld).sessionOpen()) {
+            return;
+        }
+        // Un tick plus tard : le bootstrap + chunks sont prêts (évite spawn dans le sol).
+        ServerLevels.server(sp).execute(() -> {
+            if (sp.isRemoved()) {
+                return;
+            }
+            onSessionStart(sp, WorldModProfile.get(overworld));
+        });
     }
 
     private static boolean shouldSpectate(ServerPlayer player, WorldModProfile.WorldProfileData profile) {
@@ -94,7 +112,7 @@ public final class ModeGameplayHandler {
         if (settings.parcoursLayout() == WorldModeSettings.ParcoursLayout.COOP) {
             int required = Math.max(1, profile.oneBlockPlayers());
             ParcoursWorldState.get(level).recordCoopBreak(required);
-            ParcoursArenaBuilder.syncCoopGates(level, profile, WorldProfileApplier.arenaOrigin(profile, new BlockPos(0, 80, 0)));
+            ParcoursArenaBuilder.syncCoopGates(level, profile, WorldProfileApplier.arenaOrigin(profile, new BlockPos(0, WorldProfileApplier.ARENA_Y, 0)));
         }
         if (settings.parcoursLayout() == WorldModeSettings.ParcoursLayout.BATTLE) {
             spillBattleEffect(level, player, pos, tier, profile);

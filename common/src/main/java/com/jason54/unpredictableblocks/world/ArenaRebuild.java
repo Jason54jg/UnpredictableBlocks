@@ -9,7 +9,7 @@ public final class ArenaRebuild {
     private ArenaRebuild() {}
 
     public static void rebuild(ServerLevel level, WorldModProfile.WorldProfileData profile) {
-        BlockPos origin = WorldProfileApplier.arenaOrigin(profile, new BlockPos(0, 80, 0));
+        BlockPos origin = WorldProfileApplier.arenaOrigin(profile, new BlockPos(0, WorldProfileApplier.ARENA_Y, 0));
         clearArena(level, profile, origin);
         profile.setOneBlockBuilt(false);
         profile.setParcoursBuilt(false);

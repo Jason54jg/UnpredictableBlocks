@@ -26,6 +26,9 @@ public final class ParcoursArenaBuilder {
         ParcoursWorldState.get(level).setLayoutSeed(seed);
         RandomSource random = RandomSource.create(seed);
         int lanes = laneCount(profile, settings);
+        int halfWidth = settings.parcoursLayout() == WorldModeSettings.ParcoursLayout.COOP ? 3
+                : (settings.parcoursLayout() == WorldModeSettings.ParcoursLayout.BATTLE ? 0 : 1);
+        clearArenaEnvelope(level, arenaOrigin, settings.pathLengthBlocks(), lanes, halfWidth);
         if (settings.parcoursLayout() == WorldModeSettings.ParcoursLayout.COOP) {
             buildCoopLane(level, arenaOrigin, profile, settings, random);
         } else {
@@ -62,9 +65,9 @@ public final class ParcoursArenaBuilder {
         }
     }
 
+    /** Pieds du joueur sur le pad de départ (herbe en Y-1), hors lanterne / lucky. */
     public static BlockPos laneSpawnPos(BlockPos arenaOrigin, int laneIndex, int laneCount) {
-        BlockPos start = laneOriginAt(arenaOrigin, laneIndex, laneCount);
-        return start.offset(0, 1, 0);
+        return laneOriginAt(arenaOrigin, laneIndex, laneCount).offset(-1, 0, 0);
     }
 
     public static int laneForPlayer(java.util.UUID playerId, int laneCount) {
@@ -96,7 +99,7 @@ public final class ParcoursArenaBuilder {
             int step
     ) {
         int clamped = Math.max(0, Math.min(step, profile.modeSettings().pathLengthBlocks()));
-        return laneSpawnPos(origin, laneIndex, laneCount).offset(clamped, 0, 0);
+        return laneOriginAt(origin, laneIndex, laneCount).offset(clamped, 0, 0);
     }
 
     private static int laneCount(WorldModProfile.WorldProfileData profile, WorldModeSettings settings) {
@@ -166,6 +169,7 @@ public final class ParcoursArenaBuilder {
         for (int step = -2; step <= pathLength; step++) {
             for (int dz = -pathHalfWidth; dz <= pathHalfWidth; dz++) {
                 BlockPos foot = laneOrigin.offset(step, 0, dz);
+                clearAirColumn(level, foot, 5);
                 decorateUnderPath(level, foot, settings);
                 if (isGap(step, pathLength)) {
                     if (step == gapBridgeStep(pathLength, 1)) {
@@ -174,7 +178,8 @@ public final class ParcoursArenaBuilder {
                     continue;
                 }
                 level.setBlock(foot.below(), path, 3);
-                if (dz == 0 && step % 6 == 0) {
+                // Accents / sea lantern décalés pour ne pas boucher la case de spawn (step 0).
+                if (dz == 0 && step > 0 && step % 6 == 0) {
                     level.setBlock(foot, accent, 3);
                 }
                 if (dz == 0 && step >= 0 && step % luckyInterval == 2) {
@@ -184,7 +189,7 @@ public final class ParcoursArenaBuilder {
                         level.setBlock(foot.offset(0, 2, 0), rouletteMarker(theme), 3);
                     }
                 }
-                if (step % 12 == 0 && dz == 0 && step >= 0) {
+                if (step > 0 && step % 12 == 0 && dz == 0) {
                     level.setBlock(foot.above(), Blocks.SEA_LANTERN.defaultBlockState(), 3);
                 }
                 if (Math.abs(dz) == pathHalfWidth) {
@@ -212,12 +217,40 @@ public final class ParcoursArenaBuilder {
         for (int dx = 0; dx < pad; dx++) {
             for (int dz = 0; dz < pad; dz++) {
                 BlockPos p = startPad.offset(dx, 0, dz);
+                clearAirColumn(level, p.above(), 4);
                 decorateUnderPath(level, p.below(), settings);
                 level.setBlock(p, Blocks.GRASS_BLOCK.defaultBlockState(), 3);
             }
         }
-        level.setBlock(laneOrigin.above(), Blocks.LANTERN.defaultBlockState(), 3);
-        placeLucky(level, laneOrigin.offset(0, 2, 0), LuckyTheme.BOULANGERIE, luck, random, settings);
+        // Lanterne / lucky de départ sur le côté — pas sur la case de spawn.
+        level.setBlock(laneOrigin.offset(-1, 1, pathHalfWidth + 1), Blocks.LANTERN.defaultBlockState(), 3);
+        placeLucky(level, laneOrigin.offset(1, 1, 0), LuckyTheme.BOULANGERIE, luck, random, settings);
+    }
+
+    /** Vide le volume de l'arène pour ne pas construire dans la pierre / colline. */
+    private static void clearArenaEnvelope(ServerLevel level, BlockPos origin, int pathLength, int lanes, int halfWidth) {
+        int zSpan = Math.max(8, (int) Math.ceil(lanes * LANE_SPACING / 2.0) + halfWidth + 4);
+        for (int x = -6; x <= pathLength + 8; x++) {
+            for (int z = -zSpan; z <= zSpan; z++) {
+                for (int y = -5; y <= 8; y++) {
+                    BlockPos p = origin.offset(x, y, z);
+                    BlockState state = level.getBlockState(p);
+                    if (!state.isAir() && !state.is(Blocks.BEDROCK)) {
+                        level.setBlock(p, Blocks.AIR.defaultBlockState(), 3);
+                    }
+                }
+            }
+        }
+    }
+
+    private static void clearAirColumn(ServerLevel level, BlockPos base, int height) {
+        for (int y = 0; y < height; y++) {
+            BlockPos p = base.above(y);
+            BlockState state = level.getBlockState(p);
+            if (!state.isAir() && !state.is(Blocks.BEDROCK)) {
+                level.setBlock(p, Blocks.AIR.defaultBlockState(), 3);
+            }
+        }
     }
 
     private static void decorateUnderPath(ServerLevel level, BlockPos foot, WorldModeSettings settings) {

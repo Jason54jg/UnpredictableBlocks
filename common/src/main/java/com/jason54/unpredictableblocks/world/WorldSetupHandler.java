@@ -11,7 +11,6 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 
 /** Bootstrap profil à la création / 1er join (assistant si non configuré). */
 public final class WorldSetupHandler {
@@ -33,9 +32,7 @@ public final class WorldSetupHandler {
             ServerLevel overworld = ServerLevels.server(sp).overworld();
             WorldModProfile.WorldProfileData profile = WorldModProfile.get(overworld);
             if (profile.configured()) {
-                if (profile.parcoursBuilt() && ParcoursWorldState.get(overworld).sessionOpen()) {
-                    ModeGameplayHandler.onSessionStart(sp, profile);
-                }
+                // Téléport arène géré par ModeGameplayHandler.onJoin.
                 return;
             }
             if (!canConfigure(sp)) {
@@ -85,21 +82,9 @@ public final class WorldSetupHandler {
     }
 
     public static void sendToParcoursLane(ServerPlayer player, WorldModProfile.WorldProfileData profile) {
+        WorldProfileApplier.teleportToArena(player, profile);
         int lanes = Math.clamp(profile.oneBlockPlayers(), 1, 4);
         int lane = ParcoursArenaBuilder.laneForPlayer(player.getUUID(), lanes);
-        var origin = WorldProfileApplier.arenaOrigin(profile, player.blockPosition());
-        var spawn = ParcoursArenaBuilder.laneSpawnPos(origin, lane, lanes);
-        player.teleportTo(
-                ServerLevels.server(player).overworld(),
-                spawn.getX() + 0.5,
-                spawn.getY(),
-                spawn.getZ() + 0.5,
-                java.util.Set.of(),
-                player.getYRot(),
-                player.getXRot(),
-                true
-        );
-        player.setDeltaMovement(Vec3.ZERO);
         player.sendSystemMessage(ModMessages.msg("world.parcours_lane", lane + 1, lanes));
     }
 }
