@@ -347,7 +347,7 @@ public final class ThemeCatalogEffects {
             return;
         }
         int code = player.getRandom().nextInt(9000) + 1000;
-        PlayerQuestData.setFortuneCode(player, code, 5L * 20);
+        PlayerQuestData.setFortuneCode(player, code, 30L * 20);
         var cookie = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.BISCUIT_FORTUNE.get(), level);
         if (cookie != null) {
             cookie.setPos(Vec3.atBottomCenterOf(origin));

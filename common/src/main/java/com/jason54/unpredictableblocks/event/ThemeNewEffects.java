@@ -160,8 +160,9 @@ public final class ThemeNewEffects {
     }
 
     private static void multivers(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
+        // Fenêtre quête sur tout tier (avant : LOW seulement → Temporal Link jamais progressait).
+        PlayerQuestData.startMultiversTrack(player, 20L * 120);
         if (tier == LuckTier.LOW) {
-            PlayerQuestData.startMultiversTrack(player, 20L * 120);
             level.getEntitiesOfClass(net.minecraft.world.entity.LivingEntity.class, new AABB(origin).inflate(16))
                     .forEach(e -> e.setDeltaMovement(e.getDeltaMovement().add(0, 1.2, 0)));
             for (int y = origin.getY(); y < origin.getY() + 20; y++) {
@@ -177,7 +178,9 @@ public final class ThemeNewEffects {
                 slider.setPos(Vec3.atBottomCenterOf(origin).add(0, 1, 0));
                 level.addFreshEntity(slider);
             }
-            player.sendSystemMessage(Component.literal("§bZapper + Slider Multivers déployé !"));
+            player.sendSystemMessage(Component.literal("§bZapper + Slider Multivers — traversez 3 biomes en 2 min !"));
+        } else {
+            player.sendSystemMessage(Component.literal("§dPortail multivers — traversez 3 biomes en 2 min !"));
         }
     }
 
@@ -218,13 +221,13 @@ public final class ThemeNewEffects {
             }
             player.sendSystemMessage(Component.literal("§7Orage soudain — un Nuage Orageux arrive !"));
         } else {
-            BlockPos strike = origin.offset(level.getRandom().nextInt(7) - 3, 0, level.getRandom().nextInt(7) - 3);
+            // Frapper le joueur (pas un offset aléatoire) pour valider la quête « Human Lightning Rod ».
             var bolt = EntitySpawnHelper.create(McRefs.LIGHTNING_BOLT, level);
             if (bolt != null) {
-                bolt.setPos(Vec3.atBottomCenterOf(strike));
+                bolt.setPos(player.position());
                 level.addFreshEntity(bolt);
             }
-            player.sendSystemMessage(Component.literal("§eLa foudre tombe tout près…"));
+            player.sendSystemMessage(Component.literal("§eLa foudre te frappe !"));
         }
     }
 

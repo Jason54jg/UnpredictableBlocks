@@ -72,7 +72,8 @@ public final class QuestTriggers {
             return EventResult.pass();
         });
         EntityEvent.ANIMAL_TAME.register((animal, player) -> {
-            if (player instanceof ServerPlayer sp && animal instanceof Cat) {
+            if (player instanceof ServerPlayer sp
+                    && (animal instanceof Cat || animal instanceof com.jason54.unpredictableblocks.entity.mob.ChatInternetEntity)) {
                 Quests.increment(sp, LuckyTheme.CHAT_INTERNET, "tame_cats");
             }
             return EventResult.pass();
@@ -230,9 +231,9 @@ public final class QuestTriggers {
         PlayerQuestData.setAnanasQuestFailed(player, true);
     }
 
-    /** Chefs italiens invoqués : la quête ananas (re)commence. */
+    /** Chefs italiens invoqués : réactive la quête sans effacer les kills déjà validés. */
     public static void onChefsSpawned(ServerPlayer player) {
-        PlayerQuestData.resetAnanasQuest(player);
+        PlayerQuestData.setAnanasQuestFailed(player, false);
     }
 
     // ------------------------------------------------------------------ utilitaires
