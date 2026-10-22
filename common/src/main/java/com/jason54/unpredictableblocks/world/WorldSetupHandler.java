@@ -70,6 +70,11 @@ public final class WorldSetupHandler {
         player.sendSystemMessage(clickable("world.setup_preset_race", "/unpredictableblocks world preset race 1"));
         player.sendSystemMessage(clickable("world.setup_preset_coop", "/unpredictableblocks world preset coop 2"));
         player.sendSystemMessage(clickable("world.setup_preset_battle", "/unpredictableblocks world preset battle 4"));
+        player.sendSystemMessage(clickable("world.setup_preset_roulette", "/unpredictableblocks world preset roulette 2"));
+        player.sendSystemMessage(clickable("world.setup_preset_daily", "/unpredictableblocks world preset daily 4"));
+        player.sendSystemMessage(clickable("world.setup_preset_island", "/unpredictableblocks world preset island 1"));
+        player.sendSystemMessage(clickable("world.setup_preset_evolution", "/unpredictableblocks world preset oneblock_evolution 1"));
+        player.sendSystemMessage(clickable("world.setup_preset_marathon", "/unpredictableblocks world preset race_marathon 4"));
         NextWorldProfileStorage.peek().ifPresent(p ->
                 player.sendSystemMessage(ModMessages.msg("world.setup_pending_hint", p.mode().id(), p.oneBlockPlayers()))
         );

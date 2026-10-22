@@ -2,6 +2,7 @@ package com.jason54.unpredictableblocks.command;
 
 import com.jason54.unpredictableblocks.util.ModMessages;
 import com.jason54.unpredictableblocks.util.ServerLevels;
+import com.jason54.unpredictableblocks.world.ArenaRebuild;
 import com.jason54.unpredictableblocks.world.ModeGameplayHandler;
 import com.jason54.unpredictableblocks.world.NextWorldProfileStorage;
 import com.jason54.unpredictableblocks.world.ParcoursWorldState;
@@ -98,6 +99,8 @@ public final class WorldProfileCommands {
                                 .executes(ctx -> voteConfirm(ctx.getSource()))))
                 .then(Commands.literal("start")
                         .executes(ctx -> sessionStart(ctx.getSource())))
+                .then(Commands.literal("rebuild")
+                        .executes(ctx -> rebuildArena(ctx.getSource())))
                 .then(Commands.literal("show")
                         .executes(ctx -> show(ctx.getSource())))
                 .then(Commands.literal("menu")
@@ -163,6 +166,22 @@ public final class WorldProfileCommands {
 
     private static int voteConfirm(CommandSourceStack source) throws CommandSyntaxException {
         WorldVoteManager.confirm(source.getPlayerOrException());
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private static int rebuildArena(CommandSourceStack source) throws CommandSyntaxException {
+        ServerPlayer player = source.getPlayerOrException();
+        ServerLevel level = ServerLevels.of(player);
+        WorldModProfile.WorldProfileData profile = WorldModProfile.get(level);
+        if (profile.mode() != WorldPlayMode.PARCOURS && profile.mode() != WorldPlayMode.ONEBLOCK) {
+            source.sendFailure(ModMessages.msg("world.rebuild_wrong_mode"));
+            return 0;
+        }
+        ArenaRebuild.rebuild(level, profile);
+        if (profile.mode() == WorldPlayMode.PARCOURS) {
+            level.getServer().getPlayerList().getPlayers().forEach(p -> ModeGameplayHandler.onSessionStart(p, profile));
+        }
+        source.sendSuccess(() -> ModMessages.msg("world.rebuild_done"), true);
         return Command.SINGLE_SUCCESS;
     }
 
