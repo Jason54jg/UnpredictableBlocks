@@ -7,4 +7,3 @@ out/
 *.log
 stonecutter-cache/
 tools/__pycache__/
-tools/
