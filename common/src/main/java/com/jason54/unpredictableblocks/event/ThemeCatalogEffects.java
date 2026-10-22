@@ -69,13 +69,13 @@ public final class ThemeCatalogEffects {
             case BOULANGERIE -> boulangerie(level, player, origin, tier);
             case BSOD -> bsod(player, tier);
             case VOLAILLE -> volaille(level, player, origin, tier);
-            case IMPOTS -> impots(player, tier);
-            case STREAMER -> streamer(player, tier);
-            case PROPRETE -> proprete(player, tier);
-            case GRAVITE_ZERO -> gravite(player, tier);
+            case IMPOTS -> impots(level, player, origin, tier);
+            case STREAMER -> streamer(level, player, origin, tier);
+            case PROPRETE -> proprete(level, player, origin, tier);
+            case GRAVITE_ZERO -> gravite(level, player, origin, tier);
             case FAST_FOOD -> fastFood(level, player, origin, tier);
             case CAUCHEMAR_MATIN -> cauchemar(level, player, origin, tier);
-            case FILM_ACTION -> filmAction(level, player, tier);
+            case FILM_ACTION -> filmAction(level, player, origin, tier);
             case JDR_D20 -> jdr(level, player, origin, tier);
             case PENURIE_2020 -> penurie(level, player, tier);
             case COMPLOT -> complot(player, tier);
@@ -115,7 +115,12 @@ public final class ThemeCatalogEffects {
                     level.addFreshEntity(chicken);
                 }
             }
-            player.sendSystemMessage(Component.literal("§eLa basse-cour s'échappe de la boutique !"));
+            var baguette = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.BAGUETTE_VIVANTE.get(), level);
+            if (baguette != null) {
+                baguette.setPos(Vec3.atBottomCenterOf(origin));
+                level.addFreshEntity(baguette);
+            }
+            player.sendSystemMessage(Component.literal("§eLa basse-cour s'échappe… et une Baguette Vivante aussi !"));
             return;
         }
         if (tier != LuckTier.LOW) {
@@ -152,41 +157,61 @@ public final class ThemeCatalogEffects {
         player.sendSystemMessage(Component.literal("§6Œuf d'or incubateur : poulets dorés."));
     }
 
-    private static void impots(ServerPlayer player, LuckTier tier) {
+    private static void impots(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
         if (tier != LuckTier.LOW) {
             return;
         }
         player.addEffect(new MobEffectInstance(MobEffects.MINING_FATIGUE, 20 * 45, 3));
         player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 20 * 45, 1));
-        player.sendSystemMessage(Component.literal("§4Grève générale : outils inutilisables 45s."));
+        var dossier = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.DOSSIER_FISCAL.get(), level);
+        if (dossier != null) {
+            dossier.setPos(Vec3.atBottomCenterOf(origin));
+            level.addFreshEntity(dossier);
+        }
+        player.sendSystemMessage(Component.literal("§4Grève générale + Dossier Fiscal tamponneur !"));
     }
 
-    private static void streamer(ServerPlayer player, LuckTier tier) {
+    private static void streamer(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
         if (tier != LuckTier.NEUTRAL) {
             return;
         }
         player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 20 * 30, 0));
         player.setCustomName(Component.literal("Joueur_***"));
         player.setCustomNameVisible(true);
-        player.sendSystemMessage(Component.literal("§9Sponsorisé par NordVPN — pseudo masqué + invisibilité."));
+        var alert = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.ALERTE_DON.get(), level);
+        if (alert != null) {
+            alert.setPos(Vec3.atBottomCenterOf(origin).add(0, 0.5, 0));
+            level.addFreshEntity(alert);
+        }
+        player.sendSystemMessage(Component.literal("§9Sponsorisé — et une Alerte Don spam le chat !"));
     }
 
-    private static void proprete(ServerPlayer player, LuckTier tier) {
+    private static void proprete(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
         if (tier != LuckTier.HIGH) {
             return;
         }
         player.removeAllEffects();
         player.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 20 * 300, 0));
-        player.sendSystemMessage(Component.literal("§fDouche désinfectante — immunité poison 5 min."));
+        var sponge = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.EPONGE_SAVON.get(), level);
+        if (sponge != null) {
+            sponge.setPos(Vec3.atBottomCenterOf(origin));
+            level.addFreshEntity(sponge);
+        }
+        player.sendSystemMessage(Component.literal("§fDouche désinfectante — une Éponge Savon frottonne tout !"));
     }
 
-    private static void gravite(ServerPlayer player, LuckTier tier) {
+    private static void gravite(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
         if (tier != LuckTier.LOW) {
             return;
         }
         player.addEffect(new MobEffectInstance(MobEffects.WITHER, 20 * 15, 0));
         player.hurt(player.level().damageSources().drown(), 4);
-        player.sendSystemMessage(Component.literal("§7Pression atmosphérique nulle — asphyxie 15s."));
+        var helmet = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.CASQUE_ORBITAL.get(), level);
+        if (helmet != null) {
+            helmet.setPos(Vec3.atBottomCenterOf(origin).add(0, 1, 0));
+            level.addFreshEntity(helmet);
+        }
+        player.sendSystemMessage(Component.literal("§7Pression nulle — un Casque Orbital dérive vers toi !"));
     }
 
     private static void fastFood(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
@@ -215,7 +240,7 @@ public final class ThemeCatalogEffects {
         player.sendSystemMessage(Component.literal("§dRêve lucide… et un Réveil Cauchemardesque qui sonne !"));
     }
 
-    private static void filmAction(ServerLevel level, ServerPlayer player, LuckTier tier) {
+    private static void filmAction(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
         if (tier != LuckTier.LOW) {
             return;
         }
@@ -225,8 +250,13 @@ public final class ThemeCatalogEffects {
             sniper.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
             level.addFreshEntity(sniper);
         }
+        var clap = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.CLAP_CINEMA.get(), level);
+        if (clap != null) {
+            clap.setPos(Vec3.atBottomCenterOf(origin));
+            level.addFreshEntity(clap);
+        }
         level.explode(player, player.getX(), player.getY(), player.getZ(), 2.0f, Level.ExplosionInteraction.TNT);
-        player.sendSystemMessage(Component.literal("§cTir du méchant — sniper squelette !"));
+        player.sendSystemMessage(Component.literal("§cAction ! Clap Cinéma + sniper squelette !"));
     }
 
     private static void jdr(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {

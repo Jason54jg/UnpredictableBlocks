@@ -18,7 +18,8 @@ public final class MobsClientGameTest implements FabricClientGameTest {
             "chef_italien", "comte_dracula", "mascotte_hamburger", "chat_internet", "coq_gaulois", "ecran_bleu",
             "toi_du_futur", "douanier", "lapin_extirpateur", "grossiste_clandestin", "statue_vivante", "mimique_d20",
             "bodybuilder", "danseur_disco", "hacker_fantome", "bot_speedrunner", "barista", "pirate_torrent",
-            "manifestant", "crypto_bulle", "nuage_orage", "slider_multivers", "pop_it_geant", "reveil_cauchemar");
+            "manifestant", "crypto_bulle", "nuage_orage", "slider_multivers", "pop_it_geant", "reveil_cauchemar",
+            "baguette_vivante", "dossier_fiscal", "alerte_don", "eponge_savon", "casque_orbital", "clap_cinema");
 
     @Override
     public void runTest(ClientGameTestContext context) {
@@ -28,17 +29,15 @@ public final class MobsClientGameTest implements FabricClientGameTest {
             server.runCommand("time set noon");
             server.runCommand("gamerule advance_time false");
             server.runCommand("gamerule spawn_mobs false");
-            server.runCommand("fill -16 99 -8 16 99 28 minecraft:smooth_stone");
-            server.runCommand("fill -16 100 -8 16 108 28 minecraft:air");
+            server.runCommand("fill -16 99 -8 16 99 36 minecraft:smooth_stone");
+            server.runCommand("fill -16 100 -8 16 108 36 minecraft:air");
             for (int i = 0; i < MOBS.size(); i++) {
                 int row = i / 6;
                 int col = i % 6;
                 double x = -7.5 + col * 3;
                 double z = 3.5 + row * 4;
                 String id = MOBS.get(i);
-                double y = id.equals("ecran_bleu") || id.equals("statue_vivante") || id.equals("hacker_fantome")
-                        || id.equals("manifestant") || id.equals("crypto_bulle") || id.equals("nuage_orage")
-                        || id.equals("slider_multivers") ? 101 : 100;
+                double y = List.of("ecran_bleu","statue_vivante","hacker_fantome","manifestant","crypto_bulle","nuage_orage","slider_multivers","toi_du_futur","comte_dracula","chef_italien","bot_speedrunner","danseur_disco","alerte_don","casque_orbital").contains(id) ? 101 : 100;
                 // Rotation 180 : le mob regarde vers -Z, donc vers la caméra
                 server.runCommand("summon unpredictableblocks:" + MOBS.get(i) + " " + x + " " + y + " " + z
                         + " {NoAI:1b,Rotation:[180f,0f]}");

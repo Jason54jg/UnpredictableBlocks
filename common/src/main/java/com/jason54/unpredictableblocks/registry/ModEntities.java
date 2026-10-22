@@ -23,6 +23,12 @@ import com.jason54.unpredictableblocks.entity.mob.NuageOrageEntity;
 import com.jason54.unpredictableblocks.entity.mob.PirateTorrentEntity;
 import com.jason54.unpredictableblocks.entity.mob.PopItGeantEntity;
 import com.jason54.unpredictableblocks.entity.mob.ReveilCauchemarEntity;
+import com.jason54.unpredictableblocks.entity.mob.BaguetteVivanteEntity;
+import com.jason54.unpredictableblocks.entity.mob.DossierFiscalEntity;
+import com.jason54.unpredictableblocks.entity.mob.AlerteDonEntity;
+import com.jason54.unpredictableblocks.entity.mob.EpongeSavonEntity;
+import com.jason54.unpredictableblocks.entity.mob.CasqueOrbitalEntity;
+import com.jason54.unpredictableblocks.entity.mob.ClapCinemaEntity;
 import com.jason54.unpredictableblocks.entity.mob.SliderMultiversEntity;
 import com.jason54.unpredictableblocks.entity.mob.StatueVivanteEntity;
 import com.jason54.unpredictableblocks.entity.mob.ToiDuFuturEntity;
@@ -53,11 +59,11 @@ public final class ModEntities {
                             Registries.ENTITY_TYPE,
                             Identifier.fromNamespaceAndPath(UnpredictableBlocks.MOD_ID, "lucky_rocket"))));
 
-    // Lot 1
+    // Lot 1 (silhouettes objets / creatures)
     public static final RegistrySupplier<EntityType<ChefItalienEntity>> CHEF_ITALIEN =
-            mob(ChefItalienEntity.ID, ChefItalienEntity::new, MobCategory.MONSTER, 0.6F, 1.95F);
+            mob(ChefItalienEntity.ID, ChefItalienEntity::new, MobCategory.MONSTER, 1.0F, 1.4F);
     public static final RegistrySupplier<EntityType<ComteDraculaEntity>> COMTE_DRACULA =
-            mob(ComteDraculaEntity.ID, ComteDraculaEntity::new, MobCategory.MONSTER, 0.6F, 1.95F);
+            mob(ComteDraculaEntity.ID, ComteDraculaEntity::new, MobCategory.MONSTER, 1.0F, 1.6F);
     public static final RegistrySupplier<EntityType<MascotteHamburgerEntity>> MASCOTTE_HAMBURGER =
             mob(MascotteHamburgerEntity.ID, MascotteHamburgerEntity::new, MobCategory.MONSTER, 1.0F, 1.4F);
     public static final RegistrySupplier<EntityType<ChatInternetEntity>> CHAT_INTERNET =
@@ -69,13 +75,13 @@ public final class ModEntities {
 
     // Lot 2
     public static final RegistrySupplier<EntityType<ToiDuFuturEntity>> TOI_DU_FUTUR =
-            mob(ToiDuFuturEntity.ID, ToiDuFuturEntity::new, MobCategory.CREATURE, 0.6F, 1.95F);
+            mob(ToiDuFuturEntity.ID, ToiDuFuturEntity::new, MobCategory.CREATURE, 0.8F, 1.4F);
     public static final RegistrySupplier<EntityType<DouanierEntity>> DOUANIER =
-            mob(DouanierEntity.ID, DouanierEntity::new, MobCategory.MISC, 0.6F, 1.95F);
+            mob(DouanierEntity.ID, DouanierEntity::new, MobCategory.MISC, 1.4F, 1.5F);
     public static final RegistrySupplier<EntityType<LapinExtirpateurEntity>> LAPIN_EXTIRPATEUR =
             mob(LapinExtirpateurEntity.ID, LapinExtirpateurEntity::new, MobCategory.CREATURE, 0.6F, 0.9F);
     public static final RegistrySupplier<EntityType<GrossisteClandestinEntity>> GROSSISTE_CLANDESTIN =
-            mob(GrossisteClandestinEntity.ID, GrossisteClandestinEntity::new, MobCategory.MISC, 0.6F, 1.95F);
+            mob(GrossisteClandestinEntity.ID, GrossisteClandestinEntity::new, MobCategory.MISC, 0.9F, 1.5F);
     public static final RegistrySupplier<EntityType<StatueVivanteEntity>> STATUE_VIVANTE =
             mob(StatueVivanteEntity.ID, StatueVivanteEntity::new, MobCategory.MONSTER, 0.9F, 1.8F);
     public static final RegistrySupplier<EntityType<MimiqueD20Entity>> MIMIQUE_D20 =
@@ -83,17 +89,17 @@ public final class ModEntities {
 
     // Lot 3
     public static final RegistrySupplier<EntityType<BodybuilderEntity>> BODYBUILDER =
-            mob(BodybuilderEntity.ID, BodybuilderEntity::new, MobCategory.MONSTER, 0.7F, 1.95F);
+            mob(BodybuilderEntity.ID, BodybuilderEntity::new, MobCategory.MONSTER, 1.6F, 1.0F);
     public static final RegistrySupplier<EntityType<DanseurDiscoEntity>> DANSEUR_DISCO =
-            mob(DanseurDiscoEntity.ID, DanseurDiscoEntity::new, MobCategory.MONSTER, 0.6F, 1.95F);
+            mob(DanseurDiscoEntity.ID, DanseurDiscoEntity::new, MobCategory.MONSTER, 0.9F, 1.6F);
     public static final RegistrySupplier<EntityType<HackerFantomeEntity>> HACKER_FANTOME =
-            mob(HackerFantomeEntity.ID, HackerFantomeEntity::new, MobCategory.MONSTER, 0.6F, 1.8F);
+            mob(HackerFantomeEntity.ID, HackerFantomeEntity::new, MobCategory.MONSTER, 1.0F, 1.2F);
     public static final RegistrySupplier<EntityType<BotSpeedrunnerEntity>> BOT_SPEEDRUNNER =
-            mob(BotSpeedrunnerEntity.ID, BotSpeedrunnerEntity::new, MobCategory.MONSTER, 0.6F, 1.95F);
+            mob(BotSpeedrunnerEntity.ID, BotSpeedrunnerEntity::new, MobCategory.MONSTER, 0.9F, 1.2F);
     public static final RegistrySupplier<EntityType<BaristaEntity>> BARISTA =
-            mob(BaristaEntity.ID, BaristaEntity::new, MobCategory.MISC, 0.6F, 1.95F);
+            mob(BaristaEntity.ID, BaristaEntity::new, MobCategory.MISC, 0.9F, 1.3F);
     public static final RegistrySupplier<EntityType<PirateTorrentEntity>> PIRATE_TORRENT =
-            mob(PirateTorrentEntity.ID, PirateTorrentEntity::new, MobCategory.MONSTER, 0.6F, 1.95F);
+            mob(PirateTorrentEntity.ID, PirateTorrentEntity::new, MobCategory.MONSTER, 1.0F, 1.4F);
 
     // Lot 4 — silhouettes objets / créatures (pas de forme Steve)
     public static final RegistrySupplier<EntityType<ManifestantEntity>> MANIFESTANT =
@@ -108,6 +114,20 @@ public final class ModEntities {
             mob(PopItGeantEntity.ID, PopItGeantEntity::new, MobCategory.MONSTER, 1.4F, 0.6F);
     public static final RegistrySupplier<EntityType<ReveilCauchemarEntity>> REVEIL_CAUCHEMAR =
             mob(ReveilCauchemarEntity.ID, ReveilCauchemarEntity::new, MobCategory.MONSTER, 0.9F, 1.1F);
+
+    // Lot 5 — themes restants (objets)
+    public static final RegistrySupplier<EntityType<BaguetteVivanteEntity>> BAGUETTE_VIVANTE =
+            mob(BaguetteVivanteEntity.ID, BaguetteVivanteEntity::new, MobCategory.MONSTER, 1.6F, 0.8F);
+    public static final RegistrySupplier<EntityType<DossierFiscalEntity>> DOSSIER_FISCAL =
+            mob(DossierFiscalEntity.ID, DossierFiscalEntity::new, MobCategory.MONSTER, 1.0F, 1.4F);
+    public static final RegistrySupplier<EntityType<AlerteDonEntity>> ALERTE_DON =
+            mob(AlerteDonEntity.ID, AlerteDonEntity::new, MobCategory.MONSTER, 1.0F, 1.3F);
+    public static final RegistrySupplier<EntityType<EpongeSavonEntity>> EPONGE_SAVON =
+            mob(EpongeSavonEntity.ID, EpongeSavonEntity::new, MobCategory.MONSTER, 1.2F, 1.0F);
+    public static final RegistrySupplier<EntityType<CasqueOrbitalEntity>> CASQUE_ORBITAL =
+            mob(CasqueOrbitalEntity.ID, CasqueOrbitalEntity::new, MobCategory.MONSTER, 1.0F, 1.4F);
+    public static final RegistrySupplier<EntityType<ClapCinemaEntity>> CLAP_CINEMA =
+            mob(ClapCinemaEntity.ID, ClapCinemaEntity::new, MobCategory.MONSTER, 1.2F, 1.2F);
 
     private ModEntities() {}
 
@@ -145,5 +165,11 @@ public final class ModEntities {
         EntityAttributeRegistry.register(SLIDER_MULTIVERS, SliderMultiversEntity::createAttributes);
         EntityAttributeRegistry.register(POP_IT_GEANT, PopItGeantEntity::createAttributes);
         EntityAttributeRegistry.register(REVEIL_CAUCHEMAR, ReveilCauchemarEntity::createAttributes);
+        EntityAttributeRegistry.register(BAGUETTE_VIVANTE, BaguetteVivanteEntity::createAttributes);
+        EntityAttributeRegistry.register(DOSSIER_FISCAL, DossierFiscalEntity::createAttributes);
+        EntityAttributeRegistry.register(ALERTE_DON, AlerteDonEntity::createAttributes);
+        EntityAttributeRegistry.register(EPONGE_SAVON, EpongeSavonEntity::createAttributes);
+        EntityAttributeRegistry.register(CASQUE_ORBITAL, CasqueOrbitalEntity::createAttributes);
+        EntityAttributeRegistry.register(CLAP_CINEMA, ClapCinemaEntity::createAttributes);
     }
 }

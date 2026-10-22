@@ -24,6 +24,12 @@ import com.jason54.unpredictableblocks.entity.mob.NuageOrageEntity;
 import com.jason54.unpredictableblocks.entity.mob.PirateTorrentEntity;
 import com.jason54.unpredictableblocks.entity.mob.PopItGeantEntity;
 import com.jason54.unpredictableblocks.entity.mob.ReveilCauchemarEntity;
+import com.jason54.unpredictableblocks.entity.mob.BaguetteVivanteEntity;
+import com.jason54.unpredictableblocks.entity.mob.DossierFiscalEntity;
+import com.jason54.unpredictableblocks.entity.mob.AlerteDonEntity;
+import com.jason54.unpredictableblocks.entity.mob.EpongeSavonEntity;
+import com.jason54.unpredictableblocks.entity.mob.CasqueOrbitalEntity;
+import com.jason54.unpredictableblocks.entity.mob.ClapCinemaEntity;
 import com.jason54.unpredictableblocks.entity.mob.SliderMultiversEntity;
 import com.jason54.unpredictableblocks.entity.mob.StatueVivanteEntity;
 import com.jason54.unpredictableblocks.entity.mob.ToiDuFuturEntity;
@@ -72,6 +78,12 @@ public final class UnpredictableBlocksClient {
         EntityRendererRegistry.register(ModEntities.SLIDER_MULTIVERS, ctx -> new LuckyMobRenderer<>(ctx, SliderMultiversEntity.ID, 0.5F));
         EntityRendererRegistry.register(ModEntities.POP_IT_GEANT, ctx -> new LuckyMobRenderer<>(ctx, PopItGeantEntity.ID, 0.5F));
         EntityRendererRegistry.register(ModEntities.REVEIL_CAUCHEMAR, ctx -> new LuckyMobRenderer<>(ctx, ReveilCauchemarEntity.ID, 0.5F));
+        EntityRendererRegistry.register(ModEntities.BAGUETTE_VIVANTE, ctx -> new LuckyMobRenderer<>(ctx, BaguetteVivanteEntity.ID, 0.5F));
+        EntityRendererRegistry.register(ModEntities.DOSSIER_FISCAL, ctx -> new LuckyMobRenderer<>(ctx, DossierFiscalEntity.ID, 0.5F));
+        EntityRendererRegistry.register(ModEntities.ALERTE_DON, ctx -> new LuckyMobRenderer<>(ctx, AlerteDonEntity.ID, 0.5F));
+        EntityRendererRegistry.register(ModEntities.EPONGE_SAVON, ctx -> new LuckyMobRenderer<>(ctx, EpongeSavonEntity.ID, 0.6F));
+        EntityRendererRegistry.register(ModEntities.CASQUE_ORBITAL, ctx -> new LuckyMobRenderer<>(ctx, CasqueOrbitalEntity.ID, 0.6F));
+        EntityRendererRegistry.register(ModEntities.CLAP_CINEMA, ctx -> new LuckyMobRenderer<>(ctx, ClapCinemaEntity.ID, 0.5F));
 
         NetworkManager.registerReceiver(
                 NetworkManager.s2c(),

@@ -625,5 +625,11 @@
   "entity.unpredictableblocks.nuage_orage": "Nuage Orageux",
   "entity.unpredictableblocks.slider_multivers": "Slider Multivers",
   "entity.unpredictableblocks.pop_it_geant": "Pop-it Géant",
-  "entity.unpredictableblocks.reveil_cauchemar": "Réveil Cauchemardesque"
+  "entity.unpredictableblocks.reveil_cauchemar": "Réveil Cauchemardesque",
+  "entity.unpredictableblocks.baguette_vivante": "Baguette Vivante",
+  "entity.unpredictableblocks.dossier_fiscal": "Dossier Fiscal",
+  "entity.unpredictableblocks.alerte_don": "Alerte Don",
+  "entity.unpredictableblocks.eponge_savon": "Éponge Savon",
+  "entity.unpredictableblocks.casque_orbital": "Casque Orbital",
+  "entity.unpredictableblocks.clap_cinema": "Clap Cinéma"
 }

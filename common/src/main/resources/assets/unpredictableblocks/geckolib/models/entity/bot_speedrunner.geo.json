@@ -24,7 +24,7 @@
           ]
         },
         {
-          "name": "body",
+          "name": "chrono",
           "pivot": [
             0,
             12,
@@ -34,95 +34,100 @@
           "cubes": [
             {
               "origin": [
-                -4,
-                12,
-                -2
+                -6,
+                6,
+                -3
               ],
               "size": [
-                8,
                 12,
-                4
+                12,
+                6
               ],
               "uv": [
                 0,
                 0
               ]
-            }
-          ]
-        },
-        {
-          "name": "head",
-          "pivot": [
-            0,
-            24,
-            0
-          ],
-          "parent": "body",
-          "cubes": [
+            },
             {
               "origin": [
                 -4,
-                24,
+                8,
                 -4
               ],
               "size": [
                 8,
                 8,
-                8
+                1
               ],
               "uv": [
-                24,
+                36,
                 0
               ]
             }
           ]
         },
         {
-          "name": "right_arm",
+          "name": "hand",
           "pivot": [
-            -5,
-            22,
-            0
+            0,
+            14,
+            -4
           ],
-          "parent": "body",
+          "parent": "chrono",
+          "cubes": [
+            {
+              "origin": [
+                -1,
+                12,
+                -4
+              ],
+              "size": [
+                2,
+                5,
+                1
+              ],
+              "uv": [
+                54,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "thruster_l",
+          "pivot": [
+            -6,
+            8,
+            2
+          ],
+          "parent": "chrono",
           "cubes": [
             {
               "origin": [
                 -8,
-                12,
-                -2
+                6,
+                1
               ],
               "size": [
-                4,
-                12,
-                4
+                3,
+                6,
+                3
               ],
               "uv": [
-                56,
+                60,
                 0
               ]
-            }
-          ]
-        },
-        {
-          "name": "left_arm",
-          "pivot": [
-            5,
-            22,
-            0
-          ],
-          "parent": "body",
-          "cubes": [
+            },
             {
               "origin": [
+                -7,
                 4,
-                12,
-                -2
+                2
               ],
               "size": [
-                4,
-                12,
-                4
+                2,
+                2,
+                2
               ],
               "uv": [
                 72,
@@ -132,125 +137,44 @@
           ]
         },
         {
-          "name": "right_leg",
+          "name": "thruster_r",
           "pivot": [
-            -2,
-            12,
-            0
+            6,
+            8,
+            2
           ],
-          "parent": "root",
+          "parent": "chrono",
           "cubes": [
             {
               "origin": [
-                -4,
-                0,
-                -2
-              ],
-              "size": [
-                4,
-                12,
-                4
-              ],
-              "uv": [
-                88,
-                0
-              ]
-            }
-          ]
-        },
-        {
-          "name": "left_leg",
-          "pivot": [
-            2,
-            12,
-            0
-          ],
-          "parent": "root",
-          "cubes": [
-            {
-              "origin": [
-                0,
-                0,
-                -2
-              ],
-              "size": [
-                4,
-                12,
-                4
-              ],
-              "uv": [
-                104,
-                0
-              ]
-            }
-          ]
-        },
-        {
-          "name": "visor",
-          "pivot": [
-            0,
-            28,
-            -4
-          ],
-          "parent": "head",
-          "cubes": [
-            {
-              "origin": [
-                -4,
-                26,
-                -5
-              ],
-              "size": [
-                8,
-                3,
+                5,
+                6,
                 1
               ],
-              "uv": [
-                0,
-                16
-              ]
-            }
-          ]
-        },
-        {
-          "name": "backpack",
-          "pivot": [
-            0,
-            18,
-            3
-          ],
-          "parent": "body",
-          "cubes": [
-            {
-              "origin": [
-                -4,
-                14,
-                2
-              ],
               "size": [
-                8,
-                8,
+                3,
+                6,
                 3
               ],
               "uv": [
-                18,
-                16
+                80,
+                0
               ]
             },
             {
               "origin": [
-                -2,
-                16,
-                5
+                6,
+                4,
+                2
               ],
               "size": [
-                4,
-                3,
+                2,
+                2,
                 2
               ],
               "uv": [
-                40,
-                16
+                92,
+                0
               ]
             }
           ]

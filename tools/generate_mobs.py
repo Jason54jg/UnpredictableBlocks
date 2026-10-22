@@ -1199,10 +1199,536 @@ def reveil_cauchemar() -> Mob:
     return Mob("reveil_cauchemar", bones, anims)
 
 
+# --------------------------------------------------------------------------- reshape : plus de silhouettes Steve
+# (redefinit les usines humanoïdes — Python garde la derniere def)
+
+def _obj_anims(idle_bones, walk_bones, attack_bones, special_bones, idle_len=2.0, walk_len=0.8, atk_len=0.5, sp_len=1.0):
+    return {
+        "idle": (idle_len, True, idle_bones),
+        "walk": (walk_len, True, walk_bones),
+        "attack": (atk_len, False, attack_bones),
+        "special": (sp_len, False, special_bones),
+    }
+
+
+def chef() -> Mob:
+    """Toque + pizza volante (plus de corps Steve)."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("pizza", (0, 8, 0), "root", [
+            Cube((-8, 6, -8), (16, 2, 16), "F4C04A",
+                 top=lambda d, x, y, w, h: [px(d, x + i, y + j, "C62828")
+                                           for i, j in ((2, 2), (8, 3), (4, 8), (11, 10), (6, 12))]),
+        ]),
+        Bone("toque", (0, 14, 0), "root", [
+            Cube((-5, 10, -5), (10, 3, 10), "FFFFFF"),
+            Cube((-6, 13, -6), (12, 8, 12), "FAFAFA"),
+        ]),
+        Bone("eyes", (0, 9, -8), "pizza", [
+            Cube((-5, 8, -9), (3, 3, 1), "FFFFFF"), Cube((-4, 9, -9.5), (1, 1, 1), "111111"),
+            Cube((2, 8, -9), (3, 3, 1), "FFFFFF"), Cube((3, 9, -9.5), (1, 1, 1), "111111"),
+        ]),
+    ]
+    return Mob("chef_italien", bones, _obj_anims(
+        {"toque": {"rotation": swing(2.0, 4, axis=2)}, "pizza": {"rotation": swing(2.0, 3, axis=1)},
+         "root": {"position": loop(2.0, [(0, [0, 0, 0]), (1.0, [0, 2, 0]), (2.0, [0, 0, 0])])}},
+        {"root": {"position": loop(0.8, [(0, [0, 0, 0]), (0.2, [0, 3, 0]), (0.4, [0, 0, 0]), (0.6, [0, 3, 0]), (0.8, [0, 0, 0])])},
+         "pizza": {"rotation": swing(0.8, 15, axis=1)}},
+        {"pizza": {"rotation": loop(0.5, [(0, [0, 0, 0]), (0.2, [-40, 0, 0]), (0.4, [20, 0, 0]), (0.5, [0, 0, 0])])}},
+        {"toque": {"scale": loop(1.0, [(0, [1, 1, 1]), (0.3, [1.2, 1.4, 1.2]), (0.7, [1.2, 1.4, 1.2]), (1.0, [1, 1, 1])])},
+         "pizza": {"rotation": loop(1.0, [(0, [0, 0, 0]), (1.0, [0, 360, 0])])}},
+    ))
+
+
+def dracula() -> Mob:
+    """Nuee de chauves-souris + cape flottante + crocs."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("cape", (0, 12, 0), "root", [
+            Cube((-8, 2, 0), (16, 18, 1), "1A0000"),
+            Cube((-6, 16, -1), (12, 6, 1), "8B0000"),
+        ]),
+        Bone("fangs", (0, 14, -4), "root", [
+            Cube((-3, 12, -5), (2, 4, 2), "FAFAFA"),
+            Cube((1, 12, -5), (2, 4, 2), "FAFAFA"),
+            Cube((-4, 14, -4), (8, 4, 3), "DADAE8", front=dracula_face),
+        ]),
+        Bone("bat_a", (-8, 18, 2), "root", [Cube((-10, 16, 0), (4, 3, 6), "111111")]),
+        Bone("bat_b", (8, 16, 2), "root", [Cube((6, 14, 0), (4, 3, 6), "111111")]),
+        Bone("bat_c", (0, 20, 4), "root", [Cube((-2, 18, 2), (4, 3, 6), "1A0000")]),
+    ]
+    return Mob("comte_dracula", bones, _obj_anims(
+        {"cape": {"rotation": swing(2.0, 8)}, "bat_a": {"rotation": swing(2.0, 20, axis=2)},
+         "bat_b": {"rotation": swing(2.0, -20, axis=2)}, "bat_c": {"position": loop(2.0, [(0, [0, 0, 0]), (1.0, [0, 2, 0]), (2.0, [0, 0, 0])])},
+         "root": {"position": loop(2.0, [(0, [0, 0, 0]), (1.0, [0, 2, 0]), (2.0, [0, 0, 0])])}},
+        {"root": {"position": loop(0.8, [(0, [0, 1, 0]), (0.4, [0, 3, 0]), (0.8, [0, 1, 0])])},
+         "cape": {"rotation": {0.0: [15, 0, 0]}}, "bat_a": {"rotation": swing(0.8, 35, axis=2)}, "bat_b": {"rotation": swing(0.8, -35, axis=2)}},
+        {"fangs": {"position": loop(0.5, [(0, [0, 0, 0]), (0.2, [0, 0, -4]), (0.5, [0, 0, 0])])},
+         "cape": {"rotation": loop(0.5, [(0, [0, 0, 0]), (0.2, [30, 0, 0]), (0.5, [0, 0, 0])])}},
+        {"root": {"scale": loop(1.0, [(0, [1, 1, 1]), (0.4, [1.1, 0.5, 1.1]), (0.8, [0, 0, 0]), (1.0, [0, 0, 0])]),
+                  "rotation": loop(1.0, [(0, [0, 0, 0]), (1.0, [0, 720, 0])])},
+         "cape": {"rotation": {0.0: [60, 0, 0]}}},
+    ))
+
+
+def toi_du_futur() -> Mob:
+    """Casque neon + jetpack chrome flottant."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("helmet", (0, 16, 0), "root", [
+            Cube((-5, 12, -5), (10, 8, 10), "B0BEC5", front=futur_face),
+            Cube((-5, 14, -6), (10, 4, 1), "00E5FF", inflate=0.2),
+        ]),
+        Bone("jetpack", (0, 12, 4), "root", [
+            Cube((-6, 8, 2), (5, 10, 4), "455A64"),
+            Cube((1, 8, 2), (5, 10, 4), "455A64"),
+            Cube((-5, 6, 4), (3, 3, 2), "FF6D00"),
+            Cube((2, 6, 4), (3, 3, 2), "FF6D00"),
+        ]),
+        Bone("beam", (0, 14, -6), "helmet", [Cube((-1, 13, -14), (2, 2, 8), "00E5FF")]),
+    ]
+    return Mob("toi_du_futur", bones, _obj_anims(
+        {"root": {"position": loop(2.0, [(0, [0, 0, 0]), (1.0, [0, 3, 0]), (2.0, [0, 0, 0])])},
+         "jetpack": {"rotation": swing(2.0, 4, axis=2)}, "helmet": {"rotation": swing(2.0, 3, axis=1)}},
+        {"root": {"position": loop(0.8, [(0, [0, 2, 0]), (0.4, [0, 4, 0]), (0.8, [0, 2, 0])])},
+         "jetpack": {"rotation": swing(0.8, 10, axis=2)}},
+        {"beam": {"scale": loop(0.5, [(0, [1, 1, 0.2]), (0.2, [1, 1, 1.5]), (0.5, [1, 1, 0.2])])},
+         "helmet": {"scale": loop(0.5, [(0, [1, 1, 1]), (0.2, [1.15, 1.15, 1.15]), (0.5, [1, 1, 1])])}},
+        {"root": {"position": loop(1.0, [(0, [0, 0, 0]), (0.4, [0, 8, 0]), (1.0, [0, 0, 0])])},
+         "jetpack": {"scale": loop(1.0, [(0, [1, 1, 1]), (0.3, [1.2, 1.3, 1.2]), (1.0, [1, 1, 1])])}},
+    ))
+
+
+def douanier() -> Mob:
+    """Tampon geant + barriere douaniere."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("barrier", (0, 10, 0), "root", [
+            Cube((-12, 8, -1), (24, 3, 2), "FFD700"),
+            Cube((-12, 0, -1), (2, 10, 2), "1565C0"),
+            Cube((10, 0, -1), (2, 10, 2), "1565C0"),
+        ]),
+        Bone("stamp", (0, 16, -4), "root", [
+            Cube((-5, 12, -8), (10, 8, 8), "C62828", front=douanier_face),
+            Cube((-2, 20, -5), (4, 6, 4), "5D4037"),
+        ]),
+    ]
+    return Mob("douanier", bones, _obj_anims(
+        {"stamp": {"rotation": swing(2.0, 5, axis=2)}, "barrier": {"rotation": swing(2.0, 2)}},
+        {"root": {"position": loop(0.8, [(0, [0, 0, 0]), (0.4, [0, 2, 0]), (0.8, [0, 0, 0])])},
+         "stamp": {"rotation": swing(0.8, 12)}},
+        {"stamp": {"position": loop(0.5, [(0, [0, 0, 0]), (0.2, [0, -6, -2]), (0.35, [0, 2, 0]), (0.5, [0, 0, 0])])}},
+        {"stamp": {"rotation": loop(1.0, [(0, [0, 0, 0]), (0.3, [20, 25, 0]), (0.7, [20, -25, 0]), (1.0, [0, 0, 0])])},
+         "barrier": {"scale": loop(1.0, [(0, [1, 1, 1]), (0.5, [1.1, 1, 1.1]), (1.0, [1, 1, 1])])}},
+    ))
+
+
+def grossiste_clandestin() -> Mob:
+    """Montagne de PQ + lunettes noires (plus de Steve en imper)."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("stack", (0, 6, 0), "root", [
+            Cube((-6, 0, -6), (12, 6, 12), "FAFAFA"),
+            Cube((-5, 6, -5), (10, 6, 10), "ECEFF1"),
+            Cube((-4, 12, -4), (8, 6, 8), "FAFAFA"),
+            Cube((-3, 18, -3), (6, 4, 6), "F5F5F5"),
+        ]),
+        Bone("shades", (0, 20, -4), "stack", [
+            Cube((-5, 18, -5), (10, 3, 1), "111111"),
+        ]),
+        Bone("coat", (0, 10, 4), "root", [
+            Cube((-7, 2, 2), (14, 16, 3), "37474F"),
+        ]),
+    ]
+    return Mob("grossiste_clandestin", bones, _obj_anims(
+        {"stack": {"rotation": swing(2.0, 3, axis=2)}, "shades": {"rotation": swing(2.0, 4, axis=1)}},
+        {"root": {"position": loop(0.8, [(0, [0, 0, 0]), (0.2, [0, 2, 0]), (0.4, [0, 0, 0]), (0.6, [0, 2, 0]), (0.8, [0, 0, 0])])},
+         "coat": {"rotation": {0.0: [8, 0, 0]}}},
+        {"root": {"position": loop(0.5, [(0, [0, 0, 0]), (0.2, [0, 0, -4]), (0.5, [0, 0, 0])])},
+         "coat": {"rotation": loop(0.5, [(0, [0, 0, 0]), (0.2, [25, 0, 0]), (0.5, [0, 0, 0])])}},
+        {"shades": {"rotation": loop(1.0, [(0, [0, 0, 0]), (0.4, [0, 30, 0]), (1.0, [0, 0, 0])])},
+         "stack": {"scale": loop(1.0, [(0, [1, 1, 1]), (0.4, [1.1, 1.15, 1.1]), (1.0, [1, 1, 1])])}},
+        idle_len=2.0, walk_len=0.7, atk_len=0.5, sp_len=1.0,
+    ))
+
+
+def bodybuilder() -> Mob:
+    """Halteres vivantes (plaques qui flexent)."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("bar", (0, 10, 0), "root", [Cube((-12, 9, -1), (24, 2, 2), "78909C")]),
+        Bone("plate_l", (-10, 10, 0), "bar", [
+            Cube((-14, 6, -4), (4, 8, 8), "C62828"),
+            Cube((-16, 7, -3), (2, 6, 6), "B71C1C"),
+        ]),
+        Bone("plate_r", (10, 10, 0), "bar", [
+            Cube((10, 6, -4), (4, 8, 8), "C62828"),
+            Cube((14, 7, -3), (2, 6, 6), "B71C1C"),
+        ]),
+        Bone("face", (0, 12, -2), "bar", [
+            Cube((-3, 10, -3), (6, 4, 2), "E0AC69", front=gym_face),
+        ]),
+    ]
+    return Mob("bodybuilder", bones, _obj_anims(
+        {"plate_l": {"rotation": swing(2.0, 6, axis=2)}, "plate_r": {"rotation": swing(2.0, -6, axis=2)},
+         "root": {"position": loop(2.0, [(0, [0, 0, 0]), (1.0, [0, 2, 0]), (2.0, [0, 0, 0])])}},
+        {"root": {"position": loop(0.6, [(0, [0, 0, 0]), (0.15, [0, 3, 0]), (0.3, [0, 0, 0]), (0.45, [0, 3, 0]), (0.6, [0, 0, 0])])},
+         "bar": {"rotation": swing(0.6, 10, axis=2)}},
+        {"bar": {"rotation": loop(0.5, [(0, [0, 0, 0]), (0.2, [0, 0, -40]), (0.4, [0, 0, 20]), (0.5, [0, 0, 0])])}},
+        {"plate_l": {"scale": loop(1.2, [(0, [1, 1, 1]), (0.4, [1.3, 1.3, 1.3]), (0.9, [1.3, 1.3, 1.3]), (1.2, [1, 1, 1])])},
+         "plate_r": {"scale": loop(1.2, [(0, [1, 1, 1]), (0.4, [1.3, 1.3, 1.3]), (0.9, [1.3, 1.3, 1.3]), (1.2, [1, 1, 1])])},
+         "face": {"scale": loop(1.2, [(0, [1, 1, 1]), (0.4, [1.2, 1.2, 1.2]), (1.2, [1, 1, 1])])}},
+        walk_len=0.6, sp_len=1.2,
+    ))
+
+
+def danseur_disco() -> Mob:
+    """Boule disco + enceinte (plus de danseur Steve)."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("speaker", (0, 4, 0), "root", [
+            Cube((-6, 0, -4), (12, 8, 8), "212121", front=disco_suit),
+            Cube((-4, 2, -5), (8, 4, 1), "7B1FA2"),
+        ]),
+        Bone("ball", (0, 16, 0), "root", [
+            Cube((-5, 11, -5), (10, 10, 10), "E0E0E0", pattern="checker", front=disco_face),
+        ]),
+        Bone("light", (0, 22, 0), "ball", [Cube((-1, 21, -1), (2, 2, 2), "FFD700")]),
+    ]
+    return Mob("danseur_disco", bones, _obj_anims(
+        {"ball": {"rotation": swing(2.0, 25, axis=1)}, "light": {"rotation": swing(2.0, 40, axis=1)},
+         "root": {"position": loop(2.0, [(0, [0, 0, 0]), (1.0, [0, 2, 0]), (2.0, [0, 0, 0])])}},
+        {"root": {"position": loop(0.7, [(0, [0, 0, 0]), (0.2, [0, 3, 0]), (0.4, [0, 0, 0]), (0.6, [0, 3, 0]), (0.7, [0, 0, 0])])},
+         "ball": {"rotation": swing(0.7, 40, axis=1)}},
+        {"root": {"rotation": loop(0.6, [(0, [0, 0, 0]), (0.3, [0, 180, 0]), (0.6, [0, 360, 0])])},
+         "ball": {"scale": loop(0.6, [(0, [1, 1, 1]), (0.3, [1.2, 1.2, 1.2]), (0.6, [1, 1, 1])])}},
+        {"ball": {"rotation": loop(1.2, [(0, [0, 0, 0]), (1.2, [0, 720, 0])])},
+         "speaker": {"scale": loop(1.2, [(0, [1, 1, 1]), (0.3, [1.1, 0.9, 1.1]), (0.6, [0.95, 1.15, 0.95]), (0.9, [1.1, 0.9, 1.1]), (1.2, [1, 1, 1])])}},
+        walk_len=0.7, atk_len=0.6, sp_len=1.2,
+    ))
+
+
+def hacker_fantome() -> Mob:
+    """Terminal matrix flottant (plus de hoodie humanoide)."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("screen", (0, 12, 0), "root", [
+            Cube((-8, 6, -2), (16, 12, 3), "0D1F12", front=hacker_face),
+            Cube((-6, 8, 1), (12, 8, 2), "1B5E20"),
+        ]),
+        Bone("code", (0, 12, -3), "screen", [
+            Cube((-5, 8, -3), (10, 1, 1), "69F0AE"),
+            Cube((-4, 11, -3), (8, 1, 1), "69F0AE"),
+            Cube((-6, 14, -3), (9, 1, 1), "69F0AE"),
+        ]),
+        Bone("glitch", (6, 18, 0), "screen", [Cube((4, 16, -1), (4, 4, 2), "69F0AE")]),
+    ]
+    return Mob("hacker_fantome", bones, _obj_anims(
+        {"root": {"position": loop(2.0, [(0, [0, 0, 0]), (1.0, [0, 3, 0]), (2.0, [0, 0, 0])])},
+         "code": {"position": loop(2.0, [(0, [0, 0, 0]), (1.0, [0, -1, 0]), (2.0, [0, 0, 0])])},
+         "glitch": {"rotation": swing(2.0, 15, axis=2)}},
+        {"root": {"position": loop(0.8, [(0, [0, 2, 0]), (0.4, [0, 4, 0]), (0.8, [0, 2, 0])])},
+         "screen": {"rotation": {0.0: [8, 0, 0]}}},
+        {"screen": {"scale": loop(0.5, [(0, [1, 1, 1]), (0.15, [1.2, 0.9, 1.2]), (0.5, [1, 1, 1])])}},
+        {"root": {"scale": loop(0.6, [(0, [1, 1, 1]), (0.15, [0.3, 1.4, 0.3]), (0.3, [1.3, 0.5, 1.3]), (0.45, [0.5, 1.2, 0.5]), (0.6, [1, 1, 1])]),
+                  "rotation": loop(0.6, [(0, [0, 0, 0]), (0.6, [0, 360, 0])])}},
+        sp_len=0.6,
+    ))
+
+
+def bot_speedrunner() -> Mob:
+    """Chronometre volant + propulseurs (plus de bot Steve)."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("chrono", (0, 12, 0), "root", [
+            Cube((-6, 6, -3), (12, 12, 6), "455A64", front=bot_face),
+            Cube((-4, 8, -4), (8, 8, 1), "00E5FF"),
+        ]),
+        Bone("hand", (0, 14, -4), "chrono", [Cube((-1, 12, -4), (2, 5, 1), "212121")]),
+        Bone("thruster_l", (-6, 8, 2), "chrono", [
+            Cube((-8, 6, 1), (3, 6, 3), "263238"),
+            Cube((-7, 4, 2), (2, 2, 2), "FF6D00"),
+        ]),
+        Bone("thruster_r", (6, 8, 2), "chrono", [
+            Cube((5, 6, 1), (3, 6, 3), "263238"),
+            Cube((6, 4, 2), (2, 2, 2), "FF6D00"),
+        ]),
+    ]
+    return Mob("bot_speedrunner", bones, _obj_anims(
+        {"hand": {"rotation": swing(2.0, 20, axis=2)}, "root": {"position": loop(2.0, [(0, [0, 0, 0]), (1.0, [0, 2, 0]), (2.0, [0, 0, 0])])}},
+        {"root": {"position": loop(0.5, [(0, [0, 1, 0]), (0.25, [0, 3, 0]), (0.5, [0, 1, 0])])},
+         "chrono": {"rotation": {0.0: [12, 0, 0]}}, "thruster_l": {"rotation": swing(0.5, 8, axis=2)},
+         "thruster_r": {"rotation": swing(0.5, -8, axis=2)}},
+        {"root": {"position": loop(0.4, [(0, [0, 0, 0]), (0.15, [0, 0, -8]), (0.4, [0, 0, 0])])}},
+        {"root": {"position": loop(0.8, [(0, [0, 0, 0]), (0.3, [0, 4, -12]), (0.8, [0, 0, 0])]),
+                  "scale": loop(0.8, [(0, [1, 1, 1]), (0.3, [0.8, 1.1, 1.4]), (0.8, [1, 1, 1])])},
+         "thruster_l": {"scale": loop(0.8, [(0, [1, 1, 1]), (0.3, [1.3, 1.5, 1.3]), (0.8, [1, 1, 1])])},
+         "thruster_r": {"scale": loop(0.8, [(0, [1, 1, 1]), (0.3, [1.3, 1.5, 1.3]), (0.8, [1, 1, 1])])}},
+        walk_len=0.5, atk_len=0.4, sp_len=0.8,
+    ))
+
+
+def barista() -> Mob:
+    """Tasse de cafe geante + vapeur (plus de barista Steve)."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("cup", (0, 6, 0), "root", [
+            Cube((-6, 0, -6), (12, 12, 12), "FAFAFA", front=barista_apron),
+            Cube((-5, 10, -5), (10, 4, 10), "5D4037"),
+        ]),
+        Bone("handle", (8, 8, 0), "cup", [Cube((6, 4, -2), (4, 8, 4), "FAFAFA")]),
+        Bone("steam_a", (-2, 16, 0), "cup", [Cube((-3, 14, -1), (2, 6, 2), "ECEFF1", inflate=0.5)]),
+        Bone("steam_b", (2, 17, 1), "cup", [Cube((1, 15, 0), (2, 5, 2), "ECEFF1", inflate=0.5)]),
+    ]
+    return Mob("barista", bones, _obj_anims(
+        {"steam_a": {"position": loop(2.0, [(0, [0, 0, 0]), (1.0, [0, 2, 0]), (2.0, [0, 0, 0])])},
+         "steam_b": {"position": loop(2.0, [(0, [0, 1, 0]), (1.0, [0, 3, 0]), (2.0, [0, 1, 0])])},
+         "cup": {"rotation": swing(2.0, 3, axis=2)}},
+        {"root": {"position": loop(0.7, [(0, [0, 0, 0]), (0.2, [0, 2, 0]), (0.4, [0, 0, 0]), (0.6, [0, 2, 0]), (0.7, [0, 0, 0])])}},
+        {"cup": {"rotation": loop(0.5, [(0, [0, 0, 0]), (0.2, [-30, 0, 20]), (0.5, [0, 0, 0])])}},
+        {"cup": {"rotation": loop(1.0, [(0, [0, 0, 0]), (0.4, [40, 0, 0]), (0.8, [40, 0, 0]), (1.0, [0, 0, 0])])},
+         "steam_a": {"scale": loop(1.0, [(0, [1, 1, 1]), (0.5, [1.4, 1.8, 1.4]), (1.0, [1, 1, 1])])},
+         "steam_b": {"scale": loop(1.0, [(0, [1, 1, 1]), (0.5, [1.5, 2.0, 1.5]), (1.0, [1, 1, 1])])}},
+        walk_len=0.7,
+    ))
+
+
+def pirate_torrent() -> Mob:
+    """Disque dur pirate + barres de download (plus de pirate Steve)."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("drive", (0, 8, 0), "root", [
+            Cube((-8, 2, -4), (16, 10, 8), "37474F", front=pirate_face),
+            Cube((-6, 4, -5), (4, 3, 1), "69F0AE"),
+            Cube((-1, 4, -5), (6, 2, 1), "C62828"),
+        ]),
+        Bone("flag", (0, 16, 0), "drive", [
+            Cube((-1, 12, -1), (2, 10, 2), "5D4037"),
+            Cube((1, 16, -1), (8, 5, 1), "111111", front=pirate_coat),
+        ]),
+        Bone("bar_a", (-4, 0, 0), "drive", [Cube((-6, -1, -2), (4, 2, 4), "00E5FF")]),
+        Bone("bar_b", (2, 0, 0), "drive", [Cube((0, -1, -2), (6, 2, 4), "69F0AE")]),
+    ]
+    return Mob("pirate_torrent", bones, _obj_anims(
+        {"flag": {"rotation": swing(2.0, 12, axis=2)}, "bar_a": {"scale": loop(2.0, [(0, [1, 1, 1]), (1.0, [1.2, 1, 1]), (2.0, [1, 1, 1])])},
+         "bar_b": {"scale": loop(2.0, [(0, [1, 1, 1]), (1.0, [0.8, 1, 1]), (2.0, [1, 1, 1])])}},
+        {"root": {"position": loop(0.7, [(0, [0, 0, 0]), (0.2, [0, 2, 0]), (0.4, [0, 0, 0]), (0.6, [0, 2, 0]), (0.7, [0, 0, 0])])},
+         "flag": {"rotation": swing(0.7, 20, axis=2)}},
+        {"drive": {"rotation": loop(0.5, [(0, [0, 0, 0]), (0.2, [-25, 0, 0]), (0.5, [0, 0, 0])])}},
+        {"bar_a": {"scale": loop(1.0, [(0, [0.2, 1, 1]), (0.5, [1.5, 1, 1]), (1.0, [1, 1, 1])])},
+         "bar_b": {"scale": loop(1.0, [(0, [0.2, 1, 1]), (0.7, [1.4, 1, 1]), (1.0, [1, 1, 1])])},
+         "flag": {"rotation": loop(1.0, [(0, [0, 0, 0]), (0.5, [0, 0, 30]), (1.0, [0, 0, 0])])}},
+        walk_len=0.7,
+    ))
+
+
+
+
+# --------------------------------------------------------------------------- Lot 5 : themes sans mob custom (silhouettes objets)
+def baguette_face(draw, x, y, w, h):
+    eyes()(draw, x, y, w, h)
+    draw.rectangle((x + 2, y + h - 3, x + w - 3, y + h - 2), fill=rgb("8D6E63"))
+
+
+def baguette_vivante() -> Mob:
+    """Baguette geante souriante — Boulangerie."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("loaf", (0, 8, 0), "root", [
+            Cube((-12, 4, -3), (24, 6, 6), "E8C07A", front=baguette_face, pattern="noise"),
+            Cube((-10, 5, -4), (6, 4, 1), "D4A574"),
+            Cube((4, 5, -4), (6, 4, 1), "D4A574"),
+        ]),
+        Bone("crumb_a", (-8, 14, 0), "loaf", [Cube((-9, 12, -1), (2, 2, 2), "FFE0B2")]),
+        Bone("crumb_b", (6, 15, 1), "loaf", [Cube((5, 13, 0), (2, 2, 2), "FFE0B2")]),
+        Bone("steam", (0, 16, 0), "loaf", [Cube((-1, 14, -1), (2, 4, 2), "ECEFF1", inflate=0.4)]),
+    ]
+    return Mob("baguette_vivante", bones, _obj_anims(
+        {"loaf": {"rotation": swing(2.0, 4, axis=2)},
+         "crumb_a": {"position": loop(2.0, [(0, [0, 0, 0]), (1.0, [0, 2, 0]), (2.0, [0, 0, 0])])},
+         "crumb_b": {"position": loop(2.0, [(0, [0, 1, 0]), (1.0, [0, 3, 0]), (2.0, [0, 1, 0])])},
+         "steam": {"position": loop(2.0, [(0, [0, 0, 0]), (1.0, [0, 2, 0]), (2.0, [0, 0, 0])])}},
+        {"root": {"position": loop(0.7, [(0, [0, 0, 0]), (0.2, [0, 3, 0]), (0.4, [0, 0, 0]), (0.6, [0, 3, 0]), (0.7, [0, 0, 0])])},
+         "loaf": {"rotation": swing(0.7, 10, axis=2)}},
+        {"loaf": {"rotation": loop(0.5, [(0, [0, 0, 0]), (0.2, [-35, 0, 0]), (0.5, [0, 0, 0])])}},
+        {"crumb_a": {"scale": loop(1.0, [(0, [1, 1, 1]), (0.3, [1.5, 1.5, 1.5]), (0.6, [0.5, 0.5, 0.5]), (1.0, [1, 1, 1])])},
+         "crumb_b": {"scale": loop(1.0, [(0, [1, 1, 1]), (0.4, [1.6, 1.6, 1.6]), (0.7, [0.4, 0.4, 0.4]), (1.0, [1, 1, 1])])},
+         "loaf": {"scale": loop(1.0, [(0, [1, 1, 1]), (0.4, [1.1, 0.9, 1.1]), (1.0, [1, 1, 1])])}},
+        walk_len=0.7,
+    ))
+
+
+def dossier_front(draw, x, y, w, h):
+    eyes("C62828")(draw, x, y, w, h)
+    draw.rectangle((x + 2, y + int(h * 0.55), x + w - 3, y + int(h * 0.7)), fill=rgb("FFEB3B"))
+    for i in range(2, w - 2, 3):
+        px(draw, x + i, y + int(h * 0.62), "333333")
+
+
+def dossier_fiscal() -> Mob:
+    """Dossier administratif + tampon — Impots."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("folder", (0, 8, 0), "root", [
+            Cube((-8, 2, -2), (16, 14, 4), "F9A825", front=dossier_front),
+            Cube((-7, 12, -3), (8, 3, 1), "FFD54F"),
+        ]),
+        Bone("paper", (0, 10, -3), "folder", [
+            Cube((-6, 4, -4), (12, 10, 1), "FAFAFA"),
+        ]),
+        Bone("stamp", (4, 16, 0), "folder", [
+            Cube((2, 14, -2), (6, 5, 4), "C62828"),
+            Cube((3, 18, -1), (4, 2, 2), "B71C1C"),
+        ]),
+    ]
+    return Mob("dossier_fiscal", bones, _obj_anims(
+        {"folder": {"rotation": swing(2.0, 3, axis=2)},
+         "stamp": {"position": loop(2.0, [(0, [0, 0, 0]), (1.0, [0, 1, 0]), (2.0, [0, 0, 0])])}},
+        {"root": {"position": loop(0.8, [(0, [0, 0, 0]), (0.4, [0, 2, 0]), (0.8, [0, 0, 0])])},
+         "paper": {"rotation": swing(0.8, 8, axis=0)}},
+        {"stamp": {"position": loop(0.5, [(0, [0, 0, 0]), (0.2, [0, -6, -4]), (0.5, [0, 0, 0])])}},
+        {"stamp": {"rotation": loop(0.8, [(0, [0, 0, 0]), (0.3, [0, 0, 40]), (0.6, [0, 0, -20]), (0.8, [0, 0, 0])])},
+         "paper": {"scale": loop(0.8, [(0, [1, 1, 1]), (0.3, [1.2, 0.8, 1]), (0.8, [1, 1, 1])])}},
+        sp_len=0.8,
+    ))
+
+
+def alerte_front(draw, x, y, w, h):
+    eyes("E91E63")(draw, x, y, w, h)
+    draw.rectangle((x + 2, y + int(h * 0.55), x + w - 3, y + int(h * 0.85)), fill=rgb("AD1457"))
+    draw.rectangle((x + 3, y + int(h * 0.65), x + w - 4, y + int(h * 0.75)), fill=rgb("69F0AE"))
+
+
+def alerte_don() -> Mob:
+    """Alerte donation / like flottant — Streamer."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("screen", (0, 10, 0), "root", [
+            Cube((-8, 4, -2), (16, 12, 3), "4A148C", front=alerte_front),
+            Cube((-7, 5, -3), (14, 10, 1), "1A1A2E"),
+        ]),
+        Bone("heart", (-6, 18, 0), "screen", [Cube((-8, 16, -1), (4, 4, 2), "E91E63")]),
+        Bone("coin", (6, 18, 0), "screen", [Cube((4, 16, -1), (4, 4, 2), "FFD700")]),
+        Bone("like", (0, 4, 0), "screen", [Cube((-3, 2, -2), (6, 3, 3), "00E5FF")]),
+    ]
+    return Mob("alerte_don", bones, _obj_anims(
+        {"root": {"position": loop(2.0, [(0, [0, 0, 0]), (1.0, [0, 3, 0]), (2.0, [0, 0, 0])])},
+         "heart": {"scale": loop(2.0, [(0, [1, 1, 1]), (0.5, [1.3, 1.3, 1.3]), (1.0, [1, 1, 1]), (2.0, [1, 1, 1])])},
+         "coin": {"rotation": loop(2.0, [(0, [0, 0, 0]), (2.0, [0, 360, 0])])}},
+        {"root": {"position": loop(0.6, [(0, [0, 1, 0]), (0.3, [0, 4, 0]), (0.6, [0, 1, 0])])},
+         "like": {"scale": loop(0.6, [(0, [1, 1, 1]), (0.3, [1.2, 1.2, 1.2]), (0.6, [1, 1, 1])])}},
+        {"screen": {"scale": loop(0.4, [(0, [1, 1, 1]), (0.15, [1.15, 0.9, 1.15]), (0.4, [1, 1, 1])])}},
+        {"heart": {"scale": loop(1.0, [(0, [1, 1, 1]), (0.2, [1.8, 1.8, 1.8]), (0.5, [0.5, 0.5, 0.5]), (1.0, [1, 1, 1])])},
+         "coin": {"scale": loop(1.0, [(0, [1, 1, 1]), (0.3, [1.6, 1.6, 1.6]), (0.6, [0.6, 0.6, 0.6]), (1.0, [1, 1, 1])])},
+         "screen": {"rotation": loop(1.0, [(0, [0, 0, 0]), (0.5, [0, 20, 0]), (1.0, [0, 0, 0])])}},
+        walk_len=0.6, atk_len=0.4,
+    ))
+
+
+def eponge_front(draw, x, y, w, h):
+    eyes()(draw, x, y, w, h)
+    for i, j in ((2, 2), (w - 4, 3), (4, h - 4), (w // 2, h // 2)):
+        px(draw, x + i, y + j, "F9A825")
+
+
+def eponge_savon() -> Mob:
+    """Eponge geante + bulles — Proprete."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("sponge", (0, 6, 0), "root", [
+            Cube((-8, 2, -6), (16, 10, 12), "FFEB3B", front=eponge_front, pattern="noise"),
+        ]),
+        Bone("bubble_a", (-4, 14, 0), "sponge", [Cube((-5, 12, -1), (3, 3, 3), "B3E5FC", inflate=0.5)]),
+        Bone("bubble_b", (3, 16, 2), "sponge", [Cube((2, 14, 1), (4, 4, 4), "E1F5FE", inflate=0.5)]),
+        Bone("bubble_c", (0, 18, -2), "sponge", [Cube((-1, 17, -3), (2, 2, 2), "B3E5FC", inflate=0.3)]),
+    ]
+    return Mob("eponge_savon", bones, _obj_anims(
+        {"sponge": {"scale": loop(2.0, [(0, [1, 1, 1]), (1.0, [1.05, 0.95, 1.05]), (2.0, [1, 1, 1])])},
+         "bubble_a": {"position": loop(2.0, [(0, [0, 0, 0]), (1.0, [0, 3, 0]), (2.0, [0, 0, 0])])},
+         "bubble_b": {"position": loop(2.0, [(0, [0, 1, 0]), (1.0, [0, 4, 0]), (2.0, [0, 1, 0])])},
+         "bubble_c": {"position": loop(2.0, [(0, [0, 0, 0]), (1.0, [0, 2, 0]), (2.0, [0, 0, 0])])}},
+        {"root": {"position": loop(0.7, [(0, [0, 0, 0]), (0.2, [0, 3, 0]), (0.4, [0, 0, 0]), (0.6, [0, 3, 0]), (0.7, [0, 0, 0])])}},
+        {"sponge": {"scale": loop(0.5, [(0, [1, 1, 1]), (0.2, [1.2, 0.7, 1.2]), (0.5, [1, 1, 1])])}},
+        {"bubble_a": {"scale": loop(1.0, [(0, [1, 1, 1]), (0.3, [1.5, 1.5, 1.5]), (0.6, [0.2, 0.2, 0.2]), (1.0, [1, 1, 1])])},
+         "bubble_b": {"scale": loop(1.0, [(0, [1, 1, 1]), (0.4, [1.6, 1.6, 1.6]), (0.7, [0.2, 0.2, 0.2]), (1.0, [1, 1, 1])])},
+         "bubble_c": {"scale": loop(1.0, [(0, [1, 1, 1]), (0.5, [1.8, 1.8, 1.8]), (0.8, [0.1, 0.1, 0.1]), (1.0, [1, 1, 1])])}},
+        walk_len=0.7,
+    ))
+
+
+def casque_front(draw, x, y, w, h):
+    draw.rectangle((x + 2, y + int(h * 0.35), x + w - 3, y + int(h * 0.75)), fill=rgb("4FC3F7"))
+    eyes("FFFFFF", white=False, y_frac=0.5)(draw, x, y, w, h)
+
+
+def casque_orbital() -> Mob:
+    """Casque astronaute flottant + planete — Gravite Zero."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("helmet", (0, 12, 0), "root", [
+            Cube((-7, 6, -7), (14, 14, 14), "ECEFF1", front=casque_front),
+            Cube((-5, 8, -8), (10, 8, 1), "29B6F6"),
+        ]),
+        Bone("planet", (10, 8, 0), "helmet", [
+            Cube((8, 6, -2), (5, 5, 5), "7E57C2"),
+            Cube((9, 7, -3), (3, 2, 1), "B39DDB"),
+        ]),
+        Bone("ring", (0, 10, 0), "helmet", [
+            Cube((-9, 11, -1), (18, 1, 2), "90CAF9", inflate=0.2),
+        ]),
+    ]
+    return Mob("casque_orbital", bones, _obj_anims(
+        {"root": {"position": loop(2.0, [(0, [0, 0, 0]), (1.0, [0, 4, 0]), (2.0, [0, 0, 0])])},
+         "planet": {"rotation": loop(2.0, [(0, [0, 0, 0]), (2.0, [0, 360, 0])])},
+         "ring": {"rotation": swing(2.0, 8, axis=2)}},
+        {"root": {"position": loop(0.8, [(0, [0, 2, 0]), (0.4, [0, 5, 0]), (0.8, [0, 2, 0])])},
+         "helmet": {"rotation": {0.0: [8, 0, 0]}}},
+        {"helmet": {"position": loop(0.5, [(0, [0, 0, 0]), (0.2, [0, 0, -6]), (0.5, [0, 0, 0])])}},
+        {"root": {"rotation": loop(1.2, [(0, [0, 0, 0]), (1.2, [0, 360, 0])])},
+         "planet": {"scale": loop(1.2, [(0, [1, 1, 1]), (0.4, [1.4, 1.4, 1.4]), (1.2, [1, 1, 1])])}},
+        walk_len=0.8, sp_len=1.2,
+    ))
+
+
+def clap_front(draw, x, y, w, h):
+    eyes()(draw, x, y, w, h)
+    for row in range(0, h, 3):
+        c = "FAFAFA" if (row // 3) % 2 == 0 else "212121"
+        draw.rectangle((x, y + row, x + w - 1, y + min(row + 2, h - 1)), fill=rgb(c))
+
+
+def clap_cinema() -> Mob:
+    """Clap de cinema vivant — Film Action."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("board", (0, 8, 0), "root", [
+            Cube((-9, 2, -2), (18, 12, 4), "212121", front=clap_front),
+            Cube((-8, 3, -3), (16, 5, 1), "FAFAFA"),
+        ]),
+        Bone("stick", (0, 16, 0), "board", [
+            Cube((-9, 14, -2), (18, 4, 4), "FAFAFA", pattern="stripes"),
+        ]),
+        Bone("hinge", (0, 14, 0), "board", [Cube((-1, 13, -1), (2, 2, 2), "FFD700")]),
+    ]
+    return Mob("clap_cinema", bones, _obj_anims(
+        {"stick": {"rotation": swing(2.0, 6, axis=0)},
+         "board": {"rotation": swing(2.0, 2, axis=2)}},
+        {"root": {"position": loop(0.7, [(0, [0, 0, 0]), (0.2, [0, 2, 0]), (0.4, [0, 0, 0]), (0.6, [0, 2, 0]), (0.7, [0, 0, 0])])}},
+        {"stick": {"rotation": loop(0.4, [(0, [0, 0, 0]), (0.15, [-50, 0, 0]), (0.3, [0, 0, 0]), (0.4, [0, 0, 0])])}},
+        {"stick": {"rotation": loop(0.8, [
+            (0, [0, 0, 0]), (0.15, [-60, 0, 0]), (0.3, [0, 0, 0]),
+            (0.45, [-60, 0, 0]), (0.6, [0, 0, 0]), (0.8, [0, 0, 0]),
+         ])},
+         "board": {"scale": loop(0.8, [(0, [1, 1, 1]), (0.3, [1.1, 0.9, 1.1]), (0.8, [1, 1, 1])])}},
+        walk_len=0.7, atk_len=0.4, sp_len=0.8,
+    ))
+
+
 MOBS = [chef, dracula, hamburger, cat, rooster, screen,
         toi_du_futur, douanier, lapin_extirpateur, grossiste_clandestin, statue_vivante, mimique_d20,
         bodybuilder, danseur_disco, hacker_fantome, bot_speedrunner, barista, pirate_torrent,
-        manifestant, crypto_bulle, nuage_orage, slider_multivers, pop_it_geant, reveil_cauchemar]
+        manifestant, crypto_bulle, nuage_orage, slider_multivers, pop_it_geant, reveil_cauchemar,
+        baguette_vivante, dossier_fiscal, alerte_don, eponge_savon, casque_orbital, clap_cinema]
 
 
 # --------------------------------------------------------------------------- export

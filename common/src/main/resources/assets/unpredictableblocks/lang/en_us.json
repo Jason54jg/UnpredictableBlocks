@@ -625,5 +625,11 @@
   "entity.unpredictableblocks.nuage_orage": "Storm Cloud",
   "entity.unpredictableblocks.slider_multivers": "Multiverse Slider",
   "entity.unpredictableblocks.pop_it_geant": "Giant Pop-It",
-  "entity.unpredictableblocks.reveil_cauchemar": "Nightmare Alarm"
+  "entity.unpredictableblocks.reveil_cauchemar": "Nightmare Alarm",
+  "entity.unpredictableblocks.baguette_vivante": "Living Baguette",
+  "entity.unpredictableblocks.dossier_fiscal": "Tax Folder",
+  "entity.unpredictableblocks.alerte_don": "Donation Alert",
+  "entity.unpredictableblocks.eponge_savon": "Soap Sponge",
+  "entity.unpredictableblocks.casque_orbital": "Orbital Helmet",
+  "entity.unpredictableblocks.clap_cinema": "Action Clapper"
 }
