@@ -1724,11 +1724,175 @@ def clap_cinema() -> Mob:
     ))
 
 
+
+
+# --------------------------------------------------------------------------- Lot 6 : derniers themes sans mob
+def pyramide_front(draw, x, y, w, h):
+    eyes("C62828", white=False)(draw, x, y, w, h)
+    # oeil central
+    cx, cy = x + w // 2, y + h // 2
+    draw.ellipse((cx - 3, cy - 2, cx + 3, cy + 2), fill=rgb("FAFAFA"))
+    px(draw, cx, cy, "C62828")
+
+
+def pyramide_oeil() -> Mob:
+    """Pyramide + oeil flottant — Complot."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("pyramid", (0, 4, 0), "root", [
+            Cube((-8, 0, -8), (16, 4, 16), "C0C0C0"),
+            Cube((-6, 4, -6), (12, 4, 12), "B0BEC5"),
+            Cube((-4, 8, -4), (8, 4, 8), "90A4AE"),
+            Cube((-2, 12, -2), (4, 4, 4), "78909C", front=pyramide_front),
+        ]),
+        Bone("eye", (0, 18, 0), "pyramid", [
+            Cube((-3, 16, -2), (6, 4, 4), "FAFAFA"),
+            Cube((-1, 17, -3), (2, 2, 1), "C62828"),
+        ]),
+        Bone("foil", (6, 10, 0), "pyramid", [Cube((4, 8, -2), (5, 5, 4), "ECEFF1", inflate=0.3)]),
+    ]
+    return Mob("pyramide_oeil", bones, _obj_anims(
+        {"eye": {"position": loop(2.0, [(0, [0, 0, 0]), (1.0, [0, 2, 0]), (2.0, [0, 0, 0])])},
+         "foil": {"rotation": swing(2.0, 10, axis=2)},
+         "pyramid": {"rotation": swing(2.0, 2, axis=1)}},
+        {"root": {"position": loop(0.8, [(0, [0, 0, 0]), (0.4, [0, 2, 0]), (0.8, [0, 0, 0])])}},
+        {"eye": {"scale": loop(0.5, [(0, [1, 1, 1]), (0.2, [1.4, 1.4, 1.4]), (0.5, [1, 1, 1])])}},
+        {"pyramid": {"rotation": loop(1.0, [(0, [0, 0, 0]), (1.0, [0, 360, 0])])},
+         "eye": {"scale": loop(1.0, [(0, [1, 1, 1]), (0.4, [1.6, 1.6, 1.6]), (1.0, [1, 1, 1])])}},
+    ))
+
+
+def cle_front(draw, x, y, w, h):
+    eyes()(draw, x, y, w, h)
+    draw.rectangle((x + 2, y + int(h * 0.6), x + w - 3, y + int(h * 0.75)), fill=rgb("FFD700"))
+
+
+def cle_tuyau() -> Mob:
+    """Cle a molette + tuyau — Plomberie."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("wrench", (0, 8, 0), "root", [
+            Cube((-10, 6, -2), (20, 4, 4), "78909C", front=cle_front),
+            Cube((-12, 4, -3), (6, 8, 6), "607D8B"),
+            Cube((6, 5, -2), (5, 6, 4), "546E7A"),
+        ]),
+        Bone("pipe", (0, 2, 0), "wrench", [
+            Cube((-2, 0, -2), (4, 6, 4), "4CAF50"),
+            Cube((-2, -2, -2), (4, 2, 4), "388E3C"),
+        ]),
+        Bone("drip", (0, 0, 0), "pipe", [Cube((-1, -4, -1), (2, 3, 2), "81D4FA")]),
+    ]
+    return Mob("cle_tuyau", bones, _obj_anims(
+        {"drip": {"position": loop(2.0, [(0, [0, 0, 0]), (1.0, [0, -3, 0]), (2.0, [0, 0, 0])])},
+         "wrench": {"rotation": swing(2.0, 4, axis=2)}},
+        {"root": {"position": loop(0.7, [(0, [0, 0, 0]), (0.2, [0, 2, 0]), (0.4, [0, 0, 0]), (0.6, [0, 2, 0]), (0.7, [0, 0, 0])])}},
+        {"wrench": {"rotation": loop(0.5, [(0, [0, 0, 0]), (0.2, [0, 0, -40]), (0.5, [0, 0, 0])])}},
+        {"pipe": {"scale": loop(0.8, [(0, [1, 1, 1]), (0.3, [1.2, 1.5, 1.2]), (0.8, [1, 1, 1])])},
+         "drip": {"scale": loop(0.8, [(0, [1, 1, 1]), (0.4, [1.5, 2.0, 1.5]), (0.8, [1, 1, 1])])}},
+        walk_len=0.7, sp_len=0.8,
+    ))
+
+
+def biscuit_front(draw, x, y, w, h):
+    eyes()(draw, x, y, w, h)
+    draw.rectangle((x + 2, y + int(h * 0.7), x + w - 3, y + int(h * 0.8)), fill=rgb("5D4037"))
+
+
+def biscuit_fortune() -> Mob:
+    """Biscuit fortune + papier — Fortune Cookie."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("cookie", (0, 6, 0), "root", [
+            Cube((-6, 2, -4), (12, 8, 8), "E0A060", front=biscuit_front, pattern="noise"),
+            Cube((-5, 3, -5), (10, 6, 1), "D4934A"),
+        ]),
+        Bone("paper", (0, 10, -5), "cookie", [
+            Cube((-5, 8, -6), (10, 3, 1), "FFFDE7"),
+        ]),
+        Bone("crumb", (5, 4, 2), "cookie", [Cube((4, 3, 1), (2, 2, 2), "FFCC80")]),
+    ]
+    return Mob("biscuit_fortune", bones, _obj_anims(
+        {"paper": {"rotation": swing(2.0, 8, axis=0)},
+         "cookie": {"rotation": swing(2.0, 3, axis=2)}},
+        {"root": {"position": loop(0.6, [(0, [0, 0, 0]), (0.15, [0, 3, 0]), (0.3, [0, 0, 0]), (0.45, [0, 3, 0]), (0.6, [0, 0, 0])])}},
+        {"cookie": {"scale": loop(0.4, [(0, [1, 1, 1]), (0.15, [1.15, 0.85, 1.15]), (0.4, [1, 1, 1])])}},
+        {"paper": {"position": loop(1.0, [(0, [0, 0, 0]), (0.4, [0, 0, -6]), (0.7, [0, 0, -6]), (1.0, [0, 0, 0])])},
+         "crumb": {"scale": loop(1.0, [(0, [1, 1, 1]), (0.3, [1.5, 1.5, 1.5]), (0.6, [0.3, 0.3, 0.3]), (1.0, [1, 1, 1])])}},
+        walk_len=0.6, atk_len=0.4,
+    ))
+
+
+def tente_front(draw, x, y, w, h):
+    eyes()(draw, x, y, w, h)
+    # entree tente
+    draw.rectangle((x + w // 2 - 2, y + int(h * 0.4), x + w // 2 + 1, y + h - 1), fill=rgb("3E2723"))
+
+
+def tente_camp() -> Mob:
+    """Tente + feu de camp — Camping."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("tent", (0, 4, 0), "root", [
+            Cube((-10, 0, -8), (20, 2, 16), "5D4037"),
+            Cube((-8, 2, -6), (16, 10, 12), "2E7D32", front=tente_front),
+            Cube((-4, 12, -4), (8, 4, 8), "1B5E20"),
+        ]),
+        Bone("pole", (0, 14, 0), "tent", [Cube((-1, 10, -1), (2, 8, 2), "8D6E63")]),
+        Bone("fire", (0, 2, 10), "root", [
+            Cube((-2, 0, 8), (4, 5, 4), "FF6D00"),
+            Cube((-1, 4, 9), (2, 3, 2), "FFEB3B"),
+        ]),
+    ]
+    return Mob("tente_camp", bones, _obj_anims(
+        {"fire": {"scale": loop(1.5, [(0, [1, 1, 1]), (0.4, [1.1, 1.3, 1.1]), (0.8, [0.9, 0.8, 0.9]), (1.5, [1, 1, 1])])},
+         "tent": {"rotation": swing(2.0, 2, axis=2)}},
+        {"root": {"position": loop(0.8, [(0, [0, 0, 0]), (0.4, [0, 1, 0]), (0.8, [0, 0, 0])])}},
+        {"tent": {"scale": loop(0.5, [(0, [1, 1, 1]), (0.2, [1.1, 0.9, 1.1]), (0.5, [1, 1, 1])])}},
+        {"fire": {"scale": loop(1.0, [(0, [1, 1, 1]), (0.3, [1.5, 2.0, 1.5]), (0.6, [0.8, 0.6, 0.8]), (1.0, [1, 1, 1])])},
+         "pole": {"rotation": loop(1.0, [(0, [0, 0, 0]), (0.5, [0, 0, 15]), (1.0, [0, 0, 0])])}},
+    ))
+
+
+def meme_front(draw, x, y, w, h):
+    eyes("69F0AE")(draw, x, y, w, h)
+    # sourire pepe-ish
+    draw.rectangle((x + 2, y + int(h * 0.7), x + w - 3, y + int(h * 0.8)), fill=rgb("212121"))
+    px(draw, x + 2, y + int(h * 0.65), "212121")
+    px(draw, x + w - 3, y + int(h * 0.65), "212121")
+
+
+def cube_meme() -> Mob:
+    """Cube meme arc-en-ciel — Invasion Memes."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("cube", (0, 8, 0), "root", [
+            Cube((-7, 2, -7), (14, 14, 14), "7CB342", front=meme_front, pattern="checker"),
+        ]),
+        Bone("nyan_a", (-10, 10, 0), "cube", [Cube((-12, 8, -1), (4, 3, 2), "E91E63")]),
+        Bone("nyan_b", (-10, 12, 0), "cube", [Cube((-12, 11, -1), (4, 2, 2), "FFEB3B")]),
+        Bone("nyan_c", (-10, 14, 0), "cube", [Cube((-12, 13, -1), (4, 2, 2), "42A5F5")]),
+        Bone("glasses", (0, 14, -8), "cube", [Cube((-5, 12, -8), (10, 3, 1), "212121")]),
+    ]
+    return Mob("cube_meme", bones, _obj_anims(
+        {"root": {"position": loop(2.0, [(0, [0, 0, 0]), (1.0, [0, 3, 0]), (2.0, [0, 0, 0])])},
+         "cube": {"rotation": loop(2.0, [(0, [0, 0, 0]), (2.0, [0, 360, 0])])},
+         "nyan_a": {"position": loop(2.0, [(0, [0, 0, 0]), (1.0, [-2, 0, 0]), (2.0, [0, 0, 0])])}},
+        {"root": {"position": loop(0.5, [(0, [0, 1, 0]), (0.25, [0, 4, 0]), (0.5, [0, 1, 0])])}},
+        {"cube": {"scale": loop(0.4, [(0, [1, 1, 1]), (0.15, [1.2, 0.8, 1.2]), (0.4, [1, 1, 1])])}},
+        {"cube": {"rotation": loop(0.8, [(0, [0, 0, 0]), (0.8, [0, 720, 0])])},
+         "nyan_a": {"scale": loop(0.8, [(0, [1, 1, 1]), (0.3, [1.5, 1.5, 1.5]), (0.8, [1, 1, 1])])},
+         "nyan_b": {"scale": loop(0.8, [(0, [1, 1, 1]), (0.4, [1.5, 1.5, 1.5]), (0.8, [1, 1, 1])])},
+         "nyan_c": {"scale": loop(0.8, [(0, [1, 1, 1]), (0.5, [1.5, 1.5, 1.5]), (0.8, [1, 1, 1])])}},
+        walk_len=0.5, atk_len=0.4, sp_len=0.8,
+    ))
+
+
 MOBS = [chef, dracula, hamburger, cat, rooster, screen,
         toi_du_futur, douanier, lapin_extirpateur, grossiste_clandestin, statue_vivante, mimique_d20,
         bodybuilder, danseur_disco, hacker_fantome, bot_speedrunner, barista, pirate_torrent,
         manifestant, crypto_bulle, nuage_orage, slider_multivers, pop_it_geant, reveil_cauchemar,
-        baguette_vivante, dossier_fiscal, alerte_don, eponge_savon, casque_orbital, clap_cinema]
+        baguette_vivante, dossier_fiscal, alerte_don, eponge_savon, casque_orbital, clap_cinema,
+        pyramide_oeil, cle_tuyau, biscuit_fortune, tente_camp, cube_meme]
 
 
 # --------------------------------------------------------------------------- export

@@ -30,6 +30,11 @@ import com.jason54.unpredictableblocks.entity.mob.AlerteDonEntity;
 import com.jason54.unpredictableblocks.entity.mob.EpongeSavonEntity;
 import com.jason54.unpredictableblocks.entity.mob.CasqueOrbitalEntity;
 import com.jason54.unpredictableblocks.entity.mob.ClapCinemaEntity;
+import com.jason54.unpredictableblocks.entity.mob.PyramideOeilEntity;
+import com.jason54.unpredictableblocks.entity.mob.CleTuyauEntity;
+import com.jason54.unpredictableblocks.entity.mob.BiscuitFortuneEntity;
+import com.jason54.unpredictableblocks.entity.mob.TenteCampEntity;
+import com.jason54.unpredictableblocks.entity.mob.CubeMemeEntity;
 import com.jason54.unpredictableblocks.entity.mob.SliderMultiversEntity;
 import com.jason54.unpredictableblocks.entity.mob.StatueVivanteEntity;
 import com.jason54.unpredictableblocks.entity.mob.ToiDuFuturEntity;
@@ -84,6 +89,11 @@ public final class UnpredictableBlocksClient {
         EntityRendererRegistry.register(ModEntities.EPONGE_SAVON, ctx -> new LuckyMobRenderer<>(ctx, EpongeSavonEntity.ID, 0.6F));
         EntityRendererRegistry.register(ModEntities.CASQUE_ORBITAL, ctx -> new LuckyMobRenderer<>(ctx, CasqueOrbitalEntity.ID, 0.6F));
         EntityRendererRegistry.register(ModEntities.CLAP_CINEMA, ctx -> new LuckyMobRenderer<>(ctx, ClapCinemaEntity.ID, 0.5F));
+        EntityRendererRegistry.register(ModEntities.PYRAMIDE_OEIL, ctx -> new LuckyMobRenderer<>(ctx, PyramideOeilEntity.ID, 0.6F));
+        EntityRendererRegistry.register(ModEntities.CLE_TUYAU, ctx -> new LuckyMobRenderer<>(ctx, CleTuyauEntity.ID, 0.5F));
+        EntityRendererRegistry.register(ModEntities.BISCUIT_FORTUNE, ctx -> new LuckyMobRenderer<>(ctx, BiscuitFortuneEntity.ID, 0.4F));
+        EntityRendererRegistry.register(ModEntities.TENTE_CAMP, ctx -> new LuckyMobRenderer<>(ctx, TenteCampEntity.ID, 0.7F));
+        EntityRendererRegistry.register(ModEntities.CUBE_MEME, ctx -> new LuckyMobRenderer<>(ctx, CubeMemeEntity.ID, 0.6F));
 
         NetworkManager.registerReceiver(
                 NetworkManager.s2c(),

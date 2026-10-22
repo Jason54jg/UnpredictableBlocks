@@ -78,16 +78,16 @@ public final class ThemeCatalogEffects {
             case FILM_ACTION -> filmAction(level, player, origin, tier);
             case JDR_D20 -> jdr(level, player, origin, tier);
             case PENURIE_2020 -> penurie(level, player, tier);
-            case COMPLOT -> complot(player, tier);
+            case COMPLOT -> complot(level, player, origin, tier);
             case LAG_BUG -> lagBug(level, player, origin, tier);
             case DISCO_80 -> disco(level, player, origin, tier);
             case PLOMBERIE -> plomberie(level, player, origin, tier);
-            case FORTUNE_COOKIE -> fortuneCookie(player, tier);
-            case CAMPING -> camping(player, tier);
+            case FORTUNE_COOKIE -> fortuneCookie(level, player, origin, tier);
+            case CAMPING -> camping(level, player, origin, tier);
             case GYM_BRO -> gymBro(level, player, origin, tier);
             case ART_MODERNE -> artModerne(level, player, origin, tier);
             case MAGIE_COMPTOIR -> magie(level, origin, tier);
-            case INVASION_MEMES -> memes(player, tier);
+            case INVASION_MEMES -> memes(level, player, origin, tier);
             default -> {}
         }
     }
@@ -283,12 +283,17 @@ public final class ThemeCatalogEffects {
         player.sendSystemMessage(Component.literal("§7Grossiste clandestin : objet rare contre 8 émeraudes (clic droit)."));
     }
 
-    private static void complot(ServerPlayer player, LuckTier tier) {
+    private static void complot(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
         if (tier != LuckTier.LOW) {
             return;
         }
         player.addEffect(new MobEffectInstance(MobEffects.GLOWING, 20 * 600, 0));
-        player.sendSystemMessage(Component.literal("§5Puce 5G — Glow permanent, phantoms attirés."));
+        var pyramid = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.PYRAMIDE_OEIL.get(), level);
+        if (pyramid != null) {
+            pyramid.setPos(Vec3.atBottomCenterOf(origin));
+            level.addFreshEntity(pyramid);
+        }
+        player.sendSystemMessage(Component.literal("§5Puce 5G — et la Pyramide Oeil vous observe."));
     }
 
     private static void lagBug(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
@@ -329,24 +334,39 @@ public final class ThemeCatalogEffects {
         }
         player.setDeltaMovement(0, 1.8, 0);
         level.setBlockAndUpdate(origin, Blocks.MUD.defaultBlockState());
-        player.sendSystemMessage(Component.literal("§6Geyser de boue — tuyauterie bouchée !"));
+        var wrench = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.CLE_TUYAU.get(), level);
+        if (wrench != null) {
+            wrench.setPos(Vec3.atBottomCenterOf(origin).add(1, 0, 0));
+            level.addFreshEntity(wrench);
+        }
+        player.sendSystemMessage(Component.literal("§6Geyser de boue — une Clé à Tuyau débouche tout !"));
     }
 
-    private static void fortuneCookie(ServerPlayer player, LuckTier tier) {
+    private static void fortuneCookie(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
         if (tier != LuckTier.NEUTRAL) {
             return;
         }
         int code = player.getRandom().nextInt(9000) + 1000;
         PlayerQuestData.setFortuneCode(player, code, 5L * 20);
-        player.sendSystemMessage(Component.literal("§eCode fortune : §l" + code + " §e(tapez /say " + code + " sous 5s pour +500 XP)."));
+        var cookie = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.BISCUIT_FORTUNE.get(), level);
+        if (cookie != null) {
+            cookie.setPos(Vec3.atBottomCenterOf(origin));
+            level.addFreshEntity(cookie);
+        }
+        player.sendSystemMessage(Component.literal("§eCode fortune : §l" + code + " §e— un Biscuit Fortune apparaît !"));
     }
 
-    private static void camping(ServerPlayer player, LuckTier tier) {
+    private static void camping(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
         if (tier != LuckTier.HIGH) {
             return;
         }
         player.getInventory().add(new ItemStack(Items.SHULKER_BOX));
-        player.sendSystemMessage(Component.literal("§2Sac à dos suréquipé — Shulker Box de survie."));
+        var tent = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.TENTE_CAMP.get(), level);
+        if (tent != null) {
+            tent.setPos(Vec3.atBottomCenterOf(origin));
+            level.addFreshEntity(tent);
+        }
+        player.sendSystemMessage(Component.literal("§2Shulker Box — et une Tente de Camp s'installe !"));
     }
 
     private static void gymBro(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
@@ -385,12 +405,17 @@ public final class ThemeCatalogEffects {
         }
     }
 
-    private static void memes(ServerPlayer player, LuckTier tier) {
+    private static void memes(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
         if (tier != LuckTier.NEUTRAL) {
             return;
         }
         player.setDeltaMovement(player.getDeltaMovement().add(0, 0.8, 0));
-        player.sendSystemMessage(Component.literal("§cEmotional Damage !"));
+        var cube = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.CUBE_MEME.get(), level);
+        if (cube != null) {
+            cube.setPos(Vec3.atBottomCenterOf(origin).add(0, 0.5, 0));
+            level.addFreshEntity(cube);
+        }
+        player.sendSystemMessage(Component.literal("§cEmotional Damage — Cube Meme inbound !"));
     }
 
     private static void shuffleHotbar(ServerPlayer player) {

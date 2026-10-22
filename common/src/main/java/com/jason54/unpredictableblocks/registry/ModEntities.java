@@ -29,6 +29,11 @@ import com.jason54.unpredictableblocks.entity.mob.AlerteDonEntity;
 import com.jason54.unpredictableblocks.entity.mob.EpongeSavonEntity;
 import com.jason54.unpredictableblocks.entity.mob.CasqueOrbitalEntity;
 import com.jason54.unpredictableblocks.entity.mob.ClapCinemaEntity;
+import com.jason54.unpredictableblocks.entity.mob.PyramideOeilEntity;
+import com.jason54.unpredictableblocks.entity.mob.CleTuyauEntity;
+import com.jason54.unpredictableblocks.entity.mob.BiscuitFortuneEntity;
+import com.jason54.unpredictableblocks.entity.mob.TenteCampEntity;
+import com.jason54.unpredictableblocks.entity.mob.CubeMemeEntity;
 import com.jason54.unpredictableblocks.entity.mob.SliderMultiversEntity;
 import com.jason54.unpredictableblocks.entity.mob.StatueVivanteEntity;
 import com.jason54.unpredictableblocks.entity.mob.ToiDuFuturEntity;
@@ -129,6 +134,18 @@ public final class ModEntities {
     public static final RegistrySupplier<EntityType<ClapCinemaEntity>> CLAP_CINEMA =
             mob(ClapCinemaEntity.ID, ClapCinemaEntity::new, MobCategory.MONSTER, 1.2F, 1.2F);
 
+    // Lot 6 — derniers themes
+    public static final RegistrySupplier<EntityType<PyramideOeilEntity>> PYRAMIDE_OEIL =
+            mob(PyramideOeilEntity.ID, PyramideOeilEntity::new, MobCategory.MONSTER, 1.2F, 1.4F);
+    public static final RegistrySupplier<EntityType<CleTuyauEntity>> CLE_TUYAU =
+            mob(CleTuyauEntity.ID, CleTuyauEntity::new, MobCategory.MONSTER, 1.4F, 1.0F);
+    public static final RegistrySupplier<EntityType<BiscuitFortuneEntity>> BISCUIT_FORTUNE =
+            mob(BiscuitFortuneEntity.ID, BiscuitFortuneEntity::new, MobCategory.MONSTER, 0.9F, 0.8F);
+    public static final RegistrySupplier<EntityType<TenteCampEntity>> TENTE_CAMP =
+            mob(TenteCampEntity.ID, TenteCampEntity::new, MobCategory.MONSTER, 1.4F, 1.4F);
+    public static final RegistrySupplier<EntityType<CubeMemeEntity>> CUBE_MEME =
+            mob(CubeMemeEntity.ID, CubeMemeEntity::new, MobCategory.MONSTER, 1.1F, 1.1F);
+
     private ModEntities() {}
 
     private static <T extends Entity> RegistrySupplier<EntityType<T>> mob(
@@ -171,5 +188,10 @@ public final class ModEntities {
         EntityAttributeRegistry.register(EPONGE_SAVON, EpongeSavonEntity::createAttributes);
         EntityAttributeRegistry.register(CASQUE_ORBITAL, CasqueOrbitalEntity::createAttributes);
         EntityAttributeRegistry.register(CLAP_CINEMA, ClapCinemaEntity::createAttributes);
+        EntityAttributeRegistry.register(PYRAMIDE_OEIL, PyramideOeilEntity::createAttributes);
+        EntityAttributeRegistry.register(CLE_TUYAU, CleTuyauEntity::createAttributes);
+        EntityAttributeRegistry.register(BISCUIT_FORTUNE, BiscuitFortuneEntity::createAttributes);
+        EntityAttributeRegistry.register(TENTE_CAMP, TenteCampEntity::createAttributes);
+        EntityAttributeRegistry.register(CUBE_MEME, CubeMemeEntity::createAttributes);
     }
 }

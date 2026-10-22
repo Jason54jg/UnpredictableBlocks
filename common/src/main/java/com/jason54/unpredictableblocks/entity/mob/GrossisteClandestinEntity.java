@@ -21,6 +21,7 @@ import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -33,13 +34,15 @@ public class GrossisteClandestinEntity extends PathfinderMob implements GeoEntit
     public static final String ID = "grossiste_clandestin";
     private static final MobAnimations ANIMS = MobAnimations.of(ID);
     private static final int PRICE = 8;
-    private static final ItemStack[] WARES = {
-            new ItemStack(Items.NETHERITE_SCRAP),
-            new ItemStack(Items.DIAMOND, 2),
-            new ItemStack(Items.GOLDEN_APPLE),
-            new ItemStack(Items.ENDER_PEARL, 4),
-            new ItemStack(Items.TOTEM_OF_UNDYING),
+    // Item+count (pas ItemStack) : creation trop tot au class-init => Components not bound yet
+    private static final Item[] WARE_ITEMS = {
+            Items.NETHERITE_SCRAP,
+            Items.DIAMOND,
+            Items.GOLDEN_APPLE,
+            Items.ENDER_PEARL,
+            Items.TOTEM_OF_UNDYING,
     };
+    private static final int[] WARE_COUNTS = {1, 2, 1, 4, 1};
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private boolean fleeing;
@@ -83,7 +86,8 @@ public class GrossisteClandestinEntity extends PathfinderMob implements GeoEntit
                 return InteractionResult.SUCCESS;
             }
             takeEmeralds(player, PRICE);
-            ItemStack ware = WARES[getRandom().nextInt(WARES.length)].copy();
+            int idx = getRandom().nextInt(WARE_ITEMS.length);
+            ItemStack ware = new ItemStack(WARE_ITEMS[idx], WARE_COUNTS[idx]);
             McAccess.giveOrDrop(player, ware);
             triggerAnim(MobAnimations.ACTION, MobAnimations.SPECIAL);
             playSound(SoundEvents.VILLAGER_YES, 1.0F, 0.9F);

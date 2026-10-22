@@ -16,6 +16,7 @@ import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -29,13 +30,14 @@ public class LapinExtirpateurEntity extends PathfinderMob implements GeoEntity {
     public static final String ID = "lapin_extirpateur";
     private static final MobAnimations ANIMS = MobAnimations.of(ID);
     private static final int TRICK_COOLDOWN = 20 * 8;
-    private static final ItemStack[] TRICKS = {
-            new ItemStack(Items.PAPER),
-            new ItemStack(Items.GOLD_NUGGET),
-            new ItemStack(Items.RABBIT_FOOT),
-            new ItemStack(Items.EMERALD),
-            new ItemStack(Items.MAP),
-            new ItemStack(Items.NAME_TAG),
+    // Item (pas ItemStack) : creation trop tot au class-init => Components not bound yet
+    private static final Item[] TRICKS = {
+            Items.PAPER,
+            Items.GOLD_NUGGET,
+            Items.RABBIT_FOOT,
+            Items.EMERALD,
+            Items.MAP,
+            Items.NAME_TAG,
     };
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
@@ -84,7 +86,7 @@ public class LapinExtirpateurEntity extends PathfinderMob implements GeoEntity {
     private void pullFromHat(ServerLevel level) {
         triggerAnim(MobAnimations.ACTION, MobAnimations.ATTACK);
         playSound(SoundEvents.ENDER_CHEST_OPEN, 0.7F, 1.4F);
-        ItemStack drop = TRICKS[getRandom().nextInt(TRICKS.length)].copy();
+        ItemStack drop = new ItemStack(TRICKS[getRandom().nextInt(TRICKS.length)]);
         var item = new net.minecraft.world.entity.item.ItemEntity(level, getX(), getY() + 1.2, getZ(), drop);
         level.addFreshEntity(item);
         level.sendParticles(ParticleTypes.ENCHANT, getX(), getY() + 1.2, getZ(), 12, 0.3, 0.4, 0.3, 0.5);

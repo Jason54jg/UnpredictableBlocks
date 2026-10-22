@@ -631,5 +631,10 @@
   "entity.unpredictableblocks.alerte_don": "Alerte Don",
   "entity.unpredictableblocks.eponge_savon": "Éponge Savon",
   "entity.unpredictableblocks.casque_orbital": "Casque Orbital",
-  "entity.unpredictableblocks.clap_cinema": "Clap Cinéma"
+  "entity.unpredictableblocks.clap_cinema": "Clap Cinéma",
+  "entity.unpredictableblocks.pyramide_oeil": "Pyramide Œil",
+  "entity.unpredictableblocks.cle_tuyau": "Clé à Tuyau",
+  "entity.unpredictableblocks.biscuit_fortune": "Biscuit Fortune",
+  "entity.unpredictableblocks.tente_camp": "Tente de Camp",
+  "entity.unpredictableblocks.cube_meme": "Cube Meme"
 }

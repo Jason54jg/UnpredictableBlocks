@@ -631,5 +631,10 @@
   "entity.unpredictableblocks.alerte_don": "Donation Alert",
   "entity.unpredictableblocks.eponge_savon": "Soap Sponge",
   "entity.unpredictableblocks.casque_orbital": "Orbital Helmet",
-  "entity.unpredictableblocks.clap_cinema": "Action Clapper"
+  "entity.unpredictableblocks.clap_cinema": "Action Clapper",
+  "entity.unpredictableblocks.pyramide_oeil": "Eye Pyramid",
+  "entity.unpredictableblocks.cle_tuyau": "Pipe Wrench",
+  "entity.unpredictableblocks.biscuit_fortune": "Fortune Cookie",
+  "entity.unpredictableblocks.tente_camp": "Camp Tent",
+  "entity.unpredictableblocks.cube_meme": "Meme Cube"
 }
