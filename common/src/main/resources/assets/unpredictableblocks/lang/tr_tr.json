@@ -601,5 +601,11 @@
   "gamerule.unpredictableblocks.lucky_density": "0)",
   "gamerule.unpredictableblocks.lucky_density.description": "Doğal 0 = Hayır, 100 = normal, 1000 = on kat daha fazla.",
   "gamerule.unpredictableblocks.lucky_shrines": "Shrines yaklaşık 0 )",
-  "gamerule.unpredictableblocks.lucky_shrines.description": "Pedestals, sunars and sanctuaries around naturalur0)."
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Pedestals, sunars and sanctuaries around naturalur0).",
+  "entity.unpredictableblocks.chef_italien": "İtalyan Şefi",
+  "entity.unpredictableblocks.comte_dracula": "Count Dracula",
+  "entity.unpredictableblocks.mascotte_hamburger": "Burger Mascot",
+  "entity.unpredictableblocks.chat_internet": "İnternet Kedisi",
+  "entity.unpredictableblocks.coq_gaulois": "Gallic Rooster",
+  "entity.unpredictableblocks.ecran_bleu": "Blue Ekran"
 }

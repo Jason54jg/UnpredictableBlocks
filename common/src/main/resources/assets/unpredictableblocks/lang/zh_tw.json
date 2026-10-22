@@ -601,5 +601,11 @@
   "gamerule.unpredictableblocks.lucky_density": "Lucky Block 密度(%)",
   "gamerule.unpredictableblocks.lucky_density.description": "自然 Lucky Blocks 量:0=0,100=正常,1000=10倍。",
   "gamerule.unpredictableblocks.lucky_shrines": "Lucky Blocks",
-  "gamerule.unpredictableblocks.lucky_shrines.description": "自然界的祭台、祭壇和聖物 Lucky Blocks。"
+  "gamerule.unpredictableblocks.lucky_shrines.description": "自然界的祭台、祭壇和聖物 Lucky Blocks。",
+  "entity.unpredictableblocks.chef_italien": "意大利主廚",
+  "entity.unpredictableblocks.comte_dracula": "德古拉伯爵",
+  "entity.unpredictableblocks.mascotte_hamburger": "汉堡吉祥物",
+  "entity.unpredictableblocks.chat_internet": "網路貓",
+  "entity.unpredictableblocks.coq_gaulois": "伽利克蟑螂",
+  "entity.unpredictableblocks.ecran_bleu": "藍色螢幕"
 }

@@ -601,5 +601,11 @@
   "gamerule.unpredictableblocks.lucky_density": "Lucky Block kepadatan (%)",
   "gamerule.unpredictableblocks.lucky_density.description": "Jumlah natural Lucky Blocks: 0 = none, 100 = normal, 1000 = sepuluh kali lebih.",
   "gamerule.unpredictableblocks.lucky_shrines": "Shrines sekitar Lucky Blocks",
-  "gamerule.unpredictableblocks.lucky_shrines.description": "Para pedagang, altar dan tempat-tempat suci di sekitar alam."
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Para pedagang, altar dan tempat-tempat suci di sekitar alam.",
+  "entity.unpredictableblocks.chef_italien": "Koki Italia",
+  "entity.unpredictableblocks.comte_dracula": "Count Dracula",
+  "entity.unpredictableblocks.mascotte_hamburger": "Burger Mascot",
+  "entity.unpredictableblocks.chat_internet": "Internet Cat",
+  "entity.unpredictableblocks.coq_gaulois": "Gallic Rooster",
+  "entity.unpredictableblocks.ecran_bleu": "Layar Biru"
 }

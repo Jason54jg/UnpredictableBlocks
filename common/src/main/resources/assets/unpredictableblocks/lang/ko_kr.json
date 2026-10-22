@@ -601,5 +601,11 @@
   "gamerule.unpredictableblocks.lucky_density": "Lucky Block 밀도 (%)",
   "gamerule.unpredictableblocks.lucky_density.description": "자연 Lucky Blocks 금액: 0 = 없음, 100 = 정상, 1000 = 10 배 더.",
   "gamerule.unpredictableblocks.lucky_shrines": "Lucky Blocks 주변의 신사",
-  "gamerule.unpredictableblocks.lucky_shrines.description": "자연적인 Lucky Blocks 의 주위에 pedestals, altars 및 sanctuaries."
+  "gamerule.unpredictableblocks.lucky_shrines.description": "자연적인 Lucky Blocks 의 주위에 pedestals, altars 및 sanctuaries.",
+  "entity.unpredictableblocks.chef_italien": "이탈리아 요리사",
+  "entity.unpredictableblocks.comte_dracula": "연구실",
+  "entity.unpredictableblocks.mascotte_hamburger": "버거 마스코트",
+  "entity.unpredictableblocks.chat_internet": "인터넷 고양이",
+  "entity.unpredictableblocks.coq_gaulois": "연락처",
+  "entity.unpredictableblocks.ecran_bleu": "파란 스크린"
 }

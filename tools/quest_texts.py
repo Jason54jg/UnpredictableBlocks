@@ -177,6 +177,12 @@ EXTRA = {
     "gamerule.unpredictableblocks.lucky_density.description": (
         "Quantité de Lucky Blocks naturels : 0 = aucun, 100 = normal, 1000 = dix fois plus.",
         "Natural Lucky Blocks amount: 0 = none, 100 = normal, 1000 = ten times more."),
+    "entity.unpredictableblocks.chef_italien": ("Chef Italien", "Italian Chef"),
+    "entity.unpredictableblocks.comte_dracula": ("Comte Dracula", "Count Dracula"),
+    "entity.unpredictableblocks.mascotte_hamburger": ("Mascotte Hamburger", "Burger Mascot"),
+    "entity.unpredictableblocks.chat_internet": ("Chat d'Internet", "Internet Cat"),
+    "entity.unpredictableblocks.coq_gaulois": ("Coq Gaulois", "Gallic Rooster"),
+    "entity.unpredictableblocks.ecran_bleu": ("Écran Bleu", "Blue Screen"),
     "gamerule.unpredictableblocks.lucky_shrines": ("Structures autour des Lucky Blocks", "Shrines around Lucky Blocks"),
     "gamerule.unpredictableblocks.lucky_shrines.description": (
         "Socles, autels et sanctuaires autour des Lucky Blocks naturels.",

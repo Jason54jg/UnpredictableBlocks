@@ -1,6 +1,8 @@
 package com.jason54.unpredictableblocks.quest;
 
 import com.jason54.unpredictableblocks.compat.McRefs;
+import com.jason54.unpredictableblocks.entity.mob.ChefItalienEntity;
+import com.jason54.unpredictableblocks.entity.mob.ComteDraculaEntity;
 import com.jason54.unpredictableblocks.registry.ModItems;
 import com.jason54.unpredictableblocks.registry.ModSounds;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
@@ -133,15 +135,15 @@ public final class QuestTriggers {
         }
 
         var name = victim.getCustomName();
-        if (name == null) {
-            return;
-        }
-        String label = name.getString();
+        String label = name == null ? "" : name.getString();
+        // Vrais mobs du mod, ou anciens mobs vanilla renommés (mondes existants)
+        boolean chef = victim instanceof ChefItalienEntity || QuestNames.CHEF_ITALIEN.equals(label);
+        boolean dracula = victim instanceof ComteDraculaEntity || QuestNames.COMTE_DRACULA.equals(label);
         if ("Toi du Futur".equals(label)) {
             Quests.complete(killer, LuckyTheme.ANACHRONISME, "kill_ravager");
-        } else if (QuestNames.CHEF_ITALIEN.equals(label) && !PlayerQuestData.isAnanasQuestFailed(killer)) {
+        } else if (chef && !PlayerQuestData.isAnanasQuestFailed(killer)) {
             Quests.increment(killer, LuckyTheme.ANANAS_PIZZA, "survive_chefs");
-        } else if (QuestNames.COMTE_DRACULA.equals(label) && !wearingMetalArmor(killer)) {
+        } else if (dracula && !wearingMetalArmor(killer)) {
             Quests.complete(killer, LuckyTheme.VAMPIRE_GOTHIQUE, "dracula_no_metal");
         }
     }

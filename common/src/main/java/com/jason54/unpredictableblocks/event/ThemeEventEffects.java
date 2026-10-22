@@ -113,6 +113,13 @@ public final class ThemeEventEffects {
         } else {
             player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 20 * 10, 0));
             player.addEffect(new MobEffectInstance(MobEffects.NAUSEA, 20 * 10, 0));
+            for (int i = 0; i < 2; i++) {
+                var screen = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.ECRAN_BLEU.get(), level);
+                if (screen != null) {
+                    screen.setPos(player.position().add(i == 0 ? 3 : -3, 1.5, 2));
+                    level.addFreshEntity(screen);
+                }
+            }
             playAt(player, ModSounds.BSOD_BOOT.get());
         }
     }
@@ -136,11 +143,14 @@ public final class ThemeEventEffects {
                 spawnPassive(level, origin, McRefs.CHICKEN);
             }
         } else if (tier == LuckTier.LOW) {
-            var golem = EntitySpawnHelper.create(McRefs.IRON_GOLEM, level);
-            if (golem != null) {
-                golem.setPos(Vec3.atBottomCenterOf(origin));
-                golem.setHealth(500);
-                level.addFreshEntity(golem);
+            var coq = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.COQ_GAULOIS.get(), level);
+            if (coq != null) {
+                coq.setPos(Vec3.atBottomCenterOf(origin).add(2, 0, 0));
+                level.addFreshEntity(coq);
+                var nearest = level.getNearestPlayer(coq, 16.0);
+                if (nearest != null) {
+                    coq.setTarget(nearest); // coq vexé : il attaque tout de suite
+                }
             }
         } else {
             playerCaquetage(level, origin);

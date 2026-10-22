@@ -601,5 +601,11 @@
   "gamerule.unpredictableblocks.lucky_density": "Lucky Block tiheys (%)",
   "gamerule.unpredictableblocks.lucky_density.description": "Luonnollinen Lucky Blocks määrä: 0 = ei mitään, 100 = normaali, 1000 = kymmenen kertaa enemmän.",
   "gamerule.unpredictableblocks.lucky_shrines": "Shrines noin Lucky Blocks",
-  "gamerule.unpredictableblocks.lucky_shrines.description": "Pedestalit, alttarit ja pyhäköt luonnon ympärillä Lucky Blocks ."
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Pedestalit, alttarit ja pyhäköt luonnon ympärillä Lucky Blocks .",
+  "entity.unpredictableblocks.chef_italien": "Italian kokki",
+  "entity.unpredictableblocks.comte_dracula": "Kreivi Dracula",
+  "entity.unpredictableblocks.mascotte_hamburger": "Burger Mascot",
+  "entity.unpredictableblocks.chat_internet": "Internet-kissa",
+  "entity.unpredictableblocks.coq_gaulois": "Gallic Rooster",
+  "entity.unpredictableblocks.ecran_bleu": "Sininen näyttö"
 }

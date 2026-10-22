@@ -6,6 +6,7 @@
   "environment": "*",
   "entrypoints": {
     "fabric-client-gametest": [
+      "com.jason54.unpredictableblocks.gametest.MobsClientGameTest",
       "com.jason54.unpredictableblocks.gametest.LuckyBlockClientGameTest"
     ]
   },

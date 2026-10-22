@@ -1,0 +1,241 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.unpredictableblocks.mascotte_hamburger",
+        "texture_width": 128,
+        "texture_height": 128,
+        "visible_bounds_width": 3,
+        "visible_bounds_height": 3.5,
+        "visible_bounds_offset": [
+          0,
+          1.25,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "root",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "right_leg",
+          "pivot": [
+            -3,
+            6,
+            0
+          ],
+          "parent": "root",
+          "cubes": [
+            {
+              "origin": [
+                -5,
+                0,
+                -2
+              ],
+              "size": [
+                3,
+                6,
+                3
+              ],
+              "uv": [
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "left_leg",
+          "pivot": [
+            3,
+            6,
+            0
+          ],
+          "parent": "root",
+          "cubes": [
+            {
+              "origin": [
+                2,
+                0,
+                -2
+              ],
+              "size": [
+                3,
+                6,
+                3
+              ],
+              "uv": [
+                12,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "body",
+          "pivot": [
+            0,
+            6,
+            0
+          ],
+          "parent": "root",
+          "cubes": [
+            {
+              "origin": [
+                -7,
+                6,
+                -7
+              ],
+              "size": [
+                14,
+                4,
+                14
+              ],
+              "uv": [
+                24,
+                0
+              ]
+            },
+            {
+              "origin": [
+                -7,
+                10,
+                -7
+              ],
+              "size": [
+                14,
+                3,
+                14
+              ],
+              "uv": [
+                0,
+                18
+              ],
+              "inflate": 0.4
+            },
+            {
+              "origin": [
+                -8,
+                13,
+                -8
+              ],
+              "size": [
+                16,
+                1,
+                16
+              ],
+              "uv": [
+                56,
+                18
+              ]
+            },
+            {
+              "origin": [
+                -7,
+                14,
+                -7
+              ],
+              "size": [
+                14,
+                1,
+                14
+              ],
+              "uv": [
+                0,
+                35
+              ],
+              "inflate": 0.5
+            }
+          ]
+        },
+        {
+          "name": "top",
+          "pivot": [
+            0,
+            15,
+            0
+          ],
+          "parent": "body",
+          "cubes": [
+            {
+              "origin": [
+                -7,
+                15,
+                -7
+              ],
+              "size": [
+                14,
+                7,
+                14
+              ],
+              "uv": [
+                56,
+                35
+              ]
+            }
+          ]
+        },
+        {
+          "name": "right_arm",
+          "pivot": [
+            -8,
+            11,
+            0
+          ],
+          "parent": "body",
+          "cubes": [
+            {
+              "origin": [
+                -10,
+                4,
+                -1
+              ],
+              "size": [
+                2,
+                8,
+                2
+              ],
+              "uv": [
+                112,
+                35
+              ]
+            }
+          ]
+        },
+        {
+          "name": "left_arm",
+          "pivot": [
+            8,
+            11,
+            0
+          ],
+          "parent": "body",
+          "cubes": [
+            {
+              "origin": [
+                8,
+                4,
+                -1
+              ],
+              "size": [
+                2,
+                8,
+                2
+              ],
+              "uv": [
+                120,
+                35
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

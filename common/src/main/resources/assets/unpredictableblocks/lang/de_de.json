@@ -601,5 +601,11 @@
   "gamerule.unpredictableblocks.lucky_density": "Lucky Block Dichte (%)",
   "gamerule.unpredictableblocks.lucky_density.description": "Natürliche (0) Menge: 0 = keine, 100 = normal, 1000 = zehnmal mehr.",
   "gamerule.unpredictableblocks.lucky_shrines": "Schreine rund um Lucky Blocks",
-  "gamerule.unpredictableblocks.lucky_shrines.description": "Sockel, Altäre und Heiligtümer rund um die Natur."
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Sockel, Altäre und Heiligtümer rund um die Natur.",
+  "entity.unpredictableblocks.chef_italien": "Italienischer Chefkoch",
+  "entity.unpredictableblocks.comte_dracula": "Graf Dracula",
+  "entity.unpredictableblocks.mascotte_hamburger": "Burger Maskottchen",
+  "entity.unpredictableblocks.chat_internet": "Internetkatze",
+  "entity.unpredictableblocks.coq_gaulois": "Gallischer Hahn",
+  "entity.unpredictableblocks.ecran_bleu": "Blue Screen"
 }

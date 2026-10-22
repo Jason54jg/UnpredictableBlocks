@@ -80,11 +80,10 @@ public final class ThemeNewEffects {
     private static void ananasPizza(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
         if (tier == LuckTier.NEUTRAL) {
             QuestTriggers.onChefsSpawned(player);
-            for (int i = 0; i < 10; i++) {
-                var chef = EntitySpawnHelper.create(McRefs.VILLAGER, level);
+            for (int i = 0; i < 4; i++) {
+                var chef = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.CHEF_ITALIEN.get(), level);
                 if (chef != null) {
-                    chef.setCustomName(Component.literal(QuestNames.CHEF_ITALIEN));
-                    chef.setPos(Vec3.atBottomCenterOf(origin).add(i % 5, 0, i / 5));
+                    chef.setPos(Vec3.atBottomCenterOf(origin).add(i % 2 * 3 - 1.5, 0, i / 2 * 3 - 1.5));
                     level.addFreshEntity(chef);
                 }
             }
@@ -132,12 +131,9 @@ public final class ThemeNewEffects {
             player.addEffect(new MobEffectInstance(MobEffects.STRENGTH, 20 * 90, 1));
             player.sendSystemMessage(Component.literal("§5Pacte des ténèbres — forme d'ombre."));
         } else if (tier == LuckTier.NEUTRAL && player.level() instanceof ServerLevel level) {
-            var dracula = EntitySpawnHelper.create(McRefs.ZOMBIE, level);
+            var dracula = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.COMTE_DRACULA.get(), level);
             if (dracula != null) {
-                dracula.setCustomName(Component.literal(QuestNames.COMTE_DRACULA));
-                dracula.setCustomNameVisible(true);
-                dracula.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.LEATHER_HELMET));
-                dracula.setPos(player.position().add(2, 0, 0));
+                dracula.setPos(player.position().add(3, 0, 0));
                 level.addFreshEntity(dracula);
                 player.sendSystemMessage(Component.literal("§5Le Comte Dracula exige un duel sans armure métallique."));
             }
@@ -206,7 +202,7 @@ public final class ThemeNewEffects {
 
     private static void chats(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
         if (tier == LuckTier.HIGH) {
-            var cat = EntitySpawnHelper.create(McRefs.CAT, level);
+            var cat = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.CHAT_INTERNET.get(), level);
             if (cat != null) {
                 cat.setPos(Vec3.atBottomCenterOf(origin));
                 cat.tame(player);
@@ -216,7 +212,7 @@ public final class ThemeNewEffects {
             player.sendSystemMessage(Component.literal("§aUn chat t'a adopté. Il est à toi (ou l'inverse)."));
         } else if (tier == LuckTier.NEUTRAL) {
             for (int i = 0; i < 4; i++) {
-                var cat = EntitySpawnHelper.create(McRefs.CAT, level);
+                var cat = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.CHAT_INTERNET.get(), level);
                 if (cat != null) {
                     cat.setPos(Vec3.atBottomCenterOf(origin).add(level.getRandom().nextDouble() * 4 - 2, 0, level.getRandom().nextDouble() * 4 - 2));
                     level.addFreshEntity(cat);

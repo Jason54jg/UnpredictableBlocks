@@ -601,5 +601,11 @@
   "gamerule.unpredictableblocks.lucky_density": "Densité des Lucky Blocks (%)",
   "gamerule.unpredictableblocks.lucky_density.description": "Quantité de Lucky Blocks naturels : 0 = aucun, 100 = normal, 1000 = dix fois plus.",
   "gamerule.unpredictableblocks.lucky_shrines": "Structures autour des Lucky Blocks",
-  "gamerule.unpredictableblocks.lucky_shrines.description": "Socles, autels et sanctuaires autour des Lucky Blocks naturels."
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Socles, autels et sanctuaires autour des Lucky Blocks naturels.",
+  "entity.unpredictableblocks.chef_italien": "Chef Italien",
+  "entity.unpredictableblocks.comte_dracula": "Comte Dracula",
+  "entity.unpredictableblocks.mascotte_hamburger": "Mascotte Hamburger",
+  "entity.unpredictableblocks.chat_internet": "Chat d'Internet",
+  "entity.unpredictableblocks.coq_gaulois": "Coq Gaulois",
+  "entity.unpredictableblocks.ecran_bleu": "Écran Bleu"
 }

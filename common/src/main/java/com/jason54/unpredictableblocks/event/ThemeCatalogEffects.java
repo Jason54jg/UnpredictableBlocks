@@ -198,11 +198,10 @@ public final class ThemeCatalogEffects {
         if (tier != LuckTier.NEUTRAL) {
             return;
         }
-        var iron = EntitySpawnHelper.create(McRefs.IRON_GOLEM, level);
-        if (iron != null) {
-            iron.setCustomName(Component.literal("Mascotte Hamburger"));
-            iron.setPos(Vec3.atBottomCenterOf(origin));
-            level.addFreshEntity(iron);
+        var mascotte = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.MASCOTTE_HAMBURGER.get(), level);
+        if (mascotte != null) {
+            mascotte.setPos(Vec3.atBottomCenterOf(origin).add(2, 0, 0));
+            level.addFreshEntity(mascotte);
         }
         player.sendSystemMessage(Component.literal("§eMascotte encombrante devant la caméra…"));
     }

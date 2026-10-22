@@ -601,5 +601,11 @@
   "gamerule.unpredictableblocks.lucky_density": "Lucky Block densidade (%)",
   "gamerule.unpredictableblocks.lucky_density.description": "Quantidade natural: 0 = nenhum, 100 = normal, 1000 = dez vezes mais.",
   "gamerule.unpredictableblocks.lucky_shrines": "Santuários ao redor",
-  "gamerule.unpredictableblocks.lucky_shrines.description": "Pedestais, altares e santuários naturais."
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Pedestais, altares e santuários naturais.",
+  "entity.unpredictableblocks.chef_italien": "Chef italiano",
+  "entity.unpredictableblocks.comte_dracula": "Conde Drácula.",
+  "entity.unpredictableblocks.mascotte_hamburger": "Burger Mascot",
+  "entity.unpredictableblocks.chat_internet": "Gato da Internet",
+  "entity.unpredictableblocks.coq_gaulois": "Galo Gallico",
+  "entity.unpredictableblocks.ecran_bleu": "Tela Azul"
 }

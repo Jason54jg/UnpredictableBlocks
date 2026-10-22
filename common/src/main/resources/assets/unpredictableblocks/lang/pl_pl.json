@@ -601,5 +601,11 @@
   "gamerule.unpredictableblocks.lucky_density": "Lucky Block Gęstość (%)",
   "gamerule.unpredictableblocks.lucky_density.description": "Naturalne Lucky Blocks kwota: 0 = brak, 100 = normalne, 1000 = dziesięć razy więcej.",
   "gamerule.unpredictableblocks.lucky_shrines": "Zasłony wokół Lucky Blocks",
-  "gamerule.unpredictableblocks.lucky_shrines.description": "Piesze, ołtarze i sanktuaria wokół natury Lucky Blocks."
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Piesze, ołtarze i sanktuaria wokół natury Lucky Blocks.",
+  "entity.unpredictableblocks.chef_italien": "Włoski szef kuchni",
+  "entity.unpredictableblocks.comte_dracula": "Hrabia Dracula",
+  "entity.unpredictableblocks.mascotte_hamburger": "Burger Mascot",
+  "entity.unpredictableblocks.chat_internet": "Internet Cat",
+  "entity.unpredictableblocks.coq_gaulois": "Kogut galicyjski",
+  "entity.unpredictableblocks.ecran_bleu": "Niebieski ekran"
 }

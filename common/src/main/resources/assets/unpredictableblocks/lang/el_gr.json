@@ -601,5 +601,11 @@
   "gamerule.unpredictableblocks.lucky_density": "Lucky Block πυκνότητα (%)",
   "gamerule.unpredictableblocks.lucky_density.description": "Φυσικό Lucky Blocks ποσό: 0 = κανένα, 100 = κανονικό, 1000 = δέκα φορές περισσότερο.",
   "gamerule.unpredictableblocks.lucky_shrines": "Περικλίσεις Lucky Blocks",
-  "gamerule.unpredictableblocks.lucky_shrines.description": "Αιδεσιμώτατα, βωμοί και ιερά γύρω από φυσικά Lucky Blocks."
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Αιδεσιμώτατα, βωμοί και ιερά γύρω από φυσικά Lucky Blocks.",
+  "entity.unpredictableblocks.chef_italien": "Ιταλός σεφ",
+  "entity.unpredictableblocks.comte_dracula": "Κόμης Δράκουλας",
+  "entity.unpredictableblocks.mascotte_hamburger": "Μασκότ Burger",
+  "entity.unpredictableblocks.chat_internet": "Γάτα Internet",
+  "entity.unpredictableblocks.coq_gaulois": "Γαλακτικός Ρούστερ",
+  "entity.unpredictableblocks.ecran_bleu": "Μπλε οθόνη"
 }

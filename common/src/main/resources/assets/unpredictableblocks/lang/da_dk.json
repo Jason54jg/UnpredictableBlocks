@@ -601,5 +601,11 @@
   "gamerule.unpredictableblocks.lucky_density": "Lucky Block densitet (%)",
   "gamerule.unpredictableblocks.lucky_density.description": "Naturlig Lucky Blocks beløb: 0 = ingen, 100 = normal, 1000 = ti gange mere.",
   "gamerule.unpredictableblocks.lucky_shrines": "Spejle omkring Lucky Blocks",
-  "gamerule.unpredictableblocks.lucky_shrines.description": "Pedestals, altre og helligdomme omkring naturlige Lucky Blocks."
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Pedestals, altre og helligdomme omkring naturlige Lucky Blocks.",
+  "entity.unpredictableblocks.chef_italien": "Italiensk kok",
+  "entity.unpredictableblocks.comte_dracula": "Grev Dracula",
+  "entity.unpredictableblocks.mascotte_hamburger": "Burger Mascot",
+  "entity.unpredictableblocks.chat_internet": "Internetkat",
+  "entity.unpredictableblocks.coq_gaulois": "Gallic Rooster",
+  "entity.unpredictableblocks.ecran_bleu": "Blå skærm"
 }

@@ -1,7 +1,14 @@
 package com.jason54.unpredictableblocks.client;
 
 import com.jason54.unpredictableblocks.client.geo.LuckyBlockRenderer;
+import com.jason54.unpredictableblocks.client.geo.LuckyMobRenderer;
 import com.jason54.unpredictableblocks.client.geo.LuckyRocketRenderer;
+import com.jason54.unpredictableblocks.entity.mob.ChatInternetEntity;
+import com.jason54.unpredictableblocks.entity.mob.ChefItalienEntity;
+import com.jason54.unpredictableblocks.entity.mob.ComteDraculaEntity;
+import com.jason54.unpredictableblocks.entity.mob.CoqGauloisEntity;
+import com.jason54.unpredictableblocks.entity.mob.EcranBleuEntity;
+import com.jason54.unpredictableblocks.entity.mob.MascotteHamburgerEntity;
 import com.jason54.unpredictableblocks.network.OpenQuestJournalPayload;
 import com.jason54.unpredictableblocks.network.RequestQuestJournalPayload;
 import com.jason54.unpredictableblocks.registry.ModBlockEntities;
@@ -23,6 +30,12 @@ public final class UnpredictableBlocksClient {
     public static void init() {
         BlockEntityRendererRegistry.register(ModBlockEntities.LUCKY_BLOCK.get(), LuckyBlockRenderer::new);
         EntityRendererRegistry.register(ModEntities.LUCKY_ROCKET, LuckyRocketRenderer::new);
+        EntityRendererRegistry.register(ModEntities.CHEF_ITALIEN, ctx -> new LuckyMobRenderer<>(ctx, ChefItalienEntity.ID, 0.5F));
+        EntityRendererRegistry.register(ModEntities.COMTE_DRACULA, ctx -> new LuckyMobRenderer<>(ctx, ComteDraculaEntity.ID, 0.5F));
+        EntityRendererRegistry.register(ModEntities.MASCOTTE_HAMBURGER, ctx -> new LuckyMobRenderer<>(ctx, MascotteHamburgerEntity.ID, 0.8F));
+        EntityRendererRegistry.register(ModEntities.CHAT_INTERNET, ctx -> new LuckyMobRenderer<>(ctx, ChatInternetEntity.ID, 0.4F));
+        EntityRendererRegistry.register(ModEntities.COQ_GAULOIS, ctx -> new LuckyMobRenderer<>(ctx, CoqGauloisEntity.ID, 0.6F));
+        EntityRendererRegistry.register(ModEntities.ECRAN_BLEU, ctx -> new LuckyMobRenderer<>(ctx, EcranBleuEntity.ID, 0.6F));
 
         NetworkManager.registerReceiver(
                 NetworkManager.s2c(),

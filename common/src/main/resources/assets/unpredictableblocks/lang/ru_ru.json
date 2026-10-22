@@ -601,5 +601,11 @@
   "gamerule.unpredictableblocks.lucky_density": "Lucky Block Плотность (%)",
   "gamerule.unpredictableblocks.lucky_density.description": "Естественная величина: 0 = нет, 100 = нормально, 1000 = в десять раз больше.",
   "gamerule.unpredictableblocks.lucky_shrines": "Усыпальница вокруг Lucky Blocks",
-  "gamerule.unpredictableblocks.lucky_shrines.description": "Пешеходы, алтари и святилища вокруг природы Lucky Blocks."
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Пешеходы, алтари и святилища вокруг природы Lucky Blocks.",
+  "entity.unpredictableblocks.chef_italien": "Итальянский шеф",
+  "entity.unpredictableblocks.comte_dracula": "Граф Дракула",
+  "entity.unpredictableblocks.mascotte_hamburger": "Бургер талисман",
+  "entity.unpredictableblocks.chat_internet": "Интернет-кошка",
+  "entity.unpredictableblocks.coq_gaulois": "Галльский петух",
+  "entity.unpredictableblocks.ecran_bleu": "Синий экран"
 }

@@ -601,5 +601,11 @@
   "gamerule.unpredictableblocks.lucky_density": "Lucky Block ความหนาแน่น (%)",
   "gamerule.unpredictableblocks.lucky_density.description": "จํานวน Lucky Blocks: 0 = ไม่มี, 100 = ปกติ, 1000 = 10 เท่า.",
   "gamerule.unpredictableblocks.lucky_shrines": "sines รอบ Lucky Blocks",
-  "gamerule.unpredictableblocks.lucky_shrines.description": "วัด แท่นบูชา และสถานที่ศักดิ์สิทธิ์ รอบๆธรรมชาติ Lucky Blocks."
+  "gamerule.unpredictableblocks.lucky_shrines.description": "วัด แท่นบูชา และสถานที่ศักดิ์สิทธิ์ รอบๆธรรมชาติ Lucky Blocks.",
+  "entity.unpredictableblocks.chef_italien": "เชฟอิตาลี",
+  "entity.unpredictableblocks.comte_dracula": "เคานท์แดร็กคูล่า",
+  "entity.unpredictableblocks.mascotte_hamburger": "เบอร์เกอร์",
+  "entity.unpredictableblocks.chat_internet": "แมวในอินเทอร์เน็ต",
+  "entity.unpredictableblocks.coq_gaulois": "แกลลิก รูสเตอร์",
+  "entity.unpredictableblocks.ecran_bleu": "หน้าจอสีน้ําเงิน"
 }

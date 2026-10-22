@@ -601,5 +601,11 @@
   "gamerule.unpredictableblocks.lucky_density": "Lucky Block density (%)",
   "gamerule.unpredictableblocks.lucky_density.description": "Přirozený objem Lucky Blocks: 0 = žádný, 100 = normální, 1000 = desetkrát více.",
   "gamerule.unpredictableblocks.lucky_shrines": "Svršky kolem Lucky Blocks",
-  "gamerule.unpredictableblocks.lucky_shrines.description": "Podstavce, oltáře a svatyně kolem přírodních Lucky Blocks."
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Podstavce, oltáře a svatyně kolem přírodních Lucky Blocks.",
+  "entity.unpredictableblocks.chef_italien": "Italský kuchař",
+  "entity.unpredictableblocks.comte_dracula": "Hrabě Drákula",
+  "entity.unpredictableblocks.mascotte_hamburger": "Maskot Burger",
+  "entity.unpredictableblocks.chat_internet": "Internetová kočka",
+  "entity.unpredictableblocks.coq_gaulois": "Gallic Rooster",
+  "entity.unpredictableblocks.ecran_bleu": "Modrá obrazovka"
 }

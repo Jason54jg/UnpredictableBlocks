@@ -601,5 +601,11 @@
   "gamerule.unpredictableblocks.lucky_density": "Lucky Block densitate (%)",
   "gamerule.unpredictableblocks.lucky_density.description": "Valoarea naturală Lucky Blocks: 0 = zero, 100 = normală, 1000 = de zece ori mai mult.",
   "gamerule.unpredictableblocks.lucky_shrines": "Shrines around Lucky Blocks",
-  "gamerule.unpredictableblocks.lucky_shrines.description": "Piedestaluri, altare și sanctuare în jurul naturii Lucky Blocks ."
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Piedestaluri, altare și sanctuare în jurul naturii Lucky Blocks .",
+  "entity.unpredictableblocks.chef_italien": "Bucătar italian",
+  "entity.unpredictableblocks.comte_dracula": "Contele Dracula.",
+  "entity.unpredictableblocks.mascotte_hamburger": "Burger Mascota",
+  "entity.unpredictableblocks.chat_internet": "Internet Cat",
+  "entity.unpredictableblocks.coq_gaulois": "Rooster galic",
+  "entity.unpredictableblocks.ecran_bleu": "Ecran albastru"
 }

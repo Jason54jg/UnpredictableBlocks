@@ -601,5 +601,11 @@
   "gamerule.unpredictableblocks.lucky_density": "Lucky Block dichtheid (%)",
   "gamerule.unpredictableblocks.lucky_density.description": "Natuurlijke hoeveelheid Lucky Blocks: 0 = geen, 100 = normaal, 1000 = tien keer meer.",
   "gamerule.unpredictableblocks.lucky_shrines": "Heiligdommen rond Lucky Blocks",
-  "gamerule.unpredictableblocks.lucky_shrines.description": "Pedestalen, altaren en heiligdommen rond natuurlijke Lucky Blocks ."
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Pedestalen, altaren en heiligdommen rond natuurlijke Lucky Blocks .",
+  "entity.unpredictableblocks.chef_italien": "Italiaanse kok",
+  "entity.unpredictableblocks.comte_dracula": "Graaf Dracula",
+  "entity.unpredictableblocks.mascotte_hamburger": "Burger mascotte",
+  "entity.unpredictableblocks.chat_internet": "Internet Kat",
+  "entity.unpredictableblocks.coq_gaulois": "Gallische haan",
+  "entity.unpredictableblocks.ecran_bleu": "Blauw scherm"
 }

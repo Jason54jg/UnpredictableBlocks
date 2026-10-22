@@ -601,5 +601,11 @@
   "gamerule.unpredictableblocks.lucky_density": "Lucky Block sűrűség (%)",
   "gamerule.unpredictableblocks.lucky_density.description": "Természetes Lucky Blocks összeg: 0 = semmi, 100 = normális, 1000 = tízszer több.",
   "gamerule.unpredictableblocks.lucky_shrines": "Rák körül Lucky Blocks",
-  "gamerule.unpredictableblocks.lucky_shrines.description": "Gyalogok, oltárok és szenthelyek a természetes Lucky Blocks körül."
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Gyalogok, oltárok és szenthelyek a természetes Lucky Blocks körül.",
+  "entity.unpredictableblocks.chef_italien": "Olasz séf",
+  "entity.unpredictableblocks.comte_dracula": "Drakula gróf",
+  "entity.unpredictableblocks.mascotte_hamburger": "Burger kabalája",
+  "entity.unpredictableblocks.chat_internet": "Internet Cat",
+  "entity.unpredictableblocks.coq_gaulois": "Galambbegysaláta",
+  "entity.unpredictableblocks.ecran_bleu": "Kék képernyő"
 }

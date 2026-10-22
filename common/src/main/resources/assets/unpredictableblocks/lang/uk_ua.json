@@ -601,5 +601,11 @@
   "gamerule.unpredictableblocks.lucky_density": "Lucky Block щільність (%)",
   "gamerule.unpredictableblocks.lucky_density.description": "Природні Lucky Blocks кількість: 0 = немає, 100 = нормальний, 1000 = десять разів більше.",
   "gamerule.unpredictableblocks.lucky_shrines": "Шини Lucky Blocks",
-  "gamerule.unpredictableblocks.lucky_shrines.description": "Педести, альтари та санцуари навколо природного Lucky Blocks ."
+  "gamerule.unpredictableblocks.lucky_shrines.description": "Педести, альтари та санцуари навколо природного Lucky Blocks .",
+  "entity.unpredictableblocks.chef_italien": "Італійська шеф",
+  "entity.unpredictableblocks.comte_dracula": "Граф Дракула",
+  "entity.unpredictableblocks.mascotte_hamburger": "Бургер Маскот",
+  "entity.unpredictableblocks.chat_internet": "Інтернет-кішка",
+  "entity.unpredictableblocks.coq_gaulois": "Галіч Роостер",
+  "entity.unpredictableblocks.ecran_bleu": "Синій екран"
 }

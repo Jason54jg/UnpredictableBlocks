@@ -601,5 +601,11 @@
   "gamerule.unpredictableblocks.lucky_density": "צפיפות (%)",
   "gamerule.unpredictableblocks.lucky_density.description": "כמות טבעית: 0 = לא, 100 = נורמלי, 1000=עשר פעמים יותר.",
   "gamerule.unpredictableblocks.lucky_shrines": "מקדשים סביב 0",
-  "gamerule.unpredictableblocks.lucky_shrines.description": "מזבחות, מזבחות וקדושות סביב טבעי."
+  "gamerule.unpredictableblocks.lucky_shrines.description": "מזבחות, מזבחות וקדושות סביב טבעי.",
+  "entity.unpredictableblocks.chef_italien": "השף האיטלקי",
+  "entity.unpredictableblocks.comte_dracula": "הרוזן דרקולה",
+  "entity.unpredictableblocks.mascotte_hamburger": "בורגר Mascot",
+  "entity.unpredictableblocks.chat_internet": "חתול אינטרנט",
+  "entity.unpredictableblocks.coq_gaulois": "ורוד גלי",
+  "entity.unpredictableblocks.ecran_bleu": "מסך כחול"
 }
