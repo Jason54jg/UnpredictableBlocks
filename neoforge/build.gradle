@@ -71,14 +71,32 @@ neoForge {
     }
 }
 
+processResources {
+    inputs.property 'version', version
+    filesMatching('META-INF/neoforge.mods.toml') {
+        expand version: version
+    }
+}
+
 // Bundle common classes + resources into the distributable jar.
 tasks.named('jar', Jar).configure {
     dependsOn(':common:jar')
     from({
         zipTree(project(':common').tasks.named('jar', Jar).flatMap { it.archiveFile })
-    })
+    }) {
+        exclude 'fabric.mod.json'
+        exclude 'architectury.common.json'
+    }
     from sourceSets.client.output
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    manifest {
+        attributes(
+                'Implementation-Title': project.base.archivesName.get(),
+                'Implementation-Version': project.version,
+                'Specification-Title': 'unpredictableblocks',
+                'Specification-Version': project.version
+        )
+    }
 }
 
 java {

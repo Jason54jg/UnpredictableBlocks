@@ -1,7 +1,7 @@
 plugins {
     id "dev.kikugie.stonecutter"
 }
-stonecutter.active "26.1.2"
+stonecutter.active "26.2"
 
 def supported = (findProperty('supported_minecraft_versions') ?: '26.1.2')
         .toString()
@@ -55,10 +55,14 @@ supported.each { mc ->
             mustRunAfter previousTaskName
         }
         doLast {
+            // Build first, then collect in a second invocation so we never copy stale jars
+            // (Gradle can otherwise parallelize collectVersionJars with :neoforge:build).
             runGradlew([
                     "Set active project to ${mcVersion}".toString(),
                     ':fabric:build',
                     ':neoforge:build',
+            ] + mcPropArgs + ['--console=plain', '--no-configuration-cache'])
+            runGradlew([
                     ":${mcVersion}:collectVersionJars".toString(),
             ] + mcPropArgs + ['--console=plain', '--no-configuration-cache'])
         }

@@ -10,7 +10,6 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.level.Level;
 
 /** Bootstrap profil à la création / 1er join (assistant si non configuré). */
 public final class WorldSetupHandler {
@@ -19,11 +18,10 @@ public final class WorldSetupHandler {
     private WorldSetupHandler() {}
 
     public static void register() {
-        LifecycleEvent.SERVER_LEVEL_LOAD.register(level -> {
-            if (level instanceof ServerLevel serverLevel && serverLevel.dimension().equals(Level.OVERWORLD)) {
-                WorldModProfile.bootstrapOverworld(serverLevel);
-            }
-        });
+        // SERVER_STARTED (pas LEVEL_LOAD) : évite de forcer la gen de chunks pendant
+        // le boot NeoForge, qui bloque alors l'écran « Chargement du monde ».
+        LifecycleEvent.SERVER_STARTED.register(server ->
+                WorldModProfile.bootstrapOverworld(server.overworld()));
 
         PlayerEvent.PLAYER_JOIN.register(player -> {
             if (player.level().isClientSide() || !(player instanceof ServerPlayer sp)) {

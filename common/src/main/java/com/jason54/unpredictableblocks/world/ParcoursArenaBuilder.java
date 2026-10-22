@@ -26,9 +26,8 @@ public final class ParcoursArenaBuilder {
         ParcoursWorldState.get(level).setLayoutSeed(seed);
         RandomSource random = RandomSource.create(seed);
         int lanes = laneCount(profile, settings);
-        int halfWidth = settings.parcoursLayout() == WorldModeSettings.ParcoursLayout.COOP ? 3
-                : (settings.parcoursLayout() == WorldModeSettings.ParcoursLayout.BATTLE ? 0 : 1);
-        clearArenaEnvelope(level, arenaOrigin, settings.pathLengthBlocks(), lanes, halfWidth);
+        // Pas de clear envelope massif : ça force la gen de dizaines de chunks au boot
+        // (freeze NeoForge « map qui charge pas »). clearAirColumn par case suffit.
         if (settings.parcoursLayout() == WorldModeSettings.ParcoursLayout.COOP) {
             buildCoopLane(level, arenaOrigin, profile, settings, random);
         } else {
@@ -225,22 +224,6 @@ public final class ParcoursArenaBuilder {
         // Lanterne / lucky de départ sur le côté — pas sur la case de spawn.
         level.setBlock(laneOrigin.offset(-1, 1, pathHalfWidth + 1), Blocks.LANTERN.defaultBlockState(), 3);
         placeLucky(level, laneOrigin.offset(1, 1, 0), LuckyTheme.BOULANGERIE, luck, random, settings);
-    }
-
-    /** Vide le volume de l'arène pour ne pas construire dans la pierre / colline. */
-    private static void clearArenaEnvelope(ServerLevel level, BlockPos origin, int pathLength, int lanes, int halfWidth) {
-        int zSpan = Math.max(8, (int) Math.ceil(lanes * LANE_SPACING / 2.0) + halfWidth + 4);
-        for (int x = -6; x <= pathLength + 8; x++) {
-            for (int z = -zSpan; z <= zSpan; z++) {
-                for (int y = -5; y <= 8; y++) {
-                    BlockPos p = origin.offset(x, y, z);
-                    BlockState state = level.getBlockState(p);
-                    if (!state.isAir() && !state.is(Blocks.BEDROCK)) {
-                        level.setBlock(p, Blocks.AIR.defaultBlockState(), 3);
-                    }
-                }
-            }
-        }
     }
 
     private static void clearAirColumn(ServerLevel level, BlockPos base, int height) {

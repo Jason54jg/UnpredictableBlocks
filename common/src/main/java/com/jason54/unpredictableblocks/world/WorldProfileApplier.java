@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.LevelData;
 import net.minecraft.world.phys.Vec3;
 
@@ -32,6 +33,10 @@ public final class WorldProfileApplier {
         }
     }
 
+    public static boolean isArenaMode(WorldModProfile.WorldProfileData profile) {
+        return profile.mode() == WorldPlayMode.PARCOURS || profile.mode() == WorldPlayMode.ONEBLOCK;
+    }
+
     public static BlockPos arenaOrigin(WorldModProfile.WorldProfileData profile, BlockPos suggested) {
         if (profile.mode() == WorldPlayMode.PARCOURS || profile.mode() == WorldPlayMode.ONEBLOCK) {
             return defaultCenter();
@@ -56,34 +61,66 @@ public final class WorldProfileApplier {
     }
 
     public static void teleportToArena(ServerPlayer player, WorldModProfile.WorldProfileData profile) {
-        if (profile.mode() != WorldPlayMode.PARCOURS && profile.mode() != WorldPlayMode.ONEBLOCK) {
+        if (!isArenaMode(profile)) {
             return;
         }
         BlockPos spawn = playerSpawnPos(profile, player);
         ServerLevel overworld = player.level().getServer().overworld();
-        overworld.getChunkAt(spawn);
-        player.teleportTo(
-                overworld,
-                spawn.getX() + 0.5,
-                spawn.getY(),
-                spawn.getZ() + 0.5,
-                java.util.Set.of(),
-                0.0F,
-                0.0F,
-                true
-        );
+        overworld.getChunkSource().getChunk(spawn.getX() >> 4, spawn.getZ() >> 4, true);
+        clearStandSpace(overworld, spawn);
+        if (player.level() == overworld) {
+            player.teleportTo(spawn.getX() + 0.5, spawn.getY(), spawn.getZ() + 0.5);
+        } else {
+            player.teleportTo(
+                    overworld,
+                    spawn.getX() + 0.5,
+                    spawn.getY(),
+                    spawn.getZ() + 0.5,
+                    java.util.Set.of(),
+                    0.0F,
+                    0.0F,
+                    false
+            );
+        }
         player.setDeltaMovement(Vec3.ZERO);
         player.fallDistance = 0.0F;
+        bindPlayerRespawn(player, profile);
+    }
+
+    /** Point de respawn perso forcé (sinon la mort renvoie au spawn vanilla). */
+    public static void bindPlayerRespawn(ServerPlayer player, WorldModProfile.WorldProfileData profile) {
+        if (!isArenaMode(profile)) {
+            return;
+        }
+        BlockPos spawn = playerSpawnPos(profile, player);
+        LevelData.RespawnData data = LevelData.RespawnData.of(Level.OVERWORLD, spawn, 0.0F, 0.0F);
+        player.setRespawnPosition(new ServerPlayer.RespawnConfig(data, true), false);
+    }
+
+    private static void clearStandSpace(ServerLevel level, BlockPos feet) {
+        if (!level.getBlockState(feet).isAir()) {
+            level.setBlock(feet, Blocks.AIR.defaultBlockState(), 3);
+        }
+        if (!level.getBlockState(feet.above()).isAir()) {
+            level.setBlock(feet.above(), Blocks.AIR.defaultBlockState(), 3);
+        }
     }
 
     private static void applyWorldSpawn(ServerLevel level, WorldModProfile.WorldProfileData profile, BlockPos origin) {
-        if (profile.mode() != WorldPlayMode.PARCOURS && profile.mode() != WorldPlayMode.ONEBLOCK) {
+        if (isArenaMode(profile)) {
+            BlockPos spawn = profile.mode() == WorldPlayMode.PARCOURS
+                    ? ParcoursArenaBuilder.laneSpawnPos(origin, 0, Math.max(1, profile.oneBlockPlayers()))
+                    : OneBlockArenaBuilder.spawnPos(origin);
+            clearStandSpace(level, spawn);
+            level.setRespawnData(LevelData.RespawnData.of(Level.OVERWORLD, spawn, 0.0F, 0.0F));
             return;
         }
-        BlockPos spawn = profile.mode() == WorldPlayMode.PARCOURS
-                ? ParcoursArenaBuilder.laneSpawnPos(origin, 0, Math.max(1, profile.oneBlockPlayers()))
-                : OneBlockArenaBuilder.spawnPos(origin);
-        level.setRespawnData(LevelData.RespawnData.of(Level.OVERWORLD, spawn, 0.0F, 0.0F));
+        // Maps normales : corrige le spawn vanilla s'il est dans la terre / une grotte.
+        BlockPos shared = level.getRespawnData().pos();
+        BlockPos safe = SafeSpawn.findNear(level, shared);
+        if (!safe.equals(shared)) {
+            level.setRespawnData(LevelData.RespawnData.of(Level.OVERWORLD, safe, 0.0F, 0.0F));
+        }
     }
 
     private static void applyWorldBorder(ServerLevel level, WorldModProfile.WorldProfileData profile, BlockPos center) {

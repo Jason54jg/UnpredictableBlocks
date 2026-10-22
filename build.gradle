@@ -12,6 +12,8 @@ version = project.mod_version
 tasks.register('collectVersionJars') {
     group = 'build'
     description = 'Copy built loader jars into build/libs-multi/<mc>/'
+    // Must run after loader jars exist (Gradle may otherwise parallelize and copy stale jars).
+    mustRunAfter ':fabric:build', ':neoforge:build', ':common:jar'
     doLast {
         def mc = findProperty('target_mc_version')?.toString()
         if (!mc) {
@@ -31,10 +33,11 @@ tasks.register('collectVersionJars') {
             def jars = dir.listFiles()?.findAll {
                 it.name.endsWith('.jar') &&
                         !it.name.contains('sources') &&
-                        it.name.contains("-${loader}")
+                        it.name.contains("-${loader}-")
             } ?: []
-            // Prefer the largest non-sources jar (remapped / final artifact).
-            def jar = jars.max { it.length() }
+            // Prefer the jar built for this MC version (name ends with +<mc>.jar).
+            def jar = jars.find { it.name.endsWith("+${mc}.jar") }
+                    ?: jars.max { it.length() }
             if (jar == null) {
                 logger.warn("No ${loader} jar found in ${dir}")
                 return

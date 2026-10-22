@@ -21,6 +21,7 @@ import com.jason54.unpredictableblocks.quest.QuestTriggers;
 import com.jason54.unpredictableblocks.world.LuckyBlockSpawnHooks;
 import com.jason54.unpredictableblocks.world.LuckySkyblock;
 import com.jason54.unpredictableblocks.world.ModeGameplayHandler;
+import com.jason54.unpredictableblocks.world.OneBlockArenaBuilder;
 import com.jason54.unpredictableblocks.world.WorldSetupHandler;
 import dev.architectury.utils.Env;
 import dev.architectury.utils.EnvExecutor;
@@ -45,6 +46,7 @@ public final class UnpredictableBlocks {
         ModAdvancements.register();
         LuckyBlockSpawnHooks.register();
         LuckySkyblock.register();
+        OneBlockArenaBuilder.register();
         WorldSetupHandler.register();
         ModeGameplayHandler.register();
         QuestTriggers.register();

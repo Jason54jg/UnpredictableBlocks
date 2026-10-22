@@ -27,6 +27,7 @@ public final class ModeGameplayHandler {
 
     public static void register() {
         PlayerEvent.PLAYER_JOIN.register(ModeGameplayHandler::onJoin);
+        PlayerEvent.PLAYER_RESPAWN.register((player, conqueredEnd, removalReason) -> onRespawn(player));
         TickEvent.PLAYER_POST.register(ModeGameplayHandler::onPlayerTick);
     }
 
@@ -59,17 +60,46 @@ public final class ModeGameplayHandler {
         if (!profile.configured()) {
             return;
         }
-        boolean arenaReady = (profile.mode() == WorldPlayMode.PARCOURS && profile.parcoursBuilt())
-                || (profile.mode() == WorldPlayMode.ONEBLOCK && profile.oneBlockBuilt());
-        if (!arenaReady || !ParcoursWorldState.get(overworld).sessionOpen()) {
-            return;
-        }
-        // Un tick plus tard : le bootstrap + chunks sont prêts (évite spawn dans le sol).
         ServerLevels.server(sp).execute(() -> {
             if (sp.isRemoved()) {
                 return;
             }
-            onSessionStart(sp, WorldModProfile.get(overworld));
+            WorldModProfile.WorldProfileData p = WorldModProfile.get(overworld);
+            if (WorldProfileApplier.isArenaMode(p)
+                    && ParcoursWorldState.get(overworld).sessionOpen()
+                    && ((p.mode() == WorldPlayMode.PARCOURS && p.parcoursBuilt())
+                    || (p.mode() == WorldPlayMode.ONEBLOCK && p.oneBlockBuilt()))) {
+                onSessionStart(sp, p);
+                return;
+            }
+            // Map normale / easy / hard : remonte si spawn vanilla dans la terre.
+            SafeSpawn.rescueIfBuried(sp);
+        });
+    }
+
+    private static void onRespawn(ServerPlayer player) {
+        if (player.level().isClientSide()) {
+            return;
+        }
+        ServerLevel overworld = ServerLevels.server(player).overworld();
+        WorldModProfile.WorldProfileData profile = WorldModProfile.get(overworld);
+        if (!profile.configured()) {
+            return;
+        }
+        ServerLevels.server(player).execute(() -> {
+            if (player.isRemoved()) {
+                return;
+            }
+            WorldModProfile.WorldProfileData p = WorldModProfile.get(overworld);
+            if (p.mode() == WorldPlayMode.ONEBLOCK && p.oneBlockBuilt()) {
+                WorldProfileApplier.teleportToArena(player, p);
+                return;
+            }
+            if (p.mode() == WorldPlayMode.PARCOURS && p.parcoursBuilt()) {
+                WorldProfileApplier.teleportToArena(player, p);
+                return;
+            }
+            SafeSpawn.rescueIfBuried(player);
         });
     }
 
@@ -88,8 +118,12 @@ public final class ModeGameplayHandler {
             LuckTier tier
     ) {
         WorldModProfile.WorldProfileData profile = WorldModProfile.get(level);
-        if (profile.mode() == WorldPlayMode.ONEBLOCK && profile.modeSettings().oneBlockEvolution()) {
-            handleOneBlockEvolution(level, profile, player);
+        if (profile.mode() == WorldPlayMode.ONEBLOCK) {
+            OneBlockArenaBuilder.scheduleRespawn(level, profile);
+            if (profile.modeSettings().oneBlockEvolution()) {
+                handleOneBlockEvolution(level, profile, player);
+            }
+            return;
         }
         if (profile.mode() != WorldPlayMode.PARCOURS) {
             return;

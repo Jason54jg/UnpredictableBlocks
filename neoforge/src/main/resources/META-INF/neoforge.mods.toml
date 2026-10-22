@@ -7,27 +7,27 @@ modId = "unpredictableblocks"
 version = "${version}"
 displayName = "UnpredictableBlocks"
 authors = "Jason54"
-description = "Lucky Blocks chaotiques avec système de chance, quêtes et spawn naturel."
+description = '''Lucky Blocks chaotiques avec systeme de chance, quetes et spawn naturel.'''
 logoFile = "assets/unpredictableblocks/icon.png"
 
 [[dependencies.unpredictableblocks]]
 modId = "neoforge"
 type = "required"
-versionRange = "[26.1,26.4)"
+versionRange = "[26.1,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.unpredictableblocks]]
 modId = "minecraft"
 type = "required"
-versionRange = "[26.1.2,26.4)"
+versionRange = "[26.1,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.unpredictableblocks]]
 modId = "architectury"
 type = "required"
-versionRange = "[14.0,)"
+versionRange = "[21.0,)"
 ordering = "AFTER"
 side = "BOTH"
 

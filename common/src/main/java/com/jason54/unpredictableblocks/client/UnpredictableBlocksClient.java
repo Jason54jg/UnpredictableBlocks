@@ -57,7 +57,10 @@ public final class UnpredictableBlocksClient {
     private UnpredictableBlocksClient() {}
 
     public static void init() {
-        BlockEntityRendererRegistry.register(ModBlockEntities.LUCKY_BLOCK.get(), LuckyBlockRenderer::new);
+        // NeoForge : .get() trop tôt → NPE "Registry Object not present: …:lucky_block".
+        // listen() attend que le BlockEntityType soit réellement enregistré.
+        ModBlockEntities.LUCKY_BLOCK.listen(type ->
+                BlockEntityRendererRegistry.register(type, LuckyBlockRenderer::new));
         EntityRendererRegistry.register(ModEntities.LUCKY_ROCKET, LuckyRocketRenderer::new);
         EntityRendererRegistry.register(ModEntities.CHEF_ITALIEN, ctx -> new LuckyMobRenderer<>(ctx, ChefItalienEntity.ID, 0.5F));
         EntityRendererRegistry.register(ModEntities.COMTE_DRACULA, ctx -> new LuckyMobRenderer<>(ctx, ComteDraculaEntity.ID, 0.5F));
