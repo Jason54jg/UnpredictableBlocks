@@ -1,0 +1,182 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.unpredictableblocks.hacker_fantome",
+        "texture_width": 128,
+        "texture_height": 128,
+        "visible_bounds_width": 3,
+        "visible_bounds_height": 3.5,
+        "visible_bounds_offset": [
+          0,
+          1.25,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "root",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "body",
+          "pivot": [
+            0,
+            14,
+            0
+          ],
+          "parent": "root",
+          "cubes": [
+            {
+              "origin": [
+                -4,
+                10,
+                -2
+              ],
+              "size": [
+                8,
+                10,
+                4
+              ],
+              "uv": [
+                0,
+                0
+              ]
+            },
+            {
+              "origin": [
+                -5,
+                8,
+                -1
+              ],
+              "size": [
+                10,
+                2,
+                2
+              ],
+              "uv": [
+                24,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "hood",
+          "pivot": [
+            0,
+            22,
+            0
+          ],
+          "parent": "body",
+          "cubes": [
+            {
+              "origin": [
+                -5,
+                18,
+                -4
+              ],
+              "size": [
+                10,
+                8,
+                8
+              ],
+              "uv": [
+                48,
+                0
+              ],
+              "inflate": 0.3
+            }
+          ]
+        },
+        {
+          "name": "right_arm",
+          "pivot": [
+            -5,
+            18,
+            0
+          ],
+          "parent": "body",
+          "cubes": [
+            {
+              "origin": [
+                -7,
+                8,
+                -1
+              ],
+              "size": [
+                3,
+                10,
+                3
+              ],
+              "uv": [
+                84,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "left_arm",
+          "pivot": [
+            5,
+            18,
+            0
+          ],
+          "parent": "body",
+          "cubes": [
+            {
+              "origin": [
+                4,
+                8,
+                -1
+              ],
+              "size": [
+                3,
+                10,
+                3
+              ],
+              "uv": [
+                96,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "trail",
+          "pivot": [
+            0,
+            10,
+            2
+          ],
+          "parent": "body",
+          "cubes": [
+            {
+              "origin": [
+                -3,
+                0,
+                1
+              ],
+              "size": [
+                6,
+                10,
+                1
+              ],
+              "uv": [
+                108,
+                0
+              ],
+              "inflate": 0.5
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

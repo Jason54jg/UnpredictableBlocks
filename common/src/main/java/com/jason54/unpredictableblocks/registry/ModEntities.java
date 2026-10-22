@@ -2,12 +2,30 @@ package com.jason54.unpredictableblocks.registry;
 
 import com.jason54.unpredictableblocks.UnpredictableBlocks;
 import com.jason54.unpredictableblocks.entity.LuckyRocketEntity;
+import com.jason54.unpredictableblocks.entity.mob.BaristaEntity;
+import com.jason54.unpredictableblocks.entity.mob.BodybuilderEntity;
+import com.jason54.unpredictableblocks.entity.mob.BotSpeedrunnerEntity;
 import com.jason54.unpredictableblocks.entity.mob.ChatInternetEntity;
+import com.jason54.unpredictableblocks.entity.mob.CryptoBulleEntity;
 import com.jason54.unpredictableblocks.entity.mob.ChefItalienEntity;
 import com.jason54.unpredictableblocks.entity.mob.ComteDraculaEntity;
 import com.jason54.unpredictableblocks.entity.mob.CoqGauloisEntity;
+import com.jason54.unpredictableblocks.entity.mob.DanseurDiscoEntity;
+import com.jason54.unpredictableblocks.entity.mob.DouanierEntity;
 import com.jason54.unpredictableblocks.entity.mob.EcranBleuEntity;
+import com.jason54.unpredictableblocks.entity.mob.GrossisteClandestinEntity;
+import com.jason54.unpredictableblocks.entity.mob.HackerFantomeEntity;
+import com.jason54.unpredictableblocks.entity.mob.LapinExtirpateurEntity;
+import com.jason54.unpredictableblocks.entity.mob.ManifestantEntity;
 import com.jason54.unpredictableblocks.entity.mob.MascotteHamburgerEntity;
+import com.jason54.unpredictableblocks.entity.mob.MimiqueD20Entity;
+import com.jason54.unpredictableblocks.entity.mob.NuageOrageEntity;
+import com.jason54.unpredictableblocks.entity.mob.PirateTorrentEntity;
+import com.jason54.unpredictableblocks.entity.mob.PopItGeantEntity;
+import com.jason54.unpredictableblocks.entity.mob.ReveilCauchemarEntity;
+import com.jason54.unpredictableblocks.entity.mob.SliderMultiversEntity;
+import com.jason54.unpredictableblocks.entity.mob.StatueVivanteEntity;
+import com.jason54.unpredictableblocks.entity.mob.ToiDuFuturEntity;
 import dev.architectury.registry.level.entity.EntityAttributeRegistry;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
@@ -35,7 +53,7 @@ public final class ModEntities {
                             Registries.ENTITY_TYPE,
                             Identifier.fromNamespaceAndPath(UnpredictableBlocks.MOD_ID, "lucky_rocket"))));
 
-    // Mobs animés (modèles : tools/generate_mobs.py)
+    // Lot 1
     public static final RegistrySupplier<EntityType<ChefItalienEntity>> CHEF_ITALIEN =
             mob(ChefItalienEntity.ID, ChefItalienEntity::new, MobCategory.MONSTER, 0.6F, 1.95F);
     public static final RegistrySupplier<EntityType<ComteDraculaEntity>> COMTE_DRACULA =
@@ -48,6 +66,48 @@ public final class ModEntities {
             mob(CoqGauloisEntity.ID, CoqGauloisEntity::new, MobCategory.CREATURE, 0.9F, 1.9F);
     public static final RegistrySupplier<EntityType<EcranBleuEntity>> ECRAN_BLEU =
             mob(EcranBleuEntity.ID, EcranBleuEntity::new, MobCategory.MONSTER, 1.1F, 0.9F);
+
+    // Lot 2
+    public static final RegistrySupplier<EntityType<ToiDuFuturEntity>> TOI_DU_FUTUR =
+            mob(ToiDuFuturEntity.ID, ToiDuFuturEntity::new, MobCategory.CREATURE, 0.6F, 1.95F);
+    public static final RegistrySupplier<EntityType<DouanierEntity>> DOUANIER =
+            mob(DouanierEntity.ID, DouanierEntity::new, MobCategory.MISC, 0.6F, 1.95F);
+    public static final RegistrySupplier<EntityType<LapinExtirpateurEntity>> LAPIN_EXTIRPATEUR =
+            mob(LapinExtirpateurEntity.ID, LapinExtirpateurEntity::new, MobCategory.CREATURE, 0.6F, 0.9F);
+    public static final RegistrySupplier<EntityType<GrossisteClandestinEntity>> GROSSISTE_CLANDESTIN =
+            mob(GrossisteClandestinEntity.ID, GrossisteClandestinEntity::new, MobCategory.MISC, 0.6F, 1.95F);
+    public static final RegistrySupplier<EntityType<StatueVivanteEntity>> STATUE_VIVANTE =
+            mob(StatueVivanteEntity.ID, StatueVivanteEntity::new, MobCategory.MONSTER, 0.9F, 1.8F);
+    public static final RegistrySupplier<EntityType<MimiqueD20Entity>> MIMIQUE_D20 =
+            mob(MimiqueD20Entity.ID, MimiqueD20Entity::new, MobCategory.MONSTER, 0.9F, 0.9F);
+
+    // Lot 3
+    public static final RegistrySupplier<EntityType<BodybuilderEntity>> BODYBUILDER =
+            mob(BodybuilderEntity.ID, BodybuilderEntity::new, MobCategory.MONSTER, 0.7F, 1.95F);
+    public static final RegistrySupplier<EntityType<DanseurDiscoEntity>> DANSEUR_DISCO =
+            mob(DanseurDiscoEntity.ID, DanseurDiscoEntity::new, MobCategory.MONSTER, 0.6F, 1.95F);
+    public static final RegistrySupplier<EntityType<HackerFantomeEntity>> HACKER_FANTOME =
+            mob(HackerFantomeEntity.ID, HackerFantomeEntity::new, MobCategory.MONSTER, 0.6F, 1.8F);
+    public static final RegistrySupplier<EntityType<BotSpeedrunnerEntity>> BOT_SPEEDRUNNER =
+            mob(BotSpeedrunnerEntity.ID, BotSpeedrunnerEntity::new, MobCategory.MONSTER, 0.6F, 1.95F);
+    public static final RegistrySupplier<EntityType<BaristaEntity>> BARISTA =
+            mob(BaristaEntity.ID, BaristaEntity::new, MobCategory.MISC, 0.6F, 1.95F);
+    public static final RegistrySupplier<EntityType<PirateTorrentEntity>> PIRATE_TORRENT =
+            mob(PirateTorrentEntity.ID, PirateTorrentEntity::new, MobCategory.MONSTER, 0.6F, 1.95F);
+
+    // Lot 4 — silhouettes objets / créatures (pas de forme Steve)
+    public static final RegistrySupplier<EntityType<ManifestantEntity>> MANIFESTANT =
+            mob(ManifestantEntity.ID, ManifestantEntity::new, MobCategory.MONSTER, 0.8F, 1.6F);
+    public static final RegistrySupplier<EntityType<CryptoBulleEntity>> CRYPTO_BULLE =
+            mob(CryptoBulleEntity.ID, CryptoBulleEntity::new, MobCategory.MONSTER, 1.0F, 1.2F);
+    public static final RegistrySupplier<EntityType<NuageOrageEntity>> NUAGE_ORAGE =
+            mob(NuageOrageEntity.ID, NuageOrageEntity::new, MobCategory.MONSTER, 1.4F, 1.2F);
+    public static final RegistrySupplier<EntityType<SliderMultiversEntity>> SLIDER_MULTIVERS =
+            mob(SliderMultiversEntity.ID, SliderMultiversEntity::new, MobCategory.MONSTER, 1.6F, 1.0F);
+    public static final RegistrySupplier<EntityType<PopItGeantEntity>> POP_IT_GEANT =
+            mob(PopItGeantEntity.ID, PopItGeantEntity::new, MobCategory.MONSTER, 1.4F, 0.6F);
+    public static final RegistrySupplier<EntityType<ReveilCauchemarEntity>> REVEIL_CAUCHEMAR =
+            mob(ReveilCauchemarEntity.ID, ReveilCauchemarEntity::new, MobCategory.MONSTER, 0.9F, 1.1F);
 
     private ModEntities() {}
 
@@ -67,5 +127,23 @@ public final class ModEntities {
         EntityAttributeRegistry.register(CHAT_INTERNET, ChatInternetEntity::createAttributes);
         EntityAttributeRegistry.register(COQ_GAULOIS, CoqGauloisEntity::createAttributes);
         EntityAttributeRegistry.register(ECRAN_BLEU, EcranBleuEntity::createAttributes);
+        EntityAttributeRegistry.register(TOI_DU_FUTUR, ToiDuFuturEntity::createAttributes);
+        EntityAttributeRegistry.register(DOUANIER, DouanierEntity::createAttributes);
+        EntityAttributeRegistry.register(LAPIN_EXTIRPATEUR, LapinExtirpateurEntity::createAttributes);
+        EntityAttributeRegistry.register(GROSSISTE_CLANDESTIN, GrossisteClandestinEntity::createAttributes);
+        EntityAttributeRegistry.register(STATUE_VIVANTE, StatueVivanteEntity::createAttributes);
+        EntityAttributeRegistry.register(MIMIQUE_D20, MimiqueD20Entity::createAttributes);
+        EntityAttributeRegistry.register(BODYBUILDER, BodybuilderEntity::createAttributes);
+        EntityAttributeRegistry.register(DANSEUR_DISCO, DanseurDiscoEntity::createAttributes);
+        EntityAttributeRegistry.register(HACKER_FANTOME, HackerFantomeEntity::createAttributes);
+        EntityAttributeRegistry.register(BOT_SPEEDRUNNER, BotSpeedrunnerEntity::createAttributes);
+        EntityAttributeRegistry.register(BARISTA, BaristaEntity::createAttributes);
+        EntityAttributeRegistry.register(PIRATE_TORRENT, PirateTorrentEntity::createAttributes);
+        EntityAttributeRegistry.register(MANIFESTANT, ManifestantEntity::createAttributes);
+        EntityAttributeRegistry.register(CRYPTO_BULLE, CryptoBulleEntity::createAttributes);
+        EntityAttributeRegistry.register(NUAGE_ORAGE, NuageOrageEntity::createAttributes);
+        EntityAttributeRegistry.register(SLIDER_MULTIVERS, SliderMultiversEntity::createAttributes);
+        EntityAttributeRegistry.register(POP_IT_GEANT, PopItGeantEntity::createAttributes);
+        EntityAttributeRegistry.register(REVEIL_CAUCHEMAR, ReveilCauchemarEntity::createAttributes);
     }
 }

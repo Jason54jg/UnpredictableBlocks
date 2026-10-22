@@ -466,7 +466,743 @@ def screen() -> Mob:
     return Mob("ecran_bleu", bones, anims)
 
 
-MOBS = [chef, dracula, hamburger, cat, rooster, screen]
+# --------------------------------------------------------------------------- lot 2
+def futur_face(draw, x, y, w, h):
+    draw.rectangle((x + 1, y + 2, x + w - 2, y + 5), fill=rgb("00E5FF"))  # visière néon
+    px(draw, x + 2, y + 3, "FFFFFF"); px(draw, x + w - 3, y + 3, "FFFFFF")
+
+
+def futur_chest(draw, x, y, w, h):
+    draw.rectangle((x + 2, y + 2, x + w - 3, y + h - 3), fill=rgb("B0BEC5"))
+    draw.rectangle((x + 3, y + 4, x + w - 4, y + 6), fill=rgb("00E5FF"))
+    px(draw, x + w // 2, y + 8, "FF4081")
+
+
+def douanier_face(draw, x, y, w, h):
+    eyes()(draw, x, y, w, h)
+    draw.rectangle((x + 1, y + 6, x + w - 2, y + 6), fill=rgb("5D4037"))  # moustache
+
+
+def douanier_jacket(draw, x, y, w, h):
+    draw.rectangle((x, y, x + w - 1, y + 2), fill=rgb("0D47A1"))
+    for row in (4, 7, 10):
+        px(draw, x + 2, y + row, "FFD700"); px(draw, x + w - 3, y + row, "FFD700")
+
+
+def rabbit_face(draw, x, y, w, h):
+    eyes(y_frac=0.4, gap=0.28)(draw, x, y, w, h)
+    px(draw, x + w // 2, y + h - 2, "F48FB1")
+
+
+def dealer_face(draw, x, y, w, h):
+    draw.rectangle((x, y + 2, x + w - 1, y + 4), fill=rgb("111111"))  # lunettes noires
+    px(draw, x + 1, y + 2, "333333"); px(draw, x + w - 2, y + 2, "333333")
+
+
+def dealer_coat(draw, x, y, w, h):
+    draw.rectangle((x + 1, y, x + w - 2, y + h - 1), fill=rgb("37474F"))
+    draw.rectangle((x + 3, y + 2, x + w - 4, y + 8), fill=rgb("263238"))
+
+
+def statue_face(draw, x, y, w, h):
+    draw.rectangle((x + 2, y + 2, x + w - 3, y + h - 3), fill=rgb("ECEFF1"))
+    px(draw, x + 3, y + 4, "90A4AE"); px(draw, x + w - 4, y + 4, "90A4AE")
+
+
+def mimic_front(draw, x, y, w, h):
+    # faces du dé + dents
+    draw.rectangle((x + 1, y + 1, x + w - 2, y + h - 2), fill=rgb("6A1B9A"))
+    for i, j in ((2, 2), (w // 2, 2), (w - 3, 2), (2, h // 2), (w // 2, h // 2),
+                 (w - 3, h // 2), (2, h - 3), (w // 2, h - 3), (w - 3, h - 3)):
+        if 0 <= i < w and 0 <= j < h:
+            px(draw, x + i, y + j, "FFD700")
+    for i in range(2, w - 2, 2):
+        px(draw, x + i, y + h - 2, "FFFFFF")
+
+
+def toi_du_futur() -> Mob:
+    bones = humanoid("C0C0C0", Cube((-4, 12, -2), (8, 12, 4), "90A4AE", front=futur_chest), futur_face,
+                     "78909C", "607D8B")
+    bones.append(Bone("visor", (0, 28, -4), "head", [Cube((-4, 26, -5), (8, 3, 1), "00E5FF", inflate=0.2)]))
+    bones.append(Bone("jetpack", (0, 18, 3), "body", [
+        Cube((-5, 14, 2), (4, 10, 3), "455A64"),
+        Cube((1, 14, 2), (4, 10, 3), "455A64"),
+        Cube((-4, 12, 3), (2, 3, 2), "FF6D00"),
+        Cube((2, 12, 3), (2, 3, 2), "FF6D00"),
+    ]))
+    attack = {
+        "right_arm": {"rotation": loop(0.5, [(0, [0, 0, 0]), (0.15, [-90, 0, 0]), (0.35, [-90, 0, 0]), (0.5, [0, 0, 0])])},
+        "left_arm": {"rotation": loop(0.5, [(0, [0, 0, 0]), (0.15, [-80, 0, 20]), (0.5, [0, 0, 0])])},
+        "visor": {"scale": loop(0.5, [(0, [1, 1, 1]), (0.2, [1.2, 1.2, 1.2]), (0.5, [1, 1, 1])])},
+    }
+    fly = {
+        "root": {"position": loop(1.0, [(0, [0, 0, 0]), (0.3, [0, 6, 0]), (0.7, [0, 8, 0]), (1.0, [0, 0, 0])])},
+        "jetpack": {"rotation": swing(1.0, 8, axis=2)},
+        "right_arm": {"rotation": {0.0: [-20, 0, 25]}},
+        "left_arm": {"rotation": {0.0: [-20, 0, -25]}},
+    }
+    return Mob("toi_du_futur", bones, humanoid_anims(attack, special=(1.0, fly), walk_arms=20))
+
+
+def douanier() -> Mob:
+    bones = humanoid("E0AC69", Cube((-4, 12, -2), (8, 12, 4), "1565C0", front=douanier_jacket), douanier_face,
+                     "1565C0", "0D47A1")
+    bones.append(Bone("cap", (0, 32, 0), "head", [
+        Cube((-4, 32, -4), (8, 2, 8), "0D47A1", inflate=0.2),
+        Cube((-5, 33, -5), (10, 1, 10), "0D47A1"),
+        Cube((-1, 33, -6), (2, 1, 2), "FFD700"),
+    ]))
+    bones.append(Bone("stamp", (-6, 14, -2), "right_arm", [
+        Cube((-8, 12, -4), (4, 4, 4), "C62828"),
+        Cube((-7, 16, -3), (2, 4, 2), "5D4037"),
+    ]))
+    attack = {
+        "right_arm": {"rotation": loop(0.5, [(0, [0, 0, 0]), (0.18, [-140, 10, 0]), (0.32, [20, 0, 0]), (0.5, [0, 0, 0])])},
+        "stamp": {"rotation": loop(0.5, [(0, [0, 0, 0]), (0.18, [-30, 0, 0]), (0.32, [40, 0, 0]), (0.5, [0, 0, 0])])},
+    }
+    search = {
+        "left_arm": {"rotation": loop(1.0, [(0, [0, 0, 0]), (0.25, [-60, 0, 20]), (0.5, [-40, 30, 0]), (0.75, [-60, -20, 0]), (1.0, [0, 0, 0])])},
+        "head": {"rotation": loop(1.0, [(0, [0, 0, 0]), (0.3, [15, 25, 0]), (0.7, [15, -25, 0]), (1.0, [0, 0, 0])])},
+        "body": {"rotation": loop(1.0, [(0, [0, 0, 0]), (0.5, [0, 10, 0]), (1.0, [0, 0, 0])])},
+    }
+    return Mob("douanier", bones, humanoid_anims(attack, special=(1.0, search)))
+
+
+def lapin_extirpateur() -> Mob:
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("body", (0, 8, 0), "root", [Cube((-3, 5, -4), (6, 7, 8), "F5F5F5")]),
+        Bone("head", (0, 12, -3), "body", [
+            Cube((-3.5, 11, -8), (7, 6, 6), "FAFAFA", front=rabbit_face),
+            Cube((-3, 17, -6), (2, 6, 1), "FAFAFA"),
+            Cube((1, 17, -6), (2, 6, 1), "FAFAFA"),
+            Cube((-2.5, 17, -6.5), (1, 4, 1), "F48FB1"),
+            Cube((1.5, 17, -6.5), (1, 4, 1), "F48FB1"),
+        ]),
+        Bone("hat", (0, 18, -5), "head", [
+            Cube((-4, 17, -9), (8, 1, 8), "111111"),
+            Cube((-2.5, 18, -7.5), (5, 5, 5), "111111"),
+            Cube((-3, 18, -8), (6, 1, 6), "C62828"),
+        ]),
+        Bone("cape", (0, 12, 3), "body", [Cube((-4, 2, 3), (8, 12, 1), "6A1B9A")]),
+        Bone("front_right", (-2, 5, -2), "root", [Cube((-3, 0, -3), (2, 5, 2), "F5F5F5")]),
+        Bone("front_left", (2, 5, -2), "root", [Cube((1, 0, -3), (2, 5, 2), "F5F5F5")]),
+        Bone("back_right", (-2, 5, 3), "root", [Cube((-3, 0, 2), (2, 5, 2), "F5F5F5")]),
+        Bone("back_left", (2, 5, 3), "root", [Cube((1, 0, 2), (2, 5, 2), "F5F5F5")]),
+    ]
+    anims = {
+        "idle": (1.2, True, {
+            "head": {"rotation": HEAD_LOOK},
+            "body": {"position": loop(1.2, [(0, [0, 0, 0]), (0.3, [0, 3, 0]), (0.6, [0, 0, 0]), (0.9, [0, 2, 0]), (1.2, [0, 0, 0])])},
+            "cape": {"rotation": swing(1.2, 6)},
+        }),
+        "walk": (0.5, True, {
+            "head": {"rotation": HEAD_LOOK},
+            "front_right": {"rotation": swing(0.5, 40)},
+            "back_left": {"rotation": swing(0.5, 40)},
+            "front_left": {"rotation": swing(0.5, -40)},
+            "back_right": {"rotation": swing(0.5, -40)},
+            "body": {"position": loop(0.5, [(0, [0, 0, 0]), (0.25, [0, 4, 0]), (0.5, [0, 0, 0])])},
+        }),
+        "attack": (0.8, False, {
+            "hat": {"rotation": loop(0.8, [(0, [0, 0, 0]), (0.2, [-50, 0, 0]), (0.45, [-50, 0, 0]), (0.65, [20, 0, 0]), (0.8, [0, 0, 0])])},
+            "right_arm_fake": {},
+            "head": {"rotation": loop(0.8, [(0, [0, 0, 0]), (0.3, [-15, 0, 0]), (0.8, [0, 0, 0])])},
+        }),
+        "special": (1.0, False, {
+            "root": {"scale": loop(1.0, [(0, [1, 1, 1]), (0.4, [0.2, 0.2, 0.2]), (0.6, [0, 0, 0]), (0.85, [0.3, 0.3, 0.3]), (1.0, [1, 1, 1])]),
+                     "rotation": loop(1.0, [(0, [0, 0, 0]), (0.5, [0, 360, 0]), (1.0, [0, 720, 0])])},
+        }),
+    }
+    # clean empty bone ref from attack
+    del anims["attack"][2]["right_arm_fake"]
+    return Mob("lapin_extirpateur", bones, anims)
+
+
+def grossiste_clandestin() -> Mob:
+    bones = humanoid("E0AC69", Cube((-4, 12, -2), (8, 12, 4), "455A64", front=dealer_coat), dealer_face,
+                     "37474F", "263238")
+    bones.append(Bone("backpack", (0, 18, 4), "body", [
+        Cube((-5, 12, 2), (10, 12, 5), "ECEFF1"),
+        Cube((-4, 14, 6), (3, 4, 2), "FAFAFA"),
+        Cube((1, 18, 6), (3, 4, 2), "FAFAFA"),
+        Cube((-2, 21, 6), (4, 3, 2), "FAFAFA"),
+    ]))
+    attack = {  # fuite : se penche et sprinte
+        "body": {"rotation": loop(0.5, [(0, [0, 0, 0]), (0.2, [25, 0, 0]), (0.5, [15, 0, 0])])},
+        "right_arm": {"rotation": swing(0.5, 40)},
+        "left_arm": {"rotation": swing(0.5, -40)},
+    }
+    sale = {
+        "right_arm": {"rotation": loop(1.0, [(0, [0, 0, 0]), (0.3, [-80, 0, -20]), (0.6, [-60, 0, 10]), (1.0, [0, 0, 0])])},
+        "left_arm": {"rotation": loop(1.0, [(0, [0, 0, 0]), (0.3, [-70, 0, 30]), (0.6, [-50, 0, 10]), (1.0, [0, 0, 0])])},
+        "backpack": {"rotation": loop(1.0, [(0, [0, 0, 0]), (0.4, [15, 0, 0]), (1.0, [0, 0, 0])])},
+        "head": {"rotation": loop(1.0, [(0, [0, 0, 0]), (0.4, [10, 20, 0]), (1.0, [0, 0, 0])])},
+    }
+    anims = humanoid_anims(attack, special=(1.0, sale), walk_arms=35)
+    anims["walk"][2]["body"] = {"rotation": {0.0: [8, 0, 0]}}
+    return Mob("grossiste_clandestin", bones, anims)
+
+
+def statue_vivante() -> Mob:
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("core", (0, 12, 0), "root", [Cube((-4, 8, -4), (8, 8, 8), "B0BEC5", front=statue_face, pattern="checker")]),
+        Bone("ring_a", (0, 16, 0), "core", [Cube((-7, 15, -1), (14, 2, 2), "ECEFF1"), Cube((-1, 9, -1), (2, 14, 2), "ECEFF1")]),
+        Bone("ring_b", (0, 12, 0), "core", [Cube((-9, 11, -1), (18, 2, 2), "90A4AE"), Cube((-1, 3, -1), (2, 18, 2), "90A4AE")],
+             rotation=(0, 45, 0)),
+        Bone("cube_top", (0, 22, 0), "core", [Cube((-2, 20, -2), (4, 4, 4), "CFD8DC")]),
+        Bone("cube_side", (8, 12, 0), "core", [Cube((6, 10, -2), (4, 4, 4), "78909C")]),
+        Bone("fist", (0, 6, -6), "root", [Cube((-3, 4, -9), (6, 6, 6), "607D8B")]),
+    ]
+    anims = {
+        "idle": (2.4, True, {
+            "root": {"position": loop(2.4, [(0, [0, 0, 0]), (1.2, [0, 3, 0]), (2.4, [0, 0, 0])])},
+            "ring_a": {"rotation": swing(2.4, 25, axis=1)},
+            "ring_b": {"rotation": swing(2.4, -30, axis=1)},
+            "cube_top": {"position": loop(2.4, [(0, [0, 0, 0]), (1.2, [0, 2, 0]), (2.4, [0, 0, 0])])},
+            "cube_side": {"position": loop(2.4, [(0, [0, 0, 0]), (1.2, [1, 0, 0]), (2.4, [0, 0, 0])])},
+        }),
+        "walk": (1.0, True, {
+            "root": {"position": loop(1.0, [(0, [0, 1, 0]), (0.5, [0, 3, 0]), (1.0, [0, 1, 0])])},
+            "fist": {"position": loop(1.0, [(0, [0, 0, 0]), (0.5, [0, 0, -2]), (1.0, [0, 0, 0])])},
+            "ring_a": {"rotation": swing(1.0, 40, axis=1)},
+            "ring_b": {"rotation": swing(1.0, -40, axis=1)},
+        }),
+        "attack": (0.6, False, {
+            "fist": {"position": loop(0.6, [(0, [0, 0, 0]), (0.2, [0, 4, -8]), (0.35, [0, -2, 4]), (0.6, [0, 0, 0])])},
+            "core": {"rotation": loop(0.6, [(0, [0, 0, 0]), (0.2, [-15, 0, 0]), (0.6, [0, 0, 0])])},
+        }),
+        "special": (1.2, False, {  # assemblage / figé
+            "cube_top": {"position": loop(1.2, [(0, [0, 8, 0]), (0.5, [0, 0, 0]), (1.2, [0, 0, 0])])},
+            "cube_side": {"position": loop(1.2, [(0, [8, 0, 0]), (0.5, [0, 0, 0]), (1.2, [0, 0, 0])])},
+            "ring_a": {"rotation": loop(1.2, [(0, [0, 0, 0]), (0.6, [0, 180, 0]), (1.2, [0, 360, 0])])},
+            "ring_b": {"rotation": loop(1.2, [(0, [0, 0, 0]), (0.6, [0, -180, 0]), (1.2, [0, -360, 0])])},
+            "root": {"scale": loop(1.2, [(0, [0.6, 0.6, 0.6]), (0.5, [1.1, 1.1, 1.1]), (1.2, [1, 1, 1])])},
+        }),
+    }
+    return Mob("statue_vivante", bones, anims)
+
+
+def mimique_d20() -> Mob:
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("body", (0, 8, 0), "root", [
+            Cube((-7, 0, -7), (14, 10, 14), "4A148C", front=mimic_front),
+            Cube((-6, 10, -6), (12, 2, 12), "6A1B9A"),
+        ]),
+        Bone("lid", (0, 12, 0), "body", [
+            Cube((-7, 10, -7), (14, 4, 14), "7B1FA2", front=mimic_front),
+            Cube((-1, 14, -8), (2, 2, 2), "FFD700"),
+        ]),
+        Bone("jaw", (0, 4, -4), "body", [
+            Cube((-6, 1, -8), (12, 3, 4), "311B92"),
+            Cube((-5, 0, -9), (2, 2, 2), "FFFFFF"),
+            Cube((-1, 0, -9), (2, 2, 2), "FFFFFF"),
+            Cube((3, 0, -9), (2, 2, 2), "FFFFFF"),
+        ]),
+        Bone("tongue", (0, 3, -6), "jaw", [Cube((-1, 2, -10), (2, 1, 5), "E91E63")]),
+    ]
+    anims = {
+        "idle": (2.0, True, {
+            "body": {"scale": loop(2.0, [(0, [1, 1, 1]), (1.0, [1.02, 0.98, 1.02]), (2.0, [1, 1, 1])])},
+            "lid": {"rotation": {0.0: [0, 0, 0]}},
+        }),
+        "walk": (0.7, True, {
+            "root": {"position": loop(0.7, [(0, [0, 0, 0]), (0.2, [0, 4, 0]), (0.4, [0, 0, 0]), (0.55, [0, 3, 0]), (0.7, [0, 0, 0])])},
+            "body": {"rotation": swing(0.7, 8, axis=2)},
+        }),
+        "attack": (0.5, False, {
+            "lid": {"rotation": loop(0.5, [(0, [0, 0, 0]), (0.15, [-70, 0, 0]), (0.35, [-40, 0, 0]), (0.5, [0, 0, 0])])},
+            "jaw": {"rotation": loop(0.5, [(0, [0, 0, 0]), (0.15, [50, 0, 0]), (0.35, [20, 0, 0]), (0.5, [0, 0, 0])])},
+            "root": {"position": loop(0.5, [(0, [0, 0, 0]), (0.15, [0, 6, -4]), (0.35, [0, 0, 0]), (0.5, [0, 0, 0])])},
+        }),
+        "special": (1.0, False, {  # réveil + roulé
+            "lid": {"rotation": loop(1.0, [(0, [0, 0, 0]), (0.3, [-90, 0, 0]), (1.0, [-60, 0, 0])])},
+            "jaw": {"rotation": loop(1.0, [(0, [0, 0, 0]), (0.3, [40, 0, 0]), (1.0, [25, 0, 0])])},
+            "root": {"rotation": loop(1.0, [(0, [0, 0, 0]), (0.5, [0, 180, 20]), (1.0, [0, 360, 0])])},
+            "tongue": {"position": loop(1.0, [(0, [0, 0, 0]), (0.4, [0, 0, -3]), (1.0, [0, 0, -2])])},
+        }),
+    }
+    return Mob("mimique_d20", bones, anims)
+
+
+# --------------------------------------------------------------------------- lot 3
+def gym_face(draw, x, y, w, h):
+    eyes()(draw, x, y, w, h)
+    draw.rectangle((x + 2, y + 6, x + w - 3, y + 7), fill=rgb("5D4037"))  # sourire force
+
+
+def gym_tank(draw, x, y, w, h):
+    draw.rectangle((x, y, x + w - 1, y + 2), fill=rgb("C62828"))
+    px(draw, x + w // 2, y + 5, "FFFFFF")
+
+
+def disco_face(draw, x, y, w, h):
+    eyes("E91E63", white=True)(draw, x, y, w, h)
+    draw.rectangle((x + 1, y + 6, x + w - 2, y + 6), fill=rgb("FFD700"))
+
+
+def disco_suit(draw, x, y, w, h):
+    for j in range(0, h, 2):
+        c = "7B1FA2" if (j // 2) % 2 == 0 else "1565C0"
+        draw.line((x, y + j, x + w - 1, y + j), fill=rgb(c))
+    px(draw, x + w // 2, y + 3, "FFD700")
+
+
+def hacker_face(draw, x, y, w, h):
+    draw.rectangle((x + 1, y + 1, x + w - 2, y + h - 2), fill=rgb("1B5E20"))
+    for row in (3, 5, 7):
+        draw.line((x + 2, y + row, x + w - 3, y + row), fill=rgb("69F0AE"))
+    px(draw, x + 3, y + 3, "FFFFFF")
+
+
+def bot_face(draw, x, y, w, h):
+    draw.rectangle((x + 1, y + 2, x + w - 2, y + 5), fill=rgb("00E5FF"))
+    px(draw, x + 2, y + 3, "FFFFFF"); px(draw, x + w - 3, y + 3, "FFFFFF")
+    draw.rectangle((x + 2, y + 6, x + w - 3, y + 7), fill=rgb("263238"))
+
+
+def barista_face(draw, x, y, w, h):
+    eyes()(draw, x, y, w, h)
+    draw.rectangle((x + 2, y + 6, x + w - 3, y + 6), fill=rgb("6D4C41"))
+
+
+def barista_apron(draw, x, y, w, h):
+    draw.rectangle((x + 1, y + 2, x + w - 2, y + h - 1), fill=rgb("FAFAFA"))
+    draw.rectangle((x + 2, y + 4, x + w - 3, y + 8), fill=rgb("5D4037"))  # tache cafe
+
+
+def pirate_face(draw, x, y, w, h):
+    eyes()(draw, x, y, w, h)
+    draw.rectangle((x, y + 1, x + w - 1, y + 2), fill=rgb("111111"))  # bandeau
+    px(draw, x + 1, y + 1, "C62828")
+
+
+def pirate_coat(draw, x, y, w, h):
+    draw.rectangle((x, y, x + w - 1, y + h - 1), fill=rgb("1A237E"))
+    draw.rectangle((x + 2, y + 2, x + w - 3, y + 6), fill=rgb("F5F5F5"))
+    px(draw, x + w // 2, y + 4, "FFD700")
+
+
+def bodybuilder() -> Mob:
+    bones = humanoid("E0AC69", Cube((-5, 12, -3), (10, 12, 6), "C62828", front=gym_tank), gym_face,
+                     "E0AC69", "1565C0")
+    # bras hypertrophies
+    bones[3] = Bone("right_arm", (-6, 22, 0), "body", [Cube((-11, 12, -3), (6, 12, 6), "E0AC69")])
+    bones[4] = Bone("left_arm", (6, 22, 0), "body", [Cube((5, 12, -3), (6, 12, 6), "E0AC69")])
+    bones.append(Bone("dumbbell", (-9, 12, 0), "right_arm", [
+        Cube((-12, 10, -1), (2, 2, 2), "37474F"),
+        Cube((-14, 9, -2), (2, 4, 4), "78909C"),
+        Cube((-10, 9, -2), (2, 4, 4), "78909C"),
+    ]))
+    attack = {
+        "right_arm": {"rotation": loop(0.5, [(0, [0, 0, 0]), (0.15, [-120, 0, 20]), (0.35, [30, 0, 0]), (0.5, [0, 0, 0])])},
+        "body": {"rotation": loop(0.5, [(0, [0, 0, 0]), (0.15, [0, 15, 0]), (0.5, [0, 0, 0])])},
+    }
+    flex = {
+        "right_arm": {"rotation": loop(1.2, [(0, [0, 0, 0]), (0.3, [-90, 0, -70]), (0.9, [-90, 0, -70]), (1.2, [0, 0, 0])])},
+        "left_arm": {"rotation": loop(1.2, [(0, [0, 0, 0]), (0.3, [-90, 0, 70]), (0.9, [-90, 0, 70]), (1.2, [0, 0, 0])])},
+        "body": {"scale": loop(1.2, [(0, [1, 1, 1]), (0.4, [1.15, 1.1, 1.15]), (0.9, [1.15, 1.1, 1.15]), (1.2, [1, 1, 1])])},
+    }
+    return Mob("bodybuilder", bones, humanoid_anims(attack, special=(1.2, flex), walk_arms=15))
+
+
+def danseur_disco() -> Mob:
+    bones = humanoid("E0AC69", Cube((-4, 12, -2), (8, 12, 4), "7B1FA2", front=disco_suit), disco_face,
+                     "7B1FA2", "111111")
+    bones.append(Bone("afro", (0, 32, 0), "head", [Cube((-5, 30, -5), (10, 6, 10), "3E2723", inflate=0.4)]))
+    bones.append(Bone("collar", (0, 24, 0), "body", [Cube((-5, 22, -3), (10, 3, 6), "FFD700", inflate=0.2)]))
+    attack = {
+        "root": {"rotation": loop(0.6, [(0, [0, 0, 0]), (0.3, [0, 180, 0]), (0.6, [0, 360, 0])])},
+        "right_arm": {"rotation": swing(0.6, 60)},
+        "left_arm": {"rotation": swing(0.6, -60)},
+    }
+    dance = {
+        "body": {"rotation": loop(1.2, [(0, [0, 0, 0]), (0.3, [0, 0, 15]), (0.6, [0, 0, -15]), (0.9, [0, 0, 15]), (1.2, [0, 0, 0])]),
+                 "position": loop(1.2, [(0, [0, 0, 0]), (0.3, [0, 3, 0]), (0.6, [0, 0, 0]), (0.9, [0, 3, 0]), (1.2, [0, 0, 0])])},
+        "right_arm": {"rotation": loop(1.2, [(0, [0, 0, 0]), (0.3, [-100, 0, -40]), (0.6, [-40, 0, 20]), (0.9, [-100, 0, -40]), (1.2, [0, 0, 0])])},
+        "left_arm": {"rotation": loop(1.2, [(0, [0, 0, 0]), (0.3, [-40, 0, -20]), (0.6, [-100, 0, 40]), (0.9, [-40, 0, -20]), (1.2, [0, 0, 0])])},
+        "right_leg": {"rotation": swing(1.2, 25)},
+        "left_leg": {"rotation": swing(1.2, -25)},
+    }
+    return Mob("danseur_disco", bones, humanoid_anims(attack, special=(1.2, dance), walk_arms=40))
+
+
+def hacker_fantome() -> Mob:
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("body", (0, 14, 0), "root", [
+            Cube((-4, 10, -2), (8, 10, 4), "1B5E20", front=hacker_face, pattern="stripes"),
+            Cube((-5, 8, -1), (10, 2, 2), "69F0AE"),
+        ]),
+        Bone("hood", (0, 22, 0), "body", [Cube((-5, 18, -4), (10, 8, 8), "0D1F12", inflate=0.3)]),
+        Bone("right_arm", (-5, 18, 0), "body", [Cube((-7, 8, -1), (3, 10, 3), "1B5E20")]),
+        Bone("left_arm", (5, 18, 0), "body", [Cube((4, 8, -1), (3, 10, 3), "1B5E20")]),
+        Bone("trail", (0, 10, 2), "body", [Cube((-3, 0, 1), (6, 10, 1), "69F0AE", inflate=0.5)]),
+    ]
+    anims = {
+        "idle": (2.0, True, {
+            "root": {"position": loop(2.0, [(0, [0, 0, 0]), (1.0, [0, 3, 0]), (2.0, [0, 0, 0])])},
+            "trail": {"scale": loop(2.0, [(0, [1, 1, 1]), (1.0, [1.1, 0.8, 1]), (2.0, [1, 1, 1])])},
+            "hood": {"rotation": swing(2.0, 4, axis=2)},
+        }),
+        "walk": (0.8, True, {
+            "root": {"position": loop(0.8, [(0, [0, 2, 0]), (0.4, [0, 4, 0]), (0.8, [0, 2, 0])])},
+            "right_arm": {"rotation": swing(0.8, 20)},
+            "left_arm": {"rotation": swing(0.8, -20)},
+            "body": {"rotation": {0.0: [8, 0, 0]}},
+        }),
+        "attack": (0.5, False, {
+            "right_arm": {"rotation": loop(0.5, [(0, [0, 0, 0]), (0.2, [-110, 0, 0]), (0.5, [0, 0, 0])])},
+            "body": {"scale": loop(0.5, [(0, [1, 1, 1]), (0.15, [1.2, 0.9, 1.2]), (0.5, [1, 1, 1])])},
+        }),
+        "special": (0.6, False, {
+            "root": {"scale": loop(0.6, [(0, [1, 1, 1]), (0.15, [0.2, 1.4, 0.2]), (0.3, [1.3, 0.5, 1.3]), (0.45, [0.4, 1.2, 0.4]), (0.6, [1, 1, 1])]),
+                     "rotation": loop(0.6, [(0, [0, 0, 0]), (0.3, [0, 180, 0]), (0.6, [0, 360, 0])])},
+        }),
+    }
+    return Mob("hacker_fantome", bones, anims)
+
+
+def bot_speedrunner() -> Mob:
+    bones = humanoid("90A4AE", Cube((-4, 12, -2), (8, 12, 4), "455A64", front=bot_face), bot_face,
+                     "607D8B", "37474F")
+    bones.append(Bone("visor", (0, 28, -4), "head", [Cube((-4, 26, -5), (8, 3, 1), "00E5FF")]))
+    bones.append(Bone("backpack", (0, 18, 3), "body", [
+        Cube((-4, 14, 2), (8, 8, 3), "263238"),
+        Cube((-2, 16, 5), (4, 3, 2), "FF6D00"),
+    ]))
+    attack = {
+        "root": {"position": loop(0.4, [(0, [0, 0, 0]), (0.1, [0, 0, -6]), (0.25, [0, 2, 2]), (0.4, [0, 0, 0])])},
+        "right_arm": {"rotation": loop(0.4, [(0, [0, 0, 0]), (0.1, [-90, 0, 0]), (0.4, [0, 0, 0])])},
+    }
+    dash = {
+        "root": {"position": loop(0.8, [(0, [0, 0, 0]), (0.2, [0, 4, -10]), (0.5, [0, 2, -20]), (0.8, [0, 0, 0])]),
+                 "scale": loop(0.8, [(0, [1, 1, 1]), (0.3, [0.8, 1.1, 1.4]), (0.8, [1, 1, 1])])},
+        "backpack": {"rotation": swing(0.8, 15)},
+    }
+    anims = humanoid_anims(attack, special=(0.8, dash), walk_arms=45)
+    anims["walk"][2]["body"] = {"rotation": {0.0: [12, 0, 0]}}
+    return Mob("bot_speedrunner", bones, anims)
+
+
+def barista() -> Mob:
+    bones = humanoid("E0AC69", Cube((-4, 12, -2), (8, 12, 4), "5D4037", front=barista_apron), barista_face,
+                     "FFFFFF", "3E2723")
+    bones.append(Bone("hat", (0, 32, 0), "head", [
+        Cube((-3, 32, -3), (6, 2, 6), "FAFAFA"),
+        Cube((-2, 34, -2), (4, 3, 4), "FAFAFA"),
+    ]))
+    bones.append(Bone("cup", (-6, 14, -2), "right_arm", [
+        Cube((-8, 12, -4), (4, 5, 4), "FAFAFA"),
+        Cube((-7, 16, -3), (2, 2, 2), "5D4037"),
+    ]))
+    attack = {
+        "right_arm": {"rotation": loop(0.5, [(0, [0, 0, 0]), (0.18, [-140, 0, 10]), (0.35, [20, 0, 0]), (0.5, [0, 0, 0])])},
+        "cup": {"rotation": loop(0.5, [(0, [0, 0, 0]), (0.18, [-40, 0, 0]), (0.5, [0, 0, 0])])},
+    }
+    pour = {
+        "right_arm": {"rotation": loop(1.0, [(0, [0, 0, 0]), (0.3, [-60, 0, -20]), (0.7, [-50, 0, -30]), (1.0, [0, 0, 0])])},
+        "cup": {"rotation": loop(1.0, [(0, [0, 0, 0]), (0.4, [50, 0, 0]), (0.8, [50, 0, 0]), (1.0, [0, 0, 0])])},
+        "head": {"rotation": loop(1.0, [(0, [0, 0, 0]), (0.4, [15, 0, 0]), (1.0, [0, 0, 0])])},
+    }
+    return Mob("barista", bones, humanoid_anims(attack, special=(1.0, pour)))
+
+
+def pirate_torrent() -> Mob:
+    bones = humanoid("E0AC69", Cube((-4, 12, -2), (8, 12, 4), "1A237E", front=pirate_coat), pirate_face,
+                     "1A237E", "212121")
+    bones.append(Bone("hat", (0, 32, 0), "head", [
+        Cube((-5, 31, -5), (10, 2, 10), "111111"),
+        Cube((-3, 33, -3), (6, 4, 6), "111111"),
+        Cube((-1, 33, -6), (2, 3, 2), "C62828"),
+    ]))
+    bones.append(Bone("drive", (-6, 14, -2), "right_arm", [
+        Cube((-8, 12, -4), (4, 2, 5), "37474F"),
+        Cube((-7, 13, -3), (2, 1, 2), "69F0AE"),
+    ]))
+    attack = {
+        "right_arm": {"rotation": loop(0.5, [(0, [0, 0, 0]), (0.15, [-100, 20, 0]), (0.35, [20, -10, 0]), (0.5, [0, 0, 0])])},
+        "drive": {"rotation": loop(0.5, [(0, [0, 0, 0]), (0.2, [-30, 0, 0]), (0.5, [0, 0, 0])])},
+    }
+    download = {
+        "drive": {"rotation": loop(1.0, [(0, [0, 0, 0]), (0.3, [-80, 0, 0]), (0.7, [-80, 0, 0]), (1.0, [0, 0, 0])]),
+                  "scale": loop(1.0, [(0, [1, 1, 1]), (0.4, [1.2, 1.2, 1.2]), (1.0, [1, 1, 1])])},
+        "right_arm": {"rotation": loop(1.0, [(0, [0, 0, 0]), (0.3, [-70, 0, -20]), (0.7, [-70, 0, -20]), (1.0, [0, 0, 0])])},
+        "body": {"rotation": loop(1.0, [(0, [0, 0, 0]), (0.5, [10, 15, 0]), (1.0, [0, 0, 0])])},
+    }
+    return Mob("pirate_torrent", bones, humanoid_anims(attack, special=(1.0, download)))
+
+
+# --------------------------------------------------------------------------- lot 4 — silhouettes NON-Steve (objets / creatures)
+def sign_front(draw, x, y, w, h):
+    draw.rectangle((x + 1, y + 1, x + w - 2, y + h - 2), fill=rgb("C62828"))
+    # greve / X
+    for i in range(2, min(w, h) - 2):
+        px(draw, x + i, y + i, "FFFFFF")
+        px(draw, x + w - 1 - i, y + i, "FFFFFF")
+
+
+def bubble_front(draw, x, y, w, h):
+    draw.ellipse((x + 1, y + 1, x + w - 2, y + h - 2), fill=rgb("FFD700"), outline=rgb("F9A825"))
+    px(draw, x + w // 2 - 1, y + h // 2 - 1, "1B5E20")
+    px(draw, x + w // 2 + 1, y + h // 2 - 1, "1B5E20")
+    draw.rectangle((x + w // 2 - 1, y + h // 2 + 1, x + w // 2 + 1, y + h // 2 + 2), fill=rgb("1B5E20"))
+
+
+def cloud_face(draw, x, y, w, h):
+    eyes("263238", white=True, y_frac=0.45, gap=0.25)(draw, x, y, w, h)
+
+
+def popit_front(draw, x, y, w, h):
+    draw.rectangle((x, y, x + w - 1, y + h - 1), fill=rgb("F48FB1"))
+    for row in range(1, h - 1, 3):
+        for col in range(1, w - 1, 3):
+            draw.ellipse((x + col, y + row, x + col + 1, y + row + 1), fill=rgb("FCE4EC"))
+
+
+def clock_face(draw, x, y, w, h):
+    draw.ellipse((x + 1, y + 1, x + w - 2, y + h - 2), fill=rgb("FAFAFA"), outline=rgb("C62828"))
+    cx, cy = x + w // 2, y + h // 2
+    draw.line((cx, cy, cx, y + 3), fill=rgb("212121"))
+    draw.line((cx, cy, x + w - 4, cy + 2), fill=rgb("C62828"))
+
+
+def manifestant() -> Mob:
+    """Pancarte de greve flottante + megaphone — pas de corps humain."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("pole", (0, 10, 0), "root", [Cube((-1, 0, -1), (2, 18, 2), "5D4037")]),
+        Bone("sign", (0, 22, 0), "pole", [Cube((-10, 16, -2), (20, 12, 2), "ECEFF1", front=sign_front)]),
+        Bone("megaphone", (8, 14, 0), "root", [
+            Cube((6, 12, -2), (4, 4, 4), "FFD700"),
+            Cube((10, 11, -3), (4, 6, 6), "FF6F00"),
+        ]),
+    ]
+    anims = {
+        "idle": (2.0, True, {
+            "root": {"position": loop(2.0, [(0, [0, 0, 0]), (1.0, [0, 2, 0]), (2.0, [0, 0, 0])])},
+            "sign": {"rotation": swing(2.0, 6, axis=2)},
+            "megaphone": {"rotation": swing(2.0, 8)},
+        }),
+        "walk": (0.8, True, {
+            "root": {"position": loop(0.8, [(0, [0, 0, 0]), (0.2, [0, 3, 0]), (0.4, [0, 0, 0]), (0.6, [0, 3, 0]), (0.8, [0, 0, 0])])},
+            "sign": {"rotation": swing(0.8, 12, axis=2)},
+            "megaphone": {"rotation": swing(0.8, 20)},
+        }),
+        "attack": (0.5, False, {
+            "sign": {"rotation": loop(0.5, [(0, [0, 0, 0]), (0.15, [-25, 0, 0]), (0.3, [20, 0, 0]), (0.5, [0, 0, 0])])},
+            "pole": {"rotation": loop(0.5, [(0, [0, 0, 0]), (0.15, [-15, 0, 0]), (0.5, [0, 0, 0])])},
+        }),
+        "special": (1.0, False, {
+            "megaphone": {"scale": loop(1.0, [(0, [1, 1, 1]), (0.3, [1.4, 1.4, 1.4]), (0.6, [1.1, 1.1, 1.1]), (1.0, [1, 1, 1])]),
+                          "rotation": swing(1.0, 25)},
+            "sign": {"rotation": loop(1.0, [(0, [0, 0, 0]), (0.5, [0, 20, 0]), (1.0, [0, 0, 0])])},
+        }),
+    }
+    return Mob("manifestant", bones, anims)
+
+
+def crypto_bulle() -> Mob:
+    """Bulle crypto flottante (piece / graphique) — pas de Steve."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("bubble", (0, 12, 0), "root", [
+            Cube((-8, 4, -8), (16, 16, 16), "FFD700", front=bubble_front, inflate=0.5),
+        ]),
+        Bone("chart", (0, 20, -8), "bubble", [
+            Cube((-6, 18, -9), (12, 6, 1), "1B5E20"),
+        ]),
+        Bone("spark", (6, 22, 0), "bubble", [Cube((4, 20, -1), (3, 3, 3), "69F0AE")]),
+    ]
+    anims = {
+        "idle": (2.4, True, {
+            "root": {"position": loop(2.4, [(0, [0, 0, 0]), (1.2, [0, 4, 0]), (2.4, [0, 0, 0])])},
+            "bubble": {"scale": loop(2.4, [(0, [1, 1, 1]), (1.2, [1.08, 1.08, 1.08]), (2.4, [1, 1, 1])])},
+            "spark": {"rotation": swing(2.4, 30, axis=1)},
+        }),
+        "walk": (1.0, True, {
+            "root": {"position": loop(1.0, [(0, [0, 2, 0]), (0.5, [0, 5, 0]), (1.0, [0, 2, 0])])},
+            "bubble": {"rotation": swing(1.0, 10, axis=2)},
+        }),
+        "attack": (0.5, False, {
+            "bubble": {"scale": loop(0.5, [(0, [1, 1, 1]), (0.2, [1.3, 0.8, 1.3]), (0.4, [0.9, 1.2, 0.9]), (0.5, [1, 1, 1])])},
+        }),
+        "special": (1.0, False, {  # pump then dump
+            "bubble": {"scale": loop(1.0, [(0, [1, 1, 1]), (0.4, [1.5, 1.5, 1.5]), (0.7, [0.4, 0.4, 0.4]), (1.0, [1, 1, 1])])},
+            "chart": {"rotation": loop(1.0, [(0, [0, 0, 0]), (0.4, [0, 0, 20]), (0.7, [0, 0, -40]), (1.0, [0, 0, 0])])},
+        }),
+    }
+    return Mob("crypto_bulle", bones, anims)
+
+
+def nuage_orage() -> Mob:
+    """Nuage orageux avec eclairs — flotte, pas de jambes Steve."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("cloud", (0, 14, 0), "root", [
+            Cube((-10, 10, -6), (20, 10, 12), "78909C", front=cloud_face),
+            Cube((-7, 16, -5), (14, 6, 10), "90A4AE", inflate=0.4),
+            Cube((-12, 8, -4), (8, 6, 8), "607D8B"),
+            Cube((4, 8, -4), (8, 6, 8), "607D8B"),
+        ]),
+        Bone("bolt_a", (-4, 8, 0), "cloud", [Cube((-5, 0, -1), (2, 10, 2), "FFEB3B")]),
+        Bone("bolt_b", (4, 8, 0), "cloud", [Cube((3, 2, -1), (2, 8, 2), "FFC107")]),
+    ]
+    anims = {
+        "idle": (2.0, True, {
+            "root": {"position": loop(2.0, [(0, [0, 0, 0]), (1.0, [0, 3, 0]), (2.0, [0, 0, 0])])},
+            "bolt_a": {"scale": loop(2.0, [(0, [1, 1, 1]), (0.3, [1, 0.3, 1]), (0.5, [1, 1.2, 1]), (2.0, [1, 1, 1])])},
+            "bolt_b": {"scale": loop(2.0, [(0, [1, 1, 1]), (1.0, [1, 0.4, 1]), (1.3, [1, 1.1, 1]), (2.0, [1, 1, 1])])},
+        }),
+        "walk": (1.0, True, {
+            "root": {"position": loop(1.0, [(0, [0, 2, 0]), (0.5, [0, 4, 0]), (1.0, [0, 2, 0])])},
+            "cloud": {"rotation": swing(1.0, 6, axis=2)},
+        }),
+        "attack": (0.5, False, {
+            "bolt_a": {"scale": loop(0.5, [(0, [1, 1, 1]), (0.15, [1.5, 1.8, 1.5]), (0.5, [1, 1, 1])])},
+            "bolt_b": {"scale": loop(0.5, [(0, [1, 1, 1]), (0.2, [1.5, 1.8, 1.5]), (0.5, [1, 1, 1])])},
+            "cloud": {"scale": loop(0.5, [(0, [1, 1, 1]), (0.15, [1.15, 0.9, 1.15]), (0.5, [1, 1, 1])])},
+        }),
+        "special": (0.8, False, {
+            "cloud": {"scale": loop(0.8, [(0, [1, 1, 1]), (0.3, [1.3, 0.7, 1.3]), (0.6, [0.9, 1.3, 0.9]), (0.8, [1, 1, 1])])},
+            "bolt_a": {"rotation": loop(0.8, [(0, [0, 0, 0]), (0.4, [0, 0, 25]), (0.8, [0, 0, 0])])},
+            "bolt_b": {"rotation": loop(0.8, [(0, [0, 0, 0]), (0.4, [0, 0, -25]), (0.8, [0, 0, 0])])},
+        }),
+    }
+    return Mob("nuage_orage", bones, anims)
+
+
+def slider_multivers() -> Mob:
+    """Barre slider bleu/orange + curseur — portail vivant."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("rail", (0, 10, 0), "root", [
+            Cube((-12, 8, -2), (12, 4, 4), "1565C0"),
+            Cube((0, 8, -2), (12, 4, 4), "EF6C00"),
+        ]),
+        Bone("knob", (0, 12, 0), "rail", [
+            Cube((-3, 6, -3), (6, 8, 6), "FAFAFA", front=eyes("212121")),
+        ]),
+        Bone("portal_a", (-10, 16, 0), "rail", [Cube((-12, 12, -1), (4, 8, 2), "42A5F5", inflate=0.3)]),
+        Bone("portal_b", (10, 16, 0), "rail", [Cube((8, 12, -1), (4, 8, 2), "FF9800", inflate=0.3)]),
+    ]
+    anims = {
+        "idle": (2.0, True, {
+            "root": {"position": loop(2.0, [(0, [0, 0, 0]), (1.0, [0, 2, 0]), (2.0, [0, 0, 0])])},
+            "knob": {"position": loop(2.0, [(0, [0, 0, 0]), (1.0, [4, 0, 0]), (2.0, [0, 0, 0])])},
+            "portal_a": {"scale": loop(2.0, [(0, [1, 1, 1]), (1.0, [1, 1.2, 1]), (2.0, [1, 1, 1])])},
+            "portal_b": {"scale": loop(2.0, [(0, [1, 1, 1]), (1.0, [1, 0.8, 1]), (2.0, [1, 1, 1])])},
+        }),
+        "walk": (0.8, True, {
+            "root": {"position": loop(0.8, [(0, [0, 1, 0]), (0.4, [0, 3, 0]), (0.8, [0, 1, 0])])},
+            "knob": {"position": loop(0.8, [(0, [-3, 0, 0]), (0.4, [3, 0, 0]), (0.8, [-3, 0, 0])])},
+        }),
+        "attack": (0.5, False, {
+            "knob": {"position": loop(0.5, [(0, [0, 0, 0]), (0.2, [0, 0, -6]), (0.5, [0, 0, 0])])},
+            "rail": {"scale": loop(0.5, [(0, [1, 1, 1]), (0.2, [1.2, 1, 0.8]), (0.5, [1, 1, 1])])},
+        }),
+        "special": (1.0, False, {
+            "knob": {"position": loop(1.0, [(0, [0, 0, 0]), (0.3, [-8, 0, 0]), (0.7, [8, 0, 0]), (1.0, [0, 0, 0])])},
+            "portal_a": {"scale": loop(1.0, [(0, [1, 1, 1]), (0.3, [1.5, 1.5, 1.5]), (1.0, [1, 1, 1])])},
+            "portal_b": {"scale": loop(1.0, [(0, [1, 1, 1]), (0.7, [1.5, 1.5, 1.5]), (1.0, [1, 1, 1])])},
+            "root": {"rotation": loop(1.0, [(0, [0, 0, 0]), (1.0, [0, 360, 0])])},
+        }),
+    }
+    return Mob("slider_multivers", bones, anims)
+
+
+def pop_it_geant() -> Mob:
+    """Pop-it geant rebondissant — ASMR."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("board", (0, 6, 0), "root", [
+            Cube((-10, 2, -8), (20, 3, 16), "F48FB1", front=popit_front, top=popit_front),
+        ]),
+        Bone("bubbles", (0, 8, 0), "board", [
+            Cube((-8, 5, -6), (4, 3, 4), "FCE4EC"),
+            Cube((-2, 5, -6), (4, 3, 4), "F8BBD0"),
+            Cube((4, 5, -6), (4, 3, 4), "FCE4EC"),
+            Cube((-8, 5, 0), (4, 3, 4), "F8BBD0"),
+            Cube((-2, 5, 0), (4, 3, 4), "FCE4EC"),
+            Cube((4, 5, 0), (4, 3, 4), "F8BBD0"),
+        ]),
+    ]
+    anims = {
+        "idle": (1.6, True, {
+            "board": {"scale": loop(1.6, [(0, [1, 1, 1]), (0.8, [1.04, 0.92, 1.04]), (1.6, [1, 1, 1])])},
+            "bubbles": {"position": loop(1.6, [(0, [0, 0, 0]), (0.8, [0, 1, 0]), (1.6, [0, 0, 0])])},
+        }),
+        "walk": (0.6, True, {
+            "root": {"position": loop(0.6, [(0, [0, 0, 0]), (0.15, [0, 4, 0]), (0.3, [0, 0, 0]), (0.45, [0, 4, 0]), (0.6, [0, 0, 0])])},
+            "board": {"rotation": swing(0.6, 8, axis=2)},
+        }),
+        "attack": (0.5, False, {
+            "bubbles": {"scale": loop(0.5, [(0, [1, 1, 1]), (0.15, [1, 0.3, 1]), (0.35, [1, 1.4, 1]), (0.5, [1, 1, 1])])},
+            "board": {"scale": loop(0.5, [(0, [1, 1, 1]), (0.2, [1.1, 0.7, 1.1]), (0.5, [1, 1, 1])])},
+        }),
+        "special": (1.0, False, {
+            "bubbles": {"scale": loop(1.0, [
+                (0, [1, 1, 1]), (0.15, [1, 0.2, 1]), (0.3, [1, 1, 1]),
+                (0.45, [1, 0.2, 1]), (0.6, [1, 1, 1]), (0.75, [1, 0.2, 1]), (1.0, [1, 1, 1]),
+            ])},
+        }),
+    }
+    return Mob("pop_it_geant", bones, anims)
+
+
+def reveil_cauchemar() -> Mob:
+    """Reveil-matin a cloches — Cauchemard du matin."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("body", (0, 8, 0), "root", [
+            Cube((-7, 2, -4), (14, 12, 8), "C62828", front=clock_face),
+            Cube((-6, 3, -5), (12, 10, 1), "FAFAFA"),
+        ]),
+        Bone("bell_l", (-6, 16, 0), "body", [
+            Cube((-9, 14, -3), (5, 5, 5), "FFD700"),
+            Cube((-7, 18, -1), (1, 3, 1), "FFD700"),
+        ]),
+        Bone("bell_r", (6, 16, 0), "body", [
+            Cube((4, 14, -3), (5, 5, 5), "FFD700"),
+            Cube((6, 18, -1), (1, 3, 1), "FFD700"),
+        ]),
+        Bone("legs", (0, 2, 0), "root", [
+            Cube((-5, 0, -2), (3, 3, 4), "212121"),
+            Cube((2, 0, -2), (3, 3, 4), "212121"),
+        ]),
+        Bone("hammer", (0, 18, 0), "body", [Cube((-1, 16, -1), (2, 6, 2), "90A4AE")]),
+    ]
+    anims = {
+        "idle": (1.2, True, {
+            "hammer": {"rotation": loop(1.2, [(0, [0, 0, -20]), (0.3, [0, 0, 20]), (0.6, [0, 0, -20]), (1.2, [0, 0, -20])])},
+            "bell_l": {"rotation": swing(1.2, 12, axis=2)},
+            "bell_r": {"rotation": swing(1.2, -12, axis=2)},
+        }),
+        "walk": (0.5, True, {
+            "root": {"position": loop(0.5, [(0, [0, 0, 0]), (0.15, [0, 3, 0]), (0.3, [0, 0, 0]), (0.45, [0, 3, 0]), (0.5, [0, 0, 0])])},
+            "legs": {"rotation": swing(0.5, 15, axis=2)},
+            "hammer": {"rotation": swing(0.5, 25, axis=2)},
+        }),
+        "attack": (0.4, False, {
+            "body": {"rotation": loop(0.4, [(0, [0, 0, 0]), (0.15, [-20, 0, 0]), (0.3, [15, 0, 0]), (0.4, [0, 0, 0])])},
+            "hammer": {"rotation": loop(0.4, [(0, [0, 0, 0]), (0.15, [0, 0, 40]), (0.4, [0, 0, 0])])},
+        }),
+        "special": (1.0, False, {  # sonnerie folle
+            "bell_l": {"rotation": loop(1.0, [(0, [0, 0, 0]), (0.1, [0, 0, 30]), (0.2, [0, 0, -30]), (0.3, [0, 0, 30]), (0.4, [0, 0, -30]), (1.0, [0, 0, 0])])},
+            "bell_r": {"rotation": loop(1.0, [(0, [0, 0, 0]), (0.1, [0, 0, -30]), (0.2, [0, 0, 30]), (0.3, [0, 0, -30]), (0.4, [0, 0, 30]), (1.0, [0, 0, 0])])},
+            "body": {"scale": loop(1.0, [(0, [1, 1, 1]), (0.2, [1.1, 1.1, 1.1]), (0.4, [1, 1, 1]), (0.6, [1.1, 1.1, 1.1]), (1.0, [1, 1, 1])])},
+            "hammer": {"rotation": swing(1.0, 40, axis=2)},
+        }),
+    }
+    return Mob("reveil_cauchemar", bones, anims)
+
+
+MOBS = [chef, dracula, hamburger, cat, rooster, screen,
+        toi_du_futur, douanier, lapin_extirpateur, grossiste_clandestin, statue_vivante, mimique_d20,
+        bodybuilder, danseur_disco, hacker_fantome, bot_speedrunner, barista, pirate_torrent,
+        manifestant, crypto_bulle, nuage_orage, slider_multivers, pop_it_geant, reveil_cauchemar]
 
 
 # --------------------------------------------------------------------------- export

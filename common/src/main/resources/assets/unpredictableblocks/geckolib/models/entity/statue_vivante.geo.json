@@ -1,0 +1,228 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.unpredictableblocks.statue_vivante",
+        "texture_width": 128,
+        "texture_height": 128,
+        "visible_bounds_width": 3,
+        "visible_bounds_height": 3.5,
+        "visible_bounds_offset": [
+          0,
+          1.25,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "root",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "core",
+          "pivot": [
+            0,
+            12,
+            0
+          ],
+          "parent": "root",
+          "cubes": [
+            {
+              "origin": [
+                -4,
+                8,
+                -4
+              ],
+              "size": [
+                8,
+                8,
+                8
+              ],
+              "uv": [
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "ring_a",
+          "pivot": [
+            0,
+            16,
+            0
+          ],
+          "parent": "core",
+          "cubes": [
+            {
+              "origin": [
+                -7,
+                15,
+                -1
+              ],
+              "size": [
+                14,
+                2,
+                2
+              ],
+              "uv": [
+                32,
+                0
+              ]
+            },
+            {
+              "origin": [
+                -1,
+                9,
+                -1
+              ],
+              "size": [
+                2,
+                14,
+                2
+              ],
+              "uv": [
+                64,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "ring_b",
+          "pivot": [
+            0,
+            12,
+            0
+          ],
+          "parent": "core",
+          "rotation": [
+            0,
+            45,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -9,
+                11,
+                -1
+              ],
+              "size": [
+                18,
+                2,
+                2
+              ],
+              "uv": [
+                72,
+                0
+              ]
+            },
+            {
+              "origin": [
+                -1,
+                3,
+                -1
+              ],
+              "size": [
+                2,
+                18,
+                2
+              ],
+              "uv": [
+                112,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "cube_top",
+          "pivot": [
+            0,
+            22,
+            0
+          ],
+          "parent": "core",
+          "cubes": [
+            {
+              "origin": [
+                -2,
+                20,
+                -2
+              ],
+              "size": [
+                4,
+                4,
+                4
+              ],
+              "uv": [
+                0,
+                20
+              ]
+            }
+          ]
+        },
+        {
+          "name": "cube_side",
+          "pivot": [
+            8,
+            12,
+            0
+          ],
+          "parent": "core",
+          "cubes": [
+            {
+              "origin": [
+                6,
+                10,
+                -2
+              ],
+              "size": [
+                4,
+                4,
+                4
+              ],
+              "uv": [
+                16,
+                20
+              ]
+            }
+          ]
+        },
+        {
+          "name": "fist",
+          "pivot": [
+            0,
+            6,
+            -6
+          ],
+          "parent": "root",
+          "cubes": [
+            {
+              "origin": [
+                -3,
+                4,
+                -9
+              ],
+              "size": [
+                6,
+                6,
+                6
+              ],
+              "uv": [
+                32,
+                20
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

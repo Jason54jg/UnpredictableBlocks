@@ -15,7 +15,10 @@ import net.minecraft.world.phys.AABB;
  */
 public final class MobsClientGameTest implements FabricClientGameTest {
     private static final List<String> MOBS = List.of(
-            "chef_italien", "comte_dracula", "mascotte_hamburger", "chat_internet", "coq_gaulois", "ecran_bleu");
+            "chef_italien", "comte_dracula", "mascotte_hamburger", "chat_internet", "coq_gaulois", "ecran_bleu",
+            "toi_du_futur", "douanier", "lapin_extirpateur", "grossiste_clandestin", "statue_vivante", "mimique_d20",
+            "bodybuilder", "danseur_disco", "hacker_fantome", "bot_speedrunner", "barista", "pirate_torrent",
+            "manifestant", "crypto_bulle", "nuage_orage", "slider_multivers", "pop_it_geant", "reveil_cauchemar");
 
     @Override
     public void runTest(ClientGameTestContext context) {
@@ -25,15 +28,22 @@ public final class MobsClientGameTest implements FabricClientGameTest {
             server.runCommand("time set noon");
             server.runCommand("gamerule advance_time false");
             server.runCommand("gamerule spawn_mobs false");
-            server.runCommand("fill -12 99 -8 12 99 10 minecraft:smooth_stone");
-            server.runCommand("fill -12 100 -8 12 108 10 minecraft:air");
+            server.runCommand("fill -16 99 -8 16 99 28 minecraft:smooth_stone");
+            server.runCommand("fill -16 100 -8 16 108 28 minecraft:air");
             for (int i = 0; i < MOBS.size(); i++) {
-                double x = -7.5 + i * 3;
-                double y = MOBS.get(i).equals("ecran_bleu") ? 101 : 100;
+                int row = i / 6;
+                int col = i % 6;
+                double x = -7.5 + col * 3;
+                double z = 3.5 + row * 4;
+                String id = MOBS.get(i);
+                double y = id.equals("ecran_bleu") || id.equals("statue_vivante") || id.equals("hacker_fantome")
+                        || id.equals("manifestant") || id.equals("crypto_bulle") || id.equals("nuage_orage")
+                        || id.equals("slider_multivers") ? 101 : 100;
                 // Rotation 180 : le mob regarde vers -Z, donc vers la caméra
-                server.runCommand("summon unpredictableblocks:" + MOBS.get(i) + " " + x + " " + y + " 3.5 {NoAI:1b,Rotation:[180f,0f]}");
+                server.runCommand("summon unpredictableblocks:" + MOBS.get(i) + " " + x + " " + y + " " + z
+                        + " {NoAI:1b,Rotation:[180f,0f]}");
             }
-            server.runCommand("tp @a 0.5 100 -6.5 facing 0.5 101 3.5");
+            server.runCommand("tp @a 0.5 100 -6.5 facing 0.5 101 5.5");
             singleplayer.getConnection().waitForChunksRender();
             context.waitTicks(40);
             context.takeScreenshot("mobs_idle");
@@ -54,8 +64,11 @@ public final class MobsClientGameTest implements FabricClientGameTest {
             // Gros plan de chaque mob (attendre la fin des anims ponctuelles)
             context.waitTicks(30);
             for (int i = 0; i < MOBS.size(); i++) {
-                double x = -7.5 + i * 3;
-                server.runCommand("tp @a " + x + " 100 0.5 facing " + x + " 100.8 3.5");
+                int row = i / 6;
+                int col = i % 6;
+                double x = -7.5 + col * 3;
+                double z = 3.5 + row * 4;
+                server.runCommand("tp @a " + x + " 100 " + (z - 3) + " facing " + x + " 100.8 " + z);
                 context.waitTicks(10);
                 context.takeScreenshot("mob_" + MOBS.get(i));
             }

@@ -130,8 +130,6 @@ public final class QuestTriggers {
             Quests.complete(killer, LuckyTheme.CAMPING, "bear");
         } else if (type == McRefs.WOLF) {
             Quests.complete(killer, LuckyTheme.MAGIE_COMPTOIR, "wolf");
-        } else if (type == McRefs.ENDERMAN) {
-            Quests.complete(killer, LuckyTheme.JDR_D20, "mimic");
         }
 
         var name = victim.getCustomName();
@@ -139,8 +137,14 @@ public final class QuestTriggers {
         // Vrais mobs du mod, ou anciens mobs vanilla renommés (mondes existants)
         boolean chef = victim instanceof ChefItalienEntity || QuestNames.CHEF_ITALIEN.equals(label);
         boolean dracula = victim instanceof ComteDraculaEntity || QuestNames.COMTE_DRACULA.equals(label);
-        if ("Toi du Futur".equals(label)) {
+        boolean toiFutur = victim instanceof com.jason54.unpredictableblocks.entity.mob.ToiDuFuturEntity
+                || "Toi du Futur".equals(label);
+        boolean mimique = victim instanceof com.jason54.unpredictableblocks.entity.mob.MimiqueD20Entity
+                || "Mimique D20".equals(label);
+        if (toiFutur) {
             Quests.complete(killer, LuckyTheme.ANACHRONISME, "kill_ravager");
+        } else if (mimique) {
+            Quests.complete(killer, LuckyTheme.JDR_D20, "mimic");
         } else if (chef && !PlayerQuestData.isAnanasQuestFailed(killer)) {
             Quests.increment(killer, LuckyTheme.ANANAS_PIZZA, "survive_chefs");
         } else if (dracula && !wearingMetalArmor(killer)) {
