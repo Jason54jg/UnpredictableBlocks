@@ -2,45 +2,57 @@ package com.jason54.unpredictableblocks.quest;
 
 import com.jason54.unpredictableblocks.config.ModConfig;
 import com.jason54.unpredictableblocks.lucky.PlayerLuckyBreakStats;
+import com.jason54.unpredictableblocks.network.OpenQuestJournalPayload;
+import com.jason54.unpredictableblocks.network.QuestThemeProgress;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
-import com.jason54.unpredictableblocks.util.ModMessages;
-import net.minecraft.network.chat.Component;
+import dev.architectury.networking.NetworkManager;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import net.minecraft.server.level.ServerPlayer;
 
-/** Affiche la progression des 32 quêtes thématiques. */
+/** Construit et envoie le snapshot de progression pour l'UI journal. */
 public final class QuestJournal {
     private QuestJournal() {}
 
     public static void open(ServerPlayer player) {
-        int done = 0;
+        int masterBreaks = ModConfig.gameplay().themeMasterBreaksOrDefault();
+        List<QuestThemeProgress> themes = new ArrayList<>(LuckyTheme.values().length);
         for (LuckyTheme theme : LuckyTheme.values()) {
-            if (isQuestDone(player, theme)) {
-                done++;
+            List<QuestThemeProgress.Step> steps = new ArrayList<>();
+            for (Quests.Step step : Quests.steps(theme)) {
+                steps.add(new QuestThemeProgress.Step(step.criterion(), Quests.progress(player, theme, step), step.target()));
             }
+            themes.add(new QuestThemeProgress(
+                    theme.id(),
+                    theme.rarity().ordinal(),
+                    Quests.isDone(player, theme),
+                    QuestRewards.isDone(player, "theme_master/" + theme.id()),
+                    CardCollection.hasCard(player, theme),
+                    PlayerLuckyBreakStats.breaks(player, theme),
+                    masterBreaks,
+                    steps
+            ));
         }
-        int cards = CardCollection.uniqueCount(player);
-        int masters = ThemeMasterMilestones.countMasters(player);
-        player.sendSystemMessage(ModMessages.msg("journal_header", done, cards, masters));
-        for (LuckyTheme theme : LuckyTheme.values()) {
-            String mark = isQuestDone(player, theme) ? "§a✔" : "§7○";
-            Component title = Component.translatable("advancements.unpredictableblocks." + theme.id() + ".title");
-            var spawn = ModConfig.themeSpawn(theme);
-            String biomes = String.join(", ", spawn.preferredBiomes());
-            String night = spawn.nightOnly() ? " §8(nuit)" : "";
-            int br = PlayerLuckyBreakStats.breaks(player, theme);
-            String master = QuestRewards.isDone(player, "theme_master/" + theme.id()) ? " §6★" : "";
-            String card = CardCollection.hasCard(player, theme) ? " §b◆" : "";
-            player.sendSystemMessage(Component.literal(
-                    mark + card + master + " §8[" + br + " breaks] §7" + biomes + night + " — "
-            ).append(title));
-        }
+        NetworkManager.sendToPlayer(player, new OpenQuestJournalPayload(themes, suggest(themes)));
+
         QuestCollection.tryAwardCollector(player);
         CardCollection.tryAwardCardAlbum(player);
         QuestMilestones.checkAfterQuest(player);
         ThemeMasterMilestones.checkAfterMaster(player);
     }
 
-    private static boolean isQuestDone(ServerPlayer player, LuckyTheme theme) {
-        return QuestRewards.isDone(player, "quest/" + theme.id());
+    /**
+     * Quête conseillée : d'abord celles des thèmes déjà cassés (le joueur a le contexte),
+     * puis par rareté (communes avant légendaires), puis la plus avancée.
+     */
+    private static String suggest(List<QuestThemeProgress> themes) {
+        return themes.stream()
+                .filter(t -> !t.questDone())
+                .min(Comparator.<QuestThemeProgress>comparingInt(t -> t.breaks() > 0 ? 0 : 1)
+                        .thenComparingInt(QuestThemeProgress::rarity)
+                        .thenComparing(t -> -t.questFraction()))
+                .map(QuestThemeProgress::themeId)
+                .orElse("");
     }
 }

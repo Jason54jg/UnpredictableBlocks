@@ -29,7 +29,12 @@ jobs:
         with:
           distribution: temurin
           java-version: '25'
-      - name: Gradle compile (JDK 25, Gradle 9.8)
+      - name: Gradle multi-version build (JDK 25, Gradle 9.8)
         run: |
           chmod +x gradlew
-          ./gradlew :common:compileJava :fabric:compileJava :neoforge:compileJava --no-daemon --stacktrace
+          ./gradlew chiseledBuild --no-daemon --stacktrace
+      - name: Upload multi-version jars
+        uses: actions/upload-artifact@v4
+        with:
+          name: unpredictableblocks-libs-multi
+          path: build/libs-multi/**

@@ -1,8 +1,10 @@
 package com.jason54.unpredictableblocks.event;
 
+import com.jason54.unpredictableblocks.compat.McRefs;
+
 import com.jason54.unpredictableblocks.luck.LuckTier;
 import com.jason54.unpredictableblocks.quest.PlayerQuestData;
-import com.jason54.unpredictableblocks.quest.QuestExtendedHandler;
+import com.jason54.unpredictableblocks.quest.QuestTriggers;
 import com.jason54.unpredictableblocks.quest.QuestNames;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -20,7 +22,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
-/** Thèmes 25–32 (directive §3). */
+/** Thèmes 25–36 (directive §3 + extension 33–36). */
 public final class ThemeNewEffects {
     private ThemeNewEffects() {}
 
@@ -32,23 +34,32 @@ public final class ThemeNewEffects {
             LuckTier tier
     ) {
         switch (theme) {
-            case PAUSE_CAFE -> pauseCafe(player, tier);
+            case PAUSE_CAFE -> pauseCafe(level, player, origin, tier);
             case RETARD_VOL -> retardVol(level, player, origin, tier);
             case ANANAS_PIZZA -> ananasPizza(level, player, origin, tier);
-            case SPEEDRUNNER -> speedrunner(level, player, tier);
+            case SPEEDRUNNER -> speedrunner(level, player, origin, tier);
             case PIRATERIE_TORRENT -> piraterie(level, player, origin, tier);
-            case ASMR_FIDGET -> asmr(level, player, tier);
+            case ASMR_FIDGET -> asmr(level, player, origin, tier);
             case VAMPIRE_GOTHIQUE -> vampire(player, tier);
             case MULTIVERS_SLIDERS -> multivers(level, player, origin, tier);
+            case GREVE_TRANSPORTS -> greve(level, player, origin, tier);
+            case METEO_FOLLE -> meteo(level, player, origin, tier);
+            case CHAT_INTERNET -> chats(level, player, origin, tier);
+            case CRYPTO_BULLE -> crypto(level, player, origin, tier);
             default -> {}
         }
     }
 
-    private static void pauseCafe(ServerPlayer player, LuckTier tier) {
+    private static void pauseCafe(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
         if (tier == LuckTier.HIGH) {
             player.addEffect(new MobEffectInstance(MobEffects.HASTE, 20 * 120, 4));
             player.addEffect(new MobEffectInstance(MobEffects.SPEED, 20 * 120, 2));
-            player.sendSystemMessage(Component.literal("§6Overdose d'énergie pratique — minage ultra-rapide 2 min."));
+            var barista = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.BARISTA.get(), level);
+            if (barista != null) {
+                barista.setPos(Vec3.atBottomCenterOf(origin));
+                level.addFreshEntity(barista);
+            }
+            player.sendSystemMessage(Component.literal("§6Overdose caféinée — un Barista ouvre le comptoir (clic droit)."));
         }
     }
 
@@ -61,24 +72,22 @@ public final class ThemeNewEffects {
                     }
                 }
             }
-            var douanier = EntitySpawnHelper.create(EntityType.VILLAGER, level);
+            var douanier = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.DOUANIER.get(), level);
             if (douanier != null) {
-                douanier.setCustomName(Component.literal("Douanier"));
                 douanier.setPos(Vec3.atBottomCenterOf(origin));
                 level.addFreshEntity(douanier);
             }
-            player.sendSystemMessage(Component.literal("§bVol annulé — périmètre de sécurité verre."));
+            player.sendSystemMessage(Component.literal("§bVol annulé — contrôle douanier + périmètre verre."));
         }
     }
 
     private static void ananasPizza(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
         if (tier == LuckTier.NEUTRAL) {
-            QuestExtendedHandler.onChefsSpawned(player);
-            for (int i = 0; i < 10; i++) {
-                var chef = EntitySpawnHelper.create(EntityType.VILLAGER, level);
+            QuestTriggers.onChefsSpawned(player);
+            for (int i = 0; i < 4; i++) {
+                var chef = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.CHEF_ITALIEN.get(), level);
                 if (chef != null) {
-                    chef.setCustomName(Component.literal(QuestNames.CHEF_ITALIEN));
-                    chef.setPos(Vec3.atBottomCenterOf(origin).add(i % 5, 0, i / 5));
+                    chef.setPos(Vec3.atBottomCenterOf(origin).add(i % 2 * 3 - 1.5, 0, i / 2 * 3 - 1.5));
                     level.addFreshEntity(chef);
                 }
             }
@@ -86,10 +95,15 @@ public final class ThemeNewEffects {
         }
     }
 
-    private static void speedrunner(ServerLevel level, ServerPlayer player, LuckTier tier) {
+    private static void speedrunner(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
         if (tier == LuckTier.HIGH) {
             player.teleportTo(player.getX() + 64, player.getY(), player.getZ() + 64);
-            player.sendSystemMessage(Component.literal("§eSkip de donjon — téléportation vers le trésor (approx.)."));
+            var bot = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.BOT_SPEEDRUNNER.get(), level);
+            if (bot != null) {
+                bot.setPos(player.position().add(2, 0, 2));
+                level.addFreshEntity(bot);
+            }
+            player.sendSystemMessage(Component.literal("§eSkip de donjon — un Bot Speedrunner te talonne !"));
         }
     }
 
@@ -102,11 +116,16 @@ public final class ThemeNewEffects {
                             level.setBlockAndUpdate(pos, Blocks.IRON_BLOCK.defaultBlockState());
                         }
                     });
-            player.sendSystemMessage(Component.literal("§4Ransomware — coffres & fours verrouillés (zone)."));
+            var pirate = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.PIRATE_TORRENT.get(), level);
+            if (pirate != null) {
+                pirate.setPos(Vec3.atBottomCenterOf(origin));
+                level.addFreshEntity(pirate);
+            }
+            player.sendSystemMessage(Component.literal("§4Ransomware + Pirate du Torrent en zone !"));
         }
     }
 
-    private static void asmr(ServerLevel level, ServerPlayer player, LuckTier tier) {
+    private static void asmr(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
         if (tier == LuckTier.NEUTRAL) {
             player.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 20 * 20, 0));
             player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 20 * 25, 0));
@@ -115,7 +134,12 @@ public final class ThemeNewEffects {
                     level.setBlockAndUpdate(player.blockPosition().offset(dx, 2, dz), Blocks.GLASS.defaultBlockState());
                 }
             }
-            player.sendSystemMessage(Component.literal("§fBulle de savon géante — lévitation douce."));
+            var popit = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.POP_IT_GEANT.get(), level);
+            if (popit != null) {
+                popit.setPos(Vec3.atBottomCenterOf(origin));
+                level.addFreshEntity(popit);
+            }
+            player.sendSystemMessage(Component.literal("§fBulle de savon + Pop-it Géant ASMR !"));
         }
     }
 
@@ -126,12 +150,9 @@ public final class ThemeNewEffects {
             player.addEffect(new MobEffectInstance(MobEffects.STRENGTH, 20 * 90, 1));
             player.sendSystemMessage(Component.literal("§5Pacte des ténèbres — forme d'ombre."));
         } else if (tier == LuckTier.NEUTRAL && player.level() instanceof ServerLevel level) {
-            var dracula = EntitySpawnHelper.create(EntityType.ZOMBIE, level);
+            var dracula = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.COMTE_DRACULA.get(), level);
             if (dracula != null) {
-                dracula.setCustomName(Component.literal(QuestNames.COMTE_DRACULA));
-                dracula.setCustomNameVisible(true);
-                dracula.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.LEATHER_HELMET));
-                dracula.setPos(player.position().add(2, 0, 0));
+                dracula.setPos(player.position().add(3, 0, 0));
                 level.addFreshEntity(dracula);
                 player.sendSystemMessage(Component.literal("§5Le Comte Dracula exige un duel sans armure métallique."));
             }
@@ -151,7 +172,119 @@ public final class ThemeNewEffects {
             var target = level.getEntitiesOfClass(net.minecraft.world.entity.LivingEntity.class, new AABB(origin).inflate(8))
                     .stream().filter(e -> e != player).findFirst();
             target.ifPresent(e -> e.teleportTo(e.getX(), e.getY() + 20, e.getZ()));
-            player.sendSystemMessage(Component.literal("§bZapper : entité projetée ailleurs."));
+            var slider = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.SLIDER_MULTIVERS.get(), level);
+            if (slider != null) {
+                slider.setPos(Vec3.atBottomCenterOf(origin).add(0, 1, 0));
+                level.addFreshEntity(slider);
+            }
+            player.sendSystemMessage(Component.literal("§bZapper + Slider Multivers déployé !"));
+        }
+    }
+
+    private static void greve(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
+        if (tier == LuckTier.HIGH) {
+            player.getInventory().add(new ItemStack(Items.MINECART));
+            player.getInventory().add(new ItemStack(Items.RAIL, 32));
+            player.getInventory().add(new ItemStack(Items.POWERED_RAIL, 6));
+            player.sendSystemMessage(Component.literal("§aService minimum assuré : voici de quoi rouler toi-même."));
+        } else if (tier == LuckTier.NEUTRAL) {
+            for (int i = 0; i < 4; i++) {
+                var sign = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.MANIFESTANT.get(), level);
+                if (sign != null) {
+                    sign.setPos(Vec3.atBottomCenterOf(origin).add(level.getRandom().nextDouble() * 4 - 2, 0.5, level.getRandom().nextDouble() * 4 - 2));
+                    level.addFreshEntity(sign);
+                }
+            }
+            player.sendSystemMessage(Component.literal("§eManifestation : pancartes vivantes partout !"));
+        } else {
+            player.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 20 * 60, 2));
+            player.sendSystemMessage(Component.literal("§cGrève générale : tu rentres à pied (et lentement)."));
+        }
+    }
+
+    private static void meteo(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
+        if (tier == LuckTier.HIGH) {
+            level.getServer().setWeatherParameters(20 * 600, 0, false, false);
+            player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 20 * 20, 1));
+            level.sendParticles(net.minecraft.core.particles.ParticleTypes.HAPPY_VILLAGER,
+                    origin.getX() + 0.5, origin.getY() + 2, origin.getZ() + 0.5, 40, 3, 1, 3, 0);
+            player.sendSystemMessage(Component.literal("§bGrand soleil pour 10 minutes !"));
+        } else if (tier == LuckTier.NEUTRAL) {
+            level.getServer().setWeatherParameters(0, 20 * 120, true, true);
+            var cloud = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.NUAGE_ORAGE.get(), level);
+            if (cloud != null) {
+                cloud.setPos(Vec3.atBottomCenterOf(origin).add(0, 2, 0));
+                level.addFreshEntity(cloud);
+            }
+            player.sendSystemMessage(Component.literal("§7Orage soudain — un Nuage Orageux arrive !"));
+        } else {
+            BlockPos strike = origin.offset(level.getRandom().nextInt(7) - 3, 0, level.getRandom().nextInt(7) - 3);
+            var bolt = EntitySpawnHelper.create(McRefs.LIGHTNING_BOLT, level);
+            if (bolt != null) {
+                bolt.setPos(Vec3.atBottomCenterOf(strike));
+                level.addFreshEntity(bolt);
+            }
+            player.sendSystemMessage(Component.literal("§eLa foudre tombe tout près…"));
+        }
+    }
+
+    private static void chats(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
+        if (tier == LuckTier.HIGH) {
+            var cat = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.CHAT_INTERNET.get(), level);
+            if (cat != null) {
+                cat.setPos(Vec3.atBottomCenterOf(origin));
+                cat.tame(player);
+                level.addFreshEntity(cat);
+            }
+            player.getInventory().add(new ItemStack(Items.COD, 8));
+            player.sendSystemMessage(Component.literal("§aUn chat t'a adopté. Il est à toi (ou l'inverse)."));
+        } else if (tier == LuckTier.NEUTRAL) {
+            for (int i = 0; i < 4; i++) {
+                var cat = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.CHAT_INTERNET.get(), level);
+                if (cat != null) {
+                    cat.setPos(Vec3.atBottomCenterOf(origin).add(level.getRandom().nextDouble() * 4 - 2, 0, level.getRandom().nextDouble() * 4 - 2));
+                    level.addFreshEntity(cat);
+                }
+            }
+            player.getInventory().add(new ItemStack(Items.STRING, 6));
+            player.sendSystemMessage(Component.literal("§eLes chats d'Internet débarquent. Apprivoise-les avec du poisson."));
+        } else {
+            com.jason54.unpredictableblocks.compat.McAccess.dropMainHand(player);
+            player.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 20 * 15, 1));
+            player.sendSystemMessage(Component.literal("§cLe chat a fait tomber ton objet de la table. Il ne regrette rien."));
+        }
+    }
+
+    private static void crypto(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
+        if (tier == LuckTier.HIGH) {
+            player.getInventory().add(new ItemStack(Items.EMERALD, 16 + level.getRandom().nextInt(17)));
+            player.sendSystemMessage(Component.literal("§a+1000 % ! Ton portefeuille déborde d'émeraudes."));
+        } else if (tier == LuckTier.NEUTRAL) {
+            int emeralds = 0;
+            for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+                ItemStack stack = player.getInventory().getItem(i);
+                if (stack.is(Items.EMERALD)) {
+                    emeralds += stack.getCount();
+                }
+            }
+            player.getInventory().add(new ItemStack(Items.EMERALD, Math.max(1, emeralds / 4)));
+            var bubble = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.CRYPTO_BULLE.get(), level);
+            if (bubble != null) {
+                bubble.setPos(Vec3.atBottomCenterOf(origin).add(0, 1, 0));
+                level.addFreshEntity(bubble);
+            }
+            player.sendSystemMessage(Component.literal("§eMarché stable… une Crypto Bulle flotte près de toi."));
+        } else {
+            int lost = 0;
+            for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+                ItemStack stack = player.getInventory().getItem(i);
+                if (stack.is(Items.EMERALD) || stack.is(Items.GOLD_INGOT)) {
+                    int half = stack.getCount() / 2;
+                    stack.shrink(half);
+                    lost += half;
+                }
+            }
+            player.sendSystemMessage(Component.literal("§cKrach ! La moitié de tes émeraudes et lingots d'or s'évapore (" + lost + ")."));
         }
     }
 }

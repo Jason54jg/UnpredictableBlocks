@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "BTB",
+    "CNC",
+    "BTB"
+  ],
+  "key": {
+    "B": "minecraft:gold_block",
+    "N": "minecraft:netherite_scrap",
+    "T": "minecraft:repeater",
+    "C": "unpredictableblocks:lucky_core"
+  },
+  "result": {
+    "id": "unpredictableblocks:lucky_lag_bug",
+    "count": 1
+  }
+}

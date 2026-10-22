@@ -1,0 +1,163 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.unpredictableblocks.pop_it_geant",
+        "texture_width": 128,
+        "texture_height": 128,
+        "visible_bounds_width": 3,
+        "visible_bounds_height": 3.5,
+        "visible_bounds_offset": [
+          0,
+          1.25,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "root",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "board",
+          "pivot": [
+            0,
+            6,
+            0
+          ],
+          "parent": "root",
+          "cubes": [
+            {
+              "origin": [
+                -10,
+                2,
+                -8
+              ],
+              "size": [
+                20,
+                3,
+                16
+              ],
+              "uv": [
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "bubbles",
+          "pivot": [
+            0,
+            8,
+            0
+          ],
+          "parent": "board",
+          "cubes": [
+            {
+              "origin": [
+                -8,
+                5,
+                -6
+              ],
+              "size": [
+                4,
+                3,
+                4
+              ],
+              "uv": [
+                72,
+                0
+              ]
+            },
+            {
+              "origin": [
+                -2,
+                5,
+                -6
+              ],
+              "size": [
+                4,
+                3,
+                4
+              ],
+              "uv": [
+                88,
+                0
+              ]
+            },
+            {
+              "origin": [
+                4,
+                5,
+                -6
+              ],
+              "size": [
+                4,
+                3,
+                4
+              ],
+              "uv": [
+                104,
+                0
+              ]
+            },
+            {
+              "origin": [
+                -8,
+                5,
+                0
+              ],
+              "size": [
+                4,
+                3,
+                4
+              ],
+              "uv": [
+                0,
+                19
+              ]
+            },
+            {
+              "origin": [
+                -2,
+                5,
+                0
+              ],
+              "size": [
+                4,
+                3,
+                4
+              ],
+              "uv": [
+                16,
+                19
+              ]
+            },
+            {
+              "origin": [
+                4,
+                5,
+                0
+              ],
+              "size": [
+                4,
+                3,
+                4
+              ],
+              "uv": [
+                32,
+                19
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

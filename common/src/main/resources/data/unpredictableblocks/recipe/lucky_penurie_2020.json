@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "GTG",
+    "GCG",
+    "GGG"
+  ],
+  "key": {
+    "G": "minecraft:gold_ingot",
+    "T": "minecraft:white_wool",
+    "C": "unpredictableblocks:lucky_core"
+  },
+  "result": {
+    "id": "unpredictableblocks:lucky_penurie_2020",
+    "count": 1
+  }
+}

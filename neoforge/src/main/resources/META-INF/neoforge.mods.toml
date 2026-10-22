@@ -8,6 +8,7 @@ version = "${version}"
 displayName = "UnpredictableBlocks"
 authors = "Jason54"
 description = "Lucky Blocks chaotiques avec système de chance, quêtes et spawn naturel."
+logoFile = "assets/unpredictableblocks/icon.png"
 
 [[dependencies.unpredictableblocks]]
 modId = "neoforge"
@@ -28,4 +29,11 @@ modId = "architectury"
 type = "required"
 versionRange = "[14.0,)"
 ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.unpredictableblocks]]
+modId = "geckolib"
+type = "required"
+versionRange = "[5.5,)"
+ordering = "NONE"
 side = "BOTH"

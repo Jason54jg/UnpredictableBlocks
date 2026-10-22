@@ -1,5 +1,7 @@
 package com.jason54.unpredictableblocks.event;
 
+import com.jason54.unpredictableblocks.compat.McRefs;
+
 import com.jason54.unpredictableblocks.luck.LuckTier;
 import com.jason54.unpredictableblocks.registry.ModSounds;
 import net.minecraft.sounds.SoundSource;
@@ -11,7 +13,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Silverfish;
 import net.minecraft.world.entity.monster.zombie.Zombie;
 import net.minecraft.world.level.Level;
@@ -72,7 +73,6 @@ public final class ThemeEventEffects {
             case GYM_BRO -> applyGymBro(level, player, tier);
             case ART_MODERNE -> applyArtModerne(level, origin, tier);
             case MAGIE_COMPTOIR -> applyMagie(level, origin, tier);
-            case CASINO -> applyCasino(level, player, tier);
             case INVASION_MEMES -> applyMemes(level, player, tier);
             default -> {}
         }
@@ -80,7 +80,7 @@ public final class ThemeEventEffects {
 
     private static void applyAnachronisme(ServerLevel level, ServerPlayer player, BlockPos origin, LuckTier tier) {
         if (tier == LuckTier.NEUTRAL) {
-            spawnMonster(level, origin, EntityType.RAVAGER);
+            spawnMonster(level, origin, McRefs.RAVAGER);
         } else if (tier == LuckTier.LOW) {
             player.getInventory().clearContent();
             player.getInventory().add(new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.STONE_SWORD));
@@ -95,7 +95,7 @@ public final class ThemeEventEffects {
             player.addEffect(new MobEffectInstance(MobEffects.SATURATION, 20 * 120, 0));
         } else if (tier == LuckTier.NEUTRAL) {
             for (int i = 0; i < 8; i++) {
-                spawnPassive(level, origin, EntityType.CHICKEN);
+                spawnPassive(level, origin, McRefs.CHICKEN);
             }
         } else {
             player.addEffect(new MobEffectInstance(MobEffects.SPEED, 20 * 30, 2));
@@ -113,6 +113,13 @@ public final class ThemeEventEffects {
         } else {
             player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 20 * 10, 0));
             player.addEffect(new MobEffectInstance(MobEffects.NAUSEA, 20 * 10, 0));
+            for (int i = 0; i < 2; i++) {
+                var screen = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.ECRAN_BLEU.get(), level);
+                if (screen != null) {
+                    screen.setPos(player.position().add(i == 0 ? 3 : -3, 1.5, 2));
+                    level.addFreshEntity(screen);
+                }
+            }
             playAt(player, ModSounds.BSOD_BOOT.get());
         }
     }
@@ -133,14 +140,17 @@ public final class ThemeEventEffects {
     private static void applyVolaille(ServerLevel level, BlockPos origin, LuckTier tier) {
         if (tier == LuckTier.HIGH) {
             for (int i = 0; i < 20; i++) {
-                spawnPassive(level, origin, EntityType.CHICKEN);
+                spawnPassive(level, origin, McRefs.CHICKEN);
             }
         } else if (tier == LuckTier.LOW) {
-            var golem = EntitySpawnHelper.create(EntityType.IRON_GOLEM, level);
-            if (golem != null) {
-                golem.setPos(Vec3.atBottomCenterOf(origin));
-                golem.setHealth(500);
-                level.addFreshEntity(golem);
+            var coq = EntitySpawnHelper.create(com.jason54.unpredictableblocks.registry.ModEntities.COQ_GAULOIS.get(), level);
+            if (coq != null) {
+                coq.setPos(Vec3.atBottomCenterOf(origin).add(2, 0, 0));
+                level.addFreshEntity(coq);
+                var nearest = level.getNearestPlayer(coq, 16.0);
+                if (nearest != null) {
+                    coq.setTarget(nearest); // coq vexé : il attaque tout de suite
+                }
             }
         } else {
             playerCaquetage(level, origin);
@@ -149,7 +159,7 @@ public final class ThemeEventEffects {
 
     private static void playerCaquetage(ServerLevel level, BlockPos origin) {
         for (int i = 0; i < 4; i++) {
-            spawnPassive(level, origin, EntityType.CHICKEN);
+            spawnPassive(level, origin, McRefs.CHICKEN);
         }
     }
 
@@ -165,7 +175,7 @@ public final class ThemeEventEffects {
     private static void applyStreamer(ServerLevel level, BlockPos origin, LuckTier tier) {
         if (tier == LuckTier.LOW) {
             for (int i = 0; i < 15; i++) {
-                Zombie zombie = EntitySpawnHelper.create(EntityType.ZOMBIE, level);
+                Zombie zombie = EntitySpawnHelper.create(McRefs.ZOMBIE, level);
                 if (zombie != null) {
                     var random = level.getRandom();
                     zombie.setPos(Vec3.atBottomCenterOf(origin).add(random.nextInt(8) - 4, 0, random.nextInt(8) - 4));
@@ -207,7 +217,7 @@ public final class ThemeEventEffects {
             player.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 20 * 20, 3));
             player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 20 * 20, 0));
         } else {
-            spawnMonster(level, player.blockPosition(), EntityType.ZOMBIE);
+            spawnMonster(level, player.blockPosition(), McRefs.ZOMBIE);
         }
     }
 
@@ -257,7 +267,7 @@ public final class ThemeEventEffects {
     private static void applyComplot(ServerLevel level, BlockPos origin, LuckTier tier) {
         if (tier == LuckTier.LOW) {
             for (int i = 0; i < 3; i++) {
-                EnderMan man = EntitySpawnHelper.create(EntityType.ENDERMAN, level);
+                var man = EntitySpawnHelper.create(McRefs.ENDERMAN, level);
                 if (man != null) {
                     man.setPos(Vec3.atBottomCenterOf(origin).add(i, 0, 0));
                     level.addFreshEntity(man);
@@ -297,7 +307,7 @@ public final class ThemeEventEffects {
             player.teleportTo(origin.getX(), origin.getY() - 30, origin.getZ());
         } else {
             for (int i = 0; i < 10; i++) {
-                Silverfish fish = EntitySpawnHelper.create(EntityType.SILVERFISH, level);
+                Silverfish fish = EntitySpawnHelper.create(McRefs.SILVERFISH, level);
                 if (fish != null) {
                     fish.setPos(Vec3.atBottomCenterOf(origin));
                     level.addFreshEntity(fish);
@@ -317,7 +327,7 @@ public final class ThemeEventEffects {
 
     private static void applyCamping(ServerLevel level, BlockPos origin, LuckTier tier) {
         if (tier == LuckTier.LOW) {
-            spawnMonster(level, origin, EntityType.POLAR_BEAR);
+            spawnMonster(level, origin, McRefs.POLAR_BEAR);
         } else if (tier == LuckTier.HIGH) {
             level.setBlock(origin, Blocks.CAMPFIRE.defaultBlockState(), 3);
         }
@@ -340,7 +350,7 @@ public final class ThemeEventEffects {
             for (int i = 0; i < 32; i++) {
                 var random = level.getRandom();
                 BlockPos p = origin.offset(random.nextInt(8) - 4, random.nextInt(3), random.nextInt(8) - 4);
-                level.setBlockAndUpdate(p, Blocks.WHITE_CONCRETE.defaultBlockState());
+                level.setBlockAndUpdate(p, McRefs.WHITE_CONCRETE.defaultBlockState());
             }
         }
     }
@@ -348,19 +358,10 @@ public final class ThemeEventEffects {
     private static void applyMagie(ServerLevel level, BlockPos origin, LuckTier tier) {
         if (tier == LuckTier.NEUTRAL) {
             for (int i = 0; i < 30; i++) {
-                spawnPassive(level, origin, EntityType.RABBIT);
+                spawnPassive(level, origin, McRefs.RABBIT);
             }
         } else if (tier == LuckTier.LOW) {
-            spawnMonster(level, origin, EntityType.WOLF);
-        }
-    }
-
-    private static void applyCasino(ServerLevel level, ServerPlayer player, LuckTier tier) {
-        if (tier == LuckTier.HIGH) {
-            player.getInventory().add(new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.EMERALD, 32));
-            player.getInventory().add(new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.DIAMOND, 16));
-        } else if (tier == LuckTier.LOW) {
-            stripCurrency(player);
+            spawnMonster(level, origin, McRefs.WOLF);
         }
     }
 
@@ -370,7 +371,7 @@ public final class ThemeEventEffects {
             player.addEffect(new MobEffectInstance(MobEffects.SPEED, 20 * 20, 4));
         } else if (tier == LuckTier.NEUTRAL) {
             for (int i = 0; i < 4; i++) {
-                spawnMonster(level, player.blockPosition(), EntityType.SKELETON);
+                spawnMonster(level, player.blockPosition(), McRefs.SKELETON);
             }
         }
     }
@@ -385,7 +386,7 @@ public final class ThemeEventEffects {
         for (int dx = -radius; dx <= radius; dx++) {
             for (int dy = 0; dy <= 2; dy++) {
                 for (int dz = -radius; dz <= radius; dz++) {
-                    level.setBlockAndUpdate(center.offset(dx, dy, dz), Blocks.WHITE_WOOL.defaultBlockState());
+                    level.setBlockAndUpdate(center.offset(dx, dy, dz), McRefs.WHITE_WOOL.defaultBlockState());
                 }
             }
         }
@@ -422,7 +423,7 @@ public final class ThemeEventEffects {
 
     private static void duplicateNearbyAnimals(ServerLevel level, BlockPos origin) {
         level.getEntitiesOfClass(LivingEntity.class, new net.minecraft.world.phys.AABB(origin).inflate(16),
-                e -> e.getType() == EntityType.COW || e.getType() == EntityType.PIG || e.getType() == EntityType.SHEEP)
+                e -> e.getType() == McRefs.COW || e.getType() == McRefs.PIG || e.getType() == McRefs.SHEEP)
                 .forEach(e -> {
                     var copy = EntitySpawnHelper.create(e.getType(), level);
                     if (copy != null) {
@@ -438,15 +439,6 @@ public final class ThemeEventEffects {
             var random = level.getRandom();
             entity.setPos(Vec3.atBottomCenterOf(origin).add(random.nextDouble() * 4 - 2, 0, random.nextDouble() * 4 - 2));
             level.addFreshEntity(entity);
-        }
-    }
-
-    private static void stripCurrency(ServerPlayer player) {
-        for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
-            var stack = player.getInventory().getItem(i);
-            if (stack.is(net.minecraft.world.item.Items.GOLD_INGOT) || stack.is(net.minecraft.world.item.Items.EMERALD)) {
-                player.getInventory().setItem(i, net.minecraft.world.item.ItemStack.EMPTY);
-            }
         }
     }
 

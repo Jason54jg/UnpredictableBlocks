@@ -6,3 +6,43 @@ plugins {
 
 group = project.maven_group
 version = project.mod_version
+
+// Collect jars after a versioned nested build (-Ptarget_mc_version=…).
+// Registered on every Stonecutter node; only runs when the property is set.
+tasks.register('collectVersionJars') {
+    group = 'build'
+    description = 'Copy built loader jars into build/libs-multi/<mc>/'
+    doLast {
+        def mc = findProperty('target_mc_version')?.toString()
+        if (!mc) {
+            logger.lifecycle('collectVersionJars: skip (no -Ptarget_mc_version)')
+            return
+        }
+        def outDir = rootProject.file("build/libs-multi/${mc}")
+        outDir.mkdirs()
+        def baseName = rootProject.findProperty('archives_base_name')?.toString() ?: 'unpredictableblocks'
+        def modVer = rootProject.findProperty('mod_version')?.toString() ?: '0.1.0-SNAPSHOT'
+        [
+                [rootProject.file('common/build/libs'), 'common'],
+                [rootProject.file('fabric/build/libs'), 'fabric'],
+                [rootProject.file('neoforge/build/libs'), 'neoforge'],
+        ].each { dir, loader ->
+            if (!dir.exists()) return
+            def jars = dir.listFiles()?.findAll {
+                it.name.endsWith('.jar') &&
+                        !it.name.contains('sources') &&
+                        it.name.contains("-${loader}")
+            } ?: []
+            // Prefer the largest non-sources jar (remapped / final artifact).
+            def jar = jars.max { it.length() }
+            if (jar == null) {
+                logger.warn("No ${loader} jar found in ${dir}")
+                return
+            }
+            def dest = new File(outDir, "${baseName}-${loader}-${modVer}+${mc}.jar")
+            ant.copy(file: jar, tofile: dest, overwrite: true)
+            logger.lifecycle("Collected ${dest} (${jar.length()} bytes from ${jar.name})")
+
+        }
+    }
+}

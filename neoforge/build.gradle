@@ -3,9 +3,16 @@ plugins {
     id 'net.neoforged.moddev' version '2.0.148'
 }
 
+def mcVersion = rootProject.findProperty('minecraft_version')?.toString() ?: '26.1.2'
+def neoVersion = rootProject.findProperty('neoforge_version')?.toString()
+def archVersion = rootProject.findProperty('architectury_version')?.toString() ?: '22.0.5'
+def geckolibVersion = rootProject.findProperty('geckolib_version')?.toString() ?: '5.5.2'
+
 base {
     archivesName = "${rootProject.archives_base_name}-neoforge"
 }
+
+version = "${rootProject.mod_version}+${mcVersion}"
 
 sourceSets {
     client {
@@ -16,12 +23,29 @@ sourceSets {
     }
 }
 
+repositories {
+    maven { url = 'https://maven.architectury.dev/' }
+    maven { url = 'https://maven.neoforged.net/releases/' }
+    mavenCentral()
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = 'GeckoLib'
+                url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+            }
+        }
+        filter { includeGroupAndSubgroups('com.geckolib') }
+    }
+}
+
 dependencies {
+    implementation "dev.architectury:architectury-neoforge:${archVersion}"
+    implementation "com.geckolib:geckolib-neoforge-${mcVersion}:${geckolibVersion}"
     implementation project(':common')
 }
 
 neoForge {
-    version = rootProject.neoforge_version
+    version = neoVersion ?: rootProject.neoforge_version
 
     addModdingDependenciesTo sourceSets.client
 
@@ -47,6 +71,16 @@ neoForge {
     }
 }
 
+// Bundle common classes + resources into the distributable jar.
+tasks.named('jar', Jar).configure {
+    dependsOn(':common:jar')
+    from({
+        zipTree(project(':common').tasks.named('jar', Jar).flatMap { it.archiveFile })
+    })
+    from sourceSets.client.output
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
 java {
     withSourcesJar()
     toolchain {
@@ -56,8 +90,4 @@ java {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
-}
-
-jar {
-    from sourceSets.client.output
 }

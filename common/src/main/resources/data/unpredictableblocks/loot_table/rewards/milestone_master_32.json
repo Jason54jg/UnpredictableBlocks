@@ -15,8 +15,8 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "unpredictableblocks:jeton_or_vip",
-          "functions": [{ "function": "minecraft:set_count", "count": 3 }]
+          "name": "unpredictableblocks:lucky_mystere",
+          "functions": [{ "function": "minecraft:set_count", "count": 8 }]
         }
       ]
     },

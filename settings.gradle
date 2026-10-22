@@ -11,6 +11,17 @@ plugins {
     id 'dev.kikugie.stonecutter' version '0.6.2'
 }
 
+dependencyResolutionManagement {
+    // pluginManagement repos do not apply to project deps (e.g. architectury-neoforge).
+    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
+    repositories {
+        maven { url = 'https://maven.fabricmc.net/' }
+        maven { url = 'https://maven.architectury.dev/' }
+        maven { url = 'https://maven.neoforged.net/releases/' }
+        mavenCentral()
+    }
+}
+
 stonecutter.create(rootProject) {
     kotlinController = false
     centralScript = 'build.gradle'

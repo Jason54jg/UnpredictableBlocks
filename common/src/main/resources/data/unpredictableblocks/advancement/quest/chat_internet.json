@@ -1,0 +1,34 @@
+{
+  "display": {
+    "icon": {
+      "id": "unpredictableblocks:lucky_chat_internet"
+    },
+    "title": {
+      "translate": "advancements.unpredictableblocks.chat_internet.title",
+      "fallback": "Esclave de Chat"
+    },
+    "description": {
+      "translate": "advancements.unpredictableblocks.chat_internet.description",
+      "fallback": "Apprivoiser 3 chats."
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "unpredictableblocks:root",
+  "criteria": {
+    "tame_cats": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "tame_cats"
+    ]
+  ],
+  "rewards": {
+    "loot": [
+      "unpredictableblocks:rewards/quest_chat_internet"
+    ]
+  }
+}

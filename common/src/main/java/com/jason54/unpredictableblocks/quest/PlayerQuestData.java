@@ -6,7 +6,6 @@ import com.jason54.unpredictableblocks.util.ModMessages;
 import com.jason54.unpredictableblocks.luck.LuckTier;
 import com.jason54.unpredictableblocks.luck.PlayerLuckStorage;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
-import net.minecraft.network.chat.Component;
 import com.jason54.unpredictableblocks.util.ServerLevels;
 import com.mojang.serialization.Codec;
 import net.minecraft.nbt.CompoundTag;
@@ -25,13 +24,9 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.function.Consumer;
 
-/** Compteurs de quêtes et relances VIP par joueur. */
+/** Compteurs de quêtes par joueur. */
 public final class PlayerQuestData {
     private PlayerQuestData() {}
-
-    private static long rerollTtlTicks() {
-        return ModConfig.gameplay().missedRerollTicksOrDefault();
-    }
 
     public static int getBonkCount(ServerPlayer player) {
         return root(player).bonkCounts.getOrDefault(player.getUUID(), 0);
@@ -136,6 +131,15 @@ public final class PlayerQuestData {
         return set.size();
     }
 
+    /** Biomes distincts de la fenêtre multivers en cours (0 hors fenêtre). */
+    public static int multiversBiomeCount(ServerPlayer player) {
+        if (!multiversTracking(player)) {
+            return 0;
+        }
+        Set<String> set = root(player).multiversBiomes.get(player.getUUID());
+        return set == null ? 0 : set.size();
+    }
+
     public static void setAnanasQuestFailed(ServerPlayer player, boolean failed) {
         QuestSavedData data = root(player);
         if (failed) {
@@ -232,52 +236,6 @@ public final class PlayerQuestData {
         return uuid + ":" + key;
     }
 
-    public static void setMissedReroll(ServerPlayer player, LuckyTheme theme) {
-        QuestSavedData data = root(player);
-        long expire = ServerLevels.of(player).getGameTime() + rerollTtlTicks();
-        data.missedRerolls.put(player.getUUID(), new MissedReroll(theme.id(), expire));
-        data.setDirty();
-    }
-
-    public static Optional<LuckyTheme> consumeMissedReroll(ServerPlayer player) {
-        QuestSavedData data = root(player);
-        MissedReroll missed = data.missedRerolls.get(player.getUUID());
-        if (missed == null || ServerLevels.of(player).getGameTime() > missed.expireTick()) {
-            data.missedRerolls.remove(player.getUUID());
-            data.setDirty();
-            return Optional.empty();
-        }
-        data.missedRerolls.remove(player.getUUID());
-        data.setDirty();
-        for (LuckyTheme theme : LuckyTheme.values()) {
-            if (theme.id().equals(missed.themeId())) {
-                return Optional.of(theme);
-            }
-        }
-        return Optional.empty();
-    }
-
-    public static boolean hasMissedReroll(ServerPlayer player) {
-        MissedReroll missed = root(player).missedRerolls.get(player.getUUID());
-        return missed != null && ServerLevels.of(player).getGameTime() <= missed.expireTick();
-    }
-
-    public static boolean transferMissedReroll(ServerPlayer from, ServerPlayer to) {
-        QuestSavedData data = root(from);
-        MissedReroll missed = data.missedRerolls.get(from.getUUID());
-        if (missed == null || ServerLevels.of(from).getGameTime() > missed.expireTick()) {
-            data.missedRerolls.remove(from.getUUID());
-            data.setDirty();
-            return false;
-        }
-        QuestSavedData toData = root(to);
-        toData.missedRerolls.put(to.getUUID(), missed);
-        toData.setDirty();
-        data.missedRerolls.remove(from.getUUID());
-        data.setDirty();
-        return true;
-    }
-
     public static void updateComboChain(
             ServerPlayer player,
             String themeId,
@@ -345,8 +303,6 @@ public final class PlayerQuestData {
         return storage.computeIfAbsent(QuestSavedData.TYPE);
     }
 
-    private record MissedReroll(String themeId, long expireTick) {}
-
     private record FortuneCode(int code, long expireTick) {}
 
     public record ComboChain(String themeId, int count, long expireTick) {}
@@ -362,7 +318,6 @@ public final class PlayerQuestData {
         );
 
         private final Map<UUID, Integer> bonkCounts = new HashMap<>();
-        private final Map<UUID, MissedReroll> missedRerolls = new HashMap<>();
         private final Map<String, Long> cooldowns = new HashMap<>();
         private final Map<String, Integer> counters = new HashMap<>();
         private final Map<UUID, Long> speedrunStart = new HashMap<>();
@@ -383,14 +338,6 @@ public final class PlayerQuestData {
             CompoundTag bonks = tag.getCompoundOrEmpty("Bonks");
             for (String key : bonks.keySet()) {
                 data.bonkCounts.put(UUID.fromString(key), bonks.getIntOr(key, 0));
-            }
-            CompoundTag missed = tag.getCompoundOrEmpty("MissedRerolls");
-            for (String key : missed.keySet()) {
-                CompoundTag entry = missed.getCompoundOrEmpty(key);
-                data.missedRerolls.put(
-                        UUID.fromString(key),
-                        new MissedReroll(entry.getStringOr("Theme", ""), entry.getLongOr("Expire", 0L))
-                );
             }
             CompoundTag cds = tag.getCompoundOrEmpty("Cooldowns");
             for (String key : cds.keySet()) {
@@ -470,15 +417,6 @@ public final class PlayerQuestData {
             CompoundTag bonks = new CompoundTag();
             bonkCounts.forEach((uuid, count) -> bonks.putInt(uuid.toString(), count));
             tag.put("Bonks", bonks);
-
-            CompoundTag missed = new CompoundTag();
-            missedRerolls.forEach((uuid, reroll) -> {
-                CompoundTag entry = new CompoundTag();
-                entry.putString("Theme", reroll.themeId());
-                entry.putLong("Expire", reroll.expireTick());
-                missed.put(uuid.toString(), entry);
-            });
-            tag.put("MissedRerolls", missed);
 
             CompoundTag cds = new CompoundTag();
             cooldowns.forEach(cds::putLong);

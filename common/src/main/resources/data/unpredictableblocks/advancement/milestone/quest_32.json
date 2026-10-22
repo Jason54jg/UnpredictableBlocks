@@ -1,13 +1,15 @@
 {
   "display": {
-    "icon": { "id": "unpredictableblocks:journal_quetes" },
+    "icon": {
+      "id": "unpredictableblocks:journal_quetes"
+    },
     "title": {
       "translate": "advancements.unpredictableblocks.milestone.quest_32.title",
       "fallback": "Légende de l'Absurde"
     },
     "description": {
       "translate": "advancements.unpredictableblocks.milestone.quest_32.description",
-      "fallback": "Compléter les 32 quêtes thématiques."
+      "fallback": "Compléter les 31 quêtes thématiques."
     },
     "frame": "challenge",
     "show_toast": true,
@@ -15,10 +17,18 @@
   },
   "parent": "unpredictableblocks:milestone/quest_24",
   "criteria": {
-    "tier": { "trigger": "minecraft:impossible" }
+    "tier": {
+      "trigger": "minecraft:impossible"
+    }
   },
-  "requirements": [["tier"]],
+  "requirements": [
+    [
+      "tier"
+    ]
+  ],
   "rewards": {
-    "loot": ["unpredictableblocks:rewards/milestone_32"]
+    "loot": [
+      "unpredictableblocks:rewards/milestone_32"
+    ]
   }
 }

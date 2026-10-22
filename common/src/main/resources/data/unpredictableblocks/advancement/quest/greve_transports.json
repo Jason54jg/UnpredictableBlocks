@@ -1,0 +1,34 @@
+{
+  "display": {
+    "icon": {
+      "id": "unpredictableblocks:lucky_greve_transports"
+    },
+    "title": {
+      "translate": "advancements.unpredictableblocks.greve_transports.title",
+      "fallback": "Service Minimum"
+    },
+    "description": {
+      "translate": "advancements.unpredictableblocks.greve_transports.description",
+      "fallback": "Monter dans un wagonnet."
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "unpredictableblocks:root",
+  "criteria": {
+    "minecart": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "minecart"
+    ]
+  ],
+  "rewards": {
+    "loot": [
+      "unpredictableblocks:rewards/quest_greve_transports"
+    ]
+  }
+}

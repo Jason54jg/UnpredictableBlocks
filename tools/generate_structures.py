@@ -148,13 +148,6 @@ def scene_spectacle() -> Compound:
     return build(b)
 
 
-def table_poker_vip() -> Compound:
-    blocks: dict[tuple[int, int, int], str] = {}
-    for x in range(5):
-        for z in range(3):
-            blocks[(x, 0, z)] = "minecraft:green_wool"
-    return build(blocks)
-
 
 def campement_inonde() -> Compound:
     b = cuboid((5, 2, 5), "minecraft:water", hollow=False)
@@ -232,7 +225,6 @@ STRUCTURES = {
     "sanctuaire_doge": sanctuaire_doge,
     "pyramide_piege": pyramide_piege,
     "scene_spectacle": scene_spectacle,
-    "table_poker_vip": table_poker_vip,
     "campement_inonde": campement_inonde,
     "salle_gym": salle_gym,
     "autel_mochi": autel_mochi,

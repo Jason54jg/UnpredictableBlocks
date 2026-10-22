@@ -28,7 +28,6 @@ Fiches longues : [`docs/generation/THEMES_25_32.md`](../generation/THEMES_25_32.
 | `lucky_gym_bro` | Haltères, jaune fluo | — |
 | `lucky_art_moderne` | Taches fluo | — |
 | `lucky_magie_comptoir` | Chapeau, étoiles, lapin | — |
-| `lucky_casino` | 777, or | — |
 | `lucky_invasion_memes` | Doge/Pepe, arc-en-ciel | Trait Nyan, carré Pepe 32 px |
 | `lucky_pause_cafe` | Tasse, espresso | Vapeur, porte-filtre |
 | `lucky_retard_vol` | Terminal, avion | Piste, valise |

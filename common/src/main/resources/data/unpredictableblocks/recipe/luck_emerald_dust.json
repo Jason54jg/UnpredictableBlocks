@@ -1,8 +1,8 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {"item": "minecraft:emerald"},
-    {"item": "minecraft:glowstone_dust"}
+    "minecraft:emerald",
+    "minecraft:glowstone_dust"
   ],
   "result": {
     "id": "unpredictableblocks:luck_emerald_dust",

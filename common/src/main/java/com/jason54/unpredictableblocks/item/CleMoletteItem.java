@@ -8,8 +8,8 @@ import net.minecraft.world.item.ToolMaterial;
 public class CleMoletteItem extends Item {
     private final java.util.function.Consumer<ItemStack> stackSetup;
 
-    public CleMoletteItem(java.util.function.Consumer<ItemStack> stackSetup) {
-        super(new Properties().stacksTo(1).pickaxe(ToolMaterial.NETHERITE, 1.0f, -2.8f));
+    public CleMoletteItem(Properties properties, java.util.function.Consumer<ItemStack> stackSetup) {
+        super(properties.stacksTo(1).pickaxe(ToolMaterial.NETHERITE, 1.0f, -2.8f));
         this.stackSetup = stackSetup;
     }
 

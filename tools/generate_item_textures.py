@@ -80,15 +80,6 @@ def gen_molette() -> Image.Image:
     return img
 
 
-def gen_jeton() -> Image.Image:
-    img = new_canvas()
-    d = d32(img)
-    d.raw.ellipse((6, 6, 26, 26), fill=rgb("FFC107"))
-    d.raw.ellipse((10, 10, 22, 22), fill=rgb("FF8F00"))
-    d.raw.text((13, 11), "VIP", fill=rgb("FFF8E1"))
-    return img
-
-
 def gen_emerald_dust() -> Image.Image:
     img = new_canvas()
     for x, y, c in [(10, 12, "66BB6A"), (16, 10, "43A047"), (14, 18, "2E7D32"), (20, 16, "81C784")]:
@@ -187,7 +178,6 @@ ITEMS = {
     "casque_5g.png": gen_casque,
     "shaker_prot.png": gen_shaker,
     "cle_molette_legendaire.png": gen_molette,
-    "jeton_or_vip.png": gen_jeton,
     "luck_emerald_dust.png": gen_emerald_dust,
     "luck_blaze_curse.png": gen_blaze_curse,
     "espresso_ultra_dose.png": gen_espresso,

@@ -1,5 +1,9 @@
 # UnpredictableBlocks
 
+<p align="center">
+  <img src="docs/branding/logo.png" alt="UnpredictableBlocks" width="160" />
+</p>
+
 *(English: [README.en.md](README.en.md))*
 
 Mod multi-loader **NeoForge + Fabric** (Architectury + Stonecutter) pour Minecraft **26.1.2 → 26.3**, mappings **Mojmap**.
@@ -8,23 +12,24 @@ Lucky Blocks chaotiques à thèmes, système de **chance (-100…+100)**, quête
 
 ## Fonctionnalités (v0.1.0-SNAPSHOT)
 
-- **32 Lucky Blocks** (`LuckyTheme`, thèmes 1–24 + 25–32) — communs / rares / légendaires. **Chaque bloc a sa spécification fixe** (texture, loot, structure, quête, effets) ; l’aléatoire porte sur le **tier** (HIGH / NEUTRAL / LOW) via la luck, pas sur le changement de thème au cassage. Exception volontaire : l’item **Lucky mystère** (tirage parmi les 32).
+- **31 Lucky Blocks** (`LuckyTheme`) — communs / rares / légendaires. **Chaque bloc a sa spécification fixe** (texture, loot, structure, quête, effets) ; l’aléatoire porte sur le **tier** (HIGH / NEUTRAL / LOW) via la luck, pas sur le changement de thème au cassage. Exception volontaire : l’item **Lucky mystère** (tirage parmi les 31).
 - **Luck Stat** + modificateurs craft ±10 (`luck_emerald_dust`, `luck_blaze_curse`).
 - **Spawn** : `config/unpredictableblocks.json`, hook Architectury `CHUNK_LOAD` + marqueurs par chunk.
 - **Événements** : loot tables + `ThemeEventEffects` + structures NBT (`StructurePlacer`).
 - **Quêtes** : advancements sous `data/unpredictableblocks/advancement/quest/` + **Journal des quêtes** (item).
-- **HUD Luck** (barre d’action) ; config optionnelle `unpredictableblocks.json` (**spawn** / pondérations uniquement — les **32 thèmes** restent toujours actifs en jeu).
+- **HUD Luck** (barre d’action) ; config optionnelle `unpredictableblocks.json` (**spawn** / pondérations uniquement — les thèmes restent toujours actifs en jeu).
 - **Paliers quêtes** 8/16/24/32, **Lucky mystère**, **aura de chunk**, **pari Luck** (sneak + poussière d’émeraude en off-hand au cassage).
-- **Profil monde** : Normal / Easy / Hard / Hardcore, **OneBlock** (évolution 50/100 cassages), **Parcours Lucky** (pistes, coop, battle, roulette, hardcore, chrono, daily seed, longueur sprint/standard/marathon, densité Lucky, décor île). **Fabric & NeoForge** : **UB World profile** (sous-menus OneBlock / Parcours / **presets avancés**). Commandes : `world next|setup|preset|options|vote|start|rebuild|show|menu` — `world rebuild` regénère l’arène avec les options actuelles. Presets : `race`, `coop`, `battle`, `roulette`, `hardcore_parcours`, `daily`, `island`, `oneblock_evolution`. Préréglages : `ub_normal`, `ub_oneblock_void`, `ub_parcours_void`. **i18n** : 29 locales × 305 clés (`tools/complete_lang_google.py` ou `sync_lang_missing.py`).
+- **Profil monde** : Normal / Easy / Hard / Hardcore, **OneBlock** (évolution 50/100 cassages), **Parcours Lucky** (pistes, coop, battle, roulette, hardcore, chrono, daily seed, longueur sprint/standard/marathon, densité Lucky, décor île). **Fabric & NeoForge** : **UB World profile** (sous-menus OneBlock / Parcours / **presets avancés**). Commandes : `world next|setup|preset|options|vote|start|rebuild|show|menu` — `world rebuild` regénère l’arène avec les options actuelles. Presets : `race`, `coop`, `battle`, `roulette`, `hardcore_parcours`, `daily`, `island`, `oneblock_evolution`. Préréglages : `ub_normal`, `ub_oneblock_void`, `ub_parcours_void`.
+- **Langues** (30 locales) : `en_us`, `en_gb`, `fr_fr`, `de_de`, `es_es`, `es_mx`, `pt_br`, `it_it`, `nl_nl`, `pl_pl`, `ru_ru`, `uk_ua`, `cs_cz`, `sv_se`, `da_dk`, `nb_no`, `fi_fi`, `hu_hu`, `tr_tr`, `ja_jp`, `ko_kr`, `zh_cn`, `zh_tw`, `vi_vn`, `id_id`, `th_th`, `ro_ro`, `el_gr`, `he_il`, `ar_sa` — messages via `message.unpredictableblocks.*`. Régénération : `python3 tools/generate_lang_files.py` / `complete_lang_google.py` / `sync_lang_missing.py`.
 
 ## Build
 
 **JDK 25** requis (Minecraft 26.1.2). Voir `docs/BUILD.md`.
 
 ```bash
-./gradlew :fabric:build
+./gradlew :fabric:build          # version active (26.1.2)
 ./gradlew :neoforge:build
-./gradlew chiseledBuild
+./gradlew chiseledBuild          # 26.1.2 + 26.2 + 26.3 → build/libs-multi/
 ```
 
 ## Textures (sans Photoshop / Aseprite obligatoire)
@@ -34,7 +39,7 @@ pip install -r tools/requirements.txt
 python3 tools/generate_textures.py      # blocs 32×32 + icon 128×128
 python3 tools/generate_item_textures.py # objets 32×32
 python3 tools/upscale_textures.py       # relance les deux générateurs ci-dessus
-python3 tools/generate_structures.py    # structures .nbt (32 thèmes)
+python3 tools/generate_structures.py    # structures .nbt (31 thèmes)
 ```
 
 Détails : `docs/textures/README.md`

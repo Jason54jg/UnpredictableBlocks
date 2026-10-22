@@ -79,7 +79,7 @@ public final class ModConfig {
         }
     }
 
-    /** Réglages meta-game (combo, cartes, near miss, maître thème, VIP). */
+    /** Réglages meta-game (combo, cartes, near miss, maître thème). */
     public record Gameplay(
             Double cardDropOnHigh,
             Integer comboWindowSeconds,
@@ -89,14 +89,13 @@ public final class ModConfig {
             Integer malusStreakLength,
             Integer malusStreakLuckBonus,
             Integer themeMasterBreaks,
-            Integer missedRerollSeconds,
             Integer luckBetAmount,
             Double ambientParticleRadius,
             Integer ambientParticleIntervalTicks,
             Boolean useModTierSounds
     ) {
         static Gameplay defaults() {
-            return new Gameplay(0.12, 120, 3, -58, -50, 3, 5, 10, 300, 25, 6.0, 15, true);
+            return new Gameplay(0.12, 120, 3, -58, -50, 3, 5, 10, 25, 6.0, 15, true);
         }
 
         public double cardDropOnHighOrDefault() {
@@ -135,11 +134,6 @@ public final class ModConfig {
             return themeMasterBreaks == null ? 10 : Math.max(1, themeMasterBreaks);
         }
 
-        public long missedRerollTicksOrDefault() {
-            int seconds = missedRerollSeconds == null ? 300 : Math.max(30, missedRerollSeconds);
-            return seconds * 20L;
-        }
-
         public int luckBetAmountOrDefault() {
             return luckBetAmount == null ? 25 : Math.clamp(luckBetAmount, 1, 100);
         }
@@ -168,8 +162,13 @@ public final class ModConfig {
         }
     }
 
+    /**
+     * Densité ≈ {@code attemptsPerChunk × chancePerAttempt} Lucky Blocks par nouveau chunk
+     * (moins les essais sans sol valide). {@code chancePerAttempt} null = ancienne config → défaut.
+     */
     public record Spawn(
             int attemptsPerChunk,
+            Double chancePerAttempt,
             EnumMap<LuckyRarity, Integer> rarityWeights,
             DimensionWeights dimensions
     ) {
@@ -180,9 +179,18 @@ public final class ModConfig {
             }
             return new Spawn(
                     2,
+                    0.15,
                     weights,
                     new DimensionWeights(1.0, 0.35, 0.15)
             );
+        }
+
+        public int attemptsPerChunkOrDefault() {
+            return Math.clamp(attemptsPerChunk, 0, 16);
+        }
+
+        public double chancePerAttemptOrDefault() {
+            return chancePerAttempt == null ? 0.15 : Math.clamp(chancePerAttempt, 0.0, 1.0);
         }
     }
 
@@ -220,7 +228,6 @@ public final class ModConfig {
                 case GYM_BRO -> new ThemeSpawn(LuckyRarity.RARE, 1.0, 0.4, 0.1, new String[]{"plains", "desert"}, false);
                 case ART_MODERNE -> new ThemeSpawn(LuckyRarity.RARE, 1.0, 0.1, 0.1, new String[]{"village", "badlands"}, false);
                 case MAGIE_COMPTOIR -> new ThemeSpawn(LuckyRarity.COMMON, 0.9, 0.5, 0.2, new String[]{"swamp", "mansion"}, false);
-                case CASINO -> new ThemeSpawn(LuckyRarity.LEGENDARY, 0.4, 0.6, 0.1, new String[]{"desert", "badlands"}, false);
                 case INVASION_MEMES -> new ThemeSpawn(LuckyRarity.LEGENDARY, 0.5, 0.5, 0.5, new String[]{"*"}, false);
                 case PAUSE_CAFE -> new ThemeSpawn(LuckyRarity.COMMON, 1.3, 0.1, 0.0, new String[]{"plains", "village"}, false);
                 case RETARD_VOL -> new ThemeSpawn(LuckyRarity.RARE, 1.0, 0.2, 0.1, new String[]{"plains", "desert"}, false);
@@ -230,6 +237,10 @@ public final class ModConfig {
                 case ASMR_FIDGET -> new ThemeSpawn(LuckyRarity.COMMON, 1.2, 0.2, 0.2, new String[]{"*"}, false);
                 case VAMPIRE_GOTHIQUE -> new ThemeSpawn(LuckyRarity.RARE, 1.0, 0.3, 0.1, new String[]{"dark_forest", "roofed_forest"}, true);
                 case MULTIVERS_SLIDERS -> new ThemeSpawn(LuckyRarity.LEGENDARY, 0.2, 0.7, 1.2, new String[]{"end_highlands", "nether_wastes"}, false);
+                case GREVE_TRANSPORTS -> new ThemeSpawn(LuckyRarity.COMMON, 1.2, 0.1, 0.0, new String[]{"plains", "village", "meadow"}, false);
+                case METEO_FOLLE -> new ThemeSpawn(LuckyRarity.RARE, 1.1, 0.0, 0.0, new String[]{"*"}, false);
+                case CHAT_INTERNET -> new ThemeSpawn(LuckyRarity.COMMON, 1.2, 0.1, 0.1, new String[]{"*"}, false);
+                case CRYPTO_BULLE -> new ThemeSpawn(LuckyRarity.LEGENDARY, 0.4, 0.3, 0.3, new String[]{"*"}, false);
             };
         }
     }

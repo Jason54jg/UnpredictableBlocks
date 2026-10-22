@@ -3,7 +3,7 @@ package com.jason54.unpredictableblocks.quest;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
 import net.minecraft.server.level.ServerPlayer;
 
-/** Palier : 32 advancements theme_master complétés. */
+/** Palier : tous les advancements theme_master complétés. */
 public final class ThemeMasterMilestones {
     private ThemeMasterMilestones() {}
 

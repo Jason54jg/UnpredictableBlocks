@@ -132,6 +132,16 @@ def main() -> None:
             ASSETS / f"models/item/lucky_{theme}.json",
             {"parent": f"unpredictableblocks:block/lucky_{theme}"},
         )
+        # MC 26+ client item definition (required or inventory shows missing texture)
+        write_json(
+            ASSETS / f"items/lucky_{theme}.json",
+            {
+                "model": {
+                    "type": "minecraft:model",
+                    "model": f"unpredictableblocks:block/lucky_{theme}",
+                }
+            },
+        )
         for tier, builder in [("high", loot_high), ("neutral", loot_neutral), ("low", loot_low)]:
             write_json(
                 DATA / f"loot_table/gameplay/lucky/{theme}/{tier}.json",

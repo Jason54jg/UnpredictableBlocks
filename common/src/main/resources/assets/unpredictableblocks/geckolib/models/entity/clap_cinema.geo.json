@@ -1,0 +1,126 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.unpredictableblocks.clap_cinema",
+        "texture_width": 128,
+        "texture_height": 128,
+        "visible_bounds_width": 3,
+        "visible_bounds_height": 3.5,
+        "visible_bounds_offset": [
+          0,
+          1.25,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "root",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "board",
+          "pivot": [
+            0,
+            8,
+            0
+          ],
+          "parent": "root",
+          "cubes": [
+            {
+              "origin": [
+                -9,
+                2,
+                -2
+              ],
+              "size": [
+                18,
+                12,
+                4
+              ],
+              "uv": [
+                0,
+                0
+              ]
+            },
+            {
+              "origin": [
+                -8,
+                3,
+                -3
+              ],
+              "size": [
+                16,
+                5,
+                1
+              ],
+              "uv": [
+                44,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "stick",
+          "pivot": [
+            0,
+            16,
+            0
+          ],
+          "parent": "board",
+          "cubes": [
+            {
+              "origin": [
+                -9,
+                14,
+                -2
+              ],
+              "size": [
+                18,
+                4,
+                4
+              ],
+              "uv": [
+                78,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "hinge",
+          "pivot": [
+            0,
+            14,
+            0
+          ],
+          "parent": "board",
+          "cubes": [
+            {
+              "origin": [
+                -1,
+                13,
+                -1
+              ],
+              "size": [
+                2,
+                2,
+                2
+              ],
+              "uv": [
+                0,
+                16
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

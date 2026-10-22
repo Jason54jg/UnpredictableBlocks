@@ -1,6 +1,8 @@
 package com.jason54.unpredictableblocks.block;
 
+import com.jason54.unpredictableblocks.UnpredictableBlocks;
 import com.jason54.unpredictableblocks.block.entity.LuckyBlockEntity;
+import com.jason54.unpredictableblocks.entity.LuckyRocketEntity;
 import com.jason54.unpredictableblocks.config.ModConfig;
 import com.jason54.unpredictableblocks.luck.LuckResolver;
 import com.jason54.unpredictableblocks.luck.LuckStat;
@@ -9,18 +11,18 @@ import com.jason54.unpredictableblocks.quest.PlayerQuestData;
 import com.jason54.unpredictableblocks.luck.PlayerLuckStorage;
 import com.jason54.unpredictableblocks.registry.ModItems;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
+import com.jason54.unpredictableblocks.theme.LuckyVariant;
 import com.jason54.unpredictableblocks.util.ModMessages;
 import com.jason54.unpredictableblocks.world.ChunkLuckAura;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -29,11 +31,11 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Un bloc = un thème fixe ({@link LuckyTheme}) : loot, structure, quête et effets catalogue/legacy
  * de ce thème uniquement. Seul le tier HIGH/NEUTRAL/LOW est aléatoire (luck).
+ * <p>
+ * Étend {@link Block}+{@link EntityBlock} (pas {@code BaseEntityBlock}) pour rester compatible
+ * 26.1.2–26.3 : les codecs de blocs ont été retirés en 26.3.
  */
-public class LuckyBlock extends BaseEntityBlock {
-    public static final MapCodec<LuckyBlock> CODEC = simpleCodec(
-            properties -> new LuckyBlock(LuckyTheme.BOULANGERIE, properties)
-    );
+public class LuckyBlock extends Block implements EntityBlock {
     private final LuckyTheme theme;
 
     public LuckyBlock(LuckyTheme theme, Properties properties) {
@@ -46,13 +48,9 @@ public class LuckyBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return CODEC;
-    }
-
-    @Override
     public RenderShape getRenderShape(BlockState state) {
-        return RenderShape.MODEL;
+        // MC 26 : plus de ENTITYBLOCK_ANIMATED — INVISIBLE laisse le BER GeckoLib dessiner.
+        return RenderShape.INVISIBLE;
     }
 
     @Nullable
@@ -65,26 +63,55 @@ public class LuckyBlock extends BaseEntityBlock {
     public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         if (!level.isClientSide() && level instanceof ServerLevel serverLevel && player instanceof ServerPlayer serverPlayer) {
             BlockEntity be = level.getBlockEntity(pos);
+            LuckyVariant variant = be instanceof LuckyBlockEntity lbe ? lbe.getVariant() : LuckyVariant.NORMAL;
+            Runnable events = null;
             if (be instanceof LuckyBlockEntity luckyBe) {
-                LuckStat blockLuck = new LuckStat(luckyBe.getLuck());
-                LuckStat playerLuck = PlayerLuckStorage.getModifier(serverPlayer);
-                int aura = ChunkLuckAura.luckModifier(serverLevel, pos);
-                blockLuck = blockLuck.add(aura);
-                int bet = consumeLuckBet(serverPlayer);
-                if (bet != 0) {
-                    blockLuck = blockLuck.add(bet);
-                    serverPlayer.sendSystemMessage(ModMessages.msg("luck_bet", bet));
+                try {
+                    LuckStat blockLuck = new LuckStat(luckyBe.getLuck()).add(variant.luckBonus());
+                    LuckStat playerLuck = PlayerLuckStorage.getModifier(serverPlayer);
+                    int aura = ChunkLuckAura.luckModifier(serverLevel, pos);
+                    blockLuck = blockLuck.add(aura);
+                    int bet = consumeLuckBet(serverPlayer);
+                    if (bet != 0) {
+                        blockLuck = blockLuck.add(bet);
+                        serverPlayer.sendSystemMessage(ModMessages.msg("luck_bet", bet));
+                    }
+                    int effectiveLuck = LuckStat.clamp(blockLuck.value() + playerLuck.value());
+                    LuckResolver.ResolvedOutcome outcome = LuckResolver.resolve(blockLuck, playerLuck, serverLevel.getRandom());
+                    LuckyTheme blockTheme = ((LuckyBlock) state.getBlock()).theme();
+                    if (PlayerQuestData.consumeComboPity(serverPlayer, blockTheme) && outcome.tier() == LuckTier.LOW) {
+                        outcome = new LuckResolver.ResolvedOutcome(LuckTier.NEUTRAL, "neutral");
+                    }
+                    LuckResolver.ResolvedOutcome finalOutcome = outcome;
+                    BlockPos origin = pos.immutable();
+                    events = () -> dispatchSafely(serverLevel, serverPlayer, origin, blockTheme, finalOutcome, effectiveLuck, variant);
+                } catch (Exception e) {
+                    // Une exception ici empêche removeBlock côté GameMode → le Lucky reste planté.
+                    UnpredictableBlocks.LOGGER.error(
+                            "Échec du tirage Lucky Block {} à {} — le bloc sera quand même retiré",
+                            theme.id(),
+                            pos,
+                            e
+                    );
                 }
-                int effectiveLuck = LuckStat.clamp(blockLuck.value() + playerLuck.value());
-                LuckResolver.ResolvedOutcome outcome = LuckResolver.resolve(blockLuck, playerLuck, serverLevel.getRandom());
-                LuckyTheme blockTheme = ((LuckyBlock) state.getBlock()).theme();
-                if (PlayerQuestData.consumeComboPity(serverPlayer, blockTheme) && outcome.tier() == LuckTier.LOW) {
-                    outcome = new LuckResolver.ResolvedOutcome(LuckTier.NEUTRAL, "neutral");
-                }
-                LuckyBlockEventDispatcher.dispatch(serverLevel, serverPlayer, pos, blockTheme, outcome, effectiveLuck);
             }
+            // Visuel d'abord : butin, effets et structures arrivent à la fin de l'animation,
+            // sinon une structure posée sur place ou une téléportation masque l'envol.
+            LuckyRocketEntity.launch(serverLevel, pos, theme, variant, events);
         }
         return super.playerWillDestroy(level, pos, state, player);
+    }
+
+    private void dispatchSafely(ServerLevel level, ServerPlayer player, BlockPos pos, LuckyTheme blockTheme,
+                                LuckResolver.ResolvedOutcome outcome, int effectiveLuck, LuckyVariant variant) {
+        if (player.hasDisconnected()) {
+            return;
+        }
+        try {
+            LuckyBlockEventDispatcher.dispatch(level, player, pos, blockTheme, outcome, effectiveLuck, variant);
+        } catch (Exception e) {
+            UnpredictableBlocks.LOGGER.error("Échec dispatch Lucky Block {} à {}", blockTheme.id(), pos, e);
+        }
     }
 
     /** Sneak + poussière d'émeraude en main secondaire : +25 luck effectif (1 consommée). */

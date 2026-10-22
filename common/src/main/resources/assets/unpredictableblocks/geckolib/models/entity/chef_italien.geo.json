@@ -1,0 +1,174 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.unpredictableblocks.chef_italien",
+        "texture_width": 128,
+        "texture_height": 128,
+        "visible_bounds_width": 3,
+        "visible_bounds_height": 3.5,
+        "visible_bounds_offset": [
+          0,
+          1.25,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "root",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "pizza",
+          "pivot": [
+            0,
+            8,
+            0
+          ],
+          "parent": "root",
+          "cubes": [
+            {
+              "origin": [
+                -8,
+                6,
+                -8
+              ],
+              "size": [
+                16,
+                2,
+                16
+              ],
+              "uv": [
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "toque",
+          "pivot": [
+            0,
+            14,
+            0
+          ],
+          "parent": "root",
+          "cubes": [
+            {
+              "origin": [
+                -5,
+                10,
+                -5
+              ],
+              "size": [
+                10,
+                3,
+                10
+              ],
+              "uv": [
+                64,
+                0
+              ]
+            },
+            {
+              "origin": [
+                -6,
+                13,
+                -6
+              ],
+              "size": [
+                12,
+                8,
+                12
+              ],
+              "uv": [
+                0,
+                18
+              ]
+            }
+          ]
+        },
+        {
+          "name": "eyes",
+          "pivot": [
+            0,
+            9,
+            -8
+          ],
+          "parent": "pizza",
+          "cubes": [
+            {
+              "origin": [
+                -5,
+                8,
+                -9
+              ],
+              "size": [
+                3,
+                3,
+                1
+              ],
+              "uv": [
+                48,
+                18
+              ]
+            },
+            {
+              "origin": [
+                -4,
+                9,
+                -9.5
+              ],
+              "size": [
+                1,
+                1,
+                1
+              ],
+              "uv": [
+                56,
+                18
+              ]
+            },
+            {
+              "origin": [
+                2,
+                8,
+                -9
+              ],
+              "size": [
+                3,
+                3,
+                1
+              ],
+              "uv": [
+                60,
+                18
+              ]
+            },
+            {
+              "origin": [
+                3,
+                9,
+                -9.5
+              ],
+              "size": [
+                1,
+                1,
+                1
+              ],
+              "uv": [
+                68,
+                18
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.unpredictableblocks.danseur_disco",
+        "texture_width": 128,
+        "texture_height": 128,
+        "visible_bounds_width": 3,
+        "visible_bounds_height": 3.5,
+        "visible_bounds_offset": [
+          0,
+          1.25,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "root",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "speaker",
+          "pivot": [
+            0,
+            4,
+            0
+          ],
+          "parent": "root",
+          "cubes": [
+            {
+              "origin": [
+                -6,
+                0,
+                -4
+              ],
+              "size": [
+                12,
+                8,
+                8
+              ],
+              "uv": [
+                0,
+                0
+              ]
+            },
+            {
+              "origin": [
+                -4,
+                2,
+                -5
+              ],
+              "size": [
+                8,
+                4,
+                1
+              ],
+              "uv": [
+                40,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "ball",
+          "pivot": [
+            0,
+            16,
+            0
+          ],
+          "parent": "root",
+          "cubes": [
+            {
+              "origin": [
+                -5,
+                11,
+                -5
+              ],
+              "size": [
+                10,
+                10,
+                10
+              ],
+              "uv": [
+                58,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "light",
+          "pivot": [
+            0,
+            22,
+            0
+          ],
+          "parent": "ball",
+          "cubes": [
+            {
+              "origin": [
+                -1,
+                21,
+                -1
+              ],
+              "size": [
+                2,
+                2,
+                2
+              ],
+              "uv": [
+                98,
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

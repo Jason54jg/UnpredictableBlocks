@@ -9,7 +9,7 @@
     },
     "description": {
       "translate": "advancements.unpredictableblocks.jdr_d20.description",
-      "fallback": "Vaincre un Enderman (Mimique)."
+      "fallback": "Vaincre une Mimique D20."
     },
     "frame": "task",
     "show_toast": true,

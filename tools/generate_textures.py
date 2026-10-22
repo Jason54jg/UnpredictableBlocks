@@ -34,7 +34,6 @@ FRAME: dict[str, tuple[str, str]] = {
     "lucky_gym_bro": ("88AA00", "222222"),
     "lucky_art_moderne": ("CCCCCC", "FFFFFF"),
     "lucky_magie_comptoir": ("0A0A20", "FFD700"),
-    "lucky_casino": ("660000", "FFD700"),
     "lucky_invasion_memes": ("6622AA", "FFEE88"),
     "lucky_pause_cafe": ("3E2723", "D7CCC8"),
     "lucky_retard_vol": ("0288D1", "ECEFF1"),
@@ -337,18 +336,6 @@ def gen_magie_comptoir() -> Image.Image:
     return img
 
 
-def gen_casino() -> Image.Image:
-    img = base()
-    d = draw(img)
-    d.rectangle((0, 0, 15, 15), fill=rgb("880000"))
-    d.rectangle((3, 4, 12, 11), fill=rgb("FFD700"))
-    d.rectangle((5, 6, 10, 7), fill=rgb("000000"))
-    d.text((4, 5), "777", fill=rgb("FF0000"))
-    d.raw.ellipse((20, 20, 24, 24), fill=rgb("FFD700"))
-    d.raw.ellipse((24, 22, 28, 26), fill=rgb("FFD700"))
-    return img
-
-
 def gen_pause_cafe() -> Image.Image:
     img = base()
     d = draw(img)
@@ -477,7 +464,6 @@ GENERATORS = {
     "lucky_gym_bro": gen_gym_bro,
     "lucky_art_moderne": gen_art_moderne,
     "lucky_magie_comptoir": gen_magie_comptoir,
-    "lucky_casino": gen_casino,
     "lucky_invasion_memes": gen_invasion_memes,
     "lucky_pause_cafe": gen_pause_cafe,
     "lucky_retard_vol": gen_retard_vol,
@@ -491,9 +477,28 @@ GENERATORS = {
 
 
 def icon() -> None:
+    """Icône du pack : logo branding (docs/branding/logo.jpg|.png), sinon fallback pixel."""
+    brand = ROOT / "docs/branding/logo.png"
+    if not brand.is_file():
+        brand = ROOT / "docs/branding/logo.jpg"
+    pack_icon = ROOT / "common/src/main/resources/assets/unpredictableblocks/icon.png"
+    tex_icon = OUT / "icon.png"
+    if brand.is_file():
+        img = Image.open(brand).convert("RGBA")
+        img512 = img.resize((512, 512), Image.LANCZOS)
+        img128 = img.resize((128, 128), Image.LANCZOS)
+        pack_icon.parent.mkdir(parents=True, exist_ok=True)
+        img512.save(pack_icon)
+        img128.save(tex_icon)
+        print("wrote", pack_icon.relative_to(ROOT), "(512×512 depuis branding)")
+        print("wrote", tex_icon.relative_to(ROOT), "(128×128 depuis branding)")
+        return
     img = finish(gen_invasion_memes(), "lucky_invasion_memes")
     img = img.resize((128, 128), Image.NEAREST)
     save(img, "icon.png", "lucky_invasion_memes", skip_upscale=True)
+    pack_icon.parent.mkdir(parents=True, exist_ok=True)
+    img.resize((512, 512), Image.NEAREST).save(pack_icon)
+    print("wrote", pack_icon.relative_to(ROOT), "(512×512 fallback)")
 
 
 def main() -> None:

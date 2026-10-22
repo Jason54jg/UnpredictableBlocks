@@ -1,5 +1,7 @@
 package com.jason54.unpredictableblocks.structure;
 
+import com.jason54.unpredictableblocks.compat.McAccess;
+
 import com.jason54.unpredictableblocks.luck.LuckTier;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
 import net.minecraft.core.BlockPos;
@@ -17,7 +19,7 @@ public final class StructurePlacer {
             return;
         }
         Identifier id = Identifier.fromNamespaceAndPath("unpredictableblocks", structureName);
-        StructureTemplate template = level.getStructureManager().get(id).orElse(null);
+        StructureTemplate template = McAccess.structureTemplates(level).get(id).orElse(null);
         if (template == null) {
             return;
         }
@@ -41,7 +43,6 @@ public final class StructurePlacer {
             case INVASION_MEMES -> "sanctuaire_doge";
             case ANACHRONISME -> "pyramide_piege";
             case MAGIE_COMPTOIR -> "scene_spectacle";
-            case CASINO -> "table_poker_vip";
             case CAMPING -> "campement_inonde";
             case GYM_BRO -> "salle_gym";
             case FORTUNE_COOKIE -> "autel_mochi";
@@ -62,6 +63,10 @@ public final class StructurePlacer {
             case CAUCHEMAR_MATIN -> "manoir_gothique";
             case JDR_D20 -> "scene_spectacle";
             case LAG_BUG -> "stronghold_skip";
+            case GREVE_TRANSPORTS -> "tour_controle";
+            case METEO_FOLLE -> "campement_inonde";
+            case CHAT_INTERNET -> "sanctuaire_doge";
+            case CRYPTO_BULLE -> "bunker_zone51";
         };
     }
 }

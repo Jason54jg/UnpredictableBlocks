@@ -4,7 +4,7 @@ import net.minecraft.resources.Identifier;
 import com.jason54.unpredictableblocks.UnpredictableBlocks;
 
 /**
- * Catalogue des 32 thèmes Lucky Block intégrés.
+ * Catalogue des 31 thèmes Lucky Block intégrés.
  */
 public enum LuckyTheme {
     ANACHRONISME("anachronisme", LuckyRarity.RARE),
@@ -29,7 +29,6 @@ public enum LuckyTheme {
     GYM_BRO("gym_bro", LuckyRarity.RARE),
     ART_MODERNE("art_moderne", LuckyRarity.RARE),
     MAGIE_COMPTOIR("magie_comptoir", LuckyRarity.COMMON),
-    CASINO("casino", LuckyRarity.LEGENDARY),
     INVASION_MEMES("invasion_memes", LuckyRarity.LEGENDARY),
     PAUSE_CAFE("pause_cafe", LuckyRarity.COMMON),
     RETARD_VOL("retard_vol", LuckyRarity.RARE),
@@ -38,7 +37,11 @@ public enum LuckyTheme {
     PIRATERIE_TORRENT("piraterie_torrent", LuckyRarity.RARE),
     ASMR_FIDGET("asmr_fidget", LuckyRarity.COMMON),
     VAMPIRE_GOTHIQUE("vampire_gothique", LuckyRarity.RARE),
-    MULTIVERS_SLIDERS("multivers_sliders", LuckyRarity.LEGENDARY);
+    MULTIVERS_SLIDERS("multivers_sliders", LuckyRarity.LEGENDARY),
+    GREVE_TRANSPORTS("greve_transports", LuckyRarity.COMMON),
+    METEO_FOLLE("meteo_folle", LuckyRarity.RARE),
+    CHAT_INTERNET("chat_internet", LuckyRarity.COMMON),
+    CRYPTO_BULLE("crypto_bulle", LuckyRarity.LEGENDARY);
 
     private final String id;
     private final LuckyRarity rarity;

@@ -15,6 +15,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
+import java.util.function.Consumer;
+import net.minecraft.ChatFormatting;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 
 /** Carte à collectionner ; tag NBT {@code Theme} = id thème. */
@@ -82,5 +86,24 @@ public class CollectionCardItem extends Item {
         ));
         sp.sendSystemMessage(ModMessages.msg("card_biomes", biomes));
         return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    public void appendHoverText(
+            ItemStack stack,
+            TooltipContext context,
+            TooltipDisplay display,
+            Consumer<Component> tooltip,
+            TooltipFlag flag
+    ) {
+        super.appendHoverText(stack, context, display, tooltip, flag);
+        ModItemTooltips.appendDescription(this, tooltip);
+        LuckyTheme theme = readTheme(stack);
+        if (theme != null) {
+            tooltip.accept(Component.translatable("advancements.unpredictableblocks." + theme.id() + ".title")
+                    .withStyle(ChatFormatting.AQUA));
+            tooltip.accept(Component.translatable("block.unpredictableblocks.lucky_" + theme.id() + ".desc")
+                    .withStyle(ChatFormatting.GRAY));
+        }
     }
 }

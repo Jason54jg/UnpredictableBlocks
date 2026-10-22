@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "GTG",
+    "GCG",
+    "GGG"
+  ],
+  "key": {
+    "G": "minecraft:gold_ingot",
+    "T": "minecraft:campfire",
+    "C": "unpredictableblocks:lucky_core"
+  },
+  "result": {
+    "id": "unpredictableblocks:lucky_camping",
+    "count": 1
+  }
+}

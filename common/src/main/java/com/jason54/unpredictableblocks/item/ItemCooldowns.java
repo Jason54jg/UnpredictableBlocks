@@ -6,9 +6,7 @@ import net.minecraft.server.level.ServerPlayer;
 
 public final class ItemCooldowns {
     public static final String SHAKER = "shaker_prot";
-    public static final String JETON = "jeton_vip";
     public static final long SHAKER_TICKS = 20 * 60 * 3;
-    public static final long JETON_TICKS = 20 * 60;
 
     private ItemCooldowns() {}
 
