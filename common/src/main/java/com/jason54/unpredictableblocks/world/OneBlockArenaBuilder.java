@@ -19,6 +19,8 @@ import net.minecraft.world.level.block.state.BlockState;
 public final class OneBlockArenaBuilder {
     /** Délai entre deux respawns (ticks). */
     private static final int REGEN_TICKS = 40;
+    /** NOTIFY_CLIENTS seul — évite les maj voisins (freeze NeoForge). */
+    private static final int PLACE_FLAGS = 2;
 
     private OneBlockArenaBuilder() {}
 
@@ -39,13 +41,13 @@ public final class OneBlockArenaBuilder {
         for (int dx = -radius; dx <= radius; dx++) {
             for (int dz = -radius; dz <= radius; dz++) {
                 BlockPos top = center.offset(dx, -1, dz);
-                level.setBlock(top.below(), Blocks.BEDROCK.defaultBlockState(), 3);
-                level.setBlock(top, Blocks.GRASS_BLOCK.defaultBlockState(), 3);
+                level.setBlock(top.below(), Blocks.BEDROCK.defaultBlockState(), PLACE_FLAGS);
+                level.setBlock(top, Blocks.GRASS_BLOCK.defaultBlockState(), PLACE_FLAGS);
             }
         }
         BlockPos gen = generatorPos(center);
         // Marqueur : or sous le générateur (comme Lucky Skyblock).
-        level.setBlock(gen.below(), Blocks.GOLD_BLOCK.defaultBlockState(), 3);
+        level.setBlock(gen.below(), Blocks.GOLD_BLOCK.defaultBlockState(), PLACE_FLAGS);
         placeGeneratorLucky(level, gen, profile.defaultBlockLuck());
         profile.setOneBlockBuilt(true);
         profile.setDirty();
@@ -68,8 +70,8 @@ public final class OneBlockArenaBuilder {
                     continue;
                 }
                 BlockPos top = center.offset(dx, -1, dz);
-                level.setBlock(top.below(), Blocks.BEDROCK.defaultBlockState(), 3);
-                level.setBlock(top, Blocks.GRASS_BLOCK.defaultBlockState(), 3);
+                level.setBlock(top.below(), Blocks.BEDROCK.defaultBlockState(), PLACE_FLAGS);
+                level.setBlock(top, Blocks.GRASS_BLOCK.defaultBlockState(), PLACE_FLAGS);
             }
         }
     }
@@ -108,7 +110,7 @@ public final class OneBlockArenaBuilder {
                 || level.getBlockState(gen.below()).is(Blocks.GRASS_BLOCK)
                 || level.getBlockState(gen.below()).is(Blocks.BEDROCK))) {
             // Restaure le socle si besoin.
-            level.setBlock(gen.below(), Blocks.GOLD_BLOCK.defaultBlockState(), 3);
+            level.setBlock(gen.below(), Blocks.GOLD_BLOCK.defaultBlockState(), PLACE_FLAGS);
         }
         if (placeGeneratorLucky(level, gen, luck)) {
             level.sendParticles(
@@ -124,7 +126,7 @@ public final class OneBlockArenaBuilder {
         if (!LuckyBlockSpawnPlacement.placeRandom(level, gen, level.getRandom())) {
             // Fallback thème fixe si le tirage config échoue (spawnMultiplier=0).
             BlockState lucky = ModBlocks.get(LuckyTheme.BOULANGERIE).defaultBlockState();
-            if (!level.setBlock(gen, lucky, 3)) {
+            if (!level.setBlock(gen, lucky, PLACE_FLAGS)) {
                 return false;
             }
             if (level.getBlockEntity(gen) instanceof LuckyBlockEntity be) {
@@ -145,7 +147,7 @@ public final class OneBlockArenaBuilder {
                     BlockPos p = center.offset(dx, dy, dz);
                     BlockState state = level.getBlockState(p);
                     if (!state.isAir() && !state.is(Blocks.BEDROCK) && !(state.getBlock() instanceof LuckyBlock)) {
-                        level.setBlock(p, Blocks.AIR.defaultBlockState(), 3);
+                        level.setBlock(p, Blocks.AIR.defaultBlockState(), PLACE_FLAGS);
                     }
                 }
             }

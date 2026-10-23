@@ -98,11 +98,12 @@ public final class WorldProfileApplier {
     }
 
     private static void clearStandSpace(ServerLevel level, BlockPos feet) {
+        // Flag 2 = clients only : pas de maj voisins (évite freeze NeoForge).
         if (!level.getBlockState(feet).isAir()) {
-            level.setBlock(feet, Blocks.AIR.defaultBlockState(), 3);
+            level.setBlock(feet, Blocks.AIR.defaultBlockState(), 2);
         }
         if (!level.getBlockState(feet.above()).isAir()) {
-            level.setBlock(feet.above(), Blocks.AIR.defaultBlockState(), 3);
+            level.setBlock(feet.above(), Blocks.AIR.defaultBlockState(), 2);
         }
     }
 

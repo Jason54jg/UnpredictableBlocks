@@ -71,10 +71,18 @@ neoForge {
     }
 }
 
+// 26.1.2 → Architectury 20.1.x ; 26.2 → 21.1.x ; 26.3 → 22.0.x — pas de floor hardcodé 21.0.
+def archVersionRange = {
+    def parts = archVersion.tokenize('.')
+    def majorMinor = parts.size() >= 2 ? "${parts[0]}.${parts[1]}" : archVersion
+    "[${majorMinor},)"
+}()
+
 processResources {
     inputs.property 'version', version
+    inputs.property 'architectury_version_range', archVersionRange
     filesMatching('META-INF/neoforge.mods.toml') {
-        expand version: version
+        expand version: version, architectury_version_range: archVersionRange
     }
 }
 

@@ -54,7 +54,8 @@ public final class SafeSpawn {
         if (isFeetSafe(level, best)) {
             return best;
         }
-        for (int r = 1; r <= 8; r++) {
+        // Rayon limité : un scan large force trop de chunks (freeze NeoForge au join).
+        for (int r = 1; r <= 3; r++) {
             for (int dx = -r; dx <= r; dx++) {
                 for (int dz = -r; dz <= r; dz++) {
                     if (Math.abs(dx) != r && Math.abs(dz) != r) {

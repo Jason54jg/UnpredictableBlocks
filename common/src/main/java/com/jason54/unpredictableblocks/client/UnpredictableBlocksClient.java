@@ -110,17 +110,21 @@ public final class UnpredictableBlocksClient {
             if (!(screen instanceof InventoryScreen) && !(screen instanceof CreativeModeInventoryScreen)) {
                 return;
             }
-            int x = screen.width / 2 + 88;
-            int y = screen.height / 2 - 76;
-            if (screen instanceof CreativeModeInventoryScreen) {
-                y = 6;
-                x = screen.width / 2 + 70;
-            }
+            // À gauche de l'inventaire : à droite ça chevauche les effets de potion (NeoForge/vanilla).
+            final int btnW = 52;
+            final int btnH = 20;
+            final boolean creative = screen instanceof CreativeModeInventoryScreen;
+            final int guiW = creative ? 195 : 176;
+            final int guiH = creative ? 136 : 166;
+            final int left = (screen.width - guiW) / 2;
+            final int top = (screen.height - guiH) / 2;
+            final int x = left - btnW - 4;
+            final int y = top + (creative ? 6 : 4);
             access.addRenderableWidget(Button.builder(
                             Component.translatable("screen.unpredictableblocks.quest_journal.open"),
                             b -> NetworkManager.sendToServer(RequestQuestJournalPayload.INSTANCE)
                     )
-                    .bounds(x, y, 52, 20)
+                    .bounds(x, y, btnW, btnH)
                     .build());
         });
     }

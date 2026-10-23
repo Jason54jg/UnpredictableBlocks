@@ -8,7 +8,7 @@
 
 Chaotic themed Lucky Blocks, **luck (-100…+100)**, quests (advancements), and natural world spawn.
 
-## Features (v0.1.0-SNAPSHOT)
+## Features (v0.5.0-beta)
 
 - **31 Lucky Blocks** (`LuckyTheme`) — common / rare / legendary. **One block = one fixed theme** (texture, loot, structure, quest, effects). Randomness is the **tier** (HIGH / NEUTRAL / LOW) from luck, not the theme on break. Exception: **Mystery Lucky** item (random among 31).
 - **Luck stat** + craft modifiers ±10 (`luck_emerald_dust`, `luck_blaze_curse`).

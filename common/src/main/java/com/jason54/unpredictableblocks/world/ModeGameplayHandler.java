@@ -8,6 +8,7 @@ import com.jason54.unpredictableblocks.theme.LuckyRarity;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
 import com.jason54.unpredictableblocks.util.ModMessages;
 import com.jason54.unpredictableblocks.util.ServerLevels;
+import dev.architectury.event.events.common.LifecycleEvent;
 import dev.architectury.event.events.common.PlayerEvent;
 import dev.architectury.event.events.common.TickEvent;
 import net.minecraft.core.BlockPos;
@@ -19,16 +20,29 @@ import net.minecraft.world.phys.Vec3;
 
 import java.time.LocalDate;
 import java.time.temporal.WeekFields;
+import java.util.Iterator;
 import java.util.Locale;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 /** Timers, checkpoints, coop, battle spill, oneblock évolution, résumé de fin. */
 public final class ModeGameplayHandler {
+    /**
+     * Délai après join avant construction arène / SafeSpawn.
+     * NeoForge gèle si on force des chunks pendant « Loading terrain ».
+     */
+    private static final int JOIN_SETUP_DELAY_TICKS = 40;
+    private static final Map<UUID, Integer> PENDING_JOIN_SETUP = new ConcurrentHashMap<>();
+
     private ModeGameplayHandler() {}
 
     public static void register() {
         PlayerEvent.PLAYER_JOIN.register(ModeGameplayHandler::onJoin);
         PlayerEvent.PLAYER_RESPAWN.register((player, conqueredEnd, removalReason) -> onRespawn(player));
         TickEvent.PLAYER_POST.register(ModeGameplayHandler::onPlayerTick);
+        TickEvent.SERVER_POST.register(ModeGameplayHandler::drainPendingJoins);
+        LifecycleEvent.SERVER_STOPPED.register(server -> PENDING_JOIN_SETUP.clear());
     }
 
     public static void onSessionStart(ServerPlayer player, WorldModProfile.WorldProfileData profile) {
@@ -55,26 +69,60 @@ public final class ModeGameplayHandler {
         if (player.level().isClientSide() || !(player instanceof ServerPlayer sp)) {
             return;
         }
+        // Spectateur temporaire en mode arène : évite la chute dans le vide pendant le délai NeoForge.
         ServerLevel overworld = ServerLevels.server(sp).overworld();
-        // Différé d'1 tick : chunks prêts, pas de freeze pendant le load NeoForge.
-        ServerLevels.server(sp).execute(() -> {
-            if (sp.isRemoved()) {
-                return;
+        WorldModProfile.bootstrapOverworld(overworld);
+        WorldModProfile.WorldProfileData preview = WorldModProfile.get(overworld);
+        if (WorldProfileApplier.isArenaMode(preview)) {
+            sp.setGameMode(GameType.SPECTATOR);
+        }
+        PENDING_JOIN_SETUP.put(sp.getUUID(), JOIN_SETUP_DELAY_TICKS);
+    }
+
+    private static void drainPendingJoins(net.minecraft.server.MinecraftServer server) {
+        if (PENDING_JOIN_SETUP.isEmpty()) {
+            return;
+        }
+        Iterator<Map.Entry<UUID, Integer>> it = PENDING_JOIN_SETUP.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<UUID, Integer> entry = it.next();
+            int left = entry.getValue() - 1;
+            if (left > 0) {
+                entry.setValue(left);
+                continue;
             }
-            WorldModProfile.ensureWorldReady(overworld);
-            WorldModProfile.WorldProfileData p = WorldModProfile.get(overworld);
-            if (!p.configured()) {
-                return;
+            it.remove();
+            ServerPlayer sp = server.getPlayerList().getPlayer(entry.getKey());
+            if (sp == null || sp.isRemoved()) {
+                continue;
             }
-            if (WorldProfileApplier.isArenaMode(p)
-                    && ((p.mode() == WorldPlayMode.PARCOURS && p.parcoursBuilt())
-                    || (p.mode() == WorldPlayMode.ONEBLOCK && p.oneBlockBuilt()))) {
-                onSessionStart(sp, p);
-                return;
+            finishJoinSetup(sp);
+        }
+    }
+
+    private static void finishJoinSetup(ServerPlayer sp) {
+        ServerLevel overworld = ServerLevels.server(sp).overworld();
+        WorldModProfile.ensureWorldReady(overworld);
+        WorldModProfile.WorldProfileData p = WorldModProfile.get(overworld);
+        if (!p.configured()) {
+            return;
+        }
+        if (WorldProfileApplier.isArenaMode(p)
+                && ((p.mode() == WorldPlayMode.PARCOURS && p.parcoursBuilt())
+                || (p.mode() == WorldPlayMode.ONEBLOCK && p.oneBlockBuilt()))) {
+            if (!shouldSpectate(sp, p)) {
+                sp.setGameMode(GameType.SURVIVAL);
             }
-            // Map normale / easy / hard : remonte si spawn vanilla dans la terre.
-            SafeSpawn.rescueIfBuried(sp);
-        });
+            onSessionStart(sp, p);
+            return;
+        }
+        if (sp.gameMode.getGameModeForPlayer() == GameType.SPECTATOR
+                && ServerLevels.server(sp).isSingleplayer()) {
+            // Restaure survie si on avait forcé le spectateur pour une arène annulée.
+            sp.setGameMode(GameType.SURVIVAL);
+        }
+        // Map normale / easy / hard : remonte si spawn vanilla dans la terre.
+        SafeSpawn.rescueIfBuried(sp);
     }
 
     private static void onRespawn(ServerPlayer player) {

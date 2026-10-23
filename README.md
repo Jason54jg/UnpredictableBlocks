@@ -10,7 +10,7 @@ Mod multi-loader **NeoForge + Fabric** (Architectury + Stonecutter) pour Minecra
 
 Lucky Blocks chaotiques à thèmes, système de **chance (-100…+100)**, quêtes (advancements) et spawn naturel en monde.
 
-## Fonctionnalités (v0.1.0-SNAPSHOT)
+## Fonctionnalités (v0.5.0-beta)
 
 - **31 Lucky Blocks** (`LuckyTheme`) — communs / rares / légendaires. **Chaque bloc a sa spécification fixe** (texture, loot, structure, quête, effets) ; l’aléatoire porte sur le **tier** (HIGH / NEUTRAL / LOW) via la luck, pas sur le changement de thème au cassage. Exception volontaire : l’item **Lucky mystère** (tirage parmi les 31).
 - **Luck Stat** + modificateurs craft ±10 (`luck_emerald_dust`, `luck_blaze_curse`).

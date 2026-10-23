@@ -23,7 +23,7 @@ tasks.register('collectVersionJars') {
         def outDir = rootProject.file("build/libs-multi/${mc}")
         outDir.mkdirs()
         def baseName = rootProject.findProperty('archives_base_name')?.toString() ?: 'unpredictableblocks'
-        def modVer = rootProject.findProperty('mod_version')?.toString() ?: '0.1.0-SNAPSHOT'
+        def modVer = rootProject.findProperty('mod_version')?.toString() ?: '0.5.0-beta'
         [
                 [rootProject.file('common/build/libs'), 'common'],
                 [rootProject.file('fabric/build/libs'), 'fabric'],

@@ -14,6 +14,8 @@ import net.minecraft.world.level.block.state.BlockState;
 public final class ParcoursArenaBuilder {
     public static final int LANE_SPACING = 12;
     public static final int FLOOR_Y_OFFSET = 0;
+    /** NOTIFY_CLIENTS seul — évite les maj voisins qui forcent des chunks (freeze NeoForge). */
+    private static final int PLACE_FLAGS = 2;
 
     private ParcoursArenaBuilder() {}
 
@@ -44,7 +46,7 @@ public final class ParcoursArenaBuilder {
         BlockPos start = fromCenter.offset(3, 0, 0);
         for (int step = 0; step < 12; step++) {
             BlockPos foot = start.offset(step, 0, 0);
-            level.setBlock(foot.below(), Blocks.STONE_BRICKS.defaultBlockState(), 3);
+            level.setBlock(foot.below(), Blocks.STONE_BRICKS.defaultBlockState(), PLACE_FLAGS);
             if (step % 4 == 2) {
                 placeLucky(level, foot.above(), LuckyTheme.FAST_FOOD, profile.defaultBlockLuck(), level.getRandom(), settings);
             }
@@ -172,27 +174,27 @@ public final class ParcoursArenaBuilder {
                 decorateUnderPath(level, foot, settings);
                 if (isGap(step, pathLength)) {
                     if (step == gapBridgeStep(pathLength, 1)) {
-                        level.setBlock(foot.below(), Blocks.STONE_BRICK_SLAB.defaultBlockState(), 3);
+                        level.setBlock(foot.below(), Blocks.STONE_BRICK_SLAB.defaultBlockState(), PLACE_FLAGS);
                     }
                     continue;
                 }
-                level.setBlock(foot.below(), path, 3);
+                level.setBlock(foot.below(), path, PLACE_FLAGS);
                 // Accents / sea lantern décalés pour ne pas boucher la case de spawn (step 0).
                 if (dz == 0 && step > 0 && step % 6 == 0) {
-                    level.setBlock(foot, accent, 3);
+                    level.setBlock(foot, accent, PLACE_FLAGS);
                 }
                 if (dz == 0 && step >= 0 && step % luckyInterval == 2) {
                     LuckyTheme theme = pickTheme(laneIndex, step, random, settings);
                     placeLucky(level, foot.above(), theme, luck, random, settings);
                     if (settings.parcoursRules() == WorldModeSettings.ParcoursRules.ROULETTE) {
-                        level.setBlock(foot.offset(0, 2, 0), rouletteMarker(theme), 3);
+                        level.setBlock(foot.offset(0, 2, 0), rouletteMarker(theme), PLACE_FLAGS);
                     }
                 }
                 if (step > 0 && step % 12 == 0 && dz == 0) {
-                    level.setBlock(foot.above(), Blocks.SEA_LANTERN.defaultBlockState(), 3);
+                    level.setBlock(foot.above(), Blocks.SEA_LANTERN.defaultBlockState(), PLACE_FLAGS);
                 }
                 if (Math.abs(dz) == pathHalfWidth) {
-                    level.setBlock(foot.offset(0, 1, 0), pathHalfWidth > 1 ? lowRail : rail, 3);
+                    level.setBlock(foot.offset(0, 1, 0), pathHalfWidth > 1 ? lowRail : rail, PLACE_FLAGS);
                 }
             }
             if (coopGates && (step == pathLength / 3 || step == (pathLength * 2) / 3)) {
@@ -205,7 +207,7 @@ public final class ParcoursArenaBuilder {
             for (int dz = -pathHalfWidth; dz <= pathHalfWidth; dz++) {
                 BlockPos p = finish.offset(dx, -1, dz);
                 decorateUnderPath(level, p, settings);
-                level.setBlock(p, dx == 1 && dz == 0 ? Blocks.GOLD_BLOCK.defaultBlockState() : path, 3);
+                level.setBlock(p, dx == 1 && dz == 0 ? Blocks.GOLD_BLOCK.defaultBlockState() : path, PLACE_FLAGS);
             }
         }
         placeLucky(level, finish.offset(1, 1, 0), LuckyTheme.JDR_D20, luck + 5, random, settings);
@@ -218,11 +220,11 @@ public final class ParcoursArenaBuilder {
                 BlockPos p = startPad.offset(dx, 0, dz);
                 clearAirColumn(level, p.above(), 4);
                 decorateUnderPath(level, p.below(), settings);
-                level.setBlock(p, Blocks.GRASS_BLOCK.defaultBlockState(), 3);
+                level.setBlock(p, Blocks.GRASS_BLOCK.defaultBlockState(), PLACE_FLAGS);
             }
         }
         // Lanterne / lucky de départ sur le côté — pas sur la case de spawn.
-        level.setBlock(laneOrigin.offset(-1, 1, pathHalfWidth + 1), Blocks.LANTERN.defaultBlockState(), 3);
+        level.setBlock(laneOrigin.offset(-1, 1, pathHalfWidth + 1), Blocks.LANTERN.defaultBlockState(), PLACE_FLAGS);
         placeLucky(level, laneOrigin.offset(1, 1, 0), LuckyTheme.BOULANGERIE, luck, random, settings);
     }
 
@@ -231,19 +233,19 @@ public final class ParcoursArenaBuilder {
             BlockPos p = base.above(y);
             BlockState state = level.getBlockState(p);
             if (!state.isAir() && !state.is(Blocks.BEDROCK)) {
-                level.setBlock(p, Blocks.AIR.defaultBlockState(), 3);
+                level.setBlock(p, Blocks.AIR.defaultBlockState(), PLACE_FLAGS);
             }
         }
     }
 
     private static void decorateUnderPath(ServerLevel level, BlockPos foot, WorldModeSettings settings) {
-        level.setBlock(foot.below(2), Blocks.BEDROCK.defaultBlockState(), 3);
+        level.setBlock(foot.below(2), Blocks.BEDROCK.defaultBlockState(), PLACE_FLAGS);
         if (settings.arenaDecor() == WorldModeSettings.ArenaDecor.ISLAND) {
             for (int dx = -2; dx <= 2; dx++) {
                 for (int dz = -2; dz <= 2; dz++) {
                     BlockPos p = foot.offset(dx, -3, dz);
-                    level.setBlock(p, Blocks.DIRT.defaultBlockState(), 3);
-                    level.setBlock(p.below(), Blocks.STONE.defaultBlockState(), 3);
+                    level.setBlock(p, Blocks.DIRT.defaultBlockState(), PLACE_FLAGS);
+                    level.setBlock(p.below(), Blocks.STONE.defaultBlockState(), PLACE_FLAGS);
                 }
             }
         }
@@ -252,7 +254,7 @@ public final class ParcoursArenaBuilder {
     private static void placeGate(ServerLevel level, BlockPos laneOrigin, int step, int pathHalfWidth) {
         for (int dz = -pathHalfWidth; dz <= pathHalfWidth; dz++) {
             BlockPos bar = laneOrigin.offset(step, 1, dz);
-            level.setBlock(bar, Blocks.IRON_BARS.defaultBlockState(), 3);
+            level.setBlock(bar, Blocks.IRON_BARS.defaultBlockState(), PLACE_FLAGS);
         }
     }
 
@@ -260,7 +262,7 @@ public final class ParcoursArenaBuilder {
         for (int dz = -3; dz <= 3; dz++) {
             BlockPos bar = laneOrigin.offset(step, 1, dz);
             if (level.getBlockState(bar).is(Blocks.IRON_BARS)) {
-                level.setBlock(bar, Blocks.AIR.defaultBlockState(), 3);
+                level.setBlock(bar, Blocks.AIR.defaultBlockState(), PLACE_FLAGS);
             }
         }
     }
@@ -310,7 +312,7 @@ public final class ParcoursArenaBuilder {
             WorldModeSettings settings
     ) {
         BlockState lucky = ModBlocks.get(theme).defaultBlockState();
-        level.setBlock(pos, lucky, 3);
+        level.setBlock(pos, lucky, PLACE_FLAGS);
         if (level.getBlockEntity(pos) instanceof LuckyBlockEntity be) {
             int offset = settings.luckyDensity() == WorldModeSettings.LuckyDensity.CARNIVAL ? random.nextInt(8) : random.nextInt(5);
             be.setLuck(luck + offset);
