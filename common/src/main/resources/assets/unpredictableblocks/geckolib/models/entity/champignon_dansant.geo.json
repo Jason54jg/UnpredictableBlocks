@@ -1,0 +1,153 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.unpredictableblocks.champignon_dansant",
+        "texture_width": 128,
+        "texture_height": 128,
+        "visible_bounds_width": 3,
+        "visible_bounds_height": 3.5,
+        "visible_bounds_offset": [
+          0,
+          1.25,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "root",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "stem",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "parent": "root",
+          "cubes": [
+            {
+              "origin": [
+                -2.5,
+                0,
+                -2.5
+              ],
+              "size": [
+                5,
+                8,
+                5
+              ],
+              "uv": [
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "cap",
+          "pivot": [
+            0,
+            8,
+            0
+          ],
+          "parent": "stem",
+          "cubes": [
+            {
+              "origin": [
+                -5,
+                7,
+                -5
+              ],
+              "size": [
+                10,
+                1,
+                10
+              ],
+              "uv": [
+                20,
+                0
+              ]
+            },
+            {
+              "origin": [
+                -6,
+                8,
+                -6
+              ],
+              "size": [
+                12,
+                4,
+                12
+              ],
+              "uv": [
+                60,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "right_arm",
+          "pivot": [
+            -2.5,
+            6,
+            0
+          ],
+          "parent": "stem",
+          "cubes": [
+            {
+              "origin": [
+                -4.5,
+                3,
+                -1
+              ],
+              "size": [
+                2,
+                4,
+                2
+              ],
+              "uv": [
+                108,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "left_arm",
+          "pivot": [
+            2.5,
+            6,
+            0
+          ],
+          "parent": "stem",
+          "cubes": [
+            {
+              "origin": [
+                2.5,
+                3,
+                -1
+              ],
+              "size": [
+                2,
+                4,
+                2
+              ],
+              "uv": [
+                116,
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

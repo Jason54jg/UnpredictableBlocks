@@ -6,6 +6,7 @@ import com.jason54.unpredictableblocks.compat.McRefs;
 import com.jason54.unpredictableblocks.item.ThemedGearHelper;
 import com.jason54.unpredictableblocks.luck.LuckTier;
 import com.jason54.unpredictableblocks.registry.ModBlocks;
+import com.jason54.unpredictableblocks.registry.ModEntities;
 import com.jason54.unpredictableblocks.registry.ModItems;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
 import com.jason54.unpredictableblocks.util.ModMessages;
@@ -87,7 +88,11 @@ public final class LuckyVariations {
                     giveLoot(level, player, origin, "legendary_tool")),
             new Variation("bodyguard", (level, player, origin, theme, random) ->
                     spawnNamed(level, McRefs.IRON_GOLEM, scatter(origin, random, 2.0), "§aGarde du Corps Chanceux",
-                            golem -> golem.setPlayerCreated(true)))
+                            golem -> golem.setPlayerCreated(true))),
+            new Variation("pinata", (level, player, origin, theme, random) ->
+                    spawn(level, ModEntities.PINATA_LUCKY.get(), scatter(origin, random, 2.0))),
+            new Variation("leprechaun", (level, player, origin, theme, random) ->
+                    spawn(level, ModEntities.LUTIN_TREFLE.get(), scatter(origin, random, 2.0)))
     );
 
     private static final List<Variation> NEUTRAL = List.of(
@@ -142,7 +147,14 @@ public final class LuckyVariations {
                     case 1 -> spawnNamed(level, McRefs.SHEEP, pos, "jeb_", sheep -> {});
                     default -> spawnNamed(level, McRefs.RABBIT, pos, "Toast", rabbit -> {});
                 }
-            })
+            }),
+            new Variation("mushroom_party", (level, player, origin, theme, random) -> {
+                for (int i = 0; i < 2; i++) {
+                    spawn(level, ModEntities.CHAMPIGNON_DANSANT.get(), scatter(origin, random, 2.0));
+                }
+            }),
+            new Variation("ghost", (level, player, origin, theme, random) ->
+                    spawn(level, ModEntities.FANTOME_DRAP.get(), scatter(origin, random, 3.0)))
     );
 
     private static final List<Variation> LOW = List.of(
@@ -188,7 +200,18 @@ public final class LuckyVariations {
                         skeleton.setItemSlot(EquipmentSlot.MAINHAND, named(Items.BOW, "Arc du Dimanche"));
                     });
                 }
-            })
+            }),
+            new Variation("lucky_knight", (level, player, origin, theme, random) ->
+                    spawn(level, ModEntities.CHEVALIER_LUCKY.get(), scatter(origin, random, 2.0))),
+            new Variation("goblin_thief", (level, player, origin, theme, random) -> {
+                for (int i = 0; i < 2; i++) {
+                    spawn(level, ModEntities.GOBELIN_VOLEUR.get(), scatter(origin, random, 3.0));
+                }
+            }),
+            new Variation("cactus_boxer", (level, player, origin, theme, random) ->
+                    spawn(level, ModEntities.CACTUS_BOXEUR.get(), scatter(origin, random, 2.0))),
+            new Variation("crazy_snowman", (level, player, origin, theme, random) ->
+                    spawn(level, ModEntities.BONHOMME_NEIGE_FOU.get(), scatter(origin, random, 3.0)))
     );
 
     private LuckyVariations() {}

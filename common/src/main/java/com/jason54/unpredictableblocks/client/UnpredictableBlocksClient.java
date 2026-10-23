@@ -38,6 +38,14 @@ import com.jason54.unpredictableblocks.entity.mob.CubeMemeEntity;
 import com.jason54.unpredictableblocks.entity.mob.SliderMultiversEntity;
 import com.jason54.unpredictableblocks.entity.mob.StatueVivanteEntity;
 import com.jason54.unpredictableblocks.entity.mob.ToiDuFuturEntity;
+import com.jason54.unpredictableblocks.entity.mob.PinataLuckyEntity;
+import com.jason54.unpredictableblocks.entity.mob.LutinTrefleEntity;
+import com.jason54.unpredictableblocks.entity.mob.ChampignonDansantEntity;
+import com.jason54.unpredictableblocks.entity.mob.FantomeDrapEntity;
+import com.jason54.unpredictableblocks.entity.mob.ChevalierLuckyEntity;
+import com.jason54.unpredictableblocks.entity.mob.GobelinVoleurEntity;
+import com.jason54.unpredictableblocks.entity.mob.CactusBoxeurEntity;
+import com.jason54.unpredictableblocks.entity.mob.BonhommeNeigeFouEntity;
 import com.jason54.unpredictableblocks.network.OpenQuestJournalPayload;
 import com.jason54.unpredictableblocks.network.RequestQuestJournalPayload;
 import com.jason54.unpredictableblocks.registry.ModBlockEntities;
@@ -97,6 +105,14 @@ public final class UnpredictableBlocksClient {
         EntityRendererRegistry.register(ModEntities.BISCUIT_FORTUNE, ctx -> new LuckyMobRenderer<>(ctx, BiscuitFortuneEntity.ID, 0.4F));
         EntityRendererRegistry.register(ModEntities.TENTE_CAMP, ctx -> new LuckyMobRenderer<>(ctx, TenteCampEntity.ID, 0.7F));
         EntityRendererRegistry.register(ModEntities.CUBE_MEME, ctx -> new LuckyMobRenderer<>(ctx, CubeMemeEntity.ID, 0.6F));
+        EntityRendererRegistry.register(ModEntities.PINATA_LUCKY, ctx -> new LuckyMobRenderer<>(ctx, PinataLuckyEntity.ID, 0.5F));
+        EntityRendererRegistry.register(ModEntities.LUTIN_TREFLE, ctx -> new LuckyMobRenderer<>(ctx, LutinTrefleEntity.ID, 0.3F));
+        EntityRendererRegistry.register(ModEntities.CHAMPIGNON_DANSANT, ctx -> new LuckyMobRenderer<>(ctx, ChampignonDansantEntity.ID, 0.4F));
+        EntityRendererRegistry.register(ModEntities.FANTOME_DRAP, ctx -> new LuckyMobRenderer<>(ctx, FantomeDrapEntity.ID, 0.4F));
+        EntityRendererRegistry.register(ModEntities.CHEVALIER_LUCKY, ctx -> new LuckyMobRenderer<>(ctx, ChevalierLuckyEntity.ID, 0.6F));
+        EntityRendererRegistry.register(ModEntities.GOBELIN_VOLEUR, ctx -> new LuckyMobRenderer<>(ctx, GobelinVoleurEntity.ID, 0.3F));
+        EntityRendererRegistry.register(ModEntities.CACTUS_BOXEUR, ctx -> new LuckyMobRenderer<>(ctx, CactusBoxeurEntity.ID, 0.5F));
+        EntityRendererRegistry.register(ModEntities.BONHOMME_NEIGE_FOU, ctx -> new LuckyMobRenderer<>(ctx, BonhommeNeigeFouEntity.ID, 0.6F));
 
         NetworkManager.registerReceiver(
                 NetworkManager.s2c(),

@@ -37,6 +37,14 @@ import com.jason54.unpredictableblocks.entity.mob.CubeMemeEntity;
 import com.jason54.unpredictableblocks.entity.mob.SliderMultiversEntity;
 import com.jason54.unpredictableblocks.entity.mob.StatueVivanteEntity;
 import com.jason54.unpredictableblocks.entity.mob.ToiDuFuturEntity;
+import com.jason54.unpredictableblocks.entity.mob.PinataLuckyEntity;
+import com.jason54.unpredictableblocks.entity.mob.LutinTrefleEntity;
+import com.jason54.unpredictableblocks.entity.mob.ChampignonDansantEntity;
+import com.jason54.unpredictableblocks.entity.mob.FantomeDrapEntity;
+import com.jason54.unpredictableblocks.entity.mob.ChevalierLuckyEntity;
+import com.jason54.unpredictableblocks.entity.mob.GobelinVoleurEntity;
+import com.jason54.unpredictableblocks.entity.mob.CactusBoxeurEntity;
+import com.jason54.unpredictableblocks.entity.mob.BonhommeNeigeFouEntity;
 import dev.architectury.registry.level.entity.EntityAttributeRegistry;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
@@ -146,6 +154,24 @@ public final class ModEntities {
     public static final RegistrySupplier<EntityType<CubeMemeEntity>> CUBE_MEME =
             mob(CubeMemeEntity.ID, CubeMemeEntity::new, MobCategory.MONSTER, 1.1F, 1.1F);
 
+    // Lot 7 — mobs des variations Lucky
+    public static final RegistrySupplier<EntityType<PinataLuckyEntity>> PINATA_LUCKY =
+            mob(PinataLuckyEntity.ID, PinataLuckyEntity::new, MobCategory.CREATURE, 0.9F, 1.6F);
+    public static final RegistrySupplier<EntityType<LutinTrefleEntity>> LUTIN_TREFLE =
+            mob(LutinTrefleEntity.ID, LutinTrefleEntity::new, MobCategory.CREATURE, 0.6F, 1.2F);
+    public static final RegistrySupplier<EntityType<ChampignonDansantEntity>> CHAMPIGNON_DANSANT =
+            mob(ChampignonDansantEntity.ID, ChampignonDansantEntity::new, MobCategory.CREATURE, 0.8F, 0.8F);
+    public static final RegistrySupplier<EntityType<FantomeDrapEntity>> FANTOME_DRAP =
+            mob(FantomeDrapEntity.ID, FantomeDrapEntity::new, MobCategory.CREATURE, 0.8F, 1.3F);
+    public static final RegistrySupplier<EntityType<ChevalierLuckyEntity>> CHEVALIER_LUCKY =
+            mob(ChevalierLuckyEntity.ID, ChevalierLuckyEntity::new, MobCategory.MONSTER, 0.8F, 1.5F);
+    public static final RegistrySupplier<EntityType<GobelinVoleurEntity>> GOBELIN_VOLEUR =
+            mob(GobelinVoleurEntity.ID, GobelinVoleurEntity::new, MobCategory.MONSTER, 0.6F, 1.0F);
+    public static final RegistrySupplier<EntityType<CactusBoxeurEntity>> CACTUS_BOXEUR =
+            mob(CactusBoxeurEntity.ID, CactusBoxeurEntity::new, MobCategory.MONSTER, 0.8F, 1.3F);
+    public static final RegistrySupplier<EntityType<BonhommeNeigeFouEntity>> BONHOMME_NEIGE_FOU =
+            mob(BonhommeNeigeFouEntity.ID, BonhommeNeigeFouEntity::new, MobCategory.MONSTER, 0.8F, 1.9F);
+
     private ModEntities() {}
 
     private static <T extends Entity> RegistrySupplier<EntityType<T>> mob(
@@ -193,5 +219,13 @@ public final class ModEntities {
         EntityAttributeRegistry.register(BISCUIT_FORTUNE, BiscuitFortuneEntity::createAttributes);
         EntityAttributeRegistry.register(TENTE_CAMP, TenteCampEntity::createAttributes);
         EntityAttributeRegistry.register(CUBE_MEME, CubeMemeEntity::createAttributes);
+        EntityAttributeRegistry.register(PINATA_LUCKY, PinataLuckyEntity::createAttributes);
+        EntityAttributeRegistry.register(LUTIN_TREFLE, LutinTrefleEntity::createAttributes);
+        EntityAttributeRegistry.register(CHAMPIGNON_DANSANT, ChampignonDansantEntity::createAttributes);
+        EntityAttributeRegistry.register(FANTOME_DRAP, FantomeDrapEntity::createAttributes);
+        EntityAttributeRegistry.register(CHEVALIER_LUCKY, ChevalierLuckyEntity::createAttributes);
+        EntityAttributeRegistry.register(GOBELIN_VOLEUR, GobelinVoleurEntity::createAttributes);
+        EntityAttributeRegistry.register(CACTUS_BOXEUR, CactusBoxeurEntity::createAttributes);
+        EntityAttributeRegistry.register(BONHOMME_NEIGE_FOU, BonhommeNeigeFouEntity::createAttributes);
     }
 }

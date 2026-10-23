@@ -1,0 +1,1471 @@
+{
+	"meta": {
+		"format_version": "4.10",
+		"model_format": "free",
+		"box_uv": true,
+		"unpredictableblocks_note": "Genere par tools/generate_mobs.py \u2014 meme geo/anim que le mob in-game"
+	},
+	"name": "champignon_dansant",
+	"model_identifier": "champignon_dansant",
+	"visible_box": [
+		3,
+		3.5,
+		1.25
+	],
+	"resolution": {
+		"width": 128,
+		"height": 128
+	},
+	"elements": [
+		{
+			"name": "stem_0",
+			"box_uv": true,
+			"uv_offset": [
+				0,
+				0
+			],
+			"from": [
+				-2.5,
+				0,
+				-2.5
+			],
+			"to": [
+				2.5,
+				8,
+				2.5
+			],
+			"origin": [
+				0,
+				0,
+				0
+			],
+			"inflate": 0.0,
+			"color": 0,
+			"faces": {
+				"north": {
+					"uv": [
+						5,
+						5,
+						10,
+						13
+					],
+					"texture": 0
+				},
+				"east": {
+					"uv": [
+						0,
+						5,
+						5,
+						13
+					],
+					"texture": 0
+				},
+				"south": {
+					"uv": [
+						15,
+						5,
+						20,
+						13
+					],
+					"texture": 0
+				},
+				"west": {
+					"uv": [
+						10,
+						5,
+						15,
+						13
+					],
+					"texture": 0
+				},
+				"up": {
+					"uv": [
+						10,
+						5,
+						5,
+						0
+					],
+					"texture": 0
+				},
+				"down": {
+					"uv": [
+						15,
+						0,
+						10,
+						5
+					],
+					"texture": 0
+				}
+			},
+			"uuid": "adbb9a91-f495-4895-865f-33258ed3a8ef"
+		},
+		{
+			"name": "cap_0",
+			"box_uv": true,
+			"uv_offset": [
+				20,
+				0
+			],
+			"from": [
+				-5,
+				7,
+				-5
+			],
+			"to": [
+				5,
+				8,
+				5
+			],
+			"origin": [
+				0,
+				8,
+				0
+			],
+			"inflate": 0.0,
+			"color": 1,
+			"faces": {
+				"north": {
+					"uv": [
+						30,
+						10,
+						40,
+						11
+					],
+					"texture": 0
+				},
+				"east": {
+					"uv": [
+						20,
+						10,
+						30,
+						11
+					],
+					"texture": 0
+				},
+				"south": {
+					"uv": [
+						50,
+						10,
+						60,
+						11
+					],
+					"texture": 0
+				},
+				"west": {
+					"uv": [
+						40,
+						10,
+						50,
+						11
+					],
+					"texture": 0
+				},
+				"up": {
+					"uv": [
+						40,
+						10,
+						30,
+						0
+					],
+					"texture": 0
+				},
+				"down": {
+					"uv": [
+						50,
+						0,
+						40,
+						10
+					],
+					"texture": 0
+				}
+			},
+			"uuid": "607f5923-62f0-4f09-bd63-bf4c0325c246"
+		},
+		{
+			"name": "cap_1",
+			"box_uv": true,
+			"uv_offset": [
+				60,
+				0
+			],
+			"from": [
+				-6,
+				8,
+				-6
+			],
+			"to": [
+				6,
+				12,
+				6
+			],
+			"origin": [
+				0,
+				8,
+				0
+			],
+			"inflate": 0.0,
+			"color": 2,
+			"faces": {
+				"north": {
+					"uv": [
+						72,
+						12,
+						84,
+						16
+					],
+					"texture": 0
+				},
+				"east": {
+					"uv": [
+						60,
+						12,
+						72,
+						16
+					],
+					"texture": 0
+				},
+				"south": {
+					"uv": [
+						96,
+						12,
+						108,
+						16
+					],
+					"texture": 0
+				},
+				"west": {
+					"uv": [
+						84,
+						12,
+						96,
+						16
+					],
+					"texture": 0
+				},
+				"up": {
+					"uv": [
+						84,
+						12,
+						72,
+						0
+					],
+					"texture": 0
+				},
+				"down": {
+					"uv": [
+						96,
+						0,
+						84,
+						12
+					],
+					"texture": 0
+				}
+			},
+			"uuid": "da7ab8b2-8ba9-4141-aa10-4f93426213f6"
+		},
+		{
+			"name": "right_arm_0",
+			"box_uv": true,
+			"uv_offset": [
+				108,
+				0
+			],
+			"from": [
+				2.5,
+				3,
+				-1
+			],
+			"to": [
+				4.5,
+				7,
+				1
+			],
+			"origin": [
+				2.5,
+				6,
+				0
+			],
+			"inflate": 0.0,
+			"color": 3,
+			"faces": {
+				"north": {
+					"uv": [
+						110,
+						2,
+						112,
+						6
+					],
+					"texture": 0
+				},
+				"east": {
+					"uv": [
+						108,
+						2,
+						110,
+						6
+					],
+					"texture": 0
+				},
+				"south": {
+					"uv": [
+						114,
+						2,
+						116,
+						6
+					],
+					"texture": 0
+				},
+				"west": {
+					"uv": [
+						112,
+						2,
+						114,
+						6
+					],
+					"texture": 0
+				},
+				"up": {
+					"uv": [
+						112,
+						2,
+						110,
+						0
+					],
+					"texture": 0
+				},
+				"down": {
+					"uv": [
+						114,
+						0,
+						112,
+						2
+					],
+					"texture": 0
+				}
+			},
+			"uuid": "7f5a1ef0-f98a-44f1-8663-004eb79f77cd"
+		},
+		{
+			"name": "left_arm_0",
+			"box_uv": true,
+			"uv_offset": [
+				116,
+				0
+			],
+			"from": [
+				-4.5,
+				3,
+				-1
+			],
+			"to": [
+				-2.5,
+				7,
+				1
+			],
+			"origin": [
+				-2.5,
+				6,
+				0
+			],
+			"inflate": 0.0,
+			"color": 4,
+			"faces": {
+				"north": {
+					"uv": [
+						118,
+						2,
+						120,
+						6
+					],
+					"texture": 0
+				},
+				"east": {
+					"uv": [
+						116,
+						2,
+						118,
+						6
+					],
+					"texture": 0
+				},
+				"south": {
+					"uv": [
+						122,
+						2,
+						124,
+						6
+					],
+					"texture": 0
+				},
+				"west": {
+					"uv": [
+						120,
+						2,
+						122,
+						6
+					],
+					"texture": 0
+				},
+				"up": {
+					"uv": [
+						120,
+						2,
+						118,
+						0
+					],
+					"texture": 0
+				},
+				"down": {
+					"uv": [
+						122,
+						0,
+						120,
+						2
+					],
+					"texture": 0
+				}
+			},
+			"uuid": "1ea78220-3bd2-435c-81c1-acf6396747ef"
+		}
+	],
+	"outliner": [
+		{
+			"name": "root",
+			"origin": [
+				0,
+				0,
+				0
+			],
+			"uuid": "ca84eecb-b473-43db-8ea3-58ffa223a7c2",
+			"export": true,
+			"children": [
+				{
+					"name": "stem",
+					"origin": [
+						0,
+						0,
+						0
+					],
+					"uuid": "e84531ac-d591-448c-b90a-a79f5a204ad9",
+					"export": true,
+					"children": [
+						"adbb9a91-f495-4895-865f-33258ed3a8ef",
+						{
+							"name": "cap",
+							"origin": [
+								0,
+								8,
+								0
+							],
+							"uuid": "a21139e6-6d41-484a-871a-0773457f387c",
+							"export": true,
+							"children": [
+								"607f5923-62f0-4f09-bd63-bf4c0325c246",
+								"da7ab8b2-8ba9-4141-aa10-4f93426213f6"
+							]
+						},
+						{
+							"name": "right_arm",
+							"origin": [
+								2.5,
+								6,
+								0
+							],
+							"uuid": "839d90d1-5e2d-4ee0-8fd0-b81d250d4bd1",
+							"export": true,
+							"children": [
+								"7f5a1ef0-f98a-44f1-8663-004eb79f77cd"
+							]
+						},
+						{
+							"name": "left_arm",
+							"origin": [
+								-2.5,
+								6,
+								0
+							],
+							"uuid": "6614a877-6c8c-4c93-aceb-3beab2f998b7",
+							"export": true,
+							"children": [
+								"1ea78220-3bd2-435c-81c1-acf6396747ef"
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"textures": [
+		{
+			"path": "champignon_dansant.png",
+			"name": "champignon_dansant.png",
+			"id": "0",
+			"particle": true,
+			"visible": true,
+			"internal": true,
+			"saved": true,
+			"uuid": "11ba20a5-88c8-469a-86ba-9f628556f8e6",
+			"width": 128,
+			"height": 128,
+			"uv_width": 128,
+			"uv_height": 128,
+			"source": "data:image/png;base64,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"
+		}
+	],
+	"animations": [
+		{
+			"uuid": "b1e6592a-de67-4c61-a7fe-0ec5039eaa37",
+			"name": "animation.champignon_dansant.idle",
+			"loop": "loop",
+			"override": false,
+			"length": 2.0,
+			"snapping": 100,
+			"selected": true,
+			"anim_time_update": "",
+			"blend_weight": "",
+			"start_delay": "",
+			"loop_delay": "",
+			"animators": {
+				"a21139e6-6d41-484a-871a-0773457f387c": {
+					"name": "cap",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "0.0"
+								}
+							],
+							"uuid": "22b0dccf-c7ce-427d-b72e-4d3aa4f6e56e",
+							"time": 0.0,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "3.54"
+								}
+							],
+							"uuid": "a8cbe7b2-a39b-4c08-b14e-936589bfb794",
+							"time": 0.25,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "5.0"
+								}
+							],
+							"uuid": "b44e2642-1d8a-46da-8b6e-9237982852aa",
+							"time": 0.5,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "3.54"
+								}
+							],
+							"uuid": "cf003917-e268-48e1-b710-e1df304d9076",
+							"time": 0.75,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "0.0"
+								}
+							],
+							"uuid": "a8a98f7a-0f83-43af-b1b6-9e5ab8e02e07",
+							"time": 1.0,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "-3.54"
+								}
+							],
+							"uuid": "5df5b45c-6ebc-42dd-8e8c-6ca6f5480c90",
+							"time": 1.25,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "-5.0"
+								}
+							],
+							"uuid": "ae715218-43c6-42cf-8ad5-bb2549f8cd21",
+							"time": 1.5,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "-3.54"
+								}
+							],
+							"uuid": "217e412c-439b-49ea-ac3f-d6e4d0b42793",
+							"time": 1.75,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "-0.0"
+								}
+							],
+							"uuid": "3514d516-9842-407d-8668-fa5d112b5101",
+							"time": 2.0,
+							"color": -1,
+							"interpolation": "linear"
+						}
+					]
+				},
+				"839d90d1-5e2d-4ee0-8fd0-b81d250d4bd1": {
+					"name": "right_arm",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "0.0"
+								}
+							],
+							"uuid": "ef317ae4-404b-4458-a260-96ba49184be2",
+							"time": 0.0,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "7.07"
+								}
+							],
+							"uuid": "e7893d2e-36fa-4346-a9fa-9b92c74083ca",
+							"time": 0.25,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "10.0"
+								}
+							],
+							"uuid": "1d0b7178-6c83-4a83-b1df-72eb04ced804",
+							"time": 0.5,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "7.07"
+								}
+							],
+							"uuid": "283e8431-e1af-459d-8d60-74b4758fba88",
+							"time": 0.75,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "0.0"
+								}
+							],
+							"uuid": "c709ef84-b223-42b0-a583-a3e30981f224",
+							"time": 1.0,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "-7.07"
+								}
+							],
+							"uuid": "1df79ab1-e96c-43a3-8071-7a87fd02d90a",
+							"time": 1.25,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "-10.0"
+								}
+							],
+							"uuid": "1575712b-1cfe-41fe-9644-d77fc135dfc7",
+							"time": 1.5,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "-7.07"
+								}
+							],
+							"uuid": "996b99e9-d8b4-49f4-8151-213335900689",
+							"time": 1.75,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "-0.0"
+								}
+							],
+							"uuid": "fb57194d-66fe-47ea-9377-915706663f81",
+							"time": 2.0,
+							"color": -1,
+							"interpolation": "linear"
+						}
+					]
+				},
+				"6614a877-6c8c-4c93-aceb-3beab2f998b7": {
+					"name": "left_arm",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "-0.0"
+								}
+							],
+							"uuid": "f3d8e95e-0bcf-4d69-9843-cf000d8ddb65",
+							"time": 0.0,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "-7.07"
+								}
+							],
+							"uuid": "44ca38fd-0427-4e7a-9db2-6ce7dc66990b",
+							"time": 0.25,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "-10.0"
+								}
+							],
+							"uuid": "78400710-e8c2-4000-b4c9-f0b78f285241",
+							"time": 0.5,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "-7.07"
+								}
+							],
+							"uuid": "191e2cf1-99e8-4e7f-945c-0ad29c466ef5",
+							"time": 0.75,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "-0.0"
+								}
+							],
+							"uuid": "e80a5fd6-8cc7-4d58-a3f6-a5388abff67f",
+							"time": 1.0,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "7.07"
+								}
+							],
+							"uuid": "a8c1f44f-f2d2-4b60-ab3a-3df62f6014ae",
+							"time": 1.25,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "10.0"
+								}
+							],
+							"uuid": "fc6ab2aa-2755-443b-96e0-1f3c1b227259",
+							"time": 1.5,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "7.07"
+								}
+							],
+							"uuid": "2ca9bc7a-0471-4a6b-a589-150ce2650a6a",
+							"time": 1.75,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "0.0"
+								}
+							],
+							"uuid": "9cc662b9-c065-4beb-85f0-393245e8ff61",
+							"time": 2.0,
+							"color": -1,
+							"interpolation": "linear"
+						}
+					]
+				}
+			}
+		},
+		{
+			"uuid": "61574fe4-8654-4f03-a200-2b9eafb9c1a4",
+			"name": "animation.champignon_dansant.walk",
+			"loop": "loop",
+			"override": false,
+			"length": 0.6,
+			"snapping": 100,
+			"selected": false,
+			"anim_time_update": "",
+			"blend_weight": "",
+			"start_delay": "",
+			"loop_delay": "",
+			"animators": {
+				"ca84eecb-b473-43db-8ea3-58ffa223a7c2": {
+					"name": "root",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "position",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "61600fdd-fe3d-467b-8594-f71b5bb1227b",
+							"time": 0,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "position",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "2",
+									"z": "0"
+								}
+							],
+							"uuid": "57441d6d-1fff-4af0-88e7-6b7d626e244a",
+							"time": 0.15,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "position",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "fde27bd9-2a64-4156-91a0-45bed2a590ad",
+							"time": 0.3,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "position",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "2",
+									"z": "0"
+								}
+							],
+							"uuid": "7d0562da-d1cc-4960-9065-f5ec702e3ce2",
+							"time": 0.45,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "position",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "ac8fe21c-0b9b-40bb-8444-2122ddfb9ef2",
+							"time": 0.6,
+							"color": -1,
+							"interpolation": "linear"
+						}
+					]
+				},
+				"a21139e6-6d41-484a-871a-0773457f387c": {
+					"name": "cap",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "0.0"
+								}
+							],
+							"uuid": "ac0cf711-2f3a-406f-9987-efa11bc10fec",
+							"time": 0.0,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "5.66"
+								}
+							],
+							"uuid": "b344ab7e-fd7f-4ecd-9b34-3eac6f20b60b",
+							"time": 0.075,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "8.0"
+								}
+							],
+							"uuid": "617c0b25-ad6e-4ebf-b8a6-51c9b5cea7f4",
+							"time": 0.15,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "5.66"
+								}
+							],
+							"uuid": "c42eaf06-e74c-4f8f-a71e-218b36e6f5b7",
+							"time": 0.225,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "0.0"
+								}
+							],
+							"uuid": "b925de1f-82fc-40f9-8408-86278fe30531",
+							"time": 0.3,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "-5.66"
+								}
+							],
+							"uuid": "4d9b308d-91cf-4b34-9b4e-d58870d865cc",
+							"time": 0.375,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "-8.0"
+								}
+							],
+							"uuid": "a78da080-34ee-4650-9308-867972a1faea",
+							"time": 0.45,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "-5.66"
+								}
+							],
+							"uuid": "e952e9b6-e502-4f2d-a129-b38dc3ebc08d",
+							"time": 0.525,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "-0.0"
+								}
+							],
+							"uuid": "19a9c0ba-dbff-4132-a8a4-787967472161",
+							"time": 0.6,
+							"color": -1,
+							"interpolation": "linear"
+						}
+					]
+				}
+			}
+		},
+		{
+			"uuid": "9d1e6db8-9396-485e-8589-1a3f94cfbbc8",
+			"name": "animation.champignon_dansant.attack",
+			"loop": "once",
+			"override": false,
+			"length": 0.4,
+			"snapping": 100,
+			"selected": false,
+			"anim_time_update": "",
+			"blend_weight": "",
+			"start_delay": "",
+			"loop_delay": "",
+			"animators": {
+				"a21139e6-6d41-484a-871a-0773457f387c": {
+					"name": "cap",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "7159e92f-9ed5-4955-a10a-c37567bfc0bf",
+							"time": 0,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "30",
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "ceb09565-6114-42ae-9a09-1238935d1144",
+							"time": 0.15,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "108790ee-d066-4c09-bf74-5e952d6b0147",
+							"time": 0.4,
+							"color": -1,
+							"interpolation": "linear"
+						}
+					]
+				}
+			}
+		},
+		{
+			"uuid": "066d753e-0a5c-4d36-a8b8-7fd829c7e6a2",
+			"name": "animation.champignon_dansant.special",
+			"loop": "once",
+			"override": false,
+			"length": 1.6,
+			"snapping": 100,
+			"selected": false,
+			"anim_time_update": "",
+			"blend_weight": "",
+			"start_delay": "",
+			"loop_delay": "",
+			"animators": {
+				"ca84eecb-b473-43db-8ea3-58ffa223a7c2": {
+					"name": "root",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "f44db61e-7d84-496e-9b07-48fa34e2401d",
+							"time": 0,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "-360",
+									"z": "0"
+								}
+							],
+							"uuid": "f18b0ff5-ba85-4eb9-84a2-148f6826fbde",
+							"time": 0.8,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "-720",
+									"z": "0"
+								}
+							],
+							"uuid": "597d4e49-7e0c-4314-8bbd-8f27251a9d35",
+							"time": 1.6,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "position",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "e8ed5e5e-6dea-43c3-8b70-c632fa92b047",
+							"time": 0,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "position",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "3",
+									"z": "0"
+								}
+							],
+							"uuid": "04300e6f-aeb0-4bd5-9eab-c7ceac051ec9",
+							"time": 0.4,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "position",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "82b0b90f-14d0-4138-a217-df2f4c8f9b09",
+							"time": 0.8,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "position",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "3",
+									"z": "0"
+								}
+							],
+							"uuid": "888b2ddd-ff1c-4b93-9633-6d7200d9a255",
+							"time": 1.2,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "position",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "c342e19d-ad5e-4473-b294-5537ca1ffb12",
+							"time": 1.6,
+							"color": -1,
+							"interpolation": "linear"
+						}
+					]
+				},
+				"839d90d1-5e2d-4ee0-8fd0-b81d250d4bd1": {
+					"name": "right_arm",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "4c4dd4dc-fbdd-4010-9c26-dab508b47413",
+							"time": 0,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "-150"
+								}
+							],
+							"uuid": "8f31948b-2418-487a-b686-748838bb4875",
+							"time": 0.2,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "-150"
+								}
+							],
+							"uuid": "a5593e1e-a9fb-469e-8fde-0bec954a6c4b",
+							"time": 1.4,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "57b018d3-9634-49c1-a251-cdd39141e8eb",
+							"time": 1.6,
+							"color": -1,
+							"interpolation": "linear"
+						}
+					]
+				},
+				"6614a877-6c8c-4c93-aceb-3beab2f998b7": {
+					"name": "left_arm",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "c7d8ea31-8395-42a6-884f-ceb12b968490",
+							"time": 0,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "150"
+								}
+							],
+							"uuid": "8fb27a72-dc32-4b2f-b3fe-cc283ffb7ca8",
+							"time": 0.2,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "150"
+								}
+							],
+							"uuid": "761f1526-2b9e-43b6-ae9c-18ae9f34ee03",
+							"time": 1.4,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "e9cfa401-e838-42c8-a8a8-6436159cae5c",
+							"time": 1.6,
+							"color": -1,
+							"interpolation": "linear"
+						}
+					]
+				}
+			}
+		}
+	]
+}
