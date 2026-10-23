@@ -27,7 +27,7 @@ side = "BOTH"
 [[dependencies.unpredictableblocks]]
 modId = "architectury"
 type = "required"
-versionRange = "[21.0,)"
+versionRange = "[${architectury_version},)"
 ordering = "AFTER"
 side = "BOTH"
 

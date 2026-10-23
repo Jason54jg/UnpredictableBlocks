@@ -1,15 +1,22 @@
 package com.jason54.unpredictableblocks.event;
 
+import com.jason54.unpredictableblocks.UnpredictableBlocks;
 import com.jason54.unpredictableblocks.compat.McAccess;
 import com.jason54.unpredictableblocks.compat.McRefs;
+import com.jason54.unpredictableblocks.item.ThemedGearHelper;
 import com.jason54.unpredictableblocks.luck.LuckTier;
 import com.jason54.unpredictableblocks.registry.ModBlocks;
 import com.jason54.unpredictableblocks.registry.ModItems;
 import com.jason54.unpredictableblocks.theme.LuckyTheme;
 import com.jason54.unpredictableblocks.util.ModMessages;
 import java.util.List;
+import java.util.function.Consumer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -18,19 +25,26 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
 
 /**
  * Événements bonus tirés au hasard en plus de l'effet du thème : un même Lucky Block ne donne
  * plus toujours le même résultat. Un pool par tier ; texte {@code message.unpredictableblocks.variation.<id>}.
+ * Équipement custom (armes, armures, outils) : loot tables {@code gameplay/variation/<id>}.
  */
 public final class LuckyVariations {
     /** Chance qu'un cassage normal déclenche une variation (les blocs dorés/maudits/géants en tirent plus). */
@@ -64,7 +78,16 @@ public final class LuckyVariations {
             new Variation("diamond", (level, player, origin, theme, random) ->
                     McAccess.giveOrDrop(player, new ItemStack(random.nextInt(5) == 0 ? Items.DIAMOND : Items.EMERALD, 1 + random.nextInt(2)))),
             new Variation("emerald_dust", (level, player, origin, theme, random) ->
-                    McAccess.giveOrDrop(player, new ItemStack(ModItems.LUCK_EMERALD_DUST.get(), 2 + random.nextInt(3))))
+                    McAccess.giveOrDrop(player, new ItemStack(ModItems.LUCK_EMERALD_DUST.get(), 2 + random.nextInt(3)))),
+            new Variation("legendary_weapon", (level, player, origin, theme, random) ->
+                    giveLoot(level, player, origin, "legendary_weapon")),
+            new Variation("legendary_armor", (level, player, origin, theme, random) ->
+                    giveLoot(level, player, origin, "legendary_armor")),
+            new Variation("legendary_tool", (level, player, origin, theme, random) ->
+                    giveLoot(level, player, origin, "legendary_tool")),
+            new Variation("bodyguard", (level, player, origin, theme, random) ->
+                    spawnNamed(level, McRefs.IRON_GOLEM, scatter(origin, random, 2.0), "§aGarde du Corps Chanceux",
+                            golem -> golem.setPlayerCreated(true)))
     );
 
     private static final List<Variation> NEUTRAL = List.of(
@@ -100,7 +123,26 @@ public final class LuckyVariations {
             new Variation("snack", (level, player, origin, theme, random) ->
                     McAccess.giveOrDrop(player, new ItemStack(random.nextBoolean() ? Items.COOKIE : Items.PUMPKIN_PIE, 3))),
             new Variation("bouncy", (level, player, origin, theme, random) ->
-                    player.addEffect(new MobEffectInstance(MobEffects.JUMP_BOOST, 20 * 60, 2)))
+                    player.addEffect(new MobEffectInstance(MobEffects.JUMP_BOOST, 20 * 60, 2))),
+            new Variation("joke_gear", (level, player, origin, theme, random) ->
+                    giveLoot(level, player, origin, "joke_gear")),
+            new Variation("named_pets", (level, player, origin, theme, random) -> {
+                List<EntityType<? extends Mob>> pets = List.of(McRefs.CHICKEN, McRefs.PIG, McRefs.COW, McRefs.SHEEP, McRefs.RABBIT);
+                String[] names = {"Jean-Poulet", "Sir Bacon", "Marguerite", "Mouton Rebelle", "Lapin Pressé"};
+                for (int i = 0; i < 2; i++) {
+                    int pick = random.nextInt(pets.size());
+                    spawnNamed(level, pets.get(pick), scatter(origin, random, 2.0), names[pick], pet -> {});
+                }
+            }),
+            // Noms easter egg vanilla : Dinnerbone à l'envers, jeb_ arc-en-ciel, Toast (texture lapin dédiée).
+            new Variation("easter_egg", (level, player, origin, theme, random) -> {
+                Vec3 pos = scatter(origin, random, 2.0);
+                switch (random.nextInt(3)) {
+                    case 0 -> spawnNamed(level, McRefs.PIG, pos, "Dinnerbone", pig -> {});
+                    case 1 -> spawnNamed(level, McRefs.SHEEP, pos, "jeb_", sheep -> {});
+                    default -> spawnNamed(level, McRefs.RABBIT, pos, "Toast", rabbit -> {});
+                }
+            })
     );
 
     private static final List<Variation> LOW = List.of(
@@ -128,7 +170,25 @@ public final class LuckyVariations {
                     player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 20 * 30, 2))),
             new Variation("hiccup", (level, player, origin, theme, random) ->
                     player.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 20 * 3, 1))),
-            new Variation("butterfingers", (level, player, origin, theme, random) -> McAccess.dropMainHand(player))
+            new Variation("butterfingers", (level, player, origin, theme, random) -> McAccess.dropMainHand(player)),
+            new Variation("cursed_gear", (level, player, origin, theme, random) ->
+                    giveLoot(level, player, origin, "cursed_gear")),
+            new Variation("bouncer", (level, player, origin, theme, random) ->
+                    spawnNamed(level, McRefs.ZOMBIE, scatter(origin, random, 2.0), "§cLe Videur", zombie -> {
+                        zombie.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.IRON_HELMET));
+                        zombie.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Items.IRON_CHESTPLATE));
+                        zombie.setItemSlot(EquipmentSlot.MAINHAND, named(Items.IRON_SWORD, "Matraque du Videur"));
+                        boostHealth(zombie, 40.0);
+                    })),
+            new Variation("robin_hood", (level, player, origin, theme, random) -> {
+                for (int i = 0; i < 3; i++) {
+                    // Casque doré : évite qu'ils brûlent au soleil.
+                    spawnNamed(level, McRefs.SKELETON, scatter(origin, random, 3.0), "Archer de Sherwood", skeleton -> {
+                        skeleton.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.GOLDEN_HELMET));
+                        skeleton.setItemSlot(EquipmentSlot.MAINHAND, named(Items.BOW, "Arc du Dimanche"));
+                    });
+                }
+            })
     );
 
     private LuckyVariations() {}
@@ -161,6 +221,45 @@ public final class LuckyVariations {
         if (mob != null) {
             mob.setPos(pos);
             level.addFreshEntity(mob);
+        }
+    }
+
+    private static <T extends Mob> void spawnNamed(ServerLevel level, EntityType<T> type, Vec3 pos, String name, Consumer<T> setup) {
+        T mob = EntitySpawnHelper.create(type, level);
+        if (mob == null) {
+            return;
+        }
+        mob.setPos(pos);
+        mob.setCustomName(Component.literal(name));
+        mob.setCustomNameVisible(true);
+        setup.accept(mob);
+        level.addFreshEntity(mob);
+    }
+
+    private static void boostHealth(Mob mob, double health) {
+        var maxHealth = mob.getAttribute(Attributes.MAX_HEALTH);
+        if (maxHealth == null) {
+            return;
+        }
+        maxHealth.setBaseValue(health);
+        mob.setHealth((float) health);
+    }
+
+    private static ItemStack named(Item item, String name) {
+        ItemStack stack = new ItemStack(item);
+        ThemedGearHelper.name(stack, name);
+        return stack;
+    }
+
+    private static void giveLoot(ServerLevel level, ServerPlayer player, BlockPos origin, String table) {
+        Identifier id = Identifier.fromNamespaceAndPath(UnpredictableBlocks.MOD_ID, "gameplay/variation/" + table);
+        LootParams params = new LootParams.Builder(level)
+                .withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(origin))
+                .withOptionalParameter(LootContextParams.THIS_ENTITY, player)
+                .create(LootContextParamSets.CHEST);
+        var lootTable = level.getServer().reloadableRegistries().getLootTable(ResourceKey.create(Registries.LOOT_TABLE, id));
+        for (ItemStack stack : lootTable.getRandomItems(params)) {
+            McAccess.giveOrDrop(player, stack);
         }
     }
 

@@ -73,8 +73,9 @@ neoForge {
 
 processResources {
     inputs.property 'version', version
+    inputs.property 'architectury_version', archVersion
     filesMatching('META-INF/neoforge.mods.toml') {
-        expand version: version
+        expand version: version, architectury_version: archVersion
     }
 }
 
