@@ -20,7 +20,9 @@ public final class MobsClientGameTest implements FabricClientGameTest {
             "bodybuilder", "danseur_disco", "hacker_fantome", "bot_speedrunner", "barista", "pirate_torrent",
             "manifestant", "crypto_bulle", "nuage_orage", "slider_multivers", "pop_it_geant", "reveil_cauchemar",
             "baguette_vivante", "dossier_fiscal", "alerte_don", "eponge_savon", "casque_orbital", "clap_cinema",
-            "pyramide_oeil", "cle_tuyau", "biscuit_fortune", "tente_camp", "cube_meme");
+            "pyramide_oeil", "cle_tuyau", "biscuit_fortune", "tente_camp", "cube_meme",
+            "pinata_lucky", "lutin_trefle", "champignon_dansant", "fantome_drap",
+            "chevalier_lucky", "gobelin_voleur", "cactus_boxeur", "bonhomme_neige_fou");
 
     @Override
     public void runTest(ClientGameTestContext context) {

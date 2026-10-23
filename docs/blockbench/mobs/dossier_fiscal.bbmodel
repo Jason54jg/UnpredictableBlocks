@@ -1,0 +1,1083 @@
+{
+	"meta": {
+		"format_version": "4.10",
+		"model_format": "free",
+		"box_uv": true,
+		"unpredictableblocks_note": "Genere par tools/generate_mobs.py \u2014 meme geo/anim que le mob in-game"
+	},
+	"name": "dossier_fiscal",
+	"model_identifier": "dossier_fiscal",
+	"visible_box": [
+		3,
+		3.5,
+		1.25
+	],
+	"resolution": {
+		"width": 128,
+		"height": 128
+	},
+	"elements": [
+		{
+			"name": "folder_0",
+			"box_uv": true,
+			"uv_offset": [
+				0,
+				0
+			],
+			"from": [
+				-8,
+				2,
+				-2
+			],
+			"to": [
+				8,
+				16,
+				2
+			],
+			"origin": [
+				0,
+				8,
+				0
+			],
+			"inflate": 0.0,
+			"color": 0,
+			"faces": {
+				"north": {
+					"uv": [
+						4,
+						4,
+						20,
+						18
+					],
+					"texture": 0
+				},
+				"east": {
+					"uv": [
+						0,
+						4,
+						4,
+						18
+					],
+					"texture": 0
+				},
+				"south": {
+					"uv": [
+						24,
+						4,
+						40,
+						18
+					],
+					"texture": 0
+				},
+				"west": {
+					"uv": [
+						20,
+						4,
+						24,
+						18
+					],
+					"texture": 0
+				},
+				"up": {
+					"uv": [
+						20,
+						4,
+						4,
+						0
+					],
+					"texture": 0
+				},
+				"down": {
+					"uv": [
+						36,
+						0,
+						20,
+						4
+					],
+					"texture": 0
+				}
+			},
+			"uuid": "26cd02e7-5ccf-4d67-a722-e15bc99bf122"
+		},
+		{
+			"name": "folder_1",
+			"box_uv": true,
+			"uv_offset": [
+				40,
+				0
+			],
+			"from": [
+				-1,
+				12,
+				-3
+			],
+			"to": [
+				7,
+				15,
+				-2
+			],
+			"origin": [
+				0,
+				8,
+				0
+			],
+			"inflate": 0.0,
+			"color": 1,
+			"faces": {
+				"north": {
+					"uv": [
+						41,
+						1,
+						49,
+						4
+					],
+					"texture": 0
+				},
+				"east": {
+					"uv": [
+						40,
+						1,
+						41,
+						4
+					],
+					"texture": 0
+				},
+				"south": {
+					"uv": [
+						50,
+						1,
+						58,
+						4
+					],
+					"texture": 0
+				},
+				"west": {
+					"uv": [
+						49,
+						1,
+						50,
+						4
+					],
+					"texture": 0
+				},
+				"up": {
+					"uv": [
+						49,
+						1,
+						41,
+						0
+					],
+					"texture": 0
+				},
+				"down": {
+					"uv": [
+						57,
+						0,
+						49,
+						1
+					],
+					"texture": 0
+				}
+			},
+			"uuid": "cff04da2-14d5-4817-a108-cd9ba8a932f2"
+		},
+		{
+			"name": "paper_0",
+			"box_uv": true,
+			"uv_offset": [
+				58,
+				0
+			],
+			"from": [
+				-6,
+				4,
+				-4
+			],
+			"to": [
+				6,
+				14,
+				-3
+			],
+			"origin": [
+				0,
+				10,
+				-3
+			],
+			"inflate": 0.0,
+			"color": 2,
+			"faces": {
+				"north": {
+					"uv": [
+						59,
+						1,
+						71,
+						11
+					],
+					"texture": 0
+				},
+				"east": {
+					"uv": [
+						58,
+						1,
+						59,
+						11
+					],
+					"texture": 0
+				},
+				"south": {
+					"uv": [
+						72,
+						1,
+						84,
+						11
+					],
+					"texture": 0
+				},
+				"west": {
+					"uv": [
+						71,
+						1,
+						72,
+						11
+					],
+					"texture": 0
+				},
+				"up": {
+					"uv": [
+						71,
+						1,
+						59,
+						0
+					],
+					"texture": 0
+				},
+				"down": {
+					"uv": [
+						83,
+						0,
+						71,
+						1
+					],
+					"texture": 0
+				}
+			},
+			"uuid": "04dc4094-70ed-4338-abb9-c9884a2de344"
+		},
+		{
+			"name": "stamp_0",
+			"box_uv": true,
+			"uv_offset": [
+				84,
+				0
+			],
+			"from": [
+				-8,
+				14,
+				-2
+			],
+			"to": [
+				-2,
+				19,
+				2
+			],
+			"origin": [
+				-4,
+				16,
+				0
+			],
+			"inflate": 0.0,
+			"color": 3,
+			"faces": {
+				"north": {
+					"uv": [
+						88,
+						4,
+						94,
+						9
+					],
+					"texture": 0
+				},
+				"east": {
+					"uv": [
+						84,
+						4,
+						88,
+						9
+					],
+					"texture": 0
+				},
+				"south": {
+					"uv": [
+						98,
+						4,
+						104,
+						9
+					],
+					"texture": 0
+				},
+				"west": {
+					"uv": [
+						94,
+						4,
+						98,
+						9
+					],
+					"texture": 0
+				},
+				"up": {
+					"uv": [
+						94,
+						4,
+						88,
+						0
+					],
+					"texture": 0
+				},
+				"down": {
+					"uv": [
+						100,
+						0,
+						94,
+						4
+					],
+					"texture": 0
+				}
+			},
+			"uuid": "336b0d4d-0300-430f-82f6-6d573e1c394c"
+		},
+		{
+			"name": "stamp_1",
+			"box_uv": true,
+			"uv_offset": [
+				104,
+				0
+			],
+			"from": [
+				-7,
+				18,
+				-1
+			],
+			"to": [
+				-3,
+				20,
+				1
+			],
+			"origin": [
+				-4,
+				16,
+				0
+			],
+			"inflate": 0.0,
+			"color": 4,
+			"faces": {
+				"north": {
+					"uv": [
+						106,
+						2,
+						110,
+						4
+					],
+					"texture": 0
+				},
+				"east": {
+					"uv": [
+						104,
+						2,
+						106,
+						4
+					],
+					"texture": 0
+				},
+				"south": {
+					"uv": [
+						112,
+						2,
+						116,
+						4
+					],
+					"texture": 0
+				},
+				"west": {
+					"uv": [
+						110,
+						2,
+						112,
+						4
+					],
+					"texture": 0
+				},
+				"up": {
+					"uv": [
+						110,
+						2,
+						106,
+						0
+					],
+					"texture": 0
+				},
+				"down": {
+					"uv": [
+						114,
+						0,
+						110,
+						2
+					],
+					"texture": 0
+				}
+			},
+			"uuid": "36a13ff9-2dcd-47fd-b5cc-a9bb15a3f41c"
+		}
+	],
+	"outliner": [
+		{
+			"name": "root",
+			"origin": [
+				0,
+				0,
+				0
+			],
+			"uuid": "674a16b6-b42e-45be-89a0-2f18d37f1e87",
+			"export": true,
+			"children": [
+				{
+					"name": "folder",
+					"origin": [
+						0,
+						8,
+						0
+					],
+					"uuid": "b876f88c-07ab-495c-af19-147363653cb4",
+					"export": true,
+					"children": [
+						"26cd02e7-5ccf-4d67-a722-e15bc99bf122",
+						"cff04da2-14d5-4817-a108-cd9ba8a932f2",
+						{
+							"name": "paper",
+							"origin": [
+								0,
+								10,
+								-3
+							],
+							"uuid": "6d756e96-e702-48e5-be4e-cd3af6a6d57b",
+							"export": true,
+							"children": [
+								"04dc4094-70ed-4338-abb9-c9884a2de344"
+							]
+						},
+						{
+							"name": "stamp",
+							"origin": [
+								-4,
+								16,
+								0
+							],
+							"uuid": "33ae8328-2f32-4ab4-914c-7a855d95390b",
+							"export": true,
+							"children": [
+								"336b0d4d-0300-430f-82f6-6d573e1c394c",
+								"36a13ff9-2dcd-47fd-b5cc-a9bb15a3f41c"
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"textures": [
+		{
+			"path": "dossier_fiscal.png",
+			"name": "dossier_fiscal.png",
+			"id": "0",
+			"particle": true,
+			"visible": true,
+			"internal": true,
+			"saved": true,
+			"uuid": "a5c346c6-6a61-465a-bced-954debd155a6",
+			"width": 128,
+			"height": 128,
+			"uv_width": 128,
+			"uv_height": 128,
+			"source": "data:image/png;base64,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"
+		}
+	],
+	"animations": [
+		{
+			"uuid": "dc29ba8c-0741-46f7-bf7f-9474ce9051f2",
+			"name": "animation.dossier_fiscal.idle",
+			"loop": "loop",
+			"override": false,
+			"length": 2.0,
+			"snapping": 100,
+			"selected": true,
+			"anim_time_update": "",
+			"blend_weight": "",
+			"start_delay": "",
+			"loop_delay": "",
+			"animators": {
+				"b876f88c-07ab-495c-af19-147363653cb4": {
+					"name": "folder",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "0.0"
+								}
+							],
+							"uuid": "278e03a5-68b4-4509-a0e1-1ddb1106ac48",
+							"time": 0.0,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "2.12"
+								}
+							],
+							"uuid": "3be7dfed-0ca4-4609-ad4c-0a49819f0882",
+							"time": 0.25,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "3.0"
+								}
+							],
+							"uuid": "966630c5-31c0-4cc1-a836-cd049ee3c92d",
+							"time": 0.5,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "2.12"
+								}
+							],
+							"uuid": "c9323e47-f5f7-4d97-9856-6757e074ec52",
+							"time": 0.75,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "0.0"
+								}
+							],
+							"uuid": "2d26f95a-754e-401b-a009-3af2362550d4",
+							"time": 1.0,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "-2.12"
+								}
+							],
+							"uuid": "1c042673-2c87-4194-8333-4d120c281a0b",
+							"time": 1.25,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "-3.0"
+								}
+							],
+							"uuid": "2c1176e3-2283-4f7b-8e41-bcf568fecea6",
+							"time": 1.5,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "-2.12"
+								}
+							],
+							"uuid": "d6813145-d73c-4d6c-b840-400929eff8b8",
+							"time": 1.75,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "-0.0"
+								}
+							],
+							"uuid": "a2bb60fe-e632-4efa-8440-b195accf466c",
+							"time": 2.0,
+							"color": -1,
+							"interpolation": "linear"
+						}
+					]
+				},
+				"33ae8328-2f32-4ab4-914c-7a855d95390b": {
+					"name": "stamp",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "position",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "825a57f8-9cc7-40b0-bb76-ffdc95508509",
+							"time": 0,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "position",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "1",
+									"z": "0"
+								}
+							],
+							"uuid": "7b71f68b-4906-468e-b41f-95bd6d549aab",
+							"time": 1.0,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "position",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "55c76ef5-85bc-4f1f-8fed-bc7c032a6ac7",
+							"time": 2.0,
+							"color": -1,
+							"interpolation": "linear"
+						}
+					]
+				}
+			}
+		},
+		{
+			"uuid": "2fd5399e-e7bf-4087-8c35-3594f2bb0057",
+			"name": "animation.dossier_fiscal.walk",
+			"loop": "loop",
+			"override": false,
+			"length": 0.8,
+			"snapping": 100,
+			"selected": false,
+			"anim_time_update": "",
+			"blend_weight": "",
+			"start_delay": "",
+			"loop_delay": "",
+			"animators": {
+				"674a16b6-b42e-45be-89a0-2f18d37f1e87": {
+					"name": "root",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "position",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "caa2bbcb-45fc-4acc-9c81-6b0dc3d5f61a",
+							"time": 0,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "position",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "2",
+									"z": "0"
+								}
+							],
+							"uuid": "158f8a80-3c13-40fb-9b4b-1e6b637aac0d",
+							"time": 0.4,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "position",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "9d78d3e1-c6e1-4c8d-96fc-e292b65c685f",
+							"time": 0.8,
+							"color": -1,
+							"interpolation": "linear"
+						}
+					]
+				},
+				"6d756e96-e702-48e5-be4e-cd3af6a6d57b": {
+					"name": "paper",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "0.0"
+								}
+							],
+							"uuid": "80f41fdd-34c0-4607-abcc-60113d55a529",
+							"time": 0.0,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-5.66",
+									"y": "-0.0",
+									"z": "0.0"
+								}
+							],
+							"uuid": "fea1fa61-7d42-4925-89da-e5f159cd1d88",
+							"time": 0.1,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-8.0",
+									"y": "-0.0",
+									"z": "0.0"
+								}
+							],
+							"uuid": "b10dc5fd-7509-4f10-8d43-7c4b569cf76d",
+							"time": 0.2,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-5.66",
+									"y": "-0.0",
+									"z": "0.0"
+								}
+							],
+							"uuid": "9100be78-4425-48b7-9e36-2a2d8c50c164",
+							"time": 0.3,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-0.0",
+									"y": "-0.0",
+									"z": "0.0"
+								}
+							],
+							"uuid": "0663d55a-7ba5-46f3-9625-14a6463e54cc",
+							"time": 0.4,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "5.66",
+									"y": "-0.0",
+									"z": "0.0"
+								}
+							],
+							"uuid": "6096a28c-3e84-4980-bb61-c401d5dd27d4",
+							"time": 0.5,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "8.0",
+									"y": "-0.0",
+									"z": "0.0"
+								}
+							],
+							"uuid": "155645c2-44bd-496e-9cec-7a86ebacb8b9",
+							"time": 0.6,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "5.66",
+									"y": "-0.0",
+									"z": "0.0"
+								}
+							],
+							"uuid": "6f0d728e-c384-495c-93de-df998ecc4003",
+							"time": 0.7,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "0.0",
+									"y": "-0.0",
+									"z": "0.0"
+								}
+							],
+							"uuid": "9a4f2af3-7b14-4686-948b-360c6793ead4",
+							"time": 0.8,
+							"color": -1,
+							"interpolation": "linear"
+						}
+					]
+				}
+			}
+		},
+		{
+			"uuid": "476a0f67-8bd1-4832-b733-436b6e518fda",
+			"name": "animation.dossier_fiscal.attack",
+			"loop": "once",
+			"override": false,
+			"length": 0.5,
+			"snapping": 100,
+			"selected": false,
+			"anim_time_update": "",
+			"blend_weight": "",
+			"start_delay": "",
+			"loop_delay": "",
+			"animators": {
+				"33ae8328-2f32-4ab4-914c-7a855d95390b": {
+					"name": "stamp",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "position",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "a49007ad-d2ba-4255-b6cb-4613399a89f5",
+							"time": 0,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "position",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "-6",
+									"z": "-4"
+								}
+							],
+							"uuid": "6b0c8ba8-a673-41e0-a14a-75c0c6e6a823",
+							"time": 0.2,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "position",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "f08a9f14-d25b-4a76-bc68-8eb693001ed0",
+							"time": 0.5,
+							"color": -1,
+							"interpolation": "linear"
+						}
+					]
+				}
+			}
+		},
+		{
+			"uuid": "2ad3a3e0-e084-41f1-83b2-1a494be511cd",
+			"name": "animation.dossier_fiscal.special",
+			"loop": "once",
+			"override": false,
+			"length": 0.8,
+			"snapping": 100,
+			"selected": false,
+			"anim_time_update": "",
+			"blend_weight": "",
+			"start_delay": "",
+			"loop_delay": "",
+			"animators": {
+				"33ae8328-2f32-4ab4-914c-7a855d95390b": {
+					"name": "stamp",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "470bb3d0-b6bc-494f-ba9e-46e53ee1b63b",
+							"time": 0,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "40"
+								}
+							],
+							"uuid": "95a3c3a7-be5d-471f-82f5-d918fd96beed",
+							"time": 0.3,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "-20"
+								}
+							],
+							"uuid": "ecc5199f-55d6-4655-af17-067cdb6e7ace",
+							"time": 0.6,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "371615a8-d7dd-469e-bad4-f6a3f5b8f732",
+							"time": 0.8,
+							"color": -1,
+							"interpolation": "linear"
+						}
+					]
+				},
+				"6d756e96-e702-48e5-be4e-cd3af6a6d57b": {
+					"name": "paper",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1",
+									"y": "1",
+									"z": "1"
+								}
+							],
+							"uuid": "3894f780-801c-4215-a84b-63c433305221",
+							"time": 0,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1.2",
+									"y": "0.8",
+									"z": "1"
+								}
+							],
+							"uuid": "46c6a916-d0bb-4817-9c37-f83f86fe02cd",
+							"time": 0.3,
+							"color": -1,
+							"interpolation": "linear"
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1",
+									"y": "1",
+									"z": "1"
+								}
+							],
+							"uuid": "1e2f33a6-491f-4472-84c5-55921afb3444",
+							"time": 0.8,
+							"color": -1,
+							"interpolation": "linear"
+						}
+					]
+				}
+			}
+		}
+	]
+}

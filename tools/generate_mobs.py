@@ -5,6 +5,7 @@ Sorties (common/src/main/resources/assets/unpredictableblocks/) :
   geckolib/models/entity/<mob>.geo.json        modele Bedrock (UV « box », editable dans Blockbench)
   geckolib/animations/entity/<mob>.animation.json   idle / walk / attack / special
   textures/entity/<mob>.png                    texture 128x128 peinte (faces avant decorees)
+  docs/blockbench/mobs/<mob>.bbmodel           meme modele + memes animations, a ouvrir dans Blockbench
 
 Conventions : unites en pixels (16 = 1 bloc), y = 0 au sol, avant du mob = -Z (face « north »).
 Rotations d'animation en degres, convention GeckoLib/Bedrock. La tete suit le regard via Molang
@@ -23,8 +24,13 @@ from typing import Callable
 
 from PIL import Image, ImageDraw
 
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from generate_blockbench import png_b64, uid, kf  # noqa: E402
+
 ROOT = Path(__file__).resolve().parents[1]
 ASSETS = ROOT / "common/src/main/resources/assets/unpredictableblocks"
+BB_OUT = ROOT / "docs/blockbench/mobs"
 TEX = 128
 
 Rgb = tuple[int, int, int]
@@ -1887,12 +1893,343 @@ def cube_meme() -> Mob:
     ))
 
 
+# --------------------------------------------------------------------------- Lot 7 : mobs des variations Lucky
+def pinata_face(draw, x, y, w, h):
+    eyes(y_frac=0.4, gap=0.25)(draw, x, y, w, h)
+    draw.line((x + 2, y + h - 2, x + w - 3, y + h - 2), fill=rgb("C2185B"))
+
+
+def pinata_lucky() -> Mob:
+    """Pinata lama arc-en-ciel — eclate en butin (variation HIGH)."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("front_right_leg", (-2.5, 8, -4.5), "root", [Cube((-4, 0, -6), (3, 8, 3), "E91E63", pattern="stripes")]),
+        Bone("front_left_leg", (2.5, 8, -4.5), "root", [Cube((1, 0, -6), (3, 8, 3), "FFEB3B", pattern="stripes")]),
+        Bone("back_right_leg", (-2.5, 8, 4.5), "root", [Cube((-4, 0, 3), (3, 8, 3), "42A5F5", pattern="stripes")]),
+        Bone("back_left_leg", (2.5, 8, 4.5), "root", [Cube((1, 0, 3), (3, 8, 3), "66BB6A", pattern="stripes")]),
+        Bone("body", (0, 8, 0), "root", [Cube((-5, 8, -7), (10, 8, 14), "FF7043", pattern="stripes")]),
+        Bone("neck", (0, 14, -6), "body", [Cube((-3, 14, -8), (6, 10, 4), "AB47BC", pattern="stripes")]),
+        Bone("head", (0, 24, -7), "neck", [
+            Cube((-3.5, 22, -12), (7, 5, 6), "FFCA28", front=pinata_face),
+            Cube((-3, 27, -9), (2, 3, 1), "E91E63"),
+            Cube((1, 27, -9), (2, 3, 1), "E91E63"),
+        ]),
+        Bone("tail", (0, 14, 7), "body", [Cube((-1, 11, 7), (2, 4, 3), "26C6DA", pattern="stripes")]),
+    ]
+    return Mob("pinata_lucky", bones, _obj_anims(
+        {"head": {"rotation": HEAD_LOOK}, "tail": {"rotation": swing(2.0, 15, axis=2)},
+         "body": {"rotation": swing(2.0, 3, axis=2)}},
+        {"front_right_leg": {"rotation": swing(0.8, 30)}, "back_left_leg": {"rotation": swing(0.8, 30)},
+         "front_left_leg": {"rotation": swing(0.8, -30)}, "back_right_leg": {"rotation": swing(0.8, -30)},
+         "neck": {"rotation": swing(0.8, 6)}},
+        {"body": {"rotation": loop(0.5, [(0, [0, 0, 0]), (0.1, [0, 0, 15]), (0.25, [0, 0, -15]), (0.5, [0, 0, 0])])},
+         "neck": {"rotation": loop(0.5, [(0, [0, 0, 0]), (0.15, [-20, 0, 0]), (0.5, [0, 0, 0])])}},
+        {"root": {"position": loop(1.0, [(0, [0, 0, 0]), (0.3, [0, 6, 0]), (0.6, [0, 0, 0]), (1.0, [0, 0, 0])]),
+                  "rotation": loop(1.0, [(0, [0, 0, 0]), (0.6, [0, 360, 0]), (1.0, [0, 360, 0])])},
+         "tail": {"rotation": loop(1.0, [(0, [0, 0, 0]), (0.3, [-50, 0, 0]), (1.0, [0, 0, 0])])}},
+    ))
+
+
+def lutin_face(draw, x, y, w, h):
+    eyes("2E7D32", y_frac=0.35, gap=0.25)(draw, x, y, w, h)
+    draw.rectangle((x + w // 2 - 1, y + h // 2, x + w // 2, y + h // 2 + 1), fill=rgb("E57373"))
+
+
+def lutin_vest(draw, x, y, w, h):
+    draw.rectangle((x, y + h - 3, x + w - 1, y + h - 2), fill=rgb("212121"))
+    draw.rectangle((x + w // 2 - 1, y + h - 3, x + w // 2, y + h - 2), fill=rgb("FFD700"))
+
+
+def hat_band(draw, x, y, w, h):
+    draw.rectangle((x, y + h - 2, x + w - 1, y + h - 1), fill=rgb("212121"))
+    draw.rectangle((x + w // 2 - 1, y + h - 2, x + w // 2, y + h - 1), fill=rgb("FFD700"))
+
+
+def gold_coins(draw, x, y, w, h):
+    for i in range(w):
+        for j in range(h):
+            if (i + j) % 2 == 0:
+                px(draw, x + i, y + j, "FFD700")
+
+
+def lutin_trefle() -> Mob:
+    """Lutin du trefle + marmite d'or — s'enfuit avec la fortune (variation HIGH)."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("right_leg", (-1.5, 5, 0), "root", [Cube((-3, 0, -1.5), (3, 5, 3), "2E7D32"), Cube((-3, 0, -3), (3, 2, 2), "3E2723")]),
+        Bone("left_leg", (1.5, 5, 0), "root", [Cube((0, 0, -1.5), (3, 5, 3), "2E7D32"), Cube((0, 0, -3), (3, 2, 2), "3E2723")]),
+        Bone("body", (0, 5, 0), "root", [Cube((-3.5, 5, -2), (7, 6, 4), "388E3C", front=lutin_vest)]),
+        Bone("head", (0, 11, 0), "body", [
+            Cube((-3, 11, -3), (6, 6, 6), "F1C27D", front=lutin_face),
+            Cube((-3, 9, -3.5), (6, 4, 1), "E65100"),
+        ]),
+        Bone("hat", (0, 17, 0), "head", [
+            Cube((-4.5, 17, -4.5), (9, 1, 9), "1B5E20"),
+            Cube((-3, 18, -3), (6, 5, 6), "2E7D32", front=hat_band),
+        ]),
+        Bone("right_arm", (-3.5, 10, 0), "body", [Cube((-5.5, 5, -1), (2, 5, 2), "388E3C")]),
+        Bone("left_arm", (3.5, 10, 0), "body", [Cube((3.5, 5, -1), (2, 5, 2), "388E3C")]),
+        Bone("pot", (6, 5, 0), "left_arm", [Cube((4, 2, -2), (4, 3, 4), "212121", top=gold_coins)]),
+    ]
+    return Mob("lutin_trefle", bones, _obj_anims(
+        {"head": {"rotation": HEAD_LOOK}, "hat": {"rotation": swing(2.0, 4, axis=2)},
+         "pot": {"rotation": swing(2.0, 5, axis=2)}},
+        {"head": {"rotation": HEAD_LOOK},
+         "right_leg": {"rotation": swing(0.5, 40)}, "left_leg": {"rotation": swing(0.5, -40)},
+         "right_arm": {"rotation": swing(0.5, -35)}, "left_arm": {"rotation": swing(0.5, 20)}},
+        {"root": {"position": loop(0.5, [(0, [0, 0, 0]), (0.2, [0, 4, 0]), (0.5, [0, 0, 0])])},
+         "hat": {"position": loop(0.5, [(0, [0, 0, 0]), (0.2, [0, 2, 0]), (0.5, [0, 0, 0])])}},
+        {"root": {"position": loop(1.0, [(0, [0, 0, 0]), (0.25, [0, 3, 0]), (0.5, [0, 0, 0]), (0.75, [0, 3, 0]), (1.0, [0, 0, 0])]),
+                  "rotation": loop(1.0, [(0, [0, 0, 0]), (0.5, [0, 180, 0]), (1.0, [0, 360, 0])])},
+         "right_leg": {"rotation": loop(1.0, [(0, [0, 0, 0]), (0.25, [-60, 0, 0]), (0.5, [0, 0, 0]), (1.0, [0, 0, 0])])},
+         "left_leg": {"rotation": loop(1.0, [(0, [0, 0, 0]), (0.5, [0, 0, 0]), (0.75, [-60, 0, 0]), (1.0, [0, 0, 0])])}},
+        walk_len=0.5,
+    ))
+
+
+def champi_face(draw, x, y, w, h):
+    eyes(y_frac=0.3, gap=0.25)(draw, x, y, w, h)
+    draw.rectangle((x + 1, y + int(h * 0.55), x + w - 2, y + int(h * 0.55)), fill=rgb("5D4037"))
+
+
+def champi_spots(draw, x, y, w, h):
+    rnd = random.Random(42)
+    for _ in range(max(4, w * h // 14)):
+        sx, sy = x + rnd.randrange(w - 1), y + rnd.randrange(h - 1)
+        draw.rectangle((sx, sy, sx + 1, sy + 1), fill=rgb("FAFAFA"))
+
+
+def champignon_dansant() -> Mob:
+    """Champignon qui danse et distribue des effets farfelus (variation NEUTRAL)."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("stem", (0, 0, 0), "root", [Cube((-2.5, 0, -2.5), (5, 8, 5), "F5F5DC", front=champi_face)]),
+        Bone("cap", (0, 8, 0), "stem", [
+            Cube((-5, 7, -5), (10, 1, 10), "FFE0B2"),
+            Cube((-6, 8, -6), (12, 4, 12), "D32F2F", top=champi_spots, front=champi_spots),
+        ]),
+        Bone("right_arm", (-2.5, 6, 0), "stem", [Cube((-4.5, 3, -1), (2, 4, 2), "F5F5DC")]),
+        Bone("left_arm", (2.5, 6, 0), "stem", [Cube((2.5, 3, -1), (2, 4, 2), "F5F5DC")]),
+    ]
+    return Mob("champignon_dansant", bones, _obj_anims(
+        {"cap": {"rotation": swing(2.0, 5, axis=2)},
+         "right_arm": {"rotation": swing(2.0, 10, axis=2)}, "left_arm": {"rotation": swing(2.0, -10, axis=2)}},
+        {"root": {"position": loop(0.6, [(0, [0, 0, 0]), (0.15, [0, 2, 0]), (0.3, [0, 0, 0]), (0.45, [0, 2, 0]), (0.6, [0, 0, 0])])},
+         "cap": {"rotation": swing(0.6, 8, axis=2)}},
+        {"cap": {"rotation": loop(0.4, [(0, [0, 0, 0]), (0.15, [-30, 0, 0]), (0.4, [0, 0, 0])])}},
+        {"root": {"rotation": loop(1.6, [(0, [0, 0, 0]), (0.8, [0, 360, 0]), (1.6, [0, 720, 0])]),
+                  "position": loop(1.6, [(0, [0, 0, 0]), (0.4, [0, 3, 0]), (0.8, [0, 0, 0]), (1.2, [0, 3, 0]), (1.6, [0, 0, 0])])},
+         "right_arm": {"rotation": loop(1.6, [(0, [0, 0, 0]), (0.2, [0, 0, -150]), (1.4, [0, 0, -150]), (1.6, [0, 0, 0])])},
+         "left_arm": {"rotation": loop(1.6, [(0, [0, 0, 0]), (0.2, [0, 0, 150]), (1.4, [0, 0, 150]), (1.6, [0, 0, 0])])}},
+        walk_len=0.6, atk_len=0.4, sp_len=1.6,
+    ))
+
+
+def ghost_face(draw, x, y, w, h):
+    for ex in (x + int(w * 0.25), x + int(w * 0.75) - 2):
+        draw.ellipse((ex, y + 2, ex + 2, y + 5), fill=rgb("111111"))
+    draw.ellipse((x + w // 2 - 1, y + 7, x + w // 2 + 1, y + 10), fill=rgb("212121"))
+
+
+def fantome_drap() -> Mob:
+    """Fantome en drap de lit — « Bouh ! » (variation NEUTRAL)."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("sheet", (0, 4, 0), "root", [
+            Cube((-5, 4, -5), (10, 14, 10), "FAFAFA", front=ghost_face),
+            Cube((-4, 18, -4), (8, 2, 8), "FAFAFA"),
+        ]),
+        Bone("hem", (0, 4, 0), "sheet", [
+            Cube((-5, 1, -5), (4, 3, 4), "F0F0F0"), Cube((1, 1, -5), (4, 3, 4), "F0F0F0"),
+            Cube((-5, 1, 1), (4, 3, 4), "F0F0F0"), Cube((1, 1, 1), (4, 3, 4), "F0F0F0"),
+        ]),
+        Bone("right_arm", (-5, 15, 0), "sheet", [Cube((-8, 10, -1), (3, 6, 2), "F5F5F5")]),
+        Bone("left_arm", (5, 15, 0), "sheet", [Cube((5, 10, -1), (3, 6, 2), "F5F5F5")]),
+    ]
+    return Mob("fantome_drap", bones, _obj_anims(
+        {"root": {"position": loop(2.0, [(0, [0, 1, 0]), (1.0, [0, 4, 0]), (2.0, [0, 1, 0])])},
+         "hem": {"rotation": swing(2.0, 6, axis=2)},
+         "right_arm": {"rotation": swing(2.0, 8)}, "left_arm": {"rotation": swing(2.0, -8)}},
+        {"root": {"position": loop(1.0, [(0, [0, 2, 0]), (0.5, [0, 5, 0]), (1.0, [0, 2, 0])])},
+         "sheet": {"rotation": {0.0: [10, 0, 0]}}, "hem": {"rotation": swing(1.0, 12)}},
+        {"right_arm": {"rotation": loop(0.6, [(0, [0, 0, 0]), (0.2, [-160, 0, 0]), (0.45, [-160, 0, 0]), (0.6, [0, 0, 0])])},
+         "left_arm": {"rotation": loop(0.6, [(0, [0, 0, 0]), (0.2, [-160, 0, 0]), (0.45, [-160, 0, 0]), (0.6, [0, 0, 0])])},
+         "sheet": {"scale": loop(0.6, [(0, [1, 1, 1]), (0.2, [1.25, 1.25, 1.25]), (0.6, [1, 1, 1])])}},
+        {"root": {"rotation": loop(1.0, [(0, [0, 0, 0]), (1.0, [0, 720, 0])]),
+                  "scale": loop(1.0, [(0, [1, 1, 1]), (0.5, [0.4, 1.4, 0.4]), (1.0, [1, 1, 1])])}},
+        atk_len=0.6,
+    ))
+
+
+def lucky_knight_front(draw, x, y, w, h):
+    draw.rectangle((x + 2, y + 3, x + w - 3, y + 4), fill=rgb("212121"))      # fente du heaume
+    qx, qy = x + w // 2 - 1, y + 6                                              # « ? » du Lucky Block
+    for i, j in ((0, 0), (1, 0), (2, 0), (2, 1), (1, 2), (1, 4)):
+        px(draw, qx + i, qy + j, "FFFDE7")
+
+
+def chevalier_lucky() -> Mob:
+    """Lucky Block en armure : epee, bouclier et plumet (variation LOW)."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("right_leg", (-3, 6, 0), "root", [Cube((-5, 0, -2), (4, 6, 4), "78909C")]),
+        Bone("left_leg", (3, 6, 0), "root", [Cube((1, 0, -2), (4, 6, 4), "78909C")]),
+        Bone("block", (0, 12, 0), "root", [
+            Cube((-6, 6, -6), (12, 12, 12), "FFC107", front=lucky_knight_front),
+            Cube((-6, 15, -6), (12, 3, 12), "90A4AE", inflate=0.3),
+        ]),
+        Bone("plume", (0, 18, 0), "block", [Cube((-1, 18, -3), (2, 6, 8), "C62828")]),
+        Bone("sword", (-7, 12, 0), "block", [
+            Cube((-9, 10, -2), (2, 2, 3), "5D4037"),
+            Cube((-10, 9.5, -3), (4, 3, 1), "FFD700"),
+            Cube((-8.5, 10.5, -13), (1, 1, 10), "ECEFF1"),
+        ]),
+        Bone("shield", (7, 12, 0), "block", [Cube((6, 6, -4), (1, 10, 8), "1565C0", pattern="checker")]),
+    ]
+    return Mob("chevalier_lucky", bones, _obj_anims(
+        {"plume": {"rotation": swing(2.0, 6)},
+         "block": {"scale": loop(2.0, [(0, [1, 1, 1]), (1.0, [1.02, 1.03, 1.02]), (2.0, [1, 1, 1])])}},
+        {"right_leg": {"rotation": swing(0.8, 30)}, "left_leg": {"rotation": swing(0.8, -30)},
+         "root": {"position": loop(0.8, [(0, [0, 0, 0]), (0.2, [0, 1, 0]), (0.4, [0, 0, 0]), (0.6, [0, 1, 0]), (0.8, [0, 0, 0])])},
+         "plume": {"rotation": swing(0.8, 12)}},
+        {"sword": {"rotation": loop(0.5, [(0, [0, 0, 0]), (0.15, [70, 0, -30]), (0.3, [-40, 20, 0]), (0.5, [0, 0, 0])])},
+         "block": {"rotation": loop(0.5, [(0, [0, 0, 0]), (0.15, [0, -15, 0]), (0.3, [0, 15, 0]), (0.5, [0, 0, 0])])}},
+        {"shield": {"position": loop(0.8, [(0, [0, 0, 0]), (0.2, [-3, 0, -6]), (0.5, [-3, 0, -6]), (0.8, [0, 0, 0])]),
+                    "rotation": loop(0.8, [(0, [0, 0, 0]), (0.2, [0, 60, 0]), (0.5, [0, 60, 0]), (0.8, [0, 0, 0])])},
+         "block": {"scale": loop(0.8, [(0, [1, 1, 1]), (0.25, [1.1, 0.9, 1.1]), (0.8, [1, 1, 1])])}},
+        atk_len=0.5, sp_len=0.8,
+    ))
+
+
+def goblin_face(draw, x, y, w, h):
+    eyes("FFEB3B", white=False, y_frac=0.35, gap=0.25)(draw, x, y, w, h)
+    draw.rectangle((x + 1, y + int(h * 0.7), x + w - 2, y + int(h * 0.7)), fill=rgb("33691E"))
+    px(draw, x + 2, y + int(h * 0.7) + 1, "FFFFFF"); px(draw, x + w - 3, y + int(h * 0.7) + 1, "FFFFFF")
+
+
+def gobelin_voleur() -> Mob:
+    """Gobelin a sac de butin — fait tomber l'objet tenu et file (variation LOW)."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("right_leg", (-1.5, 4, 0), "root", [Cube((-3, 0, -1), (2, 4, 2), "558B2F")]),
+        Bone("left_leg", (1.5, 4, 0), "root", [Cube((1, 0, -1), (2, 4, 2), "558B2F")]),
+        Bone("body", (0, 4, 0), "root", [Cube((-3, 4, -2), (6, 6, 4), "6D4C41")]),
+        Bone("head", (0, 10, 0), "body", [
+            Cube((-3.5, 10, -3.5), (7, 6, 7), "7CB342", front=goblin_face),
+            Cube((-7, 13, -1), (3, 2, 1), "7CB342"),
+            Cube((4, 13, -1), (3, 2, 1), "7CB342"),
+            Cube((-1, 12, -4.5), (2, 2, 1), "689F38"),
+        ]),
+        Bone("sack", (0, 9, 2), "body", [Cube((-3, 5, 2), (6, 7, 4), "A1887F", top=gold_coins)]),
+        Bone("right_arm", (-3, 9, 0), "body", [Cube((-5, 4, -1), (2, 6, 2), "7CB342")]),
+        Bone("left_arm", (3, 9, 0), "body", [Cube((3, 4, -1), (2, 6, 2), "7CB342")]),
+    ]
+    return Mob("gobelin_voleur", bones, _obj_anims(
+        {"head": {"rotation": HEAD_LOOK}, "sack": {"rotation": swing(2.0, 4, axis=2)},
+         "body": {"rotation": swing(2.0, 3, axis=2)}},
+        {"head": {"rotation": HEAD_LOOK},
+         "right_leg": {"rotation": swing(0.4, 45)}, "left_leg": {"rotation": swing(0.4, -45)},
+         "right_arm": {"rotation": swing(0.4, -40)}, "left_arm": {"rotation": swing(0.4, 40)},
+         "sack": {"rotation": swing(0.4, 10)}},
+        {"right_arm": {"rotation": loop(0.4, [(0, [0, 0, 0]), (0.15, [-110, 0, 20]), (0.3, [-20, 0, 0]), (0.4, [0, 0, 0])])},
+         "body": {"rotation": loop(0.4, [(0, [0, 0, 0]), (0.15, [15, 0, 0]), (0.4, [0, 0, 0])])}},
+        {"head": {"rotation": loop(1.0, [(0, [0, 0, 0]), (0.2, [-20, 0, 10]), (0.4, [-20, 0, -10]), (0.6, [-20, 0, 10]), (0.8, [-20, 0, -10]), (1.0, [0, 0, 0])])},
+         "body": {"scale": loop(1.0, [(0, [1, 1, 1]), (0.25, [1.05, 0.95, 1.05]), (0.5, [1, 1, 1]), (0.75, [1.05, 0.95, 1.05]), (1.0, [1, 1, 1])])}},
+        walk_len=0.4, atk_len=0.4,
+    ))
+
+
+def cactus_face(draw, x, y, w, h):
+    eyes(y_frac=0.25, gap=0.22)(draw, x, y, w, h)
+    for ex in (x + 1, x + w - 4):                                               # sourcils furieux
+        draw.line((ex, y + 2, ex + 2, y + 3), fill=rgb("1B5E20"))
+    draw.rectangle((x + 2, y + int(h * 0.4), x + w - 3, y + int(h * 0.4)), fill=rgb("1B5E20"))
+
+
+def cactus_boxeur() -> Mob:
+    """Cactus en gants de boxe — piquant au toucher (variation LOW)."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("pot", (0, 0, 0), "root", [Cube((-5, 0, -5), (10, 3, 10), "8D6E63")]),
+        Bone("trunk", (0, 3, 0), "root", [Cube((-4, 3, -4), (8, 17, 8), "388E3C", front=cactus_face, pattern="stripes")]),
+        Bone("headband", (0, 18, 0), "trunk", [Cube((-4, 17, -4), (8, 1, 8), "C62828", inflate=0.3)]),
+        Bone("right_arm", (-4, 12, 0), "trunk", [
+            Cube((-8, 11, -1.5), (4, 3, 3), "43A047"),
+            Cube((-11, 10, -4), (4, 5, 5), "D32F2F"),
+        ]),
+        Bone("left_arm", (4, 12, 0), "trunk", [
+            Cube((4, 11, -1.5), (4, 3, 3), "43A047"),
+            Cube((7, 10, -4), (4, 5, 5), "D32F2F"),
+        ]),
+    ]
+    return Mob("cactus_boxeur", bones, _obj_anims(
+        {"right_arm": {"rotation": swing(1.0, 10)}, "left_arm": {"rotation": swing(1.0, -10)},
+         "root": {"position": loop(1.0, [(0, [0, 0, 0]), (0.5, [0, 1, 0]), (1.0, [0, 0, 0])])}},
+        {"root": {"position": loop(0.5, [(0, [0, 0, 0]), (0.12, [0, 3, 0]), (0.25, [0, 0, 0]), (0.37, [0, 3, 0]), (0.5, [0, 0, 0])])},
+         "trunk": {"rotation": swing(0.5, 6, axis=2)}},
+        {"right_arm": {"position": loop(0.4, [(0, [0, 0, 0]), (0.12, [2, 0, -7]), (0.3, [0, 0, 0]), (0.4, [0, 0, 0])])},
+         "trunk": {"rotation": loop(0.4, [(0, [0, 0, 0]), (0.12, [0, 20, 0]), (0.4, [0, 0, 0])])}},
+        {"right_arm": {"position": loop(0.9, [(0, [0, 0, 0]), (0.15, [2, 0, -7]), (0.3, [0, 0, 0]), (0.75, [2, 0, -7]), (0.9, [0, 0, 0])])},
+         "left_arm": {"position": loop(0.9, [(0, [0, 0, 0]), (0.3, [0, 0, 0]), (0.45, [-2, 0, -7]), (0.6, [0, 0, 0]), (0.9, [0, 0, 0])])},
+         "trunk": {"rotation": loop(0.9, [(0, [0, 0, 0]), (0.15, [0, 20, 0]), (0.45, [0, -20, 0]), (0.75, [0, 20, 0]), (0.9, [0, 0, 0])])}},
+        idle_len=1.0, walk_len=0.5, atk_len=0.4, sp_len=0.9,
+    ))
+
+
+def snow_buttons(draw, x, y, w, h):
+    for j in range(2, h - 1, 3):
+        draw.rectangle((x + w // 2 - 1, y + j, x + w // 2, y + j + 1), fill=rgb("212121"))
+
+
+def snow_face(draw, x, y, w, h):
+    draw.rectangle((x + 1, y + 1, x + 2, y + 2), fill=rgb("212121"))           # yeux de travers
+    draw.rectangle((x + w - 3, y + 2, x + w - 2, y + 3), fill=rgb("212121"))
+    for i in range(1, w - 1, 2):
+        px(draw, x + i, y + h - 2 - (i % 4 == 1), "212121")                  # sourire en zigzag
+
+
+def bonhomme_neige_fou() -> Mob:
+    """Bonhomme de neige deglingue — bombarde de boules de neige (variation LOW)."""
+    bones = [
+        Bone("root", (0, 0, 0)),
+        Bone("base", (0, 0, 0), "root", [Cube((-6, 0, -6), (12, 10, 12), "FAFAFA")]),
+        Bone("middle", (0, 10, 0), "base", [
+            Cube((-4.5, 10, -4.5), (9, 8, 9), "F5F5F5", front=snow_buttons),
+            Cube((-4.5, 17, -4.5), (9, 2, 9), "C62828", inflate=0.2),
+        ]),
+        Bone("head", (0, 19, 0), "middle", [
+            Cube((-3.5, 19, -3.5), (7, 7, 7), "FFFFFF", front=snow_face),
+            Cube((-0.5, 21, -6.5), (1, 1, 3), "FF6D00"),
+        ]),
+        Bone("hat", (0, 26, 0), "head", [
+            Cube((-4.5, 26, -4.5), (9, 1, 9), "212121"),
+            Cube((-3, 27, -3), (6, 5, 6), "212121"),
+        ]),
+        Bone("right_arm", (-4.5, 15, 0), "middle", [Cube((-11, 14, -0.5), (7, 1, 1), "5D4037")], rotation=(0, 0, -20)),
+        Bone("left_arm", (4.5, 15, 0), "middle", [Cube((4, 14, -0.5), (7, 1, 1), "5D4037")], rotation=(0, 0, 20)),
+    ]
+    return Mob("bonhomme_neige_fou", bones, _obj_anims(
+        {"head": {"rotation": swing(1.5, 12, axis=2)}, "hat": {"rotation": swing(1.5, -8, axis=2)},
+         "right_arm": {"rotation": swing(1.5, 10)}, "left_arm": {"rotation": swing(1.5, -10)}},
+        {"root": {"position": loop(0.8, [(0, [0, 0, 0]), (0.4, [0, 1, 0]), (0.8, [0, 0, 0])])},
+         "middle": {"rotation": swing(0.8, 6, axis=2)}, "head": {"rotation": swing(0.8, 15, axis=2)}},
+        {"right_arm": {"rotation": loop(0.5, [(0, [0, 0, 0]), (0.15, [-30, 0, -80]), (0.3, [0, 0, 30]), (0.5, [0, 0, 0])])},
+         "middle": {"rotation": loop(0.5, [(0, [0, 0, 0]), (0.15, [0, 20, 0]), (0.3, [0, -15, 0]), (0.5, [0, 0, 0])])}},
+        {"head": {"rotation": loop(1.0, [(0, [0, 0, 0]), (1.0, [0, 1080, 0])]),
+                  "scale": loop(1.0, [(0, [1, 1, 1]), (0.5, [1.3, 1.3, 1.3]), (1.0, [1, 1, 1])])},
+         "hat": {"position": loop(1.0, [(0, [0, 0, 0]), (0.4, [0, 6, 0]), (0.8, [0, 0, 0]), (1.0, [0, 0, 0])])}},
+        idle_len=1.5,
+    ))
+
+
 MOBS = [chef, dracula, hamburger, cat, rooster, screen,
         toi_du_futur, douanier, lapin_extirpateur, grossiste_clandestin, statue_vivante, mimique_d20,
         bodybuilder, danseur_disco, hacker_fantome, bot_speedrunner, barista, pirate_torrent,
         manifestant, crypto_bulle, nuage_orage, slider_multivers, pop_it_geant, reveil_cauchemar,
         baguette_vivante, dossier_fiscal, alerte_don, eponge_savon, casque_orbital, clap_cinema,
-        pyramide_oeil, cle_tuyau, biscuit_fortune, tente_camp, cube_meme]
+        pyramide_oeil, cle_tuyau, biscuit_fortune, tente_camp, cube_meme,
+        pinata_lucky, lutin_trefle, champignon_dansant, fantome_drap,
+        chevalier_lucky, gobelin_voleur, cactus_boxeur, bonhomme_neige_fou]
 
 
 # --------------------------------------------------------------------------- export
@@ -1952,6 +2289,123 @@ def write_json(path: Path, data: dict) -> None:
     path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
 
 
+# --------------------------------------------------------------------------- Blockbench
+def bb_value(v, negate: bool):
+    if isinstance(v, str):
+        return f"-({v})" if negate else v
+    return -v if negate else v
+
+
+def bb_vec(channel: str, v: list) -> tuple:
+    """Bedrock -> Blockbench : axe X miroir (meme conversion que sync_geckolib_models.py)."""
+    x, y, z = v
+    if channel == "position":
+        return bb_value(x, True), y, z
+    if channel == "rotation":
+        return bb_value(x, True), bb_value(y, True), z
+    return x, y, z
+
+
+def bb_box_faces(cube: Cube) -> dict:
+    u, v = cube.uv
+    w, h, d = cube.size
+    faces = {
+        "north": [u + d, v + d, u + d + w, v + d + h],
+        "east": [u, v + d, u + d, v + d + h],
+        "south": [u + 2 * d + w, v + d, u + 2 * d + 2 * w, v + d + h],
+        "west": [u + d + w, v + d, u + 2 * d + w, v + d + h],
+        "up": [u + d + w, v + d, u + d, v],
+        "down": [u + d + 2 * w, v, u + d + w, v + d],
+    }
+    return {side: {"uv": uv, "texture": 0} for side, uv in faces.items()}
+
+
+def bbmodel_json(mob: Mob, texture: Image.Image) -> dict:
+    elements, groups, nodes = [], {}, {}
+    for bone in mob.bones:
+        pivot = [-bone.pivot[0], bone.pivot[1], bone.pivot[2]]
+        node = {"name": bone.name, "origin": pivot, "uuid": uid(), "export": True, "children": []}
+        if bone.rotation:
+            node["rotation"] = list(bb_vec("rotation", list(bone.rotation)))
+        groups[bone.name] = node["uuid"]
+        for i, cube in enumerate(bone.cubes):
+            (ox, oy, oz), (w, h, d) = cube.origin, cube.size
+            el = {
+                "name": f"{bone.name}_{i}",
+                "box_uv": True,
+                "uv_offset": list(cube.uv),
+                "from": [-(ox + w), oy, oz],
+                "to": [-ox, oy + h, oz + d],
+                "origin": pivot,
+                "inflate": cube.inflate,
+                "color": len(elements) % 8,
+                "faces": bb_box_faces(cube),
+                "uuid": uid(),
+            }
+            elements.append(el)
+            node["children"].append(el["uuid"])
+        nodes[bone.name] = node
+        if bone.parent:
+            nodes[bone.parent]["children"].append(node)
+
+    animations = []
+    for name, (length, looping, bones) in mob.animations.items():
+        animators = {}
+        for bone, channels in bones.items():
+            kfs = []
+            for channel, frames in channels.items():
+                points = [(0.0, frames)] if isinstance(frames, list) else sorted(frames.items())
+                for t, v in points:
+                    kfs.append(kf(channel, t, *bb_vec(channel, v), interp="linear"))
+            animators[groups[bone]] = {"name": bone, "type": "bone", "keyframes": kfs}
+        animations.append({
+            "uuid": uid(),
+            "name": f"animation.{mob.id}.{name}",
+            "loop": "loop" if looping else "once",
+            "override": False,
+            "length": length,
+            "snapping": 100,
+            "selected": name == "idle",
+            "anim_time_update": "",
+            "blend_weight": "",
+            "start_delay": "",
+            "loop_delay": "",
+            "animators": animators,
+        })
+
+    roots = [nodes[b.name] for b in mob.bones if not b.parent]
+    return {
+        "meta": {
+            "format_version": "4.10",
+            "model_format": "free",
+            "box_uv": True,
+            "unpredictableblocks_note": "Genere par tools/generate_mobs.py — meme geo/anim que le mob in-game",
+        },
+        "name": mob.id,
+        "model_identifier": mob.id,
+        "visible_box": [3, 3.5, 1.25],
+        "resolution": {"width": TEX, "height": TEX},
+        "elements": elements,
+        "outliner": roots,
+        "textures": [{
+            "path": f"{mob.id}.png",
+            "name": f"{mob.id}.png",
+            "id": "0",
+            "particle": True,
+            "visible": True,
+            "internal": True,
+            "saved": True,
+            "uuid": uid(),
+            "width": TEX,
+            "height": TEX,
+            "uv_width": TEX,
+            "uv_height": TEX,
+            "source": "data:image/png;base64," + png_b64(texture),
+        }],
+        "animations": animations,
+    }
+
+
 def main() -> None:
     for factory in MOBS:
         mob = factory()
@@ -1965,6 +2419,8 @@ def main() -> None:
         img.save(ASSETS / f"textures/entity/{mob.id}.png")
         write_json(ASSETS / f"geckolib/models/entity/{mob.id}.geo.json", geo_json(mob))
         write_json(ASSETS / f"geckolib/animations/entity/{mob.id}.animation.json", anim_json(mob))
+        BB_OUT.mkdir(parents=True, exist_ok=True)
+        (BB_OUT / f"{mob.id}.bbmodel").write_text(json.dumps(bbmodel_json(mob, img), indent="\t") + "\n", encoding="utf-8")
         print("OK", mob.id, "-", ", ".join(mob.animations))
 
 
