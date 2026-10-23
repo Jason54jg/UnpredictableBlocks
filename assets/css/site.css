@@ -887,3 +887,200 @@ html[lang="en"] p[data-lang-block="en"] {
     flex-wrap: wrap;
   }
 }
+
+/* ---- Guide : barres HIGH / NEUTRAL / LOW ---- */
+.formula {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--muted);
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.85rem;
+  overflow-x: auto;
+}
+.pct-high {
+  background: var(--ok);
+}
+.pct-neutral {
+  background: var(--gold);
+}
+.pct-low {
+  background: var(--danger);
+}
+.pct-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1rem;
+  margin: 0.9rem 0 0.6rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.pct-legend i {
+  display: inline-block;
+  width: 0.8rem;
+  height: 0.8rem;
+  margin-right: 0.4rem;
+  border-radius: 2px;
+  vertical-align: -0.1rem;
+}
+.pct-bars {
+  display: grid;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+}
+.pct-row {
+  display: grid;
+  grid-template-columns: 3.2rem 1fr;
+  align-items: center;
+  gap: 0.6rem;
+}
+.pct-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-align: right;
+}
+.pct-track {
+  display: flex;
+  height: 0.9rem;
+  border-radius: 3px;
+  overflow: hidden;
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+}
+.pct-track > div {
+  height: 100%;
+}
+
+/* ---- Crafts : cartes ---- */
+.craft-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0.85rem;
+}
+.craft-card {
+  border: 1px solid var(--line);
+  background: linear-gradient(165deg, var(--panel), var(--ink-2));
+  padding: 0.95rem 1rem;
+  border-radius: 6px;
+}
+.craft-card h3 {
+  margin: 0.2rem 0 0;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+.craft-meta {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--cyan-dim);
+}
+.craft-tier-block {
+  margin-top: 1.5rem;
+}
+
+/* ---- Bestiaire ---- */
+.mob-grid {
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+}
+.mob {
+  display: flex;
+  flex-direction: column;
+}
+.mob:hover {
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+.mob-art {
+  display: block;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 0.5rem;
+  filter: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.45));
+}
+.mob h3 {
+  margin: 0.1rem 0 0.15rem;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+}
+.mob p {
+  margin: 0 0 0.4rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+.mob .mob-source {
+  color: var(--cyan);
+  font-size: 0.8rem;
+}
+.mob-meta {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.mob-stats {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text);
+}
+.mob-collage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+.mob-collage img {
+  width: 100%;
+  height: auto;
+  border: 0;
+  background: radial-gradient(circle at 50% 60%, rgba(240, 193, 75, 0.14), transparent 70%);
+}
+
+/* ---- Variations ---- */
+.variation-cols h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.tier-dot {
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 2px;
+}
+.variation-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+.variation-list li {
+  margin-bottom: 0.3rem;
+}
+.variation-list code {
+  font-size: 0.75rem;
+  color: var(--cyan-dim);
+}
+.tier-tag {
+  display: inline-block;
+  margin-left: 0.4rem;
+  padding: 0.05rem 0.45rem;
+  border-radius: 3px;
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  vertical-align: middle;
+}
+.gear-lore {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.variant-golden {
+  color: var(--legend);
+}
+.variant-cursed {
+  color: #c79bff;
+}
+.variant-giant {
+  color: var(--cyan);
+}

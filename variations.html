@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Variations — UnpredictableBlocks Wiki</title>
+  <meta name="description" content="Variantes de Lucky Block, variations bonus et équipement custom d&#x27;UnpredictableBlocks." />
+  <link rel="icon" href="assets/branding/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Outfit:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/site.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/branding/logo.png" alt="" width="40" height="40" />
+        <span>UnpredictableBlocks</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+      <ul class="nav-links" id="nav">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="installer.html">Installer</a></li>
+        <li><a href="guide.html">Guide</a></li>
+        <li><a href="themes.html">Thèmes</a></li>
+        <li><a href="bestiaire.html">Bestiaire</a></li>
+        <li><a href="variations.html" aria-current="page">Variations</a></li>
+        <li><a href="crafts.html">Crafts</a></li>
+        <li><a href="mondes.html">Mondes</a></li>
+        <li><a href="commandes.html">Commandes</a></li>
+      </ul>
+      <button class="lang-toggle" type="button" data-lang-toggle>FR / EN</button>
+    </div>
+  </header>
+
+  <main>
+    <header class="page-hero">
+      <p class="eyebrow">LuckyVariations · LuckyVariant</p>
+      <h1 data-lang-block="fr">Variations</h1>
+<h1 data-lang-block="en">Variations</h1>
+      <p data-lang-block="fr">En plus de l'événement fixe du thème, chaque cassage peut tirer des variations bonus : le même bloc ne donne jamais deux fois la même chose.</p>
+<p data-lang-block="en">On top of the theme's fixed event, each break can roll bonus variations: the same block never plays out the same way twice.</p>
+    </header>
+
+    <section class="section">
+      <div class="section-head reveal">
+        <h2 data-lang-block="fr">Variantes de bloc</h2>
+<h2 data-lang-block="en">Block variants</h2>
+        <p data-lang-block="fr">Un Lucky Block naturel a ~11 % de chance d'être spécial. La variante est visible (teinte / taille) avant de le casser.</p>
+<p data-lang-block="en">A natural Lucky Block has a ~11% chance to be special. The variant is visible (tint / size) before you break it.</p>
+      </div>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th>Variante</th><th>Spawn</th><th><span data-lang="fr">Chance</span><span data-lang="en">Luck</span></th><th><span data-lang="fr">Butin</span><span data-lang="en">Loot</span></th><th><span data-lang="fr">Variations</span><span data-lang="en">Variations</span></th></tr></thead>
+          <tbody>
+            <tr><td><span data-lang="fr">Normal</span><span data-lang="en">Normal</span></td><td>~89 %</td><td>±0</td><td>×1</td><td><span data-lang="fr">1 tirage à 50 %</span><span data-lang="en">1 roll at 50%</span></td></tr>
+            <tr><td><strong class="variant-golden"><span data-lang="fr">Doré</span><span data-lang="en">Golden</span></strong></td><td>4 %</td><td>+30</td><td>×2</td><td><span data-lang="fr">1 garantie</span><span data-lang="en">1 guaranteed</span></td></tr>
+            <tr><td><strong class="variant-cursed"><span data-lang="fr">Maudit</span><span data-lang="en">Cursed</span></strong></td><td>4 %</td><td>−30</td><td>×2</td><td><span data-lang="fr">2 garanties</span><span data-lang="en">2 guaranteed</span></td></tr>
+            <tr><td><strong class="variant-giant"><span data-lang="fr">Géant</span><span data-lang="en">Giant</span></strong> (1.4×)</td><td>3 %</td><td>±0</td><td>×3</td><td><span data-lang="fr">3 tirages à 50 %</span><span data-lang="en">3 rolls at 50%</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head reveal">
+        <h2 data-lang-block="fr">36 variations bonus</h2>
+<h2 data-lang-block="en">36 bonus variations</h2>
+        <p data-lang-block="fr">Le pool dépend du tier du cassage. Message <code>message.unpredictableblocks.variation.&lt;id&gt;</code> dans la barre d'action.</p>
+<p data-lang-block="en">The pool depends on the break tier. Message <code>message.unpredictableblocks.variation.&lt;id&gt;</code> in the action bar.</p>
+      </div>
+      <div class="feature-strip variation-cols reveal">
+        <article>
+          <h3><i class="pct-high tier-dot"></i>HIGH · 12</h3>
+          <ul class="variation-list">
+            <li><code>xp_rain</code> — <span data-lang="fr">pluie d&#x27;XP !</span><span data-lang="en">XP rain!</span></li>
+            <li><code>gold_rain</code> — <span data-lang="fr">pluie d&#x27;or !</span><span data-lang="en">gold rain!</span></li>
+            <li><code>lucky_aura</code> — <span data-lang="fr">aura chanceuse !</span><span data-lang="en">lucky aura!</span></li>
+            <li><code>gift_block</code> — <span data-lang="fr">un Lucky Block en cadeau !</span><span data-lang="en">a free Lucky Block!</span></li>
+            <li><code>diamond</code> — <span data-lang="fr">pierre précieuse !</span><span data-lang="en">a gem!</span></li>
+            <li><code>emerald_dust</code> — <span data-lang="fr">poussière d&#x27;émeraude !</span><span data-lang="en">emerald dust!</span></li>
+            <li><code>legendary_weapon</code> — <span data-lang="fr">arme légendaire !</span><span data-lang="en">legendary weapon!</span></li>
+            <li><code>legendary_armor</code> — <span data-lang="fr">armure légendaire !</span><span data-lang="en">legendary armor!</span></li>
+            <li><code>legendary_tool</code> — <span data-lang="fr">outil légendaire !</span><span data-lang="en">legendary tool!</span></li>
+            <li><code>bodyguard</code> — <span data-lang="fr">un garde du corps !</span><span data-lang="en">a bodyguard!</span></li>
+            <li><code>pinata</code> — <span data-lang="fr">une piñata Lucky !</span><span data-lang="en">a lucky piñata!</span></li>
+            <li><code>leprechaun</code> — <span data-lang="fr">attrape le lutin !</span><span data-lang="en">catch the leprechaun!</span></li>
+          </ul>
+        </article>
+        <article>
+          <h3><i class="pct-neutral tier-dot"></i>NEUTRAL · 11</h3>
+          <ul class="variation-list">
+            <li><code>zoo</code> — <span data-lang="fr">mini-zoo !</span><span data-lang="en">mini zoo!</span></li>
+            <li><code>flowers</code> — <span data-lang="fr">ça fleurit !</span><span data-lang="en">flowers bloom!</span></li>
+            <li><code>blink</code> — <span data-lang="fr">téléportation surprise !</span><span data-lang="en">surprise teleport!</span></li>
+            <li><code>concert</code> — <span data-lang="fr">concert improvisé !</span><span data-lang="en">impromptu concert!</span></li>
+            <li><code>snack</code> — <span data-lang="fr">petit goûter !</span><span data-lang="en">snack time!</span></li>
+            <li><code>bouncy</code> — <span data-lang="fr">jambes à ressort !</span><span data-lang="en">springy legs!</span></li>
+            <li><code>joke_gear</code> — <span data-lang="fr">équipement farfelu !</span><span data-lang="en">silly gear!</span></li>
+            <li><code>named_pets</code> — <span data-lang="fr">animaux de compagnie !</span><span data-lang="en">named pets!</span></li>
+            <li><code>easter_egg</code> — <span data-lang="fr">easter egg !</span><span data-lang="en">easter egg!</span></li>
+            <li><code>mushroom_party</code> — <span data-lang="fr">fête des champignons !</span><span data-lang="en">mushroom party!</span></li>
+            <li><code>ghost</code> — <span data-lang="fr">un fantôme !</span><span data-lang="en">a ghost!</span></li>
+          </ul>
+        </article>
+        <article>
+          <h3><i class="pct-low tier-dot"></i>LOW · 13</h3>
+          <ul class="variation-list">
+            <li><code>anvil</code> — <span data-lang="fr">attention à la tête !</span><span data-lang="en">mind your head!</span></li>
+            <li><code>cobwebs</code> — <span data-lang="fr">toiles d&#x27;araignée !</span><span data-lang="en">cobwebs!</span></li>
+            <li><code>silverfish</code> — <span data-lang="fr">poissons d&#x27;argent !</span><span data-lang="en">silverfish!</span></li>
+            <li><code>hungry</code> — <span data-lang="fr">fringale !</span><span data-lang="en">the munchies!</span></li>
+            <li><code>hiccup</code> — <span data-lang="fr">hoquet gravitationnel !</span><span data-lang="en">gravity hiccup!</span></li>
+            <li><code>butterfingers</code> — <span data-lang="fr">mains glissantes !</span><span data-lang="en">butterfingers!</span></li>
+            <li><code>cursed_gear</code> — <span data-lang="fr">équipement maudit !</span><span data-lang="en">cursed gear!</span></li>
+            <li><code>bouncer</code> — <span data-lang="fr">le videur arrive !</span><span data-lang="en">here comes the bouncer!</span></li>
+            <li><code>robin_hood</code> — <span data-lang="fr">archers de Sherwood !</span><span data-lang="en">Sherwood archers!</span></li>
+            <li><code>lucky_knight</code> — <span data-lang="fr">un Chevalier Lucky !</span><span data-lang="en">a Lucky Knight!</span></li>
+            <li><code>goblin_thief</code> — <span data-lang="fr">des gobelins voleurs !</span><span data-lang="en">goblin thieves!</span></li>
+            <li><code>cactus_boxer</code> — <span data-lang="fr">cactus boxeur !</span><span data-lang="en">boxing cactus!</span></li>
+            <li><code>crazy_snowman</code> — <span data-lang="fr">bonhomme de neige fou !</span><span data-lang="en">crazy snowman!</span></li>
+          </ul>
+        </article>
+      </div>
+      <p class="note reveal" data-lang-block="fr">Les mobs custom de ces variations sont détaillés dans le <a href="bestiaire.html">Bestiaire</a>.</p>
+      <p class="note reveal" data-lang-block="en">The custom mobs from these variations are listed in the <a href="bestiaire.html">Bestiary</a>.</p>
+    </section>
+
+    <section class="section">
+      <div class="section-head reveal">
+        <h2 data-lang-block="fr">Équipement custom</h2>
+<h2 data-lang-block="en">Custom gear</h2>
+        <p data-lang-block="fr">Objets nommés et enchantés au-delà des limites vanilla. Loot tables <code>gameplay/variation/*</code> — modifiables par datapack.</p>
+<p data-lang-block="en">Named items with enchantments beyond vanilla limits. Loot tables <code>gameplay/variation/*</code> — datapack-editable.</p>
+      </div>
+      <div class="section-head reveal">
+        <h3 data-lang-block="fr">Armes légendaires <span class="tier-tag pct-high">HIGH</span></h3>
+        <h3 data-lang-block="en">Legendary weapons <span class="tier-tag pct-high">HIGH</span></h3>
+      </div>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th><span data-lang="fr">Nom</span><span data-lang="en">Name</span></th><th>Item</th><th><span data-lang="fr">Enchantements</span><span data-lang="en">Enchantments</span></th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Lame du Trèfle à Quatre Feuilles</strong><br /><em class="gear-lore">Chaque coup porte bonheur… à toi.</em></td>
+              <td>Diamond Sword</td>
+              <td><span data-lang="fr">Tranchant V, Butin III, Solidité III</span><span data-lang="en">Sharpness V, Looting III, Unbreaking III</span></td>
+            </tr>
+            <tr>
+              <td><strong>Hache du Bûcheron Chanceux</strong><br /><em class="gear-lore">Coupe le bois, les liens et les zombies.</em></td>
+              <td>Iron Axe</td>
+              <td><span data-lang="fr">Tranchant IV, Efficacité IV, Solidité II</span><span data-lang="en">Sharpness IV, Efficiency IV, Unbreaking II</span></td>
+            </tr>
+            <tr>
+              <td><strong>Arc de Cupidon Déchaîné</strong><br /><em class="gear-lore">Il ne vise pas les cœurs, il les transperce.</em></td>
+              <td>Bow</td>
+              <td><span data-lang="fr">Puissance V, Frappe II, Infinité I</span><span data-lang="en">Power V, Punch II, Infinity I</span></td>
+            </tr>
+            <tr>
+              <td><strong>Arbalète Triple Jackpot</strong><br /><em class="gear-lore">Trois carreaux pour le prix d&#x27;un.</em></td>
+              <td>Crossbow</td>
+              <td><span data-lang="fr">Tir multiple I, Charge rapide III, Solidité III</span><span data-lang="en">Multishot I, Quick Charge III, Unbreaking III</span></td>
+            </tr>
+            <tr>
+              <td><strong>Fourchette de Neptune</strong><br /><em class="gear-lore">Revient toujours, comme les impôts.</em></td>
+              <td>Trident</td>
+              <td><span data-lang="fr">Loyauté III, Empalement III</span><span data-lang="en">Loyalty III, Impaling III</span></td>
+            </tr>
+            <tr>
+              <td><strong>Masse du Jugement Lucky</strong><br /><em class="gear-lore">Tombe de haut. Frappe plus fort.</em></td>
+              <td>Mace</td>
+              <td><span data-lang="fr">Densité III, Rafale de vent I</span><span data-lang="en">Density III, Wind Burst I</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="section-head reveal">
+        <h3 data-lang-block="fr">Armures légendaires <span class="tier-tag pct-high">HIGH</span></h3>
+        <h3 data-lang-block="en">Legendary armour <span class="tier-tag pct-high">HIGH</span></h3>
+      </div>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th><span data-lang="fr">Nom</span><span data-lang="en">Name</span></th><th>Item</th><th><span data-lang="fr">Enchantements</span><span data-lang="en">Enchantments</span></th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Casque du Veinard</strong><br /><em class="gear-lore">Les enclumes l&#x27;évitent par politesse.</em></td>
+              <td>Diamond Helmet</td>
+              <td><span data-lang="fr">Protection IV, Apnée III, Solidité III</span><span data-lang="en">Protection IV, Respiration III, Unbreaking III</span></td>
+            </tr>
+            <tr>
+              <td><strong>Plastron Porte-Bonheur</strong><br /><em class="gear-lore">Cousu de trèfles à quatre feuilles.</em></td>
+              <td>Diamond Chestplate</td>
+              <td><span data-lang="fr">Protection IV, Épines II, Solidité III</span><span data-lang="en">Protection IV, Thorns II, Unbreaking III</span></td>
+            </tr>
+            <tr>
+              <td><strong>Jambières du Jackpot</strong><br /><em class="gear-lore">Pour s&#x27;accroupir avec style.</em></td>
+              <td>Diamond Leggings</td>
+              <td><span data-lang="fr">Protection IV, Furtivité rapide III</span><span data-lang="en">Protection IV, Swift Sneak III</span></td>
+            </tr>
+            <tr>
+              <td><strong>Bottes de Sept Lieues</strong><br /><em class="gear-lore">Les chutes, c&#x27;est pour les autres.</em></td>
+              <td>Diamond Boots</td>
+              <td><span data-lang="fr">Chute amortie IV, Agilité aquatique III, Protection III</span><span data-lang="en">Feather Falling IV, Depth Strider III, Protection III</span></td>
+            </tr>
+            <tr>
+              <td><strong>Plastron Doré du Casino</strong><br /><em class="gear-lore">Brille autant que ta chance.</em></td>
+              <td>Golden Chestplate</td>
+              <td><span data-lang="fr">Protection IV, Solidité III, Raccommodage I</span><span data-lang="en">Protection IV, Unbreaking III, Mending I</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="section-head reveal">
+        <h3 data-lang-block="fr">Outils légendaires <span class="tier-tag pct-high">HIGH</span></h3>
+        <h3 data-lang-block="en">Legendary tools <span class="tier-tag pct-high">HIGH</span></h3>
+      </div>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th><span data-lang="fr">Nom</span><span data-lang="en">Name</span></th><th>Item</th><th><span data-lang="fr">Enchantements</span><span data-lang="en">Enchantments</span></th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Pioche Trèfle à Quatre Feuilles</strong><br /><em class="gear-lore">Chaque minerai en vaut trois.</em></td>
+              <td>Diamond Pickaxe</td>
+              <td><span data-lang="fr">Fortune III, Efficacité V, Solidité III</span><span data-lang="en">Fortune III, Efficiency V, Unbreaking III</span></td>
+            </tr>
+            <tr>
+              <td><strong>Pelle du Chercheur d&#x27;Or</strong><br /><em class="gear-lore">Creuse plus vite que les rumeurs.</em></td>
+              <td>Diamond Shovel</td>
+              <td><span data-lang="fr">Efficacité V, Toucher de soie I</span><span data-lang="en">Efficiency V, Silk Touch I</span></td>
+            </tr>
+            <tr>
+              <td><strong>Canne à Pêche Miraculeuse</strong><br /><em class="gear-lore">Ça mord à tous les coups.</em></td>
+              <td>Fishing Rod</td>
+              <td><span data-lang="fr">Chance de la mer III, Appât III, Solidité III</span><span data-lang="en">Luck Of The Sea III, Lure III, Unbreaking III</span></td>
+            </tr>
+            <tr>
+              <td><strong>Houe du Fermier Béni</strong><br /><em class="gear-lore">Les récoltes poussent de gratitude.</em></td>
+              <td>Diamond Hoe</td>
+              <td><span data-lang="fr">Fortune III, Efficacité IV</span><span data-lang="en">Fortune III, Efficiency IV</span></td>
+            </tr>
+            <tr>
+              <td><strong>Ciseaux du Coiffeur Fou</strong><br /><em class="gear-lore">Coupe-tout, garantie zéro dégât.</em></td>
+              <td>Shears</td>
+              <td><span data-lang="fr">Efficacité V, Solidité III</span><span data-lang="en">Efficiency V, Unbreaking III</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="section-head reveal">
+        <h3 data-lang-block="fr">Équipement farfelu <span class="tier-tag pct-neutral">NEUTRAL</span></h3>
+        <h3 data-lang-block="en">Silly gear <span class="tier-tag pct-neutral">NEUTRAL</span></h3>
+      </div>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th><span data-lang="fr">Nom</span><span data-lang="en">Name</span></th><th>Item</th><th><span data-lang="fr">Enchantements</span><span data-lang="en">Enchantments</span></th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Poisson de Combat</strong><br /><em class="gear-lore">Une claque de poisson, ça marque.</em></td>
+              <td>Raw Cod</td>
+              <td><span data-lang="fr">Recul III</span><span data-lang="en">Knockback III</span></td>
+            </tr>
+            <tr>
+              <td><strong>Bâton de la Sagesse</strong><br /><em class="gear-lore">Frappe les ignorants. Avec douceur.</em></td>
+              <td>Stick</td>
+              <td><span data-lang="fr">Recul II, Tranchant I</span><span data-lang="en">Knockback II, Sharpness I</span></td>
+            </tr>
+            <tr>
+              <td><strong>Chapeau de Soirée</strong><br /><em class="gear-lore">Élégant. Inutile. Indispensable.</em></td>
+              <td>Leather Cap</td>
+              <td><span data-lang="fr">Protection I</span><span data-lang="en">Protection I</span></td>
+            </tr>
+            <tr>
+              <td><strong>Pelle du Bac à Sable</strong><br /><em class="gear-lore">Rapide, mais seulement dans le sable.</em></td>
+              <td>Wooden Shovel</td>
+              <td><span data-lang="fr">Efficacité V</span><span data-lang="en">Efficiency V</span></td>
+            </tr>
+            <tr>
+              <td><strong>Houe de Luxe</strong><br /><em class="gear-lore">Pour jardiner en gants blancs.</em></td>
+              <td>Golden Hoe</td>
+              <td><span data-lang="fr">Solidité III</span><span data-lang="en">Unbreaking III</span></td>
+            </tr>
+            <tr>
+              <td><strong>Masque de Citrouille Stylé</strong><br /><em class="gear-lore">Les endermen n&#x27;osent plus te regarder.</em></td>
+              <td>Carved Pumpkin</td>
+              <td><span data-lang="fr">—</span><span data-lang="en">—</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="section-head reveal">
+        <h3 data-lang-block="fr">Équipement maudit <span class="tier-tag pct-low">LOW</span></h3>
+        <h3 data-lang-block="en">Cursed gear <span class="tier-tag pct-low">LOW</span></h3>
+      </div>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th><span data-lang="fr">Nom</span><span data-lang="en">Name</span></th><th>Item</th><th><span data-lang="fr">Enchantements</span><span data-lang="en">Enchantments</span></th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Pioche en Carton</strong><br /><em class="gear-lore">Fabriquée avec amour. Et du scotch.</em></td>
+              <td>Wooden Pickaxe</td>
+              <td><span data-lang="fr">Malédiction de disparition I · usé</span><span data-lang="en">Vanishing Curse I · worn</span></td>
+            </tr>
+            <tr>
+              <td><strong>Pull Moche de Tata</strong><br /><em class="gear-lore">Impossible à enlever. Comme le souvenir.</em></td>
+              <td>Leather Tunic</td>
+              <td><span data-lang="fr">Malédiction du lien I</span><span data-lang="en">Binding Curse I</span></td>
+            </tr>
+            <tr>
+              <td><strong>Épée en Chocolat</strong><br /><em class="gear-lore">Fond au premier combat.</em></td>
+              <td>Golden Sword</td>
+              <td><span data-lang="fr">— · usé</span><span data-lang="en">— · worn</span></td>
+            </tr>
+            <tr>
+              <td><strong>Hache Émoussée</strong><br /><em class="gear-lore">A connu des jours meilleurs.</em></td>
+              <td>Stone Axe</td>
+              <td><span data-lang="fr">Malédiction de disparition I · usé</span><span data-lang="en">Vanishing Curse I · worn</span></td>
+            </tr>
+            <tr>
+              <td><strong>Tongs de Plage</strong><br /><em class="gear-lore">Parfaites pour glisser.</em></td>
+              <td>Leather Boots</td>
+              <td><span data-lang="fr">Malédiction du lien I · usé</span><span data-lang="en">Binding Curse I · worn</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>UnpredictableBlocks Wiki</p>
+      <div class="footer-links">
+        <a href="https://modrinth.com/mod/unpredictableblocks" rel="noopener">Modrinth</a>
+        <a href="https://github.com/Jason54jg/UnpredictableBlocks">GitHub</a>
+        <a href="bestiaire.html">Bestiaire</a>
+        <a href="variations.html">Variations</a>
+      </div>
+    </div>
+  </footer>
+  <script src="assets/js/site.js"></script>
+</body>
+</html>
